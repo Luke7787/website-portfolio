@@ -9,7 +9,17 @@ export default function Page() {
         id="home"
         className="scroll-mt-16 min-h-screen pt-16 flex items-center justify-center"
       >
-        <h1 className="text-4xl font-bold">Home</h1>
+        <div className="text-center">
+          {/* Subheading */}
+          <p className="mb-2 text-sm font-normal tracking-[0.8px] text-[rgb(140,140,140)]">
+            HELLO! MY NAME IS
+          </p>
+
+          {/* Name */}
+          <h1 className="text-3xl font-bold tracking-[3.2px] text-white drop-shadow-[2px_2px_4px_rgba(0,0,0,0.7)]">
+            LUKE ZHUANG
+          </h1>
+        </div>
       </section>
 
       <section
