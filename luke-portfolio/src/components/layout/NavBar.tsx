@@ -10,18 +10,20 @@ const NAV_ITEMS = [
 
 export default function NavBar() {
   return (
-    <nav className="fixed top-0 z-50 w-full border-b bg-white/80 backdrop-blur">
+    <nav className="fixed top-0 z-50 w-full border-b border-white/10 bg-[#141414]/90 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-        {/* Left */}
-        <div className="font-semibold tracking-wide">Luke Zhuang</div>
+        {/* Logo / Name */}
+        <div className="text-[1.2rem] font-bold tracking-[0.15em] text-white drop-shadow-[2px_2px_4px_rgba(0,0,0,0.7)]">
+          LUKE ZHUANG
+        </div>
 
-        {/* Right */}
+        {/* Desktop Nav Links */}
         <ul className="hidden gap-6 md:flex">
           {NAV_ITEMS.map((item) => (
             <li key={item.href}>
               <a
                 href={item.href}
-                className="text-sm text-gray-700 transition hover:text-black"
+                className="text-sm font-semibold tracking-wider text-white opacity-80 drop-shadow-[2px_2px_4px_rgba(0,0,0,0.7)] transition hover:opacity-100"
               >
                 {item.label}
               </a>
@@ -29,8 +31,10 @@ export default function NavBar() {
           ))}
         </ul>
 
-        {/* Mobile placeholder */}
-        <button className="md:hidden text-sm">Menu</button>
+        {/* Mobile Menu Button (logic later) */}
+        <button className="md:hidden text-sm font-semibold tracking-wider text-white drop-shadow-[2px_2px_4px_rgba(0,0,0,0.7)]">
+          Menu
+        </button>
       </div>
     </nav>
   );
