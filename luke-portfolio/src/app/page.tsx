@@ -16,7 +16,7 @@ export default function Page() {
           </p>
 
           {/* Name */}
-          <h1 className="text-3xl font-bold tracking-[3.2px] text-white drop-shadow-[2px_2px_4px_rgba(0,0,0,0.7)]">
+          <h1 className="text-3xl font-bold tracking-[3.2px] text-white/90 drop-shadow-[2px_2px_4px_rgba(0,0,0,0.7)]">
             LUKE ZHUANG
           </h1>
         </div>

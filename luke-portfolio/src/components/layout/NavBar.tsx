@@ -25,7 +25,7 @@ export default function NavBar() {
             priority
           />
 
-          <span className="text-[1.2rem] font-bold tracking-[0.15em] text-white drop-shadow-[2px_2px_4px_rgba(0,0,0,0.7)]">
+          <span className="text-[1.2rem] font-bold tracking-[0.15em] text-white/90 drop-shadow-[2px_2px_4px_rgba(0,0,0,0.7)]">
             LUKE ZHUANG
           </span>
         </div>
@@ -37,16 +37,16 @@ export default function NavBar() {
               <a
                 href={item.href}
                 className="
-          uppercase
-          rounded-md
-          px-3 py-2
-          text-[0.8rem]
-          font-semibold
-          tracking-[0.12em]
-          text-white
-          transition-colors
-          hover:bg-[#1E90FF]
-        "
+                  uppercase
+                  rounded-md
+                  px-3 py-2
+                  text-[0.8rem]
+                  font-semibold
+                  tracking-[0.12em]
+                  text-white/90
+                  transition-colors
+                  hover:bg-[#1E90FF]
+                "
               >
                 {item.label}
               </a>
@@ -54,8 +54,8 @@ export default function NavBar() {
           ))}
         </ul>
 
-        {/* Mobile Menu Button (logic later) */}
-        <button className="md:hidden text-sm font-semibold tracking-wider text-white drop-shadow-[2px_2px_4px_rgba(0,0,0,0.7)]">
+        {/* Mobile Menu Button */}
+        <button className="md:hidden text-sm font-semibold tracking-wider text-white/90 drop-shadow-[2px_2px_4px_rgba(0,0,0,0.7)]">
           Menu
         </button>
       </div>
