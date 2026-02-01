@@ -19,9 +19,9 @@ export default function NavBar() {
           <Image
             src="/images/logo.jpg"
             alt="Luke Zhuang"
-            width={64}
-            height={64}
-            className="h-16 w-16 rounded-full object-cover"
+            width={48}
+            height={48}
+            className="h-12 w-12 rounded-full object-cover"
             priority
           />
 
