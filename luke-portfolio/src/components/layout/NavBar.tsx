@@ -31,12 +31,22 @@ export default function NavBar() {
         </div>
 
         {/* Desktop Nav Links */}
-        <ul className="hidden gap-6 md:flex">
+        <ul className="hidden md:flex items-center gap-2">
           {NAV_ITEMS.map((item) => (
             <li key={item.href}>
               <a
                 href={item.href}
-                className="text-sm font-semibold tracking-wider text-white opacity-80 drop-shadow-[2px_2px_4px_rgba(0,0,0,0.7)] transition hover:opacity-100"
+                className="
+          uppercase
+          rounded-md
+          px-3 py-2
+          text-[0.8rem]
+          font-semibold
+          tracking-[0.12em]
+          text-white
+          transition-colors
+          hover:bg-[#1E90FF]
+        "
               >
                 {item.label}
               </a>
