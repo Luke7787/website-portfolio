@@ -25,7 +25,7 @@ export default function NavBar() {
             priority
           />
 
-          <span className="text-[1.2rem] font-bold tracking-[0.15em] text-white/90 drop-shadow-[2px_2px_4px_rgba(0,0,0,0.7)]">
+          <span className="text-[1.2rem] font-bold tracking-[0.15em] text-white/90 drop-shadow-[2px_2px_4px_rgba(0,0,0,0.7)] transition-colors duration-300 ease-in-out hover:text-[#1E90FF]">
             LUKE ZHUANG
           </span>
         </div>
