@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import AnimatedName from "@/components/effects/AnimatedName";
 
 const NAV_ITEMS = [
   { label: "Home", href: "#home" },
@@ -14,7 +15,7 @@ export default function NavBar() {
   return (
     <nav className="fixed top-0 z-50 w-full border-b border-white/10 bg-[#141414]/90 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-        {/* Logo + Name */}
+        {/* Logo + Animated Name */}
         <div className="flex items-center gap-4">
           <Image
             src="/images/logo.jpg"
@@ -25,9 +26,25 @@ export default function NavBar() {
             priority
           />
 
-          <span className="text-[1.2rem] font-bold tracking-[0.15em] text-white/90 drop-shadow-[2px_2px_4px_rgba(0,0,0,0.7)] transition-colors duration-300 ease-in-out hover:text-[#1E90FF]">
-            LUKE ZHUANG
-          </span>
+          <AnimatedName>
+            <span
+              className="
+                text-[1.2rem]
+                font-bold
+                tracking-[0.15em]
+                text-white/90
+                drop-shadow-[2px_2px_4px_rgba(0,0,0,0.7)]
+                transition-colors
+                duration-300
+                ease-in-out
+                hover:text-[#1E90FF]
+                opacity-0
+                animate-[revealText_0.65s_ease-in-out_0.65s_forwards]
+              "
+            >
+              LUKE ZHUANG
+            </span>
+          </AnimatedName>
         </div>
 
         {/* Desktop Nav Links */}
@@ -55,7 +72,7 @@ export default function NavBar() {
         </ul>
 
         {/* Mobile Menu Button */}
-        <button className="md:hidden text-sm font-semibold tracking-wider text-white/90 drop-shadow-[2px_2px_4px_rgba(0,0,0,0.7)]">
+        <button className="md:hidden text-sm font-semibold tracking-wider text-white/90">
           Menu
         </button>
       </div>

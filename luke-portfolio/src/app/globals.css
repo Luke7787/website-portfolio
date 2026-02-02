@@ -31,9 +31,18 @@ body {
   }
 }
 
+@keyframes revealText {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .name-reveal-bg {
-  height: 60%;
-  top: 20%;
+  height: 80%;
+  top: 10%;
   animation:
     slideIn 0.9s ease-out forwards,
     collapseLeft 0.9s ease-in-out 0.9s forwards;
