@@ -12,3 +12,29 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes collapseLeft {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.name-reveal-bg {
+  height: 60%;
+  top: 20%;
+  animation:
+    slideIn 0.9s ease-out forwards,
+    collapseLeft 0.9s ease-in-out 0.9s forwards;
+}
