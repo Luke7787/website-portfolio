@@ -1,5 +1,6 @@
 import NavBar from "@/components/layout/NavBar";
 import AnimatedName from "@/components/effects/AnimatedName";
+import TextScramble from "@/components/effects/TextScramble";
 
 export default function Page() {
   return (
@@ -12,9 +13,10 @@ export default function Page() {
         className="scroll-mt-16 min-h-screen pt-16 flex items-center justify-center"
       >
         <div className="text-center">
-          <p className="mb-1 text-[20px] tracking-[0.8px] text-[rgb(140,140,140)]">
-            HELLO! MY NAME IS
-          </p>
+          <TextScramble
+            text="HELLO! MY NAME IS"
+            className="mb-1 text-[20px] tracking-[0.8px] text-[rgb(140,140,140)]"
+          />
 
           <AnimatedName>
             <h1
