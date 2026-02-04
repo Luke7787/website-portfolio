@@ -22,7 +22,8 @@ export default function TextScramble({
 
   useEffect(() => {
     const letters =
-      "ゲネバコンヰゾケウユハポフチヘツムカザルマボレピスルベトペアドプヤブヲンタシデラソミネブニヌレクサゲガバーネゼ";
+      "ゲネバコンヰゾケウユハポフチヘツムカザルマボレピスルベトペアドプヤブヲンタシデラソミ" +
+      "日月山水火風電光空門中本元";
 
     const el = pRef.current;
     if (!el) return;
