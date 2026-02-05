@@ -2,7 +2,7 @@ import Image from "next/image";
 import NavBar from "@/components/layout/NavBar";
 import AnimatedName from "@/components/effects/AnimatedName";
 import TextScramble from "@/components/effects/TextScramble";
-
+// testing
 export default function Page() {
   return (
     <main className="relative">
