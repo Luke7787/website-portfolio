@@ -47,10 +47,12 @@ export default function Page() {
           <div className="flex justify-center md:justify-end">
             <div
               className="
-                max-w-[50rem]
-                max-h-[33rem]
-                md:-translate-x-12
-              "
+  w-80
+  sm:w-[21rem]
+  md:w-[25rem]
+  lg:w-[29rem]
+  md:-translate-x-12
+"
             >
               <Image
                 src="/images/about.jpg"
@@ -70,7 +72,7 @@ export default function Page() {
 
           {/* Right: Text */}
           <div className="text-center md:text-left">
-            <p className="mb-2 text-sm tracking-[0.8px] text-[rgb(140,140,140)]">
+            <p className="mb-2 text-sm tracking-[0.8px] text-[rgb(132,125,125)]">
               ABOUT
             </p>
 
