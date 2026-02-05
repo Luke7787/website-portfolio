@@ -12,7 +12,7 @@ type Props = {
 export default function TextScramble({
   text,
   className = "",
-  duration = 1700,
+  duration = 1655,
   intervalMs = 55,
 }: Props) {
   const pRef = useRef<HTMLParagraphElement | null>(null);
