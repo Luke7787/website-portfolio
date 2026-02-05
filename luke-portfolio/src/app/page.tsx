@@ -45,20 +45,28 @@ export default function Page() {
         <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-6 md:grid-cols-2">
           {/* Left: Image */}
           <div className="flex justify-center md:justify-end">
-            <Image
-              src="/images/about.jpg"
-              alt="Luke Zhuang portrait"
-              width={320}
-              height={320}
+            <div
               className="
-          rounded-2xl
-          object-cover
-          shadow-lg
-          ring-1
-          ring-white/10
+                max-w-[50rem]
+                max-h-[33rem]
+                -translate-x-6
+                md:-translate-x-12
         "
-              priority={false}
-            />
+            >
+              <Image
+                src="/images/about.jpg"
+                alt="Luke Zhuang portrait"
+                width={800}
+                height={528}
+                className="
+                rounded-lg
+                border-2
+                border-white
+                shadow-lg
+                object-cover
+              "
+              />
+            </div>
           </div>
 
           {/* Right: Text */}
