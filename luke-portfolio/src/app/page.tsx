@@ -1,3 +1,4 @@
+import Image from "next/image";
 import NavBar from "@/components/layout/NavBar";
 import AnimatedName from "@/components/effects/AnimatedName";
 import TextScramble from "@/components/effects/TextScramble";
@@ -39,16 +40,37 @@ export default function Page() {
       {/* ABOUT */}
       <section
         id="about"
-        className="scroll-mt-16 min-h-screen pt-16 flex items-center justify-center"
+        className="scroll-mt-16 min-h-screen pt-16 flex items-center"
       >
-        <div className="text-center">
-          <p className="mb-2 text-sm tracking-[0.8px] text-[rgb(140,140,140)]">
-            ABOUT
-          </p>
+        <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-6 md:grid-cols-2">
+          {/* Left: Image */}
+          <div className="flex justify-center md:justify-end">
+            <Image
+              src="/images/about.jpg"
+              alt="Luke Zhuang portrait"
+              width={320}
+              height={320}
+              className="
+          rounded-2xl
+          object-cover
+          shadow-lg
+          ring-1
+          ring-white/10
+        "
+              priority={false}
+            />
+          </div>
 
-          <h2 className="text-4xl font-bold tracking-[0.15em] text-white/90">
-            WHO I AM
-          </h2>
+          {/* Right: Text */}
+          <div className="text-center md:text-left">
+            <p className="mb-2 text-sm tracking-[0.8px] text-[rgb(140,140,140)]">
+              ABOUT
+            </p>
+
+            <h2 className="text-4xl font-bold tracking-[0.15em] text-white/90">
+              WHO I AM
+            </h2>
+          </div>
         </div>
       </section>
 
