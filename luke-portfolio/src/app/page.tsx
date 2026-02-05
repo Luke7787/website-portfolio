@@ -49,9 +49,8 @@ export default function Page() {
               className="
                 max-w-[50rem]
                 max-h-[33rem]
-                -translate-x-6
                 md:-translate-x-12
-        "
+              "
             >
               <Image
                 src="/images/about.jpg"
