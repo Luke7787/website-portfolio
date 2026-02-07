@@ -47,12 +47,12 @@ export default function Page() {
           <div className="flex justify-center md:justify-end">
             <div
               className="
-  w-80
-  sm:w-[21rem]
-  md:w-[25rem]
-  lg:w-[29rem]
-  md:-translate-x-12
-"
+                w-80
+                sm:w-[21rem]
+                md:w-[25rem]
+                lg:w-[29rem]
+                md:-translate-x-12
+              "
             >
               <Image
                 src="/images/about.jpg"
