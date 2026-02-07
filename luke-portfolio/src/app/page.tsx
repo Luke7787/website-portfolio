@@ -48,9 +48,9 @@ export default function Page() {
             <div
               className="
                 w-80
-                sm:w-[21rem]
-                md:w-[25rem]
-                lg:w-[29rem]
+                sm:w-84
+                md:w-100
+                lg:w-116
                 md:-translate-x-12
               "
             >
