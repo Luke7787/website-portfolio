@@ -38,21 +38,18 @@ export default function Page() {
       </section>
 
       {/* ABOUT */}
-      <section
-        id="about"
-        className="scroll-mt-16 min-h-screen pt-16 flex items-center"
-      >
-        <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-6 md:grid-cols-2">
+      <section id="about" className="scroll-mt-16 min-h-screen pt-16 flex">
+        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-6 md:grid-cols-2">
           {/* Left: Image */}
           <div className="flex justify-center md:justify-end">
             <div
               className="
-                w-80
-                sm:w-84
-                md:w-100
-                lg:w-116
-                md:-translate-x-12
-              "
+          w-80
+          sm:w-84
+          md:w-100
+          lg:w-116
+          md:-translate-x-12
+        "
             >
               <Image
                 src="/images/about.jpg"
@@ -60,36 +57,37 @@ export default function Page() {
                 width={800}
                 height={528}
                 className="
-                rounded-lg
-                border-2
-                border-white
-                shadow-lg
-                object-cover
-              "
+            rounded-lg
+            border-2
+            border-white
+            shadow-lg
+            object-cover
+          "
               />
             </div>
           </div>
 
           {/* Right: Text */}
-          <div className="text-center md:text-left">
+          <div className="text-center md:text-left self-start">
             <p
               className="
-    inline
-    font-['Poppins','Arial','sans-serif']
-    text-[176px]
-    font-extrabold
-    uppercase
-    text-white/15
-    tracking-[0.8px]
-    drop-shadow-[1px_1px_2px_rgba(0,0,0,0.35)]
-    drop-shadow-[3px_3px_6px_rgba(0,0,0,0.4)]
-    drop-shadow-[6px_6px_12px_rgba(0,0,0,0.45)]
-  "
+          inline
+          font-['Poppins','Arial','sans-serif']
+          text-[150px]
+          font-extrabold
+          uppercase
+          leading-none
+          text-white/15
+          tracking-[0.8px]
+          drop-shadow-[1px_1px_2px_rgba(0,0,0,0.35)]
+          drop-shadow-[3px_3px_6px_rgba(0,0,0,0.4)]
+          drop-shadow-[6px_6px_12px_rgba(0,0,0,0.45)]
+        "
             >
               ABOUT
             </p>
 
-            <h2 className="text-4xl font-bold tracking-[0.15em] text-white/90">
+            <h2 className="mt-2 text-4xl font-bold tracking-[0.15em] text-white/90">
               WHO I AM
             </h2>
           </div>
