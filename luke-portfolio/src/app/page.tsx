@@ -68,21 +68,19 @@ export default function Page() {
           </div>
 
           {/* Right: Text */}
-          <div className="text-center md:text-left self-start">
+          <div className="text-center md:text-left self-start md:-translate-y-5">
             <p
               className="
-          inline
-          font-['Poppins','Arial','sans-serif']
-          text-[150px]
-          font-extrabold
-          uppercase
-          leading-none
-          text-white/15
-          tracking-[0.8px]
-          drop-shadow-[1px_1px_2px_rgba(0,0,0,0.35)]
-          drop-shadow-[3px_3px_6px_rgba(0,0,0,0.4)]
-          drop-shadow-[6px_6px_12px_rgba(0,0,0,0.45)]
-        "
+                inline
+                font-['Poppins','Arial','sans-serif']
+                text-[150px]
+                font-extrabold
+                uppercase
+                leading-none
+                text-white/15
+                tracking-[0.8px]
+                drop-shadow-[2px_2px_4px_rgba(0,0,0,0.5)]
+              "
             >
               ABOUT
             </p>
