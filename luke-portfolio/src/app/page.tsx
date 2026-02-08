@@ -72,7 +72,20 @@ export default function Page() {
 
           {/* Right: Text */}
           <div className="text-center md:text-left">
-            <p className="mb-2 text-sm tracking-[0.8px] text-[rgb(132,125,125)]">
+            <p
+              className="
+    inline
+    font-['Poppins','Arial','sans-serif']
+    text-[176px]
+    font-extrabold
+    uppercase
+    text-white/15
+    tracking-[0.8px]
+    drop-shadow-[1px_1px_2px_rgba(0,0,0,0.35)]
+    drop-shadow-[3px_3px_6px_rgba(0,0,0,0.4)]
+    drop-shadow-[6px_6px_12px_rgba(0,0,0,0.45)]
+  "
+            >
               ABOUT
             </p>
 
