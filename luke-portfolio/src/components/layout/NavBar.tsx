@@ -39,7 +39,7 @@ export default function NavBar() {
           />
 
           {/* prevent overflow on small screens */}
-          <div className="min-w-0">
+          <div className="min-w-0 pl-1 sm:pl-2">
             <AnimatedName>
               <span
                 className="
