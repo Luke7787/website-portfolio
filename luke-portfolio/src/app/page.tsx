@@ -69,7 +69,6 @@ export default function Page() {
           </div>
 
           {/* Right: Text */}
-          {/* Right: Text */}
           <div
             className="
               text-center
@@ -87,9 +86,9 @@ export default function Page() {
                 font-extrabold
                 uppercase
                 leading-none
-                text-white/15
                 tracking-[0.8px]
-                drop-shadow-[2px_2px_4px_rgba(0,0,0,0.5)]
+                text-[rgba(255,255,255,0.15)]
+                [text-shadow:2px_2px_4px_rgba(0,0,0,0.5)]
               "
             >
               ABOUT
@@ -98,10 +97,12 @@ export default function Page() {
             <h2
               className="
                 mt-2
-                text-[2rem]
-                font-normal
+                text-[1.8rem]
+                font-medium
                 tracking-[0.05em]
                 text-white
+                md:translate-x-19
+                md:-translate-y-24
               "
             >
               {"Hi! I'm Luke Zhuang"}
