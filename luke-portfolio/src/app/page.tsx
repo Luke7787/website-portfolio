@@ -69,10 +69,19 @@ export default function Page() {
           </div>
 
           {/* Right: Text */}
-          <div className="text-center md:text-left self-start md:-translate-y-5">
+          {/* Right: Text */}
+          <div
+            className="
+              text-center
+              md:text-left
+              self-start
+              md:-translate-y-5
+              md:-translate-x-16
+            "
+          >
             <p
               className="
-                inline
+                block
                 font-['Poppins','Arial','sans-serif']
                 text-[150px]
                 font-extrabold
