@@ -96,7 +96,7 @@ export default function Page() {
             </p>
 
             <h2 className="mt-2 text-4xl font-bold tracking-[0.15em] text-white/90">
-              WHO I AM
+              {"Hi! I'm Luke Zhuang"}
             </h2>
           </div>
         </div>
