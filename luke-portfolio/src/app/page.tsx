@@ -57,12 +57,12 @@ export default function Page() {
                 width={800}
                 height={528}
                 className="
-            rounded-lg
-            border-2
-            border-white
-            shadow-lg
-            object-cover
-          "
+                  rounded-lg
+                  border-2
+                  border-white
+                  shadow-lg
+                  object-cover
+                "
               />
             </div>
           </div>
