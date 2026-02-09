@@ -62,6 +62,7 @@ export default function Page() {
                   border-white
                   shadow-lg
                   object-cover
+                  md:-translate-x-6
                 "
               />
             </div>
