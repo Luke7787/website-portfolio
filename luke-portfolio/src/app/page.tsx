@@ -81,12 +81,12 @@ export default function Page() {
             <p
               className="
                 block
-                font-['Poppins','Arial','sans-serif']
+                font-['League Spartan','Arial','sans-serif']
                 text-[150px]
-                font-extrabold
+                font-black
                 uppercase
                 leading-none
-                tracking-[0.8px]
+                tracking-[0.6px]
                 text-[rgba(255,255,255,0.15)]
                 [text-shadow:2px_2px_4px_rgba(0,0,0,0.5)]
               "
@@ -102,11 +102,31 @@ export default function Page() {
                 tracking-[0.05em]
                 text-white
                 md:translate-x-19
-                md:-translate-y-24
+                md:-translate-y-22
               "
             >
               {"Hi! I'm Luke Zhuang"}
             </h2>
+
+            <p
+              className="
+                mt-5
+                max-w-md
+                text-[1.125rem]
+                font-medium
+                leading-[1.75]
+                tracking-[0.03em]
+                text-white/80
+                text-left
+                md:text-justify
+                md:translate-x-19
+                md:-translate-y-15
+              "
+            >
+              I’m a software engineer with a passion for building websites. I’m
+              constantly seeking new challenges to expand my skills and
+              knowledge.
+            </p>
           </div>
         </div>
       </section>
