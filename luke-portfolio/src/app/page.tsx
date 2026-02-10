@@ -127,6 +127,23 @@ export default function Page() {
               constantly seeking new challenges to expand my skills and
               knowledge.
             </p>
+
+            <p
+              className="
+                mt-4
+                text-[1.125rem]
+                font-medium
+                text-[#1E90FF]
+                hover:underline
+                transition-all
+                duration-200
+                md:translate-x-19
+                md:-translate-y-12.5
+                cursor-pointer
+              "
+            >
+              Check out my resume
+            </p>
           </div>
         </div>
       </section>
