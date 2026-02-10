@@ -28,13 +28,19 @@ export default function NavBar() {
     <nav className="fixed top-0 z-50 w-full border-b border-white/10 bg-[#141414]/90 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         {/* Logo + Animated Name */}
-        <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+        <div className="flex items-center gap-3 sm:gap-4 min-w-0 translate-y-1">
           <Image
             src="/images/logo.jpg"
             alt="Luke Zhuang"
             width={48}
-            height={48}
-            className="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover"
+            height={528}
+            className="
+              h-10 w-10
+              sm:h-12 sm:w-12
+              rounded-full
+              object-cover
+              -translate-y-[2.5px]
+            "
             priority
           />
 
