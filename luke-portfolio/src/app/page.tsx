@@ -164,8 +164,8 @@ export default function Page() {
                 className="
                   group
                   inline-flex
-                  h-13.75
-                  w-13.75
+                  h-12
+                  w-12
                   items-center
                   justify-center
                   rounded-full
@@ -195,8 +195,8 @@ export default function Page() {
                 className="
                   group
                   inline-flex
-                  h-13.75
-                  w-13.75
+                  h-12
+                  w-12
                   items-center
                   justify-center
                   rounded-full
@@ -226,8 +226,8 @@ export default function Page() {
                 className="
                   group
                   inline-flex
-                  h-13.75
-                  w-13.75
+                  h-12
+                  w-12
                   items-center
                   justify-center
                   rounded-full
@@ -249,6 +249,25 @@ export default function Page() {
                 />
               </a>
             </div>
+
+            <p
+              className="
+                mt-5
+                max-w-md
+                text-[1.125rem]
+                font-medium
+                leading-[1.75]
+                tracking-[0.03em]
+                text-white/80
+                text-left
+                md:text-justify
+                md:translate-x-19
+                md:-translate-y-15
+                cursor-pointer
+              "
+            >
+              Contact me here!
+            </p>
           </div>
         </div>
       </section>
