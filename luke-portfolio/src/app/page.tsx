@@ -1,8 +1,88 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import NavBar from "@/components/layout/NavBar";
 import AnimatedName from "@/components/effects/AnimatedName";
 import TextScramble from "@/components/effects/TextScramble";
-// testing
+
+// Slideshow Component (Added Only)
+function Slideshow() {
+  const images = [
+    "/images/about.jpg",
+    "/images/test.jpeg",
+    "/images/handstand.mp4",
+  ];
+  const [index, setIndex] = useState(0);
+
+  function next() {
+    setIndex((prev) => (prev + 1) % images.length);
+  }
+
+  function prev() {
+    setIndex((prev) => (prev - 1 + images.length) % images.length);
+  }
+
+  return (
+    <div className="relative">
+      <Image
+        src={images[index]}
+        alt="Luke Zhuang portrait"
+        width={800}
+        height={528}
+        className="
+          rounded-lg
+          border-2
+          border-white
+          shadow-lg
+          object-cover
+          md:-translate-x-6
+        "
+      />
+
+      {/* Left Arrow */}
+      <button
+        onClick={prev}
+        className="
+          absolute
+          left-3
+          top-1/2
+          -translate-y-1/2
+          bg-black/40
+          text-white
+          px-3
+          py-2
+          rounded-full
+          hover:bg-black/60
+          transition
+        "
+      >
+        ‹
+      </button>
+
+      {/* Right Arrow */}
+      <button
+        onClick={next}
+        className="
+          absolute
+          right-3
+          top-1/2
+          -translate-y-1/2
+          bg-black/40
+          text-white
+          px-3
+          py-2
+          rounded-full
+          hover:bg-black/60
+          transition
+        "
+      >
+        ›
+      </button>
+    </div>
+  );
+}
+
 export default function Page() {
   return (
     <main className="relative">
@@ -40,31 +120,18 @@ export default function Page() {
       {/* ABOUT */}
       <section id="about" className="scroll-mt-16 min-h-screen pt-16 flex">
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-6 md:grid-cols-2">
-          {/* Left: Image */}
+          {/* Left: Image (Now Slideshow, styles untouched) */}
           <div className="flex justify-center md:justify-end">
             <div
               className="
-          w-80
-          sm:w-84
-          md:w-100
-          lg:w-116
-          md:-translate-x-12
-        "
+                w-80
+                sm:w-84
+                md:w-100
+                lg:w-116
+                md:-translate-x-12
+              "
             >
-              <Image
-                src="/images/about.jpg"
-                alt="Luke Zhuang portrait"
-                width={800}
-                height={528}
-                className="
-                  rounded-lg
-                  border-2
-                  border-white
-                  shadow-lg
-                  object-cover
-                  md:-translate-x-6
-                "
-              />
+              <Slideshow />
             </div>
           </div>
 
@@ -89,7 +156,6 @@ export default function Page() {
                 tracking-[0.6px]
                 text-[rgba(255,255,255,0.15)]
                 [text-shadow:2px_2px_4px_rgba(0,0,0,0.5)]
-
               "
             >
               ABOUT
