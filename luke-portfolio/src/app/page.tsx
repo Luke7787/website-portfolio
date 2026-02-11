@@ -64,42 +64,59 @@ function Slideshow() {
       )}
 
       {/* Arrows */}
+      {/* Left Arrow */}
+      {/* Left Arrow */}
       <button
         onClick={prev}
         className="
           absolute
-          left-3
+          left-4
           top-1/2
           -translate-y-1/2
-          bg-black/40
-          text-white
-          px-3
-          py-2
+          flex items-center justify-center
+          w-12 h-12
           rounded-full
-          hover:bg-black/60
-          transition
+          bg-white/10
+          backdrop-blur-md
+          border border-white/20
+          text-white
+          text-3xl
+          leading-none
+          shadow-lg
+          hover:bg-white/20
+          hover:scale-110
+          active:scale-95
+          transition-all duration-300
         "
       >
-        ‹
+        <span className="-translate-x-[1px] -translate-y-[2px]">‹</span>
       </button>
 
+      {/* Right Arrow */}
       <button
         onClick={next}
         className="
           absolute
-          right-3
+          right-4
           top-1/2
           -translate-y-1/2
-          bg-black/40
-          text-white
-          px-3
-          py-2
+          flex items-center justify-center
+          w-12 h-12
           rounded-full
-          hover:bg-black/60
-          transition
+          bg-white/10
+          backdrop-blur-md
+          border border-white/20
+          text-white
+          text-3xl
+          leading-none
+          shadow-lg
+          hover:bg-white/20
+          hover:scale-110
+          active:scale-95
+          transition-all duration-300
         "
       >
-        ›
+        <span className="translate-x-[1px] -translate-y-[2px]">›</span>
       </button>
     </div>
   );
