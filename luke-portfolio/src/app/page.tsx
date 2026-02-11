@@ -40,7 +40,6 @@ function Slideshow() {
             border-white
             shadow-lg
             object-cover
-            md:-translate-x-6
           "
         />
       )}
@@ -59,7 +58,6 @@ function Slideshow() {
             border-white
             shadow-lg
             object-cover
-            md:-translate-x-6
             w-full
           "
         />
