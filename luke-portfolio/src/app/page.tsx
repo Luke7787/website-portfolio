@@ -8,39 +8,64 @@ import TextScramble from "@/components/effects/TextScramble";
 
 // Slideshow Component (Added Only)
 function Slideshow() {
-  const images = [
-    "/images/about.jpg",
-    "/images/test.jpeg",
-    "/images/handstand.mp4",
+  const slides = [
+    { type: "image", src: "/images/about.jpg" },
+    { type: "video", src: "/images/handstand.mp4" },
+    { type: "image", src: "/images/test.jpeg" },
   ];
   const [index, setIndex] = useState(0);
 
   function next() {
-    setIndex((prev) => (prev + 1) % images.length);
+    setIndex((prev) => (prev + 1) % slides.length);
   }
 
   function prev() {
-    setIndex((prev) => (prev - 1 + images.length) % images.length);
+    setIndex((prev) => (prev - 1 + slides.length) % slides.length);
   }
+
+  const current = slides[index];
 
   return (
     <div className="relative">
-      <Image
-        src={images[index]}
-        alt="Luke Zhuang portrait"
-        width={800}
-        height={528}
-        className="
-          rounded-lg
-          border-2
-          border-white
-          shadow-lg
-          object-cover
-          md:-translate-x-6
-        "
-      />
+      {/* IMAGE */}
+      {current.type === "image" && (
+        <Image
+          src={current.src}
+          alt="Luke Zhuang"
+          width={800}
+          height={800}
+          className="
+            rounded-lg
+            border-2
+            border-white
+            shadow-lg
+            object-cover
+            md:-translate-x-6
+          "
+        />
+      )}
 
-      {/* Left Arrow */}
+      {/* VIDEO */}
+      {current.type === "video" && (
+        <video
+          src={current.src}
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="
+            rounded-lg
+            border-2
+            border-white
+            shadow-lg
+            object-cover
+            md:-translate-x-6
+            w-full
+          "
+        />
+      )}
+
+      {/* Arrows */}
       <button
         onClick={prev}
         className="
@@ -60,7 +85,6 @@ function Slideshow() {
         ‹
       </button>
 
-      {/* Right Arrow */}
       <button
         onClick={next}
         className="
