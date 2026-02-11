@@ -145,6 +145,110 @@ export default function Page() {
             >
               Check out my resume
             </p>
+
+            {/* Social Icons */}
+            <div
+              className="
+                mt-6
+                flex
+                gap-4
+                md:translate-x-19
+                md:-translate-y-12.5
+              "
+            >
+              {/* GitHub */}
+              <a
+                href="https://github.com/Luke7787"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="
+                  group
+                  inline-flex
+                  h-13.75
+                  w-13.75
+                  items-center
+                  justify-center
+                  rounded-full
+                  bg-white/15
+                  transition-all
+                  duration-300
+                  hover:scale-110
+                "
+              >
+                <i
+                  className="
+                    fab fa-github
+                    text-[30px]
+                    text-[#1B76D2]
+                    transition-colors
+                    duration-300
+                    group-hover:text-white
+                  "
+                />
+              </a>
+
+              {/* LinkedIn */}
+              <a
+                href="https://www.linkedin.com/in/zhuangluke/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="
+                  group
+                  inline-flex
+                  h-13.75
+                  w-13.75
+                  items-center
+                  justify-center
+                  rounded-full
+                  bg-white/15
+                  transition-all
+                  duration-300
+                  hover:scale-110
+                "
+              >
+                <i
+                  className="
+                    fab fa-linkedin
+                    text-[30px]
+                    text-[#1B76D2]
+                    transition-colors
+                    duration-300
+                    group-hover:text-white
+                  "
+                />
+              </a>
+
+              {/* Facebook */}
+              <a
+                href="https://www.facebook.com/luke.zhuang/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="
+                  group
+                  inline-flex
+                  h-13.75
+                  w-13.75
+                  items-center
+                  justify-center
+                  rounded-full
+                  bg-white/15
+                  transition-all
+                  duration-300
+                  hover:scale-110
+                "
+              >
+                <i
+                  className="
+                    fab fa-facebook
+                    text-[30px]
+                    text-[#1B76D2]
+                    transition-colors
+                    duration-300
+                    group-hover:text-white
+                  "
+                />
+              </a>
+            </div>
           </div>
         </div>
       </section>
