@@ -69,50 +69,50 @@ function Slideshow() {
       <button
         onClick={prev}
         className="
-    absolute
-    left-4
-    top-1/2
-    -translate-y-1/2
-    flex items-center justify-center
-    w-12 h-12
-    rounded-full
-    bg-gray-100
-    text-black
-    text-3xl
-    leading-none
-    shadow-[0_8px_20px_rgba(0,0,0,0.15)]
-    hover:bg-gray-200
-    hover:scale-110
-    active:scale-95
-    transition-all duration-300
-  "
+          absolute
+          left-4
+          top-1/2
+          -translate-y-1/2
+          flex items-center justify-center
+          w-12 h-12
+          rounded-full
+          bg-gray-100
+          text-black
+          text-3xl
+          leading-none
+          shadow-[0_8px_20px_rgba(0,0,0,0.15)]
+          hover:bg-gray-200
+          hover:scale-110
+          active:scale-95
+          transition-all duration-300
+        "
       >
-        <span className="-translate-x-[1px] -translate-y-[2px]">‹</span>
+        <span className="-translate-x-px -translate-y-0.5">‹</span>
       </button>
 
       {/* Right Arrow */}
       <button
         onClick={next}
         className="
-    absolute
-    right-4
-    top-1/2
-    -translate-y-1/2
-    flex items-center justify-center
-    w-12 h-12
-    rounded-full
-    bg-gray-100
-    text-black
-    text-3xl
-    leading-none
-    shadow-[0_8px_20px_rgba(0,0,0,0.15)]
-    hover:bg-gray-200
-    hover:scale-110
-    active:scale-95
-    transition-all duration-300
-  "
+          absolute
+          right-4
+          top-1/2
+          -translate-y-1/2
+          flex items-center justify-center
+          w-12 h-12
+          rounded-full
+          bg-gray-100
+          text-black
+          text-3xl
+          leading-none
+          shadow-[0_8px_20px_rgba(0,0,0,0.15)]
+          hover:bg-gray-200
+          hover:scale-110
+          active:scale-95
+          transition-all duration-300
+        "
       >
-        <span className="translate-x-[1px] -translate-y-[2px]">›</span>
+        <span className="translate-x-px -translate-y-0.5">›</span>
       </button>
     </div>
   );
