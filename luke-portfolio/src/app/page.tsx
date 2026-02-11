@@ -250,24 +250,51 @@ export default function Page() {
               </a>
             </div>
 
-            <p
+            <div
               className="
-                mt-5
+                mt-4
                 max-w-md
-                text-[1.125rem]
+                space-y-2
+                text-[1rem]
                 font-medium
-                leading-[1.75]
+                leading-[1.6]
                 tracking-[0.03em]
-                text-white/80
-                text-left
-                md:text-justify
                 md:translate-x-19
-                md:-translate-y-15
-                cursor-pointer
+                md:-translate-y-10
               "
             >
-              Contact me here!
-            </p>
+              <p>
+                <span className="text-[#8c8c8c]">Email:</span>{" "}
+                <span
+                  className="
+                  text-[#1E90FF]
+                  hover:underline
+                  hover:underline-offset-4
+                  transition-all
+                  duration-200
+                  cursor-pointer
+                "
+                >
+                  lukewzhuang@gmail.com
+                </span>
+              </p>
+
+              <p>
+                <span className="text-[#8c8c8c]">Phone:</span>{" "}
+                <span
+                  className="
+                    text-[#1E90FF]
+                    hover:underline
+                    hover:underline-offset-4
+                    transition-all
+                    duration-200
+                    cursor-pointer
+                  "
+                >
+                  (415) 837-8686
+                </span>
+              </p>
+            </div>
           </div>
         </div>
       </section>
