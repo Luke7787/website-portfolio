@@ -19,7 +19,7 @@ function Slideshow() {
       type: "video",
       src: "/images/handstand.mp4",
       caption:
-        "Finally achieved my first headstand push up at Cal Poly Rec November 4, 2022 (Age 21)",
+        "Taken at Cal Poly Rec, finally achieved my first headstand push up November 4, 2022 (Age 21)",
     },
     {
       type: "image",
