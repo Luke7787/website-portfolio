@@ -12,22 +12,26 @@ function Slideshow() {
     {
       type: "image",
       src: "/images/about.jpg",
-      caption: "A portrait of me exploring San Francisco.",
+      caption:
+        "Taken at Seattle’s iconic Space Needle during a family road trip September 10, 2022 (Age 20)",
     },
     {
       type: "video",
       src: "/images/handstand.mp4",
-      caption: "Training handstands and pushing physical limits.",
+      caption:
+        "Finally achieved my first headstand push up at Cal Poly Rec November 4, 2022 (Age 21)",
     },
     {
       type: "image",
       src: "/images/test.jpeg",
-      caption: "Spending time with my wife.",
+      caption:
+        "Taken at Japantown Peace Plaza in San Francisco while showing my girlfriend around the city - June 17, 2023 (Age 21)",
     },
     {
       type: "image",
       src: "/images/fishing.png",
-      caption: "Me fishing in highschool",
+      caption:
+        "Taken in San Francisco Bay after catching my first striped bass October 7, 2017 (Age 16)",
     },
   ];
   const [index, setIndex] = useState(0);
