@@ -9,10 +9,26 @@ import TextScramble from "@/components/effects/TextScramble";
 // Slideshow Component (Added Only)
 function Slideshow() {
   const slides = [
-    { type: "image", src: "/images/about.jpg" },
-    { type: "video", src: "/images/handstand.mp4" },
-    { type: "image", src: "/images/test.jpeg" },
-    { type: "image", src: "/images/fishing.png" },
+    {
+      type: "image",
+      src: "/images/about.jpg",
+      caption: "A portrait of me exploring San Francisco.",
+    },
+    {
+      type: "video",
+      src: "/images/handstand.mp4",
+      caption: "Training handstands and pushing physical limits.",
+    },
+    {
+      type: "image",
+      src: "/images/test.jpeg",
+      caption: "Spending time with my wife.",
+    },
+    {
+      type: "image",
+      src: "/images/fishing.png",
+      caption: "Me fishing in highschool",
+    },
   ];
   const [index, setIndex] = useState(0);
 
@@ -37,12 +53,12 @@ function Slideshow() {
             alt="Luke Zhuang"
             fill
             className="
-            rounded-lg
-            border-2
-            border-white
-            shadow-lg
-            object-cover
-          "
+              rounded-lg
+              border-2
+              border-white
+              shadow-lg
+              object-cover
+            "
           />
         )}
 
@@ -55,19 +71,32 @@ function Slideshow() {
             loop
             playsInline
             className="
-            absolute
-            inset-0
-            w-full
-            h-full
-            rounded-lg
-            border-2
-            border-white
-            shadow-lg
-            object-cover
-          "
+              absolute
+              inset-0
+              w-full
+              h-full
+              rounded-lg
+              border-2
+              border-white
+              shadow-lg
+              object-cover
+            "
           />
         )}
       </div>
+
+      {/* Caption (Added Only) */}
+      <p
+        className="
+          mt-4
+          text-sm
+          text-white/70
+          tracking-[0.03em]
+          text-center
+        "
+      >
+        {current.caption}
+      </p>
 
       {/* Arrows */}
       {/* Left Arrow */}
