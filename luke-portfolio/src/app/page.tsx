@@ -12,6 +12,7 @@ function Slideshow() {
     { type: "image", src: "/images/about.jpg" },
     { type: "video", src: "/images/handstand.mp4" },
     { type: "image", src: "/images/test.jpeg" },
+    { type: "image", src: "/images/fishing.png" },
   ];
   const [index, setIndex] = useState(0);
 
