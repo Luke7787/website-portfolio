@@ -27,44 +27,48 @@ function Slideshow() {
 
   return (
     <div className="relative">
-      {/* IMAGE */}
-      {current.type === "image" && (
-        <Image
-          src={current.src}
-          alt="Luke Zhuang"
-          width={800}
-          height={800}
-          className="
+      {/* Aspect Ratio Container */}
+      <div className="relative w-full aspect-square">
+        {/* IMAGE */}
+        {current.type === "image" && (
+          <Image
+            src={current.src}
+            alt="Luke Zhuang"
+            fill
+            className="
             rounded-lg
             border-2
             border-white
             shadow-lg
             object-cover
           "
-        />
-      )}
+          />
+        )}
 
-      {/* VIDEO */}
-      {current.type === "video" && (
-        <video
-          src={current.src}
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="
+        {/* VIDEO */}
+        {current.type === "video" && (
+          <video
+            src={current.src}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="
+            absolute
+            inset-0
+            w-full
+            h-full
             rounded-lg
             border-2
             border-white
             shadow-lg
             object-cover
-            w-full
           "
-        />
-      )}
+          />
+        )}
+      </div>
 
       {/* Arrows */}
-      {/* Left Arrow */}
       {/* Left Arrow */}
       <button
         onClick={prev}
