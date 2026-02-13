@@ -260,7 +260,7 @@ export default function Page() {
                 text-left
                 md:text-justify
                 md:translate-x-19
-                md:-translate-y-15
+                md:-translate-y-13
               "
             >
               I’m a software engineer with a passion for building websites. I’m
@@ -278,7 +278,7 @@ export default function Page() {
                 transition-all
                 duration-200
                 md:translate-x-19
-                md:-translate-y-12.5
+                md:-translate-y-10
                 cursor-pointer
               "
             >
@@ -292,7 +292,7 @@ export default function Page() {
                 flex
                 gap-4
                 md:translate-x-19
-                md:-translate-y-12.5
+                md:-translate-y-7
               "
             >
               {/* GitHub */}
@@ -399,7 +399,7 @@ export default function Page() {
                 leading-[1.6]
                 tracking-[0.03em]
                 md:translate-x-19
-                md:-translate-y-10
+                md:-translate-y-2.25
               "
             >
               <p>
