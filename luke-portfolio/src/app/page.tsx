@@ -257,16 +257,22 @@ export default function Page() {
             <p
               className="
                 mt-5
-                max-w-md
-                text-[1.125rem]
+                max-w-[320px]
+                sm:max-w-sm
+                md:max-w-md
+                text-[1rem]
+                sm:text-[1.05rem]
+                md:text-[1.125rem]
                 font-medium
-                leading-[1.75]
+                leading-[1.6]
+                md:leading-[1.75]
                 tracking-[0.03em]
                 text-white/80
-                text-left
-                md:text-justify
+                text-justify
                 md:translate-x-19
                 md:-translate-y-13
+                -translate-y-30
+  
               "
             >
               I’m a software engineer with a passion for building websites. I’m
