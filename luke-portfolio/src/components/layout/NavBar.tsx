@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import AnimatedName from "@/components/effects/AnimatedName";
 
@@ -14,18 +14,37 @@ const NAV_ITEMS = [
 
 export default function NavBar() {
   const [open, setOpen] = useState(false);
+  const navRef = useRef<HTMLElement | null>(null);
 
-  // Optional: close on ESC
   useEffect(() => {
-    function onKeyDown(e: KeyboardEvent) {
+    function handleKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") setOpen(false);
     }
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, []);
+
+    function handleClickOutside(e: MouseEvent) {
+      if (
+        open &&
+        navRef.current &&
+        !navRef.current.contains(e.target as Node)
+      ) {
+        setOpen(false);
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [open]);
 
   return (
-    <nav className="fixed top-0 z-50 w-full border-b border-white/10 bg-[#141414]/90 backdrop-blur">
+    <nav
+      ref={navRef}
+      className="fixed top-0 z-50 w-full border-b border-white/10 bg-[#141414]/90 backdrop-blur"
+    >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         {/* Logo + Animated Name */}
         <div className="flex items-center gap-3 sm:gap-4 min-w-0 translate-y-1">
@@ -44,7 +63,6 @@ export default function NavBar() {
             priority
           />
 
-          {/* prevent overflow on small screens */}
           <div className="min-w-0 pl-1 sm:pl-2">
             <AnimatedName>
               <span
