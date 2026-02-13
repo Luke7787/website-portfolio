@@ -191,7 +191,7 @@ export default function Page() {
       </section>
 
       {/* ABOUT */}
-      <section id="about" className="scroll-mt-16 min-h-screen pt-16 flex">
+      <section id="about" className="scroll-mt-34 min-h-screen pt-16 flex">
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-6 md:grid-cols-2">
           {/* Left: Image (Now Slideshow, styles untouched) */}
           <div className="flex justify-center md:justify-end">
