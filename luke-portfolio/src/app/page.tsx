@@ -289,6 +289,7 @@ export default function Page() {
                 hover:underline
                 transition-colors
                 duration-200
+                -translate-y-25
                 md:translate-x-19
                 md:-translate-y-10
                 cursor-pointer
@@ -305,6 +306,8 @@ export default function Page() {
                 gap-4
                 md:translate-x-19
                 md:-translate-y-7
+                -translate-y-28
+                translate-x-18
               "
             >
               {/* GitHub */}
