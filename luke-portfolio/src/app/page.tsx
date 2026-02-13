@@ -415,6 +415,7 @@ export default function Page() {
                 tracking-[0.03em]
                 md:translate-x-19
                 md:-translate-y-2.25
+                -translate-y-22
               "
             >
               <p>
