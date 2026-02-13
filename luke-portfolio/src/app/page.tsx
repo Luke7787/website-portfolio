@@ -222,7 +222,9 @@ export default function Page() {
               className="
                 block
                 font-['League Spartan','Arial','sans-serif']
-                text-[150px]
+                text-[90px]
+                sm:text-[110px]
+                lg:text-[150px]
                 font-black
                 uppercase
                 leading-none
