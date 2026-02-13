@@ -240,6 +240,8 @@ export default function Page() {
 
             <h2
               className="
+                hidden
+                md:block
                 mt-2
                 text-[1.8rem]
                 font-medium
