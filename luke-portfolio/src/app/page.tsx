@@ -279,7 +279,7 @@ export default function Page() {
                 font-medium
                 text-[#1E90FF]
                 hover:underline
-                transition-all
+                transition-colors
                 duration-200
                 md:translate-x-19
                 md:-translate-y-10
