@@ -231,6 +231,8 @@ export default function Page() {
                 tracking-[0.6px]
                 text-[rgba(255,255,255,0.15)]
                 [text-shadow:2px_2px_4px_rgba(0,0,0,0.5)]
+                -translate-y-118.75
+                md:translate-y-0
               "
             >
               ABOUT
