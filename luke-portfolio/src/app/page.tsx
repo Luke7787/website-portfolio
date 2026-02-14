@@ -547,6 +547,36 @@ export default function Page() {
           </div>
         </div>
       </section>
+
+      {/* FOOTER */}
+      <footer className="py-6 text-center">
+        <p
+          className="
+            text-[1rem]
+            font-light
+            text-white/50
+            font-['Open_Sans',sans-serif]
+          "
+        >
+          © 2026 All rights reserved | This template is made by{" "}
+          <span
+            className="
+              inline-block
+              px-2
+              py-1
+              ml-1
+              text-white
+              bg-[#1E90FF]
+              rounded
+              transition-transform
+              duration-300
+              hover:scale-110
+            "
+          >
+            Luke Zhuang
+          </span>
+        </p>
+      </footer>
     </main>
   );
 }
