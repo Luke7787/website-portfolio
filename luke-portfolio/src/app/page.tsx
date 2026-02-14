@@ -468,7 +468,7 @@ export default function Page() {
           </p>
 
           <h2 className="text-4xl font-bold tracking-[0.15em] text-white/90">
-            PROJECTS
+            Explore some of my projects
           </h2>
         </div>
       </section>
