@@ -495,46 +495,31 @@ export default function Page() {
         className="scroll-mt-16 min-h-screen pt-16 flex items-center justify-center"
       >
         <div className="text-center">
-          <p className="mb-4 text-[1.75rem] font-bold text-[rgb(140,140,140)]">
+          {/* Headline */}
+          <p className="text-[1.5rem] font-bold tracking-[0.03em] text-[rgb(140,140,140)]">
             {"Let's Connect"}
           </p>
 
           {/* Contact Info */}
-          <div className="mt-8 space-y-4">
+          <div className="mt-6 space-y-4">
             {/* Email */}
             <a
               href="mailto:lukewzhuang@gmail.com"
               className="
-                block
-                text-white
-                text-[1.55rem]
-                font-bold
-                transition-colors
-                duration-300
-                hover:text-[#1E90FF]
-              "
+          block
+          text-white
+          text-[1.55rem]
+          font-bold
+          transition-colors
+          duration-300
+          hover:text-[#1E90FF]
+        "
             >
               lukewzhuang@gmail.com
             </a>
 
-            {/* Phone */}
-            <a
-              href="tel:+14158378686"
-              className="
-                block
-                text-white
-                text-[1.55rem]
-                font-bold
-                transition-colors
-                duration-300
-                hover:text-[#1E90FF]
-              "
-            >
-              (415) 837-8686
-            </a>
-
             {/* Social Icons */}
-            <div className="mt-6 flex justify-center gap-6">
+            <div className="mt-8 flex justify-center gap-6">
               {[
                 { href: "https://github.com/Luke7787", icon: "fab fa-github" },
                 {
