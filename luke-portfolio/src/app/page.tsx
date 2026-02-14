@@ -492,7 +492,7 @@ export default function Page() {
       {/* CONTACT */}
       <section
         id="contact"
-        className="scroll-mt-16 min-h-screen pt-16 flex items-center justify-center"
+        className="scroll-mt-0 min-h-screen pt-16 flex items-center justify-center"
       >
         <div className="text-center">
           {/* Headline */}
