@@ -25,7 +25,7 @@ function Slideshow() {
       type: "image",
       src: "/images/test.jpeg",
       caption:
-        "Taken at Japantown Peace Plaza in San Francisco while showing my girlfriend around the city - June 17, 2023 (Age 21)",
+        "Taken at Japantown, San Francisco, showing my girlfriend around June 17, 2023 (Age 21)",
     },
     {
       type: "image",
@@ -493,7 +493,7 @@ export default function Page() {
       {/* CONTACT */}
       <section
         id="contact"
-        className="scroll-mt-0 min-h-screen pt-16 flex items-center justify-center"
+        className="-scroll-mt-25 min-h-screen pt-16 flex items-center justify-center"
       >
         <div className="text-center">
           {/* Headline */}
