@@ -506,14 +506,14 @@ export default function Page() {
             <a
               href="mailto:lukewzhuang@gmail.com"
               className="
-          block
-          text-white
-          text-[1.55rem]
-          font-bold
-          transition-colors
-          duration-300
-          hover:text-[#1E90FF]
-        "
+                block
+                text-white
+                text-[1.55rem]
+                font-bold
+                transition-colors
+                duration-300
+                hover:text-[#1E90FF]
+              "
             >
               lukewzhuang@gmail.com
             </a>
@@ -553,8 +553,8 @@ export default function Page() {
         <p
           className="
             text-[1rem]
-            font-light
-            text-white/50
+            font-medium
+            text-white/70
             font-['Open_Sans',sans-serif]
           "
         >
@@ -566,11 +566,12 @@ export default function Page() {
               py-1
               ml-1
               text-white
-              bg-[#1E90FF]
+              font-extrabold
+            bg-[#1565C0]
               rounded
               transition-transform
               duration-300
-              hover:scale-110
+              hover:scale-105
             "
           >
             Luke Zhuang
