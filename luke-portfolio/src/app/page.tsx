@@ -463,7 +463,7 @@ export default function Page() {
         className="scroll-mt-16 min-h-screen pt-16 flex items-center justify-center"
       >
         <div className="text-center">
-          <p className="mb-2 text-sm tracking-[0.8px] text-[rgb(140,140,140)]">
+          <p className="mb-2 text-[20px] tracking-[0.8px] text-[rgb(140,140,140)]">
             PORTFOLIO
           </p>
 
