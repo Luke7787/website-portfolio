@@ -552,7 +552,8 @@ export default function Page() {
       <footer className="py-6 text-center">
         <p
           className="
-            text-[1rem]
+            text-[0.9rem]
+            sm:text-[1rem]
             font-medium
             text-white/70
             font-['Open_Sans',sans-serif]
@@ -566,8 +567,10 @@ export default function Page() {
               py-1
               ml-1
               text-white
+              text-[0.9rem]
+              sm:text-[1rem]
               font-extrabold
-            bg-[#1565C0]
+              bg-[#1565C0]
               rounded
               transition-transform
               duration-300
