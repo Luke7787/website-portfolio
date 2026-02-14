@@ -306,11 +306,12 @@ export default function Page() {
               className="
                 mt-6
                 flex
+                justify-center
+                md:justify-start
                 gap-4
                 md:translate-x-19
                 md:-translate-y-7
                 -translate-y-28
-                translate-x-18
               "
             >
               {/* GitHub */}
