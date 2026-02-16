@@ -471,6 +471,57 @@ export default function Page() {
           <h2 className="text-3xl md:text-4xl font-bold tracking-[0.12em] text-white/90">
             Recent Projects
           </h2>
+
+          {/* First Project */}
+          <div className="mt-16 mx-auto max-w-6xl px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            {/* Left Side — Image */}
+            <div className="relative w-full aspect-[4/3]">
+              <Image
+                src="/images/about.jpg"
+                alt="My Inventory Project"
+                fill
+                className="
+        rounded-xl
+        object-cover
+        shadow-lg
+        border border-white/10
+      "
+              />
+            </div>
+
+            {/* Right Side — Text */}
+            <div className="text-left space-y-4">
+              <p className="text-sm tracking-[0.2em] text-white/60 uppercase">
+                FULL-STACK APPLICATION
+              </p>
+
+              <h3 className="text-2xl md:text-3xl font-bold text-white">
+                My Inventory
+              </h3>
+
+              <p className="text-white/80 leading-relaxed">
+                Developed a full-stack inventory management app using React,
+                Node.js, and MongoDB, featuring intuitive inventory tracking,
+                secure authentication with JWT, and RESTful APIs.
+              </p>
+
+              <div className="flex gap-6 pt-4">
+                <a
+                  href="#"
+                  className="text-[#1E90FF] font-semibold hover:underline"
+                >
+                  Live Site
+                </a>
+
+                <a
+                  href="#"
+                  className="text-[#1E90FF] font-semibold hover:underline"
+                >
+                  GitHub
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
