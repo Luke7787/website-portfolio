@@ -481,11 +481,11 @@ export default function Page() {
                 alt="My Inventory Project"
                 fill
                 className="
-        rounded-xl
-        object-cover
-        shadow-lg
-        border border-white/10
-      "
+                  rounded-xl
+                  object-cover
+                  shadow-lg
+                  border border-white/10
+                "
               />
             </div>
 
