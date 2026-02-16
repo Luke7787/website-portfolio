@@ -522,8 +522,143 @@ export default function Page() {
               </div>
             </div>
           </div>
+
+          {/* Second Project */}
+          <div className="mt-24 mx-auto max-w-6xl px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            {/* Image */}
+            <div className="relative w-full aspect-[4/3]">
+              <Image
+                src="/images/about.jpg"
+                alt="AI Research Project"
+                fill
+                className="rounded-xl object-cover shadow-lg border border-white/10"
+              />
+            </div>
+
+            {/* Text */}
+            <div className="text-left space-y-4">
+              <p className="text-sm tracking-[0.2em] text-white/60 uppercase">
+                MACHINE LEARNING RESEARCH
+              </p>
+
+              <h3 className="text-2xl md:text-3xl font-bold text-white">
+                Neuroidal Model
+              </h3>
+
+              <p className="text-white/80 leading-relaxed">
+                Contributed to biologically inspired learning algorithms based
+                on the Neuroidal Model. Implemented and tested algorithmic
+                improvements for research submission.
+              </p>
+
+              <div className="flex gap-6 pt-4">
+                <a
+                  href="#"
+                  className="text-[#1E90FF] font-semibold hover:underline"
+                >
+                  Research
+                </a>
+                <a
+                  href="#"
+                  className="text-[#1E90FF] font-semibold hover:underline"
+                >
+                  GitHub
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
+
+      {/* Third Project */}
+      <div className="mt-24 mx-auto max-w-6xl px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        {/* Image */}
+        <div className="relative w-full aspect-[4/3]">
+          <Image
+            src="/images/about.jpg"
+            alt="AI Research Project"
+            fill
+            className="rounded-xl object-cover shadow-lg border border-white/10"
+          />
+        </div>
+
+        {/* Text */}
+        <div className="text-left space-y-4">
+          <p className="text-sm tracking-[0.2em] text-white/60 uppercase">
+            MACHINE LEARNING RESEARCH
+          </p>
+
+          <h3 className="text-2xl md:text-3xl font-bold text-white">
+            Neuroidal Model
+          </h3>
+
+          <p className="text-white/80 leading-relaxed">
+            Contributed to biologically inspired learning algorithms based on
+            the Neuroidal Model. Implemented and tested algorithmic improvements
+            for research submission.
+          </p>
+
+          <div className="flex gap-6 pt-4">
+            <a
+              href="#"
+              className="text-[#1E90FF] font-semibold hover:underline"
+            >
+              Research
+            </a>
+            <a
+              href="#"
+              className="text-[#1E90FF] font-semibold hover:underline"
+            >
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Fourth Project */}
+      <div className="mt-24 mx-auto max-w-6xl px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        {/* Image */}
+        <div className="relative w-full aspect-[4/3]">
+          <Image
+            src="/images/about.jpg"
+            alt="AI Research Project"
+            fill
+            className="rounded-xl object-cover shadow-lg border border-white/10"
+          />
+        </div>
+
+        {/* Text */}
+        <div className="text-left space-y-4">
+          <p className="text-sm tracking-[0.2em] text-white/60 uppercase">
+            MACHINE LEARNING RESEARCH
+          </p>
+
+          <h3 className="text-2xl md:text-3xl font-bold text-white">
+            Neuroidal Model
+          </h3>
+
+          <p className="text-white/80 leading-relaxed">
+            Contributed to biologically inspired learning algorithms based on
+            the Neuroidal Model. Implemented and tested algorithmic improvements
+            for research submission.
+          </p>
+
+          <div className="flex gap-6 pt-4">
+            <a
+              href="#"
+              className="text-[#1E90FF] font-semibold hover:underline"
+            >
+              Research
+            </a>
+            <a
+              href="#"
+              className="text-[#1E90FF] font-semibold hover:underline"
+            >
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
 
       {/* SKILLS */}
       <section
