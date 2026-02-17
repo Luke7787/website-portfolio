@@ -475,7 +475,7 @@ export default function Page() {
           {/* First Project */}
           <div className="mt-16 mx-auto max-w-6xl px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             {/* Left Side — Image */}
-            <div className="relative w-full aspect-[4/3]">
+            <div className="relative w-full aspect-4/3">
               <Image
                 src="/images/about.jpg"
                 alt="My Inventory Project"
@@ -526,7 +526,7 @@ export default function Page() {
           {/* Second Project */}
           <div className="mt-24 mx-auto max-w-6xl px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             {/* Image */}
-            <div className="relative w-full aspect-[4/3]">
+            <div className="relative w-full aspect-4/3">
               <Image
                 src="/images/about.jpg"
                 alt="AI Research Project"
@@ -571,7 +571,7 @@ export default function Page() {
           {/* Third Project */}
           <div className="mt-24 mx-auto max-w-6xl px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             {/* Image */}
-            <div className="relative w-full aspect-[4/3]">
+            <div className="relative w-full aspect-4/3">
               <Image
                 src="/images/about.jpg"
                 alt="AI Research Project"
@@ -616,7 +616,7 @@ export default function Page() {
           {/* Fourth Project */}
           <div className="mt-24 mx-auto max-w-6xl px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             {/* Image */}
-            <div className="relative w-full aspect-[4/3]">
+            <div className="relative w-full aspect-4/3">
               <Image
                 src="/images/about.jpg"
                 alt="AI Research Project"
