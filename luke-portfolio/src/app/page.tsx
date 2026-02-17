@@ -499,7 +499,7 @@ export default function Page() {
                 My Inventory
               </h3>
 
-              <p className="text-white/80 leading-relaxed">
+              <p className="text-white/80 leading-relaxed text-justify">
                 Developed a full-stack inventory management app using React,
                 Node.js, and MongoDB, featuring intuitive inventory tracking,
                 secure authentication with JWT, and RESTful APIs.
@@ -545,7 +545,7 @@ export default function Page() {
                 Neuroidal Model
               </h3>
 
-              <p className="text-white/80 leading-relaxed">
+              <p className="text-white/80 leading-relaxed text-justify">
                 Contributed to biologically inspired learning algorithms based
                 on the Neuroidal Model. Implemented and tested algorithmic
                 improvements for research submission.
@@ -592,7 +592,7 @@ export default function Page() {
             Neuroidal Model
           </h3>
 
-          <p className="text-white/80 leading-relaxed">
+          <p className="text-white/80 leading-relaxed text-justify">
             Contributed to biologically inspired learning algorithms based on
             the Neuroidal Model. Implemented and tested algorithmic improvements
             for research submission.
@@ -637,7 +637,7 @@ export default function Page() {
             Neuroidal Model
           </h3>
 
-          <p className="text-white/80 leading-relaxed">
+          <p className="text-white/80 leading-relaxed text-justify">
             Contributed to biologically inspired learning algorithms based on
             the Neuroidal Model. Implemented and tested algorithmic improvements
             for research submission.
