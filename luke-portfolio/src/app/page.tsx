@@ -556,7 +556,7 @@ export default function Page() {
                   href="#"
                   className="text-[#1E90FF] font-semibold hover:underline"
                 >
-                  Research
+                  Live Site
                 </a>
                 <a
                   href="#"
@@ -601,7 +601,7 @@ export default function Page() {
                   href="#"
                   className="text-[#1E90FF] font-semibold hover:underline"
                 >
-                  Research
+                  Live Site
                 </a>
                 <a
                   href="#"
@@ -646,7 +646,7 @@ export default function Page() {
                   href="#"
                   className="text-[#1E90FF] font-semibold hover:underline"
                 >
-                  Research
+                  Live Site
                 </a>
                 <a
                   href="#"
