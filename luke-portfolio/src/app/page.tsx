@@ -461,7 +461,7 @@ export default function Page() {
       {/* PROJECTS */}
       <section
         id="projects"
-        className="scroll-mt-16 min-h-screen pt-16 flex items-center justify-center"
+        className="scroll-mt-5 md:scroll-mt-16 min-h-screen pt-16 flex items-center justify-center"
       >
         <div className="text-center">
           <p className="mb-2 text-[20px] tracking-[0.8px] text-[rgb(140,140,140)]">
