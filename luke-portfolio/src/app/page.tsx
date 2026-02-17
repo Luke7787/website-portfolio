@@ -490,7 +490,7 @@ export default function Page() {
             </div>
 
             {/* Right Side — Text */}
-            <div className="text-left space-y-4">
+            <div className="text-left space-y-4 max-w-md">
               <p className="text-sm tracking-[0.2em] text-white/60 uppercase">
                 FULL-STACK APPLICATION
               </p>
@@ -536,7 +536,7 @@ export default function Page() {
             </div>
 
             {/* Text */}
-            <div className="text-left space-y-4">
+            <div className="text-left space-y-4 max-w-md">
               <p className="text-sm tracking-[0.2em] text-white/60 uppercase">
                 MACHINE LEARNING RESEARCH
               </p>
@@ -583,7 +583,7 @@ export default function Page() {
         </div>
 
         {/* Text */}
-        <div className="text-left space-y-4">
+        <div className="text-left space-y-4 max-w-md">
           <p className="text-sm tracking-[0.2em] text-white/60 uppercase">
             MACHINE LEARNING RESEARCH
           </p>
@@ -628,7 +628,7 @@ export default function Page() {
         </div>
 
         {/* Text */}
-        <div className="text-left space-y-4">
+        <div className="text-left space-y-4 max-w-md">
           <p className="text-sm tracking-[0.2em] text-white/60 uppercase">
             MACHINE LEARNING RESEARCH
           </p>
