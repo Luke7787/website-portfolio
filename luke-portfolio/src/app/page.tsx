@@ -496,25 +496,31 @@ export default function Page() {
               </p>
 
               <h3 className="text-2xl md:text-3xl font-bold text-white">
-                My Inventory
+                Showroom Booking App
               </h3>
 
               <p className="text-white/80 leading-relaxed text-justify max-w-md">
-                Developed a full-stack inventory management app using React,
-                Node.js, and MongoDB, featuring intuitive inventory tracking,
-                secure authentication with JWT, and RESTful APIs.
+                Developed a full-stack appointment scheduling platform using
+                Next.js, TypeScript, Prisma, and PostgreSQL. Customers can book
+                showroom appointments based on real-time availability, while
+                admins manage bookings through a secure dashboard with
+                role-based access control.
               </p>
 
               <div className="flex gap-6 pt-4">
                 <a
-                  href="#"
+                  href="https://showroom-appointment-scheduler.onrender.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-[#1E90FF] font-semibold hover:underline"
                 >
                   Live Site
                 </a>
 
                 <a
-                  href="#"
+                  href="https://github.com/Luke7787/showroom-appointment-scheduler"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-[#1E90FF] font-semibold hover:underline"
                 >
                   GitHub
