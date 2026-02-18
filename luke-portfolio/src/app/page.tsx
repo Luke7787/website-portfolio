@@ -170,38 +170,82 @@ function Project1Slideshow() {
     "/images/P1P6.png",
     "/images/P1P7.png",
     "/images/P1P8.png",
-    "/images/P1P9.png",
   ];
 
   const [index, setIndex] = useState(0);
 
   function next() {
-    setIndex((prev) => (prev + 1) % slides.length);
+    if (index < slides.length - 1) {
+      setIndex(index + 1);
+    }
   }
 
   function prev() {
-    setIndex((prev) => (prev - 1 + slides.length) % slides.length);
+    if (index > 0) {
+      setIndex(index - 1);
+    }
   }
 
   return (
-    <div className="relative w-full aspect-[4/3]">
-      <Image
-        src={slides[index]}
-        alt="Showroom Booking App Screenshot"
-        fill
-        className="rounded-xl object-cover shadow-lg border border-white/10"
-      />
+    <div className="relative w-full">
+      <div className="relative w-full h-[450px] md:h-[500px]">
+        <Image
+          src={slides[index]}
+          alt="Showroom Booking App Screenshot"
+          fill
+          className="
+            rounded-xl
+            object-fill
+            shadow-lg
+            border border-white/10
+          "
+        />
+      </div>
 
+      {/* Left Arrow */}
       <button
         onClick={prev}
-        className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 text-black text-2xl flex items-center justify-center hover:scale-105 transition"
+        disabled={index === 0}
+        className={`
+          absolute
+          left-4
+          top-1/2
+          -translate-y-1/2
+          w-10 h-10
+          rounded-full
+          text-2xl
+          flex items-center justify-center
+          transition
+          ${
+            index === 0
+              ? "bg-white/40 text-gray-400 cursor-not-allowed"
+              : "bg-white/80 text-black hover:scale-105"
+          }
+        `}
       >
         ‹
       </button>
 
+      {/* Right Arrow */}
       <button
         onClick={next}
-        className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 text-black text-2xl flex items-center justify-center hover:scale-105 transition"
+        disabled={index === slides.length - 1}
+        className={`
+          absolute
+          right-4
+          top-1/2
+          -translate-y-1/2
+          w-10 h-10
+          rounded-full
+          text-2xl
+          flex items-center justify-center
+          transition
+          ${
+            index === slides.length - 1
+              ? "bg-white/40 text-gray-400 cursor-not-allowed"
+              : "bg-white/80 text-black hover:scale-105"
+          }
+        `}
       >
         ›
       </button>
