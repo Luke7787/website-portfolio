@@ -202,21 +202,21 @@ function Project1Slideshow() {
         onClick={prev}
         disabled={index === 0}
         className={`
-    absolute
-    left-4
-    top-1/2
-    -translate-y-1/2
-    w-10 h-10
-    rounded-full
-    text-2xl
-    flex items-center justify-center
-    transition
-    ${
-      index === 0
-        ? "bg-white/40 text-gray-400 cursor-not-allowed"
-        : "bg-white/80 text-black hover:scale-105"
-    }
-  `}
+          absolute
+          left-4
+          top-1/2
+          -translate-y-1/2
+          w-10 h-10
+          rounded-full
+          text-2xl
+          flex items-center justify-center
+          transition
+          ${
+            index === 0
+              ? "bg-white/40 text-gray-400 cursor-not-allowed"
+              : "bg-white/80 text-black hover:scale-105"
+          }
+       `}
       >
         <span className="-translate-x-[1px] -translate-y-[1px]">‹</span>
       </button>
@@ -226,21 +226,21 @@ function Project1Slideshow() {
         onClick={next}
         disabled={index === slides.length - 1}
         className={`
-    absolute
-    right-4
-    top-1/2
-    -translate-y-1/2
-    w-10 h-10
-    rounded-full
-    text-2xl
-    flex items-center justify-center
-    transition
-    ${
-      index === slides.length - 1
-        ? "bg-white/40 text-gray-400 cursor-not-allowed"
-        : "bg-white/80 text-black hover:scale-105"
-    }
-  `}
+          absolute
+          right-4
+          top-1/2
+          -translate-y-1/2
+          w-10 h-10
+          rounded-full
+          text-2xl
+          flex items-center justify-center
+          transition
+          ${
+            index === slides.length - 1
+              ? "bg-white/40 text-gray-400 cursor-not-allowed"
+              : "bg-white/80 text-black hover:scale-105"
+          }
+       `}
       >
         <span className="translate-x-[1px] -translate-y-[1px]">›</span>
       </button>
