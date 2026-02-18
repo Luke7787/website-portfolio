@@ -187,20 +187,19 @@ function Project1Slideshow() {
   }
 
   return (
-    <div className="relative w-full">
-      <div className="relative w-full h-[450px] md:h-[500px]">
-        <Image
-          src={slides[index]}
-          alt="Showroom Booking App Screenshot"
-          fill
-          className="
-            rounded-xl
-            object-fill
-            shadow-lg
-            border border-white/10
-          "
-        />
-      </div>
+    <div className="relative w-full aspect-[4/3]">
+      <Image
+        src={slides[index]}
+        alt="Showroom Booking App Screenshot"
+        fill
+        className="
+          rounded-xl
+          object-contain
+          shadow-lg
+          border border-white/10
+          bg-black
+        "
+      />
 
       {/* Left Arrow */}
       <button
