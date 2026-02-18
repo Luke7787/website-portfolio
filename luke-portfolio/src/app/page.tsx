@@ -156,10 +156,6 @@ function Slideshow() {
   );
 }
 
-/* ========================= */
-/* PROJECT 1 SLIDESHOW       */
-/* ========================= */
-
 function Project1Slideshow() {
   const slides = [
     "/images/P1P1.png",
