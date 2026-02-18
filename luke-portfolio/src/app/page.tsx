@@ -156,6 +156,59 @@ function Slideshow() {
   );
 }
 
+/* ========================= */
+/* PROJECT 1 SLIDESHOW       */
+/* ========================= */
+
+function Project1Slideshow() {
+  const slides = [
+    "/images/P1P1.png",
+    "/images/P1P2.png",
+    "/images/P1P3.png",
+    "/images/P1P4.png",
+    "/images/P1P5.png",
+    "/images/P1P6.png",
+    "/images/P1P7.png",
+    "/images/P1P8.png",
+    "/images/P1P9.png",
+  ];
+
+  const [index, setIndex] = useState(0);
+
+  function next() {
+    setIndex((prev) => (prev + 1) % slides.length);
+  }
+
+  function prev() {
+    setIndex((prev) => (prev - 1 + slides.length) % slides.length);
+  }
+
+  return (
+    <div className="relative w-full aspect-[4/3]">
+      <Image
+        src={slides[index]}
+        alt="Showroom Booking App Screenshot"
+        fill
+        className="rounded-xl object-cover shadow-lg border border-white/10"
+      />
+
+      <button
+        onClick={prev}
+        className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 text-black text-2xl flex items-center justify-center hover:scale-105 transition"
+      >
+        ‹
+      </button>
+
+      <button
+        onClick={next}
+        className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 text-black text-2xl flex items-center justify-center hover:scale-105 transition"
+      >
+        ›
+      </button>
+    </div>
+  );
+}
+
 export default function Page() {
   return (
     <main className="relative">
@@ -474,19 +527,9 @@ export default function Page() {
 
           {/* First Project */}
           <div className="mt-16 mx-auto max-w-6xl px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            {/* Left Side — Image */}
-            <div className="relative w-full aspect-4/3">
-              <Image
-                src="/images/about.jpg"
-                alt="My Inventory Project"
-                fill
-                className="
-                  rounded-xl
-                  object-cover
-                  shadow-lg
-                  border border-white/10
-                "
-              />
+            {/* Left Side — Slideshow */}
+            <div className="w-full">
+              <Project1Slideshow />
             </div>
 
             {/* Right Side — Text */}
