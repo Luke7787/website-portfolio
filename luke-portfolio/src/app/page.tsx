@@ -669,7 +669,7 @@ export default function Page() {
                 src="/images/project3.png"
                 alt="AI Research Project"
                 fill
-                className="rounded-xl object-cover shadow-lg border border-white/10"
+                className="rounded-xl object-cover object-[center_5%] shadow-lg border border-white/10"
               />
             </div>
 
