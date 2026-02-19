@@ -617,7 +617,7 @@ export default function Page() {
             <div className="relative w-full aspect-4/3">
               <Image
                 src="/images/project2.png"
-                alt="AI Research Project"
+                alt="Inventory Management Platform"
                 fill
                 className="rounded-xl object-cover shadow-lg border border-white/10"
               />
@@ -626,28 +626,33 @@ export default function Page() {
             {/* Text */}
             <div className="text-left space-y-4">
               <p className="text-sm tracking-[0.2em] text-white/60 uppercase">
-                MACHINE LEARNING RESEARCH
+                FULL-STACK APPLICATION
               </p>
 
               <h3 className="text-2xl md:text-3xl font-bold text-white">
-                Neuroidal Model
+                Inventory Management Platform
               </h3>
 
               <p className="text-white/80 leading-relaxed text-justify max-w-md">
-                Contributed to biologically inspired learning algorithms based
-                on the Neuroidal Model. Implemented and tested algorithmic
-                improvements for research submission.
+                Collaborated with a team to design and develop a full-stack
+                inventory management platform using React, TypeScript, Node.js,
+                and MongoDB. Users can view, add, update, and manage inventory
+                items through a responsive and user-friendly interface.
               </p>
 
               <div className="flex gap-6 pt-4">
                 <a
-                  href="#"
+                  href="https://mango-island-08612f41e.5.azurestaticapps.net"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-[#1E90FF] font-semibold hover:underline"
                 >
                   Live Site
                 </a>
                 <a
-                  href="#"
+                  href="https://github.com/Luke7787/ImmaculateInventors"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-[#1E90FF] font-semibold hover:underline"
                 >
                   GitHub
