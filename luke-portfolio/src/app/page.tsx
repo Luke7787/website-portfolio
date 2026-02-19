@@ -684,10 +684,10 @@ export default function Page() {
               </h3>
 
               <p className="text-white/80 leading-relaxed text-justify max-w-md">
-                Created a fun Blackjack game using JavaScript, HTML5, and CSS.
-                Includes real casino features like splitting hands, doubling
-                bets, and special payouts for Blackjack. The game is optimized
-                for all devices.
+                Built a Blackjack game using JavaScript, HTML5, and CSS.
+                Features hand splitting, double-down mechanics, special payouts
+                for Blackjack, and traditional casino rules. Designed with a
+                responsive UI for seamless gameplay across devices.
               </p>
 
               <div className="flex gap-6 pt-4">
