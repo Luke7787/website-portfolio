@@ -676,28 +676,33 @@ export default function Page() {
             {/* Text */}
             <div className="text-left space-y-4">
               <p className="text-sm tracking-[0.2em] text-white/60 uppercase">
-                MACHINE LEARNING RESEARCH
+                JAVASCRIPT GAME
               </p>
 
               <h3 className="text-2xl md:text-3xl font-bold text-white">
-                Neuroidal Model
+                Blackjack
               </h3>
 
               <p className="text-white/80 leading-relaxed text-justify max-w-md">
-                Contributed to biologically inspired learning algorithms based
-                on the Neuroidal Model. Implemented and tested algorithmic
-                improvements for research submission.
+                Created a fun Blackjack game using JavaScript, HTML5, and CSS.
+                Includes real casino features like splitting hands, doubling
+                bets, and special payouts for Blackjack. The game is optimized
+                for all devices.
               </p>
 
               <div className="flex gap-6 pt-4">
                 <a
-                  href="#"
+                  href="https://luke7787.github.io/Blackjack/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-[#1E90FF] font-semibold hover:underline"
                 >
                   Live Site
                 </a>
                 <a
-                  href="#"
+                  href="https://github.com/Luke7787/Blackjack"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-[#1E90FF] font-semibold hover:underline"
                 >
                   GitHub
