@@ -716,7 +716,7 @@ export default function Page() {
             {/* Image */}
             <div className="relative w-full aspect-4/3">
               <Image
-                src="/images/about.jpg"
+                src="/images/project4.png"
                 alt="AI Research Project"
                 fill
                 className="rounded-xl object-cover shadow-lg border border-white/10"
