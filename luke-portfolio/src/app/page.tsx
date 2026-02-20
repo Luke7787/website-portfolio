@@ -726,28 +726,25 @@ export default function Page() {
             {/* Text */}
             <div className="text-left space-y-4">
               <p className="text-sm tracking-[0.2em] text-white/60 uppercase">
-                MACHINE LEARNING RESEARCH
+                MULTI-CLIENT WEBSERVER
               </p>
 
               <h3 className="text-2xl md:text-3xl font-bold text-white">
-                Neuroidal Model
+                Server-and-Client
               </h3>
 
               <p className="text-white/80 leading-relaxed text-justify max-w-md">
-                Contributed to biologically inspired learning algorithms based
-                on the Neuroidal Model. Implemented and tested algorithmic
-                improvements for research submission.
+                Engineered a concurrent web server in C that implements a subset
+                of the Hypertext Transfer Protocol (HTTP). The server handles
+                multiple client connections by forking child processes, enabling
+                parallel request processing and efficient resource management.
               </p>
 
               <div className="flex gap-6 pt-4">
                 <a
-                  href="#"
-                  className="text-[#1E90FF] font-semibold hover:underline"
-                >
-                  Live Site
-                </a>
-                <a
-                  href="#"
+                  href="https://github.com/Luke7787/Server-and-Client"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-[#1E90FF] font-semibold hover:underline"
                 >
                   GitHub
