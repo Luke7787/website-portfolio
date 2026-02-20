@@ -764,14 +764,65 @@ export default function Page() {
         id="skills"
         className="scroll-mt-16 min-h-screen pt-16 flex items-center justify-center"
       >
-        <div className="text-center">
+        <div className="text-center w-full max-w-5xl mx-auto px-6">
           <p className="mb-2 text-[20px] tracking-[0.8px] text-[rgb(140,140,140)]">
             EXPERTISE
           </p>
 
-          <h2 className="text-3xl md:text-4xl font-bold tracking-[0.12em] text-white/90">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-[0.12em] text-white/90 mb-14">
             My Skills
           </h2>
+
+          {/* Skills grid — pill badges with hover glow */}
+          <div className="flex flex-wrap justify-center gap-3 md:gap-4">
+            {[
+              "TypeScript",
+              "JavaScript",
+              "React.js",
+              "Next.js",
+              "Node.js",
+              "Express.js",
+              "Object-Oriented Programming (OOP)",
+              "GitHub",
+              "Linux",
+              "HTML",
+              "CSS",
+              "Tailwind CSS",
+              "MongoDB",
+              "PostgreSQL",
+              "Prisma ORM",
+              "JSON Web Token (JWT)",
+              "Axios",
+              "Render",
+              "Amazon Web Services (AWS)",
+              "Python",
+              "C++",
+              "Java",
+            ].map((skill) => (
+              <span
+                key={skill}
+                className="
+                  inline-block
+                  px-4 py-2.5
+                  rounded-full
+                  text-sm md:text-base
+                  font-medium
+                  tracking-[0.04em]
+                  text-white/90
+                  bg-white/5
+                  border border-white/15
+                  shadow-[0_0_0_0_rgba(30,144,255,0)]
+                  transition-all duration-300 ease-out
+                  hover:bg-white/10
+                  hover:border-[#1E90FF]/50
+                  hover:shadow-[0_0_20px_rgba(30,144,255,0.25)]
+                  hover:scale-105
+                "
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
         </div>
       </section>
 
