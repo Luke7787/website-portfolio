@@ -852,7 +852,7 @@ export default function Page() {
               text-[0.9rem]
               sm:text-[1rem]
               font-extrabold
-              bg-[#1565C0]
+              bg-[#1b76d2]
               rounded
               transition-transform
               duration-300
