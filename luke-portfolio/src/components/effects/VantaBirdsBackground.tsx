@@ -41,7 +41,7 @@ export default function VantaBirdsBackground({ visible }: Props) {
           speedLimit: 4,
           separation: 23,
           // Fewer birds (default is higher; lower = calmer flock)
-          quantity: 2,
+          quantity: 1,
         });
       })
       .catch((err) => {
@@ -63,10 +63,7 @@ export default function VantaBirdsBackground({ visible }: Props) {
       style={{ opacity: visible ? 1 : 0 }}
       aria-hidden
     >
-      <div
-        ref={containerRef}
-        className="absolute inset-0 min-h-screen"
-      />
+      <div ref={containerRef} className="absolute inset-0 min-h-screen" />
     </div>
   );
 }
