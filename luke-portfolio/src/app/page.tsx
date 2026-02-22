@@ -911,7 +911,10 @@ export default function Page() {
           "
         >
           © 2026 All rights reserved | This template is made by{" "}
-          <span
+          <a
+            href="https://github.com/Luke7787/website-portfolio"
+            target="_blank"
+            rel="noopener noreferrer"
             className="
               inline-block
               cursor-pointer
@@ -930,7 +933,7 @@ export default function Page() {
             "
           >
             Luke Zhuang
-          </span>
+          </a>
         </p>
       </footer>
     </main>
