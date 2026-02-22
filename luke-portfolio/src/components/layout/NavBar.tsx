@@ -63,12 +63,15 @@ export default function NavBar() {
             priority
           />
 
-          <div className="min-w-0 pl-1 sm:pl-2">
+          <a
+            href="#home"
+            className="min-w-0 pl-1 sm:pl-2 cursor-pointer block"
+          >
             <AnimatedName>
               <span
                 className="
                   block
-                  cursor-default
+                  cursor-pointer
                   truncate
                   text-[1rem]
                   sm:text-[1.2rem]
@@ -87,7 +90,7 @@ export default function NavBar() {
                 LUKE ZHUANG
               </span>
             </AnimatedName>
-          </div>
+          </a>
         </div>
 
         {/* Desktop Nav Links */}

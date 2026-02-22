@@ -34,8 +34,9 @@ export default function VantaBirdsBackground({ visible }: Props) {
           gyroControls: false,
           // Match portfolio dark background (#141414)
           backgroundColor: 0x141414,
-          color1: 0x3a3a3a,
-          color2: 0x2a2a2a,
+          // Dark blue blend
+          color1: 0x0d47a1,
+          color2: 0x1565c0,
           birdSize: 1.0,
           wingSpan: 25,
           speedLimit: 4,
