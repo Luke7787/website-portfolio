@@ -268,6 +268,7 @@ function Project1Slideshow() {
 
 export default function Page() {
   const [birdsVisible, setBirdsVisible] = useState(false);
+  const [contactBirdsVisible, setContactBirdsVisible] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -876,9 +877,10 @@ export default function Page() {
       {/* CONTACT */}
       <section
         id="contact"
-        className="-scroll-mt-25 min-h-screen pt-16 flex items-center justify-center"
+        className="relative -scroll-mt-25 min-h-screen pt-16 flex items-center justify-center overflow-hidden"
       >
-        <div className="text-center">
+        <VantaBirdsBackground visible={contactBirdsVisible} />
+        <div className="relative z-10 text-center">
           {/* Headline */}
           <p className="cursor-default text-[1.5rem] font-bold tracking-[0.03em] text-[rgb(140,140,140)]">
             {"Let's Connect"}
@@ -898,6 +900,10 @@ export default function Page() {
                 duration-300
                 hover:text-[#1E90FF]
               "
+              onMouseEnter={() => setContactBirdsVisible(true)}
+              onMouseLeave={() => setContactBirdsVisible(false)}
+              onClick={() => setContactBirdsVisible(true)}
+              onTouchStart={() => setContactBirdsVisible(true)}
             >
               lukewzhuang@gmail.com
             </a>
