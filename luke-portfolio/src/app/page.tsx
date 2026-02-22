@@ -910,7 +910,7 @@ export default function Page() {
             font-['Open_Sans',sans-serif]
           "
         >
-          © 2026 All rights reserved | This template is made by{" "}
+          © {new Date().getFullYear()} All rights reserved | This template is made by{" "}
           <a
             href="https://github.com/Luke7787/website-portfolio"
             target="_blank"
