@@ -185,7 +185,12 @@ function Project1Slideshow() {
   }
 
   return (
-    <div className="relative w-full aspect-[4/3]">
+    <a
+      href="https://showroom-appointment-scheduler.onrender.com/"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="relative w-full aspect-[4/3] block overflow-hidden rounded-xl cursor-pointer group"
+    >
       <Image
         src={slides[index]}
         alt="Showroom Booking App Screenshot"
@@ -196,12 +201,18 @@ function Project1Slideshow() {
           shadow-lg
           border border-white/10
           bg-black
+          transition-transform duration-300 ease-out group-hover:scale-105
         "
       />
 
       {/* Left Arrow */}
       <button
-        onClick={prev}
+        type="button"
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          prev();
+        }}
         disabled={index === 0}
         className={`
           absolute
@@ -225,7 +236,12 @@ function Project1Slideshow() {
 
       {/* Right Arrow */}
       <button
-        onClick={next}
+        type="button"
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          next();
+        }}
         disabled={index === slides.length - 1}
         className={`
           absolute
@@ -246,7 +262,7 @@ function Project1Slideshow() {
       >
         <span className="translate-x-[1px] -translate-y-[1px]">›</span>
       </button>
-    </div>
+    </a>
   );
 }
 
@@ -632,15 +648,20 @@ export default function Page() {
 
           {/* Second Project */}
           <div className="mt-24 mx-auto max-w-6xl px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            {/* Image */}
-            <div className="relative w-full aspect-4/3">
+            {/* Image - clickable with hover scale */}
+            <a
+              href="https://mango-island-08612f41e.5.azurestaticapps.net"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative w-full aspect-4/3 block overflow-hidden rounded-xl cursor-pointer group"
+            >
               <Image
                 src="/images/project2.png"
                 alt="Inventory Management Platform"
                 fill
-                className="rounded-xl object-cover shadow-lg border border-white/10"
+                className="rounded-xl object-cover shadow-lg border border-white/10 transition-transform duration-300 ease-out group-hover:scale-105"
               />
-            </div>
+            </a>
 
             {/* Text */}
             <div className="text-left space-y-4">
@@ -682,15 +703,20 @@ export default function Page() {
 
           {/* Third Project */}
           <div className="mt-24 mx-auto max-w-6xl px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            {/* Image */}
-            <div className="relative w-full aspect-4/3">
+            {/* Image - clickable with hover scale */}
+            <a
+              href="https://luke7787.github.io/Blackjack/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative w-full aspect-4/3 block overflow-hidden rounded-xl cursor-pointer group"
+            >
               <Image
                 src="/images/project3.png"
-                alt="AI Research Project"
+                alt="Blackjack game"
                 fill
-                className="rounded-xl object-cover object-[center_5%] shadow-lg border border-white/10"
+                className="rounded-xl object-cover object-[center_5%] shadow-lg border border-white/10 transition-transform duration-300 ease-out group-hover:scale-105"
               />
-            </div>
+            </a>
 
             {/* Text */}
             <div className="text-left space-y-4">
@@ -732,15 +758,20 @@ export default function Page() {
 
           {/* Fourth Project */}
           <div className="mt-24 mx-auto max-w-6xl px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            {/* Image */}
-            <div className="relative w-full aspect-4/3">
+            {/* Image - clickable with hover scale */}
+            <a
+              href="https://github.com/Luke7787/Server-and-Client"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative w-full aspect-4/3 block overflow-hidden rounded-xl cursor-pointer group"
+            >
               <Image
                 src="/images/project4.png"
-                alt="AI Research Project"
+                alt="Server-and-Client webserver"
                 fill
-                className="rounded-xl object-cover shadow-lg border border-white/10"
+                className="rounded-xl object-cover shadow-lg border border-white/10 transition-transform duration-300 ease-out group-hover:scale-105"
               />
-            </div>
+            </a>
 
             {/* Text */}
             <div className="text-left space-y-4">
