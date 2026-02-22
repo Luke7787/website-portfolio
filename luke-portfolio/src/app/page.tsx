@@ -5,6 +5,7 @@ import Image from "next/image";
 import NavBar from "@/components/layout/NavBar";
 import AnimatedName from "@/components/effects/AnimatedName";
 import TextScramble from "@/components/effects/TextScramble";
+import VantaBirdsBackground from "@/components/effects/VantaBirdsBackground";
 
 // Slideshow Component (Added Only)
 function Slideshow() {
@@ -249,6 +250,8 @@ function Project1Slideshow() {
 }
 
 export default function Page() {
+  const [birdsVisible, setBirdsVisible] = useState(false);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -260,9 +263,10 @@ export default function Page() {
       {/* HOME */}
       <section
         id="home"
-        className="scroll-mt-16 min-h-screen pt-16 flex items-center justify-center"
+        className="relative scroll-mt-16 min-h-screen pt-16 flex items-center justify-center overflow-hidden"
       >
-        <div className="text-center">
+        <VantaBirdsBackground visible={birdsVisible} />
+        <div className="relative z-10 text-center">
           <TextScramble
             text="HELLO! MY NAME IS"
             className="mb-1 text-[20px] tracking-[0.8px] text-[rgb(140,140,140)]"
@@ -279,6 +283,10 @@ export default function Page() {
                 opacity-0
                 animate-[revealText_0.65s_ease-in-out_0.65s_forwards]
               "
+              onMouseEnter={() => setBirdsVisible(true)}
+              onClick={() => setBirdsVisible(true)}
+              onTouchStart={() => setBirdsVisible(true)}
+              style={{ cursor: "pointer" }}
             >
               LUKE ZHUANG
             </h1>
