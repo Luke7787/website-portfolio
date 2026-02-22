@@ -94,6 +94,7 @@ function Slideshow() {
       <p
         className="
           mt-4
+          cursor-default
           text-sm
           text-white/70
           tracking-[0.03em]
@@ -530,7 +531,7 @@ export default function Page() {
               "
             >
               <p>
-                <span className="text-[#8c8c8c]">Email:</span>{" "}
+                <span className="cursor-default text-[#8c8c8c]">Email:</span>{" "}
                 <span
                   className="
                   text-[#1E90FF]
@@ -546,7 +547,7 @@ export default function Page() {
               </p>
 
               <p>
-                <span className="text-[#8c8c8c]">Phone:</span>{" "}
+                <span className="cursor-default text-[#8c8c8c]">Phone:</span>{" "}
                 <span
                   className="
                     text-[#1E90FF]
@@ -571,11 +572,11 @@ export default function Page() {
         className="scroll-mt-5 md:scroll-mt-16 min-h-screen pt-16 flex items-center justify-center"
       >
         <div className="text-center">
-          <p className="mb-2 text-[20px] tracking-[0.8px] text-[rgb(140,140,140)]">
+          <p className="mb-2 cursor-default text-[20px] tracking-[0.8px] text-[rgb(140,140,140)]">
             PORTFOLIO
           </p>
 
-          <h2 className="text-3xl md:text-4xl font-bold tracking-[0.12em] text-white/90">
+          <h2 className="cursor-default text-3xl md:text-4xl font-bold tracking-[0.12em] text-white/90">
             Recent Projects
           </h2>
 
@@ -588,15 +589,15 @@ export default function Page() {
 
             {/* Right Side — Text */}
             <div className="text-left space-y-4">
-              <p className="text-sm tracking-[0.2em] text-white/60 uppercase">
+              <p className="cursor-default text-sm tracking-[0.2em] text-white/60 uppercase">
                 FULL-STACK APPLICATION
               </p>
 
-              <h3 className="text-2xl md:text-3xl font-bold text-white">
+              <h3 className="cursor-default text-2xl md:text-3xl font-bold text-white">
                 Showroom Booking App
               </h3>
 
-              <p className="text-white/80 leading-relaxed text-justify max-w-md">
+              <p className="cursor-default text-white/80 leading-relaxed text-justify max-w-md">
                 Developed a full-stack appointment scheduling platform using
                 Next.js, TypeScript, Prisma, and PostgreSQL. Customers can book
                 showroom appointments based on real-time availability, while
@@ -640,15 +641,15 @@ export default function Page() {
 
             {/* Text */}
             <div className="text-left space-y-4">
-              <p className="text-sm tracking-[0.2em] text-white/60 uppercase">
+              <p className="cursor-default text-sm tracking-[0.2em] text-white/60 uppercase">
                 FULL-STACK APPLICATION
               </p>
 
-              <h3 className="text-2xl md:text-3xl font-bold text-white">
+              <h3 className="cursor-default text-2xl md:text-3xl font-bold text-white">
                 Inventory Management Platform
               </h3>
 
-              <p className="text-white/80 leading-relaxed text-justify max-w-md">
+              <p className="cursor-default text-white/80 leading-relaxed text-justify max-w-md">
                 Collaborated with a team to design and develop a full-stack
                 inventory management platform using React, TypeScript, Node.js,
                 and MongoDB. Users can view, add, update, and manage inventory
@@ -690,15 +691,15 @@ export default function Page() {
 
             {/* Text */}
             <div className="text-left space-y-4">
-              <p className="text-sm tracking-[0.2em] text-white/60 uppercase">
+              <p className="cursor-default text-sm tracking-[0.2em] text-white/60 uppercase">
                 JAVASCRIPT GAME
               </p>
 
-              <h3 className="text-2xl md:text-3xl font-bold text-white">
+              <h3 className="cursor-default text-2xl md:text-3xl font-bold text-white">
                 Blackjack
               </h3>
 
-              <p className="text-white/80 leading-relaxed text-justify max-w-md">
+              <p className="cursor-default text-white/80 leading-relaxed text-justify max-w-md">
                 Built a Blackjack game using JavaScript, HTML5, and CSS.
                 Features hand splitting, double-down mechanics, special payouts
                 for Blackjack, and traditional casino rules. Designed with a
@@ -740,15 +741,15 @@ export default function Page() {
 
             {/* Text */}
             <div className="text-left space-y-4">
-              <p className="text-sm tracking-[0.2em] text-white/60 uppercase">
+              <p className="cursor-default text-sm tracking-[0.2em] text-white/60 uppercase">
                 MULTI-CLIENT WEBSERVER
               </p>
 
-              <h3 className="text-2xl md:text-3xl font-bold text-white">
+              <h3 className="cursor-default text-2xl md:text-3xl font-bold text-white">
                 Server-and-Client
               </h3>
 
-              <p className="text-white/80 leading-relaxed text-justify max-w-md">
+              <p className="cursor-default text-white/80 leading-relaxed text-justify max-w-md">
                 Engineered a concurrent web server in C that implements a subset
                 of the Hypertext Transfer Protocol (HTTP). The server handles
                 multiple client connections by forking child processes, enabling
@@ -776,11 +777,11 @@ export default function Page() {
         className="scroll-mt-16 min-h-screen pt-16 flex items-center justify-center"
       >
         <div className="text-center w-full max-w-5xl mx-auto px-6">
-          <p className="mb-2 text-[20px] tracking-[0.8px] text-[rgb(140,140,140)]">
+          <p className="mb-2 cursor-default text-[20px] tracking-[0.8px] text-[rgb(140,140,140)]">
             EXPERTISE
           </p>
 
-          <h2 className="text-3xl md:text-4xl font-bold tracking-[0.12em] text-white/90 mb-14">
+          <h2 className="cursor-default text-3xl md:text-4xl font-bold tracking-[0.12em] text-white/90 mb-14">
             My Skills
           </h2>
 
@@ -814,6 +815,7 @@ export default function Page() {
                 key={skill}
                 className="
                   inline-block
+                  cursor-default
                   px-4 py-2.5
                   rounded-full
                   text-sm md:text-base
@@ -844,7 +846,7 @@ export default function Page() {
       >
         <div className="text-center">
           {/* Headline */}
-          <p className="text-[1.5rem] font-bold tracking-[0.03em] text-[rgb(140,140,140)]">
+          <p className="cursor-default text-[1.5rem] font-bold tracking-[0.03em] text-[rgb(140,140,140)]">
             {"Let's Connect"}
           </p>
 
@@ -900,6 +902,7 @@ export default function Page() {
       <footer className="py-6 text-center">
         <p
           className="
+            cursor-default
             text-[0.9rem]
             sm:text-[1rem]
             font-medium
@@ -911,6 +914,7 @@ export default function Page() {
           <span
             className="
               inline-block
+              cursor-pointer
               px-2
               py-1
               ml-1
