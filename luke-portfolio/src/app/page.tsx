@@ -269,7 +269,7 @@ export default function Page() {
         <div className="relative z-10 text-center">
           <TextScramble
             text="HELLO! MY NAME IS"
-            className="mb-1 text-[20px] tracking-[0.8px] text-[rgb(140,140,140)]"
+            className="mb-1 cursor-default text-[20px] tracking-[0.8px] text-[rgb(140,140,140)]"
           />
 
           <AnimatedName>
@@ -286,7 +286,7 @@ export default function Page() {
               onMouseEnter={() => setBirdsVisible(true)}
               onClick={() => setBirdsVisible(true)}
               onTouchStart={() => setBirdsVisible(true)}
-              style={{ cursor: "pointer" }}
+              style={{ cursor: "default" }}
             >
               LUKE ZHUANG
             </h1>
@@ -328,6 +328,7 @@ export default function Page() {
             <p
               className="
                 block
+                cursor-default
                 font-['League Spartan','Arial','sans-serif']
                 text-[90px]
                 sm:text-[110px]
@@ -348,6 +349,7 @@ export default function Page() {
             <h2
               className="
                 hidden
+                cursor-default
                 md:block
                 mt-2
                 text-[1.8rem]
@@ -364,6 +366,7 @@ export default function Page() {
             <p
               className="
                 mt-5
+                cursor-default
                 max-w-[320px]
                 sm:max-w-sm
                 md:max-w-md

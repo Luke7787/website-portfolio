@@ -68,6 +68,7 @@ export default function NavBar() {
               <span
                 className="
                   block
+                  cursor-default
                   truncate
                   text-[1rem]
                   sm:text-[1.2rem]
