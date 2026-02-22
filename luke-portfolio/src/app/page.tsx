@@ -283,6 +283,9 @@ export default function Page() {
                 drop-shadow-[2px_2px_4px_rgba(0,0,0,0.7)]
                 opacity-0
                 animate-[revealText_0.65s_ease-in-out_0.65s_forwards]
+                transition-colors
+                duration-300
+                hover:text-[#1E90FF]
               "
               onMouseEnter={() => setBirdsVisible(true)}
               onClick={() => setBirdsVisible(true)}
