@@ -534,10 +534,10 @@ export default function Page() {
                 <span className="cursor-default text-[#8c8c8c]">Email:</span>{" "}
                 <span
                   className="
+                  border-b border-transparent
                   text-[#1E90FF]
-                  hover:underline
-                  hover:underline-offset-4
-                  transition-all
+                  hover:border-[#1E90FF]
+                  transition-colors
                   duration-200
                   cursor-pointer
                 "
@@ -550,10 +550,10 @@ export default function Page() {
                 <span className="cursor-default text-[#8c8c8c]">Phone:</span>{" "}
                 <span
                   className="
+                    border-b border-transparent
                     text-[#1E90FF]
-                    hover:underline
-                    hover:underline-offset-4
-                    transition-all
+                    hover:border-[#1E90FF]
+                    transition-colors
                     duration-200
                     cursor-pointer
                   "
