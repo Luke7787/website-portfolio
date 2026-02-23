@@ -601,7 +601,7 @@ export default function Page() {
           </p>
 
           <h2 className="cursor-default text-3xl md:text-4xl font-bold tracking-[0.12em] text-white/90">
-            Recent Projects
+            Featured Projects
           </h2>
 
           {/* First Project */}
