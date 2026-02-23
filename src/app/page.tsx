@@ -318,7 +318,7 @@ export default function Page() {
       {/* ABOUT */}
       <section
         id="about"
-        className="scroll-mt-22 md:scroll-mt-34 min-h-screen pt-16 flex"
+        className="scroll-mt-16 md:scroll-mt-34 min-h-screen pt-16 flex"
       >
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-6 md:grid-cols-2">
           {/* Left: Image (Now Slideshow, styles untouched) */}
@@ -593,7 +593,7 @@ export default function Page() {
       {/* PROJECTS */}
       <section
         id="projects"
-        className="scroll-mt-5 md:scroll-mt-16 min-h-screen pt-16 flex items-center justify-center"
+        className="scroll-mt-2 md:scroll-mt-16 min-h-screen pt-16 flex items-center justify-center"
       >
         <div className="text-center">
           <p className="mb-2 cursor-default text-[20px] tracking-[0.8px] text-[rgb(140,140,140)]">
@@ -813,7 +813,7 @@ export default function Page() {
       {/* SKILLS — three-column grid (modern dark style) */}
       <section
         id="skills"
-        className="scroll-mt-16 min-h-screen py-16 flex items-center justify-center bg-[#141414] text-white rounded-[90px]"
+        className="-scroll-mt-20 min-h-screen py-16 flex items-center justify-center bg-[#141414] text-white rounded-[90px]"
       >
         <div className="w-[80%] mx-auto text-center">
           {/* Skills intro */}
