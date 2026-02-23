@@ -810,49 +810,49 @@ export default function Page() {
         </div>
       </section>
 
-      {/* SKILLS — three-column grid */}
+      {/* SKILLS — three-column grid (modern dark style) */}
       <section
         id="skills"
-        className="scroll-mt-16 min-h-screen pt-16 flex items-center justify-center"
+        className="scroll-mt-16 min-h-screen py-16 flex items-center justify-center bg-[#121212] text-white rounded-[90px]"
       >
-        <div className="w-full max-w-5xl mx-auto px-6">
-          <p className="mb-2 cursor-default text-[20px] tracking-[0.8px] text-[rgb(140,140,140)] text-center">
-            EXPERTISE
-          </p>
+        <div className="w-[80%] mx-auto text-center">
+          {/* Skills intro */}
+          <div className="mt-32 text-center mb-[-6rem]">
+            <p className="mb-2 cursor-default text-[20px] tracking-[0.8px] text-[rgb(140,140,140)]">
+              EXPERTISE
+            </p>
+            <h2 className="cursor-default text-[2.5em] text-white font-normal tracking-[0.05em]">
+              My Skills
+            </h2>
+          </div>
 
-          <h2 className="cursor-default text-3xl md:text-4xl font-bold tracking-[0.12em] text-white/90 mb-14 text-center">
-            My Skills
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20">
             {/* Programming Languages */}
             <div
               className="
-                rounded-xl
-                bg-white/5
-                border border-white/15
+                mt-20
+                bg-[#1e1e1e]
+                rounded-lg
                 p-6
-                transition-all duration-300 ease-out
-                hover:bg-white/8
-                hover:border-[#1E90FF]/30
-                hover:shadow-[0_0_24px_rgba(30,144,255,0.12)]
+                shadow-[0_4px_8px_rgba(0,0,0,0.5)]
+                transition-all duration-300
+                hover:-translate-y-[5px]
+                hover:shadow-[0_8px_16px_rgba(30,144,255,0.7)]
               "
             >
-              <h3 className="cursor-default text-lg font-semibold tracking-[0.06em] text-white/95 mb-4 pb-2 border-b border-white/15">
+              <h3 className="cursor-default text-2xl text-white mb-4">
                 Programming Languages
               </h3>
-              <div className="flex flex-wrap gap-2">
+              <div className="grid gap-2 overflow-hidden">
                 {["TypeScript", "JavaScript", "React.js", "Node.js", "Next.js"].map(
                   (skill) => (
                     <span
                       key={skill}
                       className="
-                        inline-block cursor-default px-3 py-1.5 rounded-full
-                        text-sm font-medium tracking-[0.04em] text-white/90
-                        bg-white/5 border border-white/15
-                        transition-all duration-300 ease-out
-                        hover:bg-white/10 hover:border-[#1E90FF]/40
-                        hover:shadow-[0_0_12px_rgba(30,144,255,0.2)]
+                        inline-block cursor-default text-[1.2rem] text-[#b0b0b0]
+                        py-2 px-4 rounded bg-[#2c2c2c]
+                        transition-colors duration-300
+                        hover:bg-[#3a3a3a] hover:text-white
                       "
                     >
                       {skill}
@@ -865,20 +865,20 @@ export default function Page() {
             {/* Infrastructure Skills */}
             <div
               className="
-                rounded-xl
-                bg-white/5
-                border border-white/15
+                mt-20
+                bg-[#1e1e1e]
+                rounded-lg
                 p-6
-                transition-all duration-300 ease-out
-                hover:bg-white/8
-                hover:border-[#1E90FF]/30
-                hover:shadow-[0_0_24px_rgba(30,144,255,0.12)]
+                shadow-[0_4px_8px_rgba(0,0,0,0.5)]
+                transition-all duration-300
+                hover:-translate-y-[5px]
+                hover:shadow-[0_8px_16px_rgba(30,144,255,0.7)]
               "
             >
-              <h3 className="cursor-default text-lg font-semibold tracking-[0.06em] text-white/95 mb-4 pb-2 border-b border-white/15">
+              <h3 className="cursor-default text-2xl text-white mb-4">
                 Infrastructure Skills
               </h3>
-              <div className="flex flex-wrap gap-2">
+              <div className="grid gap-2 overflow-hidden">
                 {[
                   "Continuous Deployment",
                   "Production Deployment",
@@ -889,12 +889,10 @@ export default function Page() {
                   <span
                     key={skill}
                     className="
-                      inline-block cursor-default px-3 py-1.5 rounded-full
-                      text-sm font-medium tracking-[0.04em] text-white/90
-                      bg-white/5 border border-white/15
-                      transition-all duration-300 ease-out
-                      hover:bg-white/10 hover:border-[#1E90FF]/40
-                      hover:shadow-[0_0_12px_rgba(30,144,255,0.2)]
+                      inline-block cursor-default text-[1.2rem] text-[#b0b0b0]
+                      py-2 px-4 rounded bg-[#2c2c2c]
+                      transition-colors duration-300
+                      hover:bg-[#3a3a3a] hover:text-white
                     "
                   >
                     {skill}
@@ -906,20 +904,20 @@ export default function Page() {
             {/* Professional Skills */}
             <div
               className="
-                rounded-xl
-                bg-white/5
-                border border-white/15
+                mt-20
+                bg-[#1e1e1e]
+                rounded-lg
                 p-6
-                transition-all duration-300 ease-out
-                hover:bg-white/8
-                hover:border-[#1E90FF]/30
-                hover:shadow-[0_0_24px_rgba(30,144,255,0.12)]
+                shadow-[0_4px_8px_rgba(0,0,0,0.5)]
+                transition-all duration-300
+                hover:-translate-y-[5px]
+                hover:shadow-[0_8px_16px_rgba(30,144,255,0.7)]
               "
             >
-              <h3 className="cursor-default text-lg font-semibold tracking-[0.06em] text-white/95 mb-4 pb-2 border-b border-white/15">
+              <h3 className="cursor-default text-2xl text-white mb-4">
                 Professional Skills
               </h3>
-              <div className="flex flex-wrap gap-2">
+              <div className="grid gap-2 overflow-hidden">
                 {[
                   "Time Management",
                   "Problem Solving",
@@ -930,12 +928,10 @@ export default function Page() {
                   <span
                     key={skill}
                     className="
-                      inline-block cursor-default px-3 py-1.5 rounded-full
-                      text-sm font-medium tracking-[0.04em] text-white/90
-                      bg-white/5 border border-white/15
-                      transition-all duration-300 ease-out
-                      hover:bg-white/10 hover:border-[#1E90FF]/40
-                      hover:shadow-[0_0_12px_rgba(30,144,255,0.2)]
+                      inline-block cursor-default text-[1.2rem] text-[#b0b0b0]
+                      py-2 px-4 rounded bg-[#2c2c2c]
+                      transition-colors duration-300
+                      hover:bg-[#3a3a3a] hover:text-white
                     "
                   >
                     {skill}
