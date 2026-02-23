@@ -813,7 +813,7 @@ export default function Page() {
       {/* SKILLS — three-column grid (modern dark style) */}
       <section
         id="skills"
-        className="-scroll-mt-20 min-h-screen py-16 flex items-center justify-center bg-[#141414] text-white rounded-[90px]"
+        className="-scroll-mt-20 md:scroll-mt-0 pt-16 pb-0 flex items-center justify-center bg-[#141414] text-white rounded-[90px]"
       >
         <div className="w-[80%] mx-auto text-center">
           {/* Skills intro */}
@@ -950,7 +950,7 @@ export default function Page() {
       {/* CONTACT */}
       <section
         id="contact"
-        className="relative -scroll-mt-25 min-h-screen pt-16 flex items-center justify-center overflow-hidden"
+        className="relative -scroll-mt-25 min-h-screen pt-0 flex items-center justify-center overflow-hidden"
       >
         <VantaBirdsBackground visible={contactBirdsVisible} />
         <div className="relative z-10 text-center">
