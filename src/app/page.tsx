@@ -810,70 +810,139 @@ export default function Page() {
         </div>
       </section>
 
-      {/* SKILLS */}
+      {/* SKILLS — three-column grid */}
       <section
         id="skills"
         className="scroll-mt-16 min-h-screen pt-16 flex items-center justify-center"
       >
-        <div className="text-center w-full max-w-5xl mx-auto px-6">
-          <p className="mb-2 cursor-default text-[20px] tracking-[0.8px] text-[rgb(140,140,140)]">
+        <div className="w-full max-w-5xl mx-auto px-6">
+          <p className="mb-2 cursor-default text-[20px] tracking-[0.8px] text-[rgb(140,140,140)] text-center">
             EXPERTISE
           </p>
 
-          <h2 className="cursor-default text-3xl md:text-4xl font-bold tracking-[0.12em] text-white/90 mb-14">
+          <h2 className="cursor-default text-3xl md:text-4xl font-bold tracking-[0.12em] text-white/90 mb-14 text-center">
             My Skills
           </h2>
 
-          {/* Skills grid — pill badges with hover glow */}
-          <div className="flex flex-wrap justify-center gap-3 md:gap-4">
-            {[
-              "TypeScript",
-              "JavaScript",
-              "React.js",
-              "Next.js",
-              "Node.js",
-              "Express.js",
-              "Object-Oriented Programming (OOP)",
-              "GitHub",
-              "Linux",
-              "HTML",
-              "CSS",
-              "Tailwind CSS",
-              "MongoDB",
-              "PostgreSQL",
-              "Prisma ORM",
-              "JSON Web Token (JWT)",
-              "Axios",
-              "Render",
-              "Amazon Web Services (AWS)",
-              "Python",
-              "C++",
-              "Java",
-            ].map((skill) => (
-              <span
-                key={skill}
-                className="
-                  inline-block
-                  cursor-default
-                  px-4 py-2.5
-                  rounded-full
-                  text-sm md:text-base
-                  font-medium
-                  tracking-[0.04em]
-                  text-white/90
-                  bg-white/5
-                  border border-white/15
-                  shadow-[0_0_0_0_rgba(30,144,255,0)]
-                  transition-all duration-300 ease-out
-                  hover:bg-white/10
-                  hover:border-[#1E90FF]/50
-                  hover:shadow-[0_0_20px_rgba(30,144,255,0.25)]
-                  hover:scale-105
-                "
-              >
-                {skill}
-              </span>
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
+            {/* Programming Languages */}
+            <div
+              className="
+                rounded-xl
+                bg-white/5
+                border border-white/15
+                p-6
+                transition-all duration-300 ease-out
+                hover:bg-white/8
+                hover:border-[#1E90FF]/30
+                hover:shadow-[0_0_24px_rgba(30,144,255,0.12)]
+              "
+            >
+              <h3 className="cursor-default text-lg font-semibold tracking-[0.06em] text-white/95 mb-4 pb-2 border-b border-white/15">
+                Programming Languages
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {["TypeScript", "JavaScript", "React.js", "Node.js", "Next.js"].map(
+                  (skill) => (
+                    <span
+                      key={skill}
+                      className="
+                        inline-block cursor-default px-3 py-1.5 rounded-full
+                        text-sm font-medium tracking-[0.04em] text-white/90
+                        bg-white/5 border border-white/15
+                        transition-all duration-300 ease-out
+                        hover:bg-white/10 hover:border-[#1E90FF]/40
+                        hover:shadow-[0_0_12px_rgba(30,144,255,0.2)]
+                      "
+                    >
+                      {skill}
+                    </span>
+                  )
+                )}
+              </div>
+            </div>
+
+            {/* Infrastructure Skills */}
+            <div
+              className="
+                rounded-xl
+                bg-white/5
+                border border-white/15
+                p-6
+                transition-all duration-300 ease-out
+                hover:bg-white/8
+                hover:border-[#1E90FF]/30
+                hover:shadow-[0_0_24px_rgba(30,144,255,0.12)]
+              "
+            >
+              <h3 className="cursor-default text-lg font-semibold tracking-[0.06em] text-white/95 mb-4 pb-2 border-b border-white/15">
+                Infrastructure Skills
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  "Continuous Deployment",
+                  "Production Deployment",
+                  "GitHub Actions",
+                  "Database",
+                  "Testing",
+                ].map((skill) => (
+                  <span
+                    key={skill}
+                    className="
+                      inline-block cursor-default px-3 py-1.5 rounded-full
+                      text-sm font-medium tracking-[0.04em] text-white/90
+                      bg-white/5 border border-white/15
+                      transition-all duration-300 ease-out
+                      hover:bg-white/10 hover:border-[#1E90FF]/40
+                      hover:shadow-[0_0_12px_rgba(30,144,255,0.2)]
+                    "
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Professional Skills */}
+            <div
+              className="
+                rounded-xl
+                bg-white/5
+                border border-white/15
+                p-6
+                transition-all duration-300 ease-out
+                hover:bg-white/8
+                hover:border-[#1E90FF]/30
+                hover:shadow-[0_0_24px_rgba(30,144,255,0.12)]
+              "
+            >
+              <h3 className="cursor-default text-lg font-semibold tracking-[0.06em] text-white/95 mb-4 pb-2 border-b border-white/15">
+                Professional Skills
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  "Time Management",
+                  "Problem Solving",
+                  "Communication",
+                  "Resilience",
+                  "Teamwork",
+                ].map((skill) => (
+                  <span
+                    key={skill}
+                    className="
+                      inline-block cursor-default px-3 py-1.5 rounded-full
+                      text-sm font-medium tracking-[0.04em] text-white/90
+                      bg-white/5 border border-white/15
+                      transition-all duration-300 ease-out
+                      hover:bg-white/10 hover:border-[#1E90FF]/40
+                      hover:shadow-[0_0_12px_rgba(30,144,255,0.2)]
+                    "
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
