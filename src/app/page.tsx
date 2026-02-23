@@ -411,8 +411,12 @@ export default function Page() {
               knowledge.
             </p>
 
-            <p
+            <a
+              href="/ZhuangLukeResume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="
+                block
                 mt-4
                 text-[1.125rem]
                 font-medium
@@ -427,7 +431,7 @@ export default function Page() {
               "
             >
               Check out my resume
-            </p>
+            </a>
 
             {/* Social Icons */}
             <div
