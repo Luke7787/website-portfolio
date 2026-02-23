@@ -813,7 +813,7 @@ export default function Page() {
       {/* SKILLS — three-column grid (modern dark style) */}
       <section
         id="skills"
-        className="scroll-mt-16 min-h-screen py-16 flex items-center justify-center bg-[#121212] text-white rounded-[90px]"
+        className="scroll-mt-16 min-h-screen py-16 flex items-center justify-center bg-[#141414] text-white rounded-[90px]"
       >
         <div className="w-[80%] mx-auto text-center">
           {/* Skills intro */}
@@ -821,8 +821,8 @@ export default function Page() {
             <p className="mb-2 cursor-default text-[20px] tracking-[0.8px] text-[rgb(140,140,140)]">
               EXPERTISE
             </p>
-            <h2 className="cursor-default text-[2.5em] text-white font-normal tracking-[0.05em]">
-              My Skills
+            <h2 className="cursor-default text-3xl md:text-4xl font-bold tracking-[0.12em] text-white/90">
+              Technical Skills
             </h2>
           </div>
 
@@ -844,21 +844,25 @@ export default function Page() {
                 Programming Languages
               </h3>
               <div className="grid gap-2 overflow-hidden">
-                {["TypeScript", "JavaScript", "React.js", "Node.js", "Next.js"].map(
-                  (skill) => (
-                    <span
-                      key={skill}
-                      className="
+                {[
+                  "TypeScript",
+                  "JavaScript",
+                  "React.js",
+                  "Node.js",
+                  "Next.js",
+                ].map((skill) => (
+                  <span
+                    key={skill}
+                    className="
                         inline-block cursor-default text-[1.2rem] text-[#b0b0b0]
                         py-2 px-4 rounded bg-[#2c2c2c]
                         transition-colors duration-300
                         hover:bg-[#3a3a3a] hover:text-white
                       "
-                    >
-                      {skill}
-                    </span>
-                  )
-                )}
+                  >
+                    {skill}
+                  </span>
+                ))}
               </div>
             </div>
 
@@ -1019,7 +1023,8 @@ export default function Page() {
             font-['Open_Sans',sans-serif]
           "
         >
-          © {new Date().getFullYear()} All rights reserved | This template is made by{" "}
+          © {new Date().getFullYear()} All rights reserved | This template is
+          made by{" "}
           <a
             href="https://github.com/Luke7787/website-portfolio"
             target="_blank"
