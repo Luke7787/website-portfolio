@@ -12,9 +12,28 @@ const NAV_ITEMS = [
   { label: "Contact", href: "#contact" },
 ];
 
+function scrollToSection(href: string) {
+  const id = href.replace("#", "");
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: "instant" });
+  }
+  // Keep URL as base path (no hash)
+  if (typeof window !== "undefined") {
+    window.history.replaceState(null, "", window.location.pathname);
+  }
+}
+
 export default function NavBar() {
   const [open, setOpen] = useState(false);
   const navRef = useRef<HTMLElement | null>(null);
+
+  // On load/refresh: strip hash so URL is always e.g. localhost:3000
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.location.hash) {
+      window.history.replaceState(null, "", window.location.pathname);
+    }
+  }, []);
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
@@ -64,8 +83,12 @@ export default function NavBar() {
           />
 
           <a
-            href="#home"
+            href="/"
             className="min-w-0 pl-1 sm:pl-2 cursor-pointer block"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToSection("#home");
+            }}
           >
             <AnimatedName>
               <span
@@ -98,7 +121,7 @@ export default function NavBar() {
           {NAV_ITEMS.map((item) => (
             <li key={item.href}>
               <a
-                href={item.href}
+                href="/"
                 className="
                   uppercase
                   rounded-md
@@ -110,6 +133,10 @@ export default function NavBar() {
                   transition-colors
                   hover:bg-[#1E90FF]
                 "
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection(item.href);
+                }}
               >
                 {item.label}
               </a>
@@ -140,8 +167,7 @@ export default function NavBar() {
           {NAV_ITEMS.map((item) => (
             <li key={item.href}>
               <a
-                href={item.href}
-                onClick={() => setOpen(false)}
+                href="/"
                 className="
                   block
                   uppercase
@@ -154,6 +180,11 @@ export default function NavBar() {
                   transition-colors
                   hover:bg-[#1E90FF]
                 "
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection(item.href);
+                  setOpen(false);
+                }}
               >
                 {item.label}
               </a>
