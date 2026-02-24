@@ -412,7 +412,7 @@ export default function Page() {
             </p>
 
             <a
-              href="/ZhuangLukeResume.pdf"
+              href="/LukeResume2026.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="
