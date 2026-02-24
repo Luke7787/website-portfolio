@@ -26,11 +26,9 @@ body {
 @keyframes collapseLeft {
   from {
     transform: translateX(0%);
-    opacity: 1;
   }
   to {
     transform: translateX(101%);
-    opacity: 0;
   }
 }
 
