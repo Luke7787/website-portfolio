@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Luke Zhuang — Portfolio
+
+🌐 **Live Site:** https://lukezhuang.onrender.com  
+
+A modern personal portfolio built with **Next.js**, **React**, and **TypeScript**.  
+The site features a dark theme, smooth section navigation, interactive animations, and project showcases designed to highlight both technical depth and personality.
+
+---
+
+## Overview
+
+This portfolio is organized into five core sections:
+
+| Section | Description |
+|----------|--------------|
+| **Home** | Hero section with animated intro text and an interactive Vanta.js birds background powered by Three.js. |
+| **About** | Professional bio with an integrated photo & video slideshow (images, video, captions, arrow navigation). |
+| **Projects** | Featured full-stack and systems projects with descriptions, slideshows, and links to live demos and GitHub repositories. |
+| **Skills** | Technical expertise displayed in a 3-column grid: Programming Languages, Infrastructure, and Professional Skills. |
+| **Contact** | “Let’s Connect” section with email and social links, plus interactive background effects. |
+
+---
+
+## Highlights
+
+- **Interactive Vanta.js Bird Animation**  
+  Three.js-powered animated background triggered on hover/tap in the Home and Contact sections.
+
+- **Custom Text Effects**  
+  Text scramble animation for the intro line and animated name reveal in the hero section.
+
+- **Multimedia Slideshow**  
+  Image and video gallery with smooth navigation and captions.
+
+- **Project Showcases**  
+  Each featured project includes:
+  - Short technical description  
+  - Live Demo link  
+  - GitHub repository link  
+
+- **Clean Navigation Experience**  
+  Smooth section scrolling without hash fragments in the URL. Refreshing always loads the base route.
+
+- **Responsive Design**  
+  Mobile-friendly layout with adaptive navigation and grid structures.
+
+---
+
+## Tech Stack
+
+- **Framework:** Next.js (App Router)
+- **Frontend:** React 19
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **3D & Effects:** Three.js, Vanta.js (Birds)
+- **Icons:** Font Awesome
+- **Image Optimization:** Next.js Image component
+
+---
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+http://localhost:3000
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Edit `src/app/page.tsx` to start customizing. Changes hot-reload automatically.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Deployment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The application is static-friendly and can be deployed on:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Vercel  
+- Render  
+- Any Node.js-compatible hosting platform  
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+For more details, see the official Next.js deployment documentation.
