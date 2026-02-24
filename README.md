@@ -17,7 +17,7 @@ This portfolio is organized into five core sections:
 | **About** | Professional bio with an integrated photo & video slideshow (images, video, captions, arrow navigation). |
 | **Projects** | Featured full-stack and systems projects with descriptions, slideshows, and links to live demos and GitHub repositories. |
 | **Skills** | Technical expertise displayed in a 3-column grid: Programming Languages, Infrastructure, and Professional Skills. |
-| **Contact** | “Let’s Connect” section with email and social links, plus interactive background effects. |
+| **Contact** | Let’s Connect section with email and social links, plus interactive background effects. |
 
 ---
 
