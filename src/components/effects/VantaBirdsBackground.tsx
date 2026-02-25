@@ -1,6 +1,19 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+
+const VANTA_MOBILE_BREAKPOINT = 600;
+
+/**
+ * Vanta.js uses different code paths for mobile vs desktop and different bird-count formulas:
+ * - Desktop (width >= 600): GPU path, count = (2^quantity)^2  → e.g. quantity 2 = 16 birds
+ * - Mobile (width < 600):   CPU path, count = 6 * 2^quantity  → e.g. quantity 0 = 6 birds
+ * So with the same quantity, small screens get more birds. We use a lower quantity on
+ * small screens so that bird count is fewer on small screens.
+ */
+function getQuantityForWidth(width: number): number {
+  return width >= VANTA_MOBILE_BREAKPOINT ? 2 : 0;
+}
 
 /**
  * Vanta.js Birds effect for the home section.
@@ -13,6 +26,21 @@ type Props = { visible: boolean };
 export default function VantaBirdsBackground({ visible }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const effectRef = useRef<{ destroy: () => void } | null>(null);
+  const [quantity, setQuantity] = useState(() =>
+    typeof window !== "undefined" ? getQuantityForWidth(window.innerWidth) : 0
+  );
+
+  // Sync quantity with viewport so small screens get fewer birds (Vanta uses different formulas per breakpoint)
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const handleResize = () => {
+      const next = getQuantityForWidth(window.innerWidth);
+      setQuantity((q) => (q !== next ? next : q));
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -41,8 +69,8 @@ export default function VantaBirdsBackground({ visible }: Props) {
           wingSpan: 25,
           speedLimit: 4,
           separation: 23,
-          // Fewer birds (default is higher; lower = calmer flock)
-          quantity: 1,
+          // Responsive quantity: fewer birds on small screens (Vanta uses different count formulas per breakpoint)
+          quantity,
         });
       })
       .catch((err) => {
@@ -56,7 +84,7 @@ export default function VantaBirdsBackground({ visible }: Props) {
         effectRef.current = null;
       }
     };
-  }, []);
+  }, [quantity]);
 
   return (
     <div
