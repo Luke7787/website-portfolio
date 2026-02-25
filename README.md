@@ -2,6 +2,8 @@
 
 A modern personal portfolio built with **Next.js** and **React**, featuring a dark theme, smooth navigation, interactive animations, and multimedia project showcases.
 
+🔗 **Live Site:** https://lukezhuang.onrender.com
+
 ---
 
 ## Sections
