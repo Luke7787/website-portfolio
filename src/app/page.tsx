@@ -723,9 +723,9 @@ export default function Page() {
           className="w-full flex items-center overflow-hidden"
           style={{
             maskImage:
-              "linear-gradient(to right, transparent 0%, black 25%, black 75%, transparent 100%)",
+              "linear-gradient(to right, transparent 0%, black 28%, black 72%, transparent 100%)",
             WebkitMaskImage:
-              "linear-gradient(to right, transparent 0%, black 25%, black 75%, transparent 100%)",
+              "linear-gradient(to right, transparent 0%, black 28%, black 72%, transparent 100%)",
           }}
         >
           <ul className="flex list-none m-0 p-0 relative w-max skill-marquee-left">
@@ -783,9 +783,9 @@ export default function Page() {
           className="w-full flex items-center overflow-hidden"
           style={{
             maskImage:
-              "linear-gradient(to right, transparent 0%, black 25%, black 75%, transparent 100%)",
+              "linear-gradient(to right, transparent 0%, black 28%, black 72%, transparent 100%)",
             WebkitMaskImage:
-              "linear-gradient(to right, transparent 0%, black 25%, black 75%, transparent 100%)",
+              "linear-gradient(to right, transparent 0%, black 28%, black 72%, transparent 100%)",
           }}
         >
           <ul className="flex list-none m-0 p-0 relative w-max skill-marquee-right">
