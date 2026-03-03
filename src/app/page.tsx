@@ -7,6 +7,37 @@ import AnimatedName from "@/components/effects/AnimatedName";
 import TextScramble from "@/components/effects/TextScramble";
 import VantaBirdsBackground from "@/components/effects/VantaBirdsBackground";
 
+// Skill logos — jsDelivr CDN. Card layout: icon + label per skill (Framer-style).
+const ICON_CDN = "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons";
+const skillEntry = (slug: string, name: string) => ({
+  name,
+  icon: `${ICON_CDN}/${slug}.svg`,
+});
+const skillsMarqueeRow1 = [
+  skillEntry("typescript", "TypeScript"),
+  skillEntry("javascript", "JavaScript"),
+  skillEntry("python", "Python"),
+  skillEntry("java", "Java"),
+  skillEntry("c", "C"),
+  skillEntry("cplusplus", "C++"),
+  skillEntry("react", "React.js"),
+  skillEntry("nextdotjs", "Next.js"),
+  skillEntry("nodedotjs", "Node.js"),
+  skillEntry("express", "Express.js"),
+];
+const skillsMarqueeRow2 = [
+  skillEntry("prisma", "Prisma ORM"),
+  skillEntry("axios", "Axios"),
+  skillEntry("postgresql", "PostgreSQL"),
+  skillEntry("mongodb", "MongoDB"),
+  skillEntry("amazonaws", "AWS"),
+  skillEntry("microsoftazure", "Azure"),
+  skillEntry("docker", "Docker"),
+  skillEntry("github", "GitHub"),
+  skillEntry("render", "Render"),
+  skillEntry("linux", "Linux"),
+];
+
 // Slideshow Component (Added Only)
 function Slideshow() {
   const slides = [
@@ -670,140 +701,130 @@ export default function Page() {
         </div>
       </section>
 
-      {/* SKILLS — three-column grid (modern dark style) */}
+      {/* SKILLS — Framer-style cards (icon + text), two rows scrolling with fade */}
       <section
         id="skills"
-        className="-scroll-mt-20 md:scroll-mt-0 pt-16 pb-0 flex items-center justify-center bg-[#141414] text-white rounded-[90px]"
+        className="-scroll-mt-20 md:scroll-mt-0 pt-16 pb-8 flex flex-col items-center justify-center bg-[#141414] text-white rounded-[90px] overflow-hidden"
       >
-        <div className="w-[80%] mx-auto text-center">
-          {/* Skills intro */}
-          <div className="mt-32 text-center mb-[-6rem]">
-            <p className="mb-2 cursor-default text-[20px] tracking-[0.8px] text-[rgb(140,140,140)]">
-              EXPERTISE
-            </p>
-            <h2 className="cursor-default text-3xl md:text-4xl font-bold tracking-[0.12em] text-white/90">
-              Technical Skills
-            </h2>
-          </div>
+        <div className="w-full text-center mb-12">
+          <p className="mb-2 cursor-default text-[20px] tracking-[0.8px] text-[rgb(140,140,140)]">
+            EXPERTISE
+          </p>
+          <h2 className="cursor-default text-3xl md:text-4xl font-bold tracking-[0.12em] text-white/90">
+            Technical Skills
+          </h2>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20">
-            {/* Programming Languages */}
-            <div
-              className="
-                mt-20
-                bg-[#1e1e1e]
-                rounded-lg
-                p-6
-                shadow-[0_4px_8px_rgba(0,0,0,0.5)]
-                transition-all duration-300
-                hover:-translate-y-[5px]
-                hover:shadow-[0_8px_16px_rgba(30,144,255,0.7)]
-              "
-            >
-              <h3 className="cursor-default text-2xl text-white mb-4">
-                Programming Languages
-              </h3>
-              <div className="grid gap-2 overflow-hidden">
-                {[
-                  "TypeScript",
-                  "JavaScript",
-                  "React.js",
-                  "Node.js",
-                  "Next.js",
-                ].map((skill) => (
-                  <span
-                    key={skill}
-                    className="
-                        inline-block cursor-default text-[1.2rem] text-[#b0b0b0]
-                        py-2 px-4 rounded bg-[#2c2c2c]
-                        transition-colors duration-300
-                        hover:bg-[#3a3a3a] hover:text-white
-                      "
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
+        {/* Row 1: scroll left — cards with icon + label; two equal-width copies for seamless loop */}
+        <div
+          className="w-full flex items-center py-2 overflow-hidden"
+          style={{
+            maskImage:
+              "linear-gradient(to right, transparent 0%, black 25%, black 75%, transparent 100%)",
+            WebkitMaskImage:
+              "linear-gradient(to right, transparent 0%, black 25%, black 75%, transparent 100%)",
+          }}
+        >
+          <ul className="flex list-none m-0 p-0 relative w-max skill-marquee-left">
+            <li className="flex items-center gap-8 shrink-0">
+              {skillsMarqueeRow1.map((skill, i) => (
+                <div key={`row1-a-${i}`} className="shrink-0">
+                  <div className="shrink-0 flex items-center gap-5 rounded-3xl border border-white/20 bg-[rgb(13,13,13)] px-6 py-5 min-h-[96px] w-[300px] transition-colors duration-200 hover:bg-[rgb(22,22,22)] hover:border-white/30">
+                    <div className="shrink-0 w-14 h-14 flex items-center justify-center rounded-2xl bg-white/10">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={skill.icon}
+                        alt=""
+                        className="w-8 h-8 object-contain brightness-0 invert"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h3 className="text-white text-2xl md:text-[28px] font-medium tracking-[-0.02em] leading-tight m-0 truncate">
+                      {skill.name}
+                    </h3>
+                  </div>
+                </div>
+              ))}
+              <span className="shrink-0 w-0 block" aria-hidden />
+            </li>
+            <li className="flex items-center gap-8 shrink-0" aria-hidden>
+              {skillsMarqueeRow1.map((skill, i) => (
+                <div key={`row1-b-${i}`} className="shrink-0">
+                  <div className="shrink-0 flex items-center gap-5 rounded-3xl border border-white/20 bg-[rgb(13,13,13)] px-6 py-5 min-h-[96px] w-[300px] transition-colors duration-200 hover:bg-[rgb(22,22,22)] hover:border-white/30">
+                    <div className="shrink-0 w-14 h-14 flex items-center justify-center rounded-2xl bg-white/10">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={skill.icon}
+                        alt=""
+                        className="w-8 h-8 object-contain brightness-0 invert"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h3 className="text-white text-2xl md:text-[28px] font-medium tracking-[-0.02em] leading-tight m-0 truncate">
+                      {skill.name}
+                    </h3>
+                  </div>
+                </div>
+              ))}
+              <span className="shrink-0 w-0 block" aria-hidden />
+            </li>
+          </ul>
+        </div>
 
-            {/* Infrastructure Skills */}
-            <div
-              className="
-                mt-20
-                bg-[#1e1e1e]
-                rounded-lg
-                p-6
-                shadow-[0_4px_8px_rgba(0,0,0,0.5)]
-                transition-all duration-300
-                hover:-translate-y-[5px]
-                hover:shadow-[0_8px_16px_rgba(30,144,255,0.7)]
-              "
-            >
-              <h3 className="cursor-default text-2xl text-white mb-4">
-                Infrastructure Skills
-              </h3>
-              <div className="grid gap-2 overflow-hidden">
-                {[
-                  "Continuous Deployment",
-                  "Production Deployment",
-                  "GitHub Actions",
-                  "Database",
-                  "Testing",
-                ].map((skill) => (
-                  <span
-                    key={skill}
-                    className="
-                      inline-block cursor-default text-[1.2rem] text-[#b0b0b0]
-                      py-2 px-4 rounded bg-[#2c2c2c]
-                      transition-colors duration-300
-                      hover:bg-[#3a3a3a] hover:text-white
-                    "
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Professional Skills */}
-            <div
-              className="
-                mt-20
-                bg-[#1e1e1e]
-                rounded-lg
-                p-6
-                shadow-[0_4px_8px_rgba(0,0,0,0.5)]
-                transition-all duration-300
-                hover:-translate-y-[5px]
-                hover:shadow-[0_8px_16px_rgba(30,144,255,0.7)]
-              "
-            >
-              <h3 className="cursor-default text-2xl text-white mb-4">
-                Professional Skills
-              </h3>
-              <div className="grid gap-2 overflow-hidden">
-                {[
-                  "Time Management",
-                  "Problem Solving",
-                  "Communication",
-                  "Resilience",
-                  "Teamwork",
-                ].map((skill) => (
-                  <span
-                    key={skill}
-                    className="
-                      inline-block cursor-default text-[1.2rem] text-[#b0b0b0]
-                      py-2 px-4 rounded bg-[#2c2c2c]
-                      transition-colors duration-300
-                      hover:bg-[#3a3a3a] hover:text-white
-                    "
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
+        {/* Row 2: scroll right — two equal-width copies for seamless loop */}
+        <div
+          className="w-full flex items-center py-2 overflow-hidden"
+          style={{
+            maskImage:
+              "linear-gradient(to right, transparent 0%, black 25%, black 75%, transparent 100%)",
+            WebkitMaskImage:
+              "linear-gradient(to right, transparent 0%, black 25%, black 75%, transparent 100%)",
+          }}
+        >
+          <ul className="flex list-none m-0 p-0 relative w-max skill-marquee-right">
+            <li className="flex items-center gap-8 shrink-0">
+              {skillsMarqueeRow2.map((skill, i) => (
+                <div key={`row2-a-${i}`} className="shrink-0">
+                  <div className="shrink-0 flex items-center gap-5 rounded-3xl border border-white/20 bg-[rgb(13,13,13)] px-6 py-5 min-h-[96px] w-[300px] transition-colors duration-200 hover:bg-[rgb(22,22,22)] hover:border-white/30">
+                    <div className="shrink-0 w-14 h-14 flex items-center justify-center rounded-2xl bg-white/10">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={skill.icon}
+                        alt=""
+                        className="w-8 h-8 object-contain brightness-0 invert"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h3 className="text-white text-2xl md:text-[28px] font-medium tracking-[-0.02em] leading-tight m-0 truncate">
+                      {skill.name}
+                    </h3>
+                  </div>
+                </div>
+              ))}
+              <span className="shrink-0 w-0 block" aria-hidden />
+            </li>
+            <li className="flex items-center gap-8 shrink-0" aria-hidden>
+              {skillsMarqueeRow2.map((skill, i) => (
+                <div key={`row2-b-${i}`} className="shrink-0">
+                  <div className="shrink-0 flex items-center gap-5 rounded-3xl border border-white/20 bg-[rgb(13,13,13)] px-6 py-5 min-h-[96px] w-[300px] transition-colors duration-200 hover:bg-[rgb(22,22,22)] hover:border-white/30">
+                    <div className="shrink-0 w-14 h-14 flex items-center justify-center rounded-2xl bg-white/10">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={skill.icon}
+                        alt=""
+                        className="w-8 h-8 object-contain brightness-0 invert"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h3 className="text-white text-2xl md:text-[28px] font-medium tracking-[-0.02em] leading-tight m-0 truncate">
+                      {skill.name}
+                    </h3>
+                  </div>
+                </div>
+              ))}
+              <span className="shrink-0 w-0 block" aria-hidden />
+            </li>
+          </ul>
         </div>
       </section>
 

@@ -48,3 +48,30 @@ body {
     slideIn 0.9s ease-out forwards,
     collapseLeft 0.9s ease-in-out 0.9s forwards;
 }
+
+/* Skills marquee: row 1 scrolls left, row 2 scrolls right */
+@keyframes skillScrollLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes skillScrollRight {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.skill-marquee-left {
+  animation: skillScrollLeft 90s linear infinite;
+}
+
+.skill-marquee-right {
+  animation: skillScrollRight 90s linear infinite;
+}
