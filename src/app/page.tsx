@@ -158,114 +158,6 @@ function Slideshow() {
   );
 }
 
-function Project1Slideshow() {
-  const slides = [
-    "/images/P1P1.png",
-    "/images/P1P2.png",
-    "/images/P1P3.png",
-    "/images/P1P4.png",
-    "/images/P1P5.png",
-    "/images/P1P6.png",
-    "/images/P1P7.png",
-    "/images/P1P8.png",
-  ];
-
-  const [index, setIndex] = useState(0);
-
-  function next() {
-    if (index < slides.length - 1) {
-      setIndex(index + 1);
-    }
-  }
-
-  function prev() {
-    if (index > 0) {
-      setIndex(index - 1);
-    }
-  }
-
-  return (
-    <a
-      href="https://showroom-appointment-scheduler.onrender.com/"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="relative w-full aspect-[4/3] block overflow-hidden rounded-xl cursor-pointer group"
-    >
-      <Image
-        src={slides[index]}
-        alt="Showroom Booking App Screenshot"
-        fill
-        className="
-          rounded-xl
-          object-contain
-          shadow-lg
-          border border-white/10
-          bg-black
-          transition-transform duration-300 ease-out group-hover:scale-105
-        "
-      />
-
-      {/* Left Arrow */}
-      <button
-        type="button"
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          prev();
-        }}
-        disabled={index === 0}
-        className={`
-          absolute
-          left-4
-          top-1/2
-          -translate-y-1/2
-          w-10 h-10
-          rounded-full
-          text-2xl
-          flex items-center justify-center
-          transition
-          ${
-            index === 0
-              ? "bg-white/40 text-gray-400 cursor-not-allowed"
-              : "bg-white/80 text-black hover:scale-105"
-          }
-       `}
-      >
-        <span className="-translate-x-[1px] -translate-y-[1px]">‹</span>
-      </button>
-
-      {/* Right Arrow */}
-      <button
-        type="button"
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          next();
-        }}
-        disabled={index === slides.length - 1}
-        className={`
-          absolute
-          right-4
-          top-1/2
-          -translate-y-1/2
-          w-10 h-10
-          rounded-full
-          text-2xl
-          flex items-center justify-center
-          transition
-          ${
-            index === slides.length - 1
-              ? "bg-white/40 text-gray-400 cursor-not-allowed"
-              : "bg-white/80 text-black hover:scale-105"
-          }
-       `}
-      >
-        <span className="translate-x-[1px] -translate-y-[1px]">›</span>
-      </button>
-    </a>
-  );
-}
-
 export default function Page() {
   const [birdsVisible, setBirdsVisible] = useState(false);
   const [contactBirdsVisible, setContactBirdsVisible] = useState(false);
@@ -590,107 +482,97 @@ export default function Page() {
         </div>
       </section>
 
-      {/* PROJECTS */}
+      {/* PROJECTS — Framer-style card grid */}
       <section
         id="projects"
         className="scroll-mt-2 md:scroll-mt-16 min-h-screen pt-16 flex items-center justify-center"
       >
-        <div className="text-center">
-          <p className="mb-2 cursor-default text-[20px] tracking-[0.8px] text-[rgb(140,140,140)]">
-            PORTFOLIO
-          </p>
+        <div className="w-full max-w-6xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <p className="mb-2 cursor-default text-[20px] tracking-[0.8px] text-[rgb(140,140,140)]">
+              PORTFOLIO
+            </p>
+            <h2 className="cursor-default text-3xl md:text-4xl font-bold tracking-[0.12em] text-white/90">
+              Featured Projects
+            </h2>
+          </div>
 
-          <h2 className="cursor-default text-3xl md:text-4xl font-bold tracking-[0.12em] text-white/90">
-            Featured Projects
-          </h2>
-
-          {/* First Project */}
-          <div className="mt-16 mx-auto max-w-6xl px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            {/* Left Side — Slideshow */}
-            <div className="w-full">
-              <Project1Slideshow />
-            </div>
-
-            {/* Right Side — Text */}
-            <div className="text-left space-y-4">
-              <p className="cursor-default text-sm tracking-[0.2em] text-white/60 uppercase">
-                FULL-STACK APPLICATION
-              </p>
-
-              <h3 className="cursor-default text-2xl md:text-3xl font-bold text-white">
-                Showroom Booking App
-              </h3>
-
-              <p className="cursor-default text-white/80 leading-relaxed text-justify max-w-md">
-                Developed a full-stack appointment scheduling platform using
-                Next.js, TypeScript, Prisma, and PostgreSQL. Customers can book
-                showroom appointments based on real-time availability, while
-                admins manage bookings through a secure dashboard with
-                role-based access control.
-              </p>
-
-              <div className="flex gap-6 pt-4">
+          {/* Card grid — 1 col mobile, 2 cols md, 3 cols lg */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+            {/* Card 1: Showroom Booking App */}
+            <div className="group opacity-100 transition-all duration-500 ease-out">
+              <a
+                href="https://showroom-appointment-scheduler.onrender.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block"
+              >
+                <div className="relative w-full aspect-9/8 overflow-hidden rounded-xl mb-5">
+                  <Image
+                    src="/images/P1P1.png"
+                    alt="Showroom Booking App"
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1128px) 50vw, 33vw"
+                    className="rounded-xl object-cover object-center transition-transform duration-300 group-hover:scale-[1.02]"
+                  />
+                </div>
+                <h3 className="cursor-default text-xl font-semibold text-white mb-2">
+                  Showroom Booking App
+                </h3>
+                <p className="cursor-default text-white/70 text-[15px] leading-relaxed">
+                  Full-stack appointment scheduling with Next.js, TypeScript, Prisma, and PostgreSQL. Book visits and manage availability with admin control.
+                </p>
+              </a>
+              <div className="flex gap-4 mt-4">
                 <a
                   href="https://showroom-appointment-scheduler.onrender.com/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#1E90FF] font-semibold hover:underline"
+                  className="text-[#0099ff] font-medium hover:underline"
                 >
                   Live Site
                 </a>
-
                 <a
                   href="https://github.com/Luke7787/showroom-appointment-scheduler"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#1E90FF] font-semibold hover:underline"
+                  className="text-[#0099ff] font-medium hover:underline"
                 >
                   GitHub
                 </a>
               </div>
             </div>
-          </div>
 
-          {/* Second Project */}
-          <div className="mt-24 mx-auto max-w-6xl px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            {/* Image - clickable with hover scale */}
-            <a
-              href="https://mango-island-08612f41e.5.azurestaticapps.net"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative w-full aspect-4/3 block overflow-hidden rounded-xl cursor-pointer group"
-            >
-              <Image
-                src="/images/project2.png"
-                alt="Inventory Management Platform"
-                fill
-                className="rounded-xl object-cover shadow-lg border border-white/10 transition-transform duration-300 ease-out group-hover:scale-105"
-              />
-            </a>
-
-            {/* Text */}
-            <div className="text-left space-y-4">
-              <p className="cursor-default text-sm tracking-[0.2em] text-white/60 uppercase">
-                FULL-STACK APPLICATION
-              </p>
-
-              <h3 className="cursor-default text-2xl md:text-3xl font-bold text-white">
-                Inventory Management Platform
-              </h3>
-
-              <p className="cursor-default text-white/80 leading-relaxed text-justify max-w-md">
-                Collaborated with a team to design and develop a full-stack
-                inventory management platform using React, TypeScript, Node.js,
-                and MongoDB. Users can view, add, update, and manage inventory
-                items through a responsive and user-friendly interface.
-              </p>
-
-              <div className="flex gap-6 pt-4">
+            {/* Card 2: Inventory Management Platform */}
+            <div className="group opacity-100 transition-all duration-500 ease-out">
+              <a
+                href="https://mango-island-08612f41e.5.azurestaticapps.net"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block"
+              >
+                <div className="relative w-full aspect-9/8 overflow-hidden rounded-xl mb-5">
+                  <Image
+                    src="/images/project2.png"
+                    alt="Inventory Management Platform"
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1128px) 50vw, 33vw"
+                    className="rounded-xl object-cover object-center transition-transform duration-300 group-hover:scale-[1.02]"
+                  />
+                </div>
+                <h3 className="cursor-default text-xl font-semibold text-white mb-2">
+                  Inventory Management Platform
+                </h3>
+                <p className="cursor-default text-white/70 text-[15px] leading-relaxed">
+                  Full-stack inventory app with React, TypeScript, Node.js, and MongoDB. View, add, update, and manage inventory through a responsive interface.
+                </p>
+              </a>
+              <div className="flex gap-4 mt-4">
                 <a
                   href="https://mango-island-08612f41e.5.azurestaticapps.net"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#1E90FF] font-semibold hover:underline"
+                  className="text-[#0099ff] font-medium hover:underline"
                 >
                   Live Site
                 </a>
@@ -698,54 +580,43 @@ export default function Page() {
                   href="https://github.com/Luke7787/ImmaculateInventors"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#1E90FF] font-semibold hover:underline"
+                  className="text-[#0099ff] font-medium hover:underline"
                 >
                   GitHub
                 </a>
               </div>
             </div>
-          </div>
 
-          {/* Third Project */}
-          <div className="mt-24 mx-auto max-w-6xl px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            {/* Image - clickable with hover scale */}
-            <a
-              href="https://luke7787.github.io/Blackjack/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative w-full aspect-4/3 block overflow-hidden rounded-xl cursor-pointer group"
-            >
-              <Image
-                src="/images/project3.png"
-                alt="Blackjack game"
-                fill
-                className="rounded-xl object-cover object-[center_5%] shadow-lg border border-white/10 transition-transform duration-300 ease-out group-hover:scale-105"
-              />
-            </a>
-
-            {/* Text */}
-            <div className="text-left space-y-4">
-              <p className="cursor-default text-sm tracking-[0.2em] text-white/60 uppercase">
-                JAVASCRIPT GAME
-              </p>
-
-              <h3 className="cursor-default text-2xl md:text-3xl font-bold text-white">
-                Blackjack
-              </h3>
-
-              <p className="cursor-default text-white/80 leading-relaxed text-justify max-w-md">
-                Built a Blackjack game using JavaScript, HTML5, and CSS.
-                Features hand splitting, double-down mechanics, special payouts
-                for Blackjack, and traditional casino rules. Designed with a
-                responsive UI for seamless gameplay across devices.
-              </p>
-
-              <div className="flex gap-6 pt-4">
+            {/* Card 3: Blackjack */}
+            <div className="group opacity-100 transition-all duration-500 ease-out">
+              <a
+                href="https://luke7787.github.io/Blackjack/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block"
+              >
+                <div className="relative w-full aspect-9/8 overflow-hidden rounded-xl mb-5">
+                  <Image
+                    src="/images/project3.png"
+                    alt="Blackjack game"
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1128px) 50vw, 33vw"
+                    className="rounded-xl object-cover object-[center_5%] transition-transform duration-300 group-hover:scale-[1.02]"
+                  />
+                </div>
+                <h3 className="cursor-default text-xl font-semibold text-white mb-2">
+                  Blackjack
+                </h3>
+                <p className="cursor-default text-white/70 text-[15px] leading-relaxed">
+                  Blackjack built with JavaScript, HTML5, and CSS. Split, double down, Blackjack payouts, and responsive UI for play on any device.
+                </p>
+              </a>
+              <div className="flex gap-4 mt-4">
                 <a
                   href="https://luke7787.github.io/Blackjack/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#1E90FF] font-semibold hover:underline"
+                  className="text-[#0099ff] font-medium hover:underline"
                 >
                   Live Site
                 </a>
@@ -753,54 +624,43 @@ export default function Page() {
                   href="https://github.com/Luke7787/Blackjack"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#1E90FF] font-semibold hover:underline"
+                  className="text-[#0099ff] font-medium hover:underline"
                 >
                   GitHub
                 </a>
               </div>
             </div>
-          </div>
 
-          {/* Fourth Project */}
-          <div className="mt-24 mx-auto max-w-6xl px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            {/* Image - clickable with hover scale */}
-            <a
-              href="https://github.com/Luke7787/Server-and-Client"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative w-full aspect-4/3 block overflow-hidden rounded-xl cursor-pointer group"
-            >
-              <Image
-                src="/images/project4.png"
-                alt="Server-and-Client webserver"
-                fill
-                className="rounded-xl object-cover shadow-lg border border-white/10 transition-transform duration-300 ease-out group-hover:scale-105"
-              />
-            </a>
-
-            {/* Text */}
-            <div className="text-left space-y-4">
-              <p className="cursor-default text-sm tracking-[0.2em] text-white/60 uppercase">
-                MULTI-CLIENT WEBSERVER
-              </p>
-
-              <h3 className="cursor-default text-2xl md:text-3xl font-bold text-white">
-                Server-and-Client
-              </h3>
-
-              <p className="cursor-default text-white/80 leading-relaxed text-justify max-w-md">
-                Engineered a concurrent web server in C that implements a subset
-                of the Hypertext Transfer Protocol (HTTP). The server handles
-                multiple client connections by forking child processes, enabling
-                parallel request processing and efficient resource management.
-              </p>
-
-              <div className="flex gap-6 pt-4">
+            {/* Card 4: Server-and-Client */}
+            <div className="group opacity-100 transition-all duration-500 ease-out md:col-span-2 lg:col-span-1">
+              <a
+                href="https://github.com/Luke7787/Server-and-Client"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block"
+              >
+                <div className="relative w-full aspect-9/8 overflow-hidden rounded-xl mb-5">
+                  <Image
+                    src="/images/project4.png"
+                    alt="Server-and-Client webserver"
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1128px) 50vw, 33vw"
+                    className="rounded-xl object-cover object-center transition-transform duration-300 group-hover:scale-[1.02]"
+                  />
+                </div>
+                <h3 className="cursor-default text-xl font-semibold text-white mb-2">
+                  Server-and-Client
+                </h3>
+                <p className="cursor-default text-white/70 text-[15px] leading-relaxed">
+                  Concurrent web server in C implementing a subset of HTTP. Handles multiple clients via forked processes for parallel request processing.
+                </p>
+              </a>
+              <div className="flex gap-4 mt-4">
                 <a
                   href="https://github.com/Luke7787/Server-and-Client"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#1E90FF] font-semibold hover:underline"
+                  className="text-[#0099ff] font-medium hover:underline"
                 >
                   GitHub
                 </a>
