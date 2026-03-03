@@ -12,6 +12,12 @@ function Slideshow() {
   const slides = [
     {
       type: "image",
+      src: "/images/fishing.png",
+      caption:
+        "Taken in San Francisco Bay after catching my first striped bass October 7, 2017 (Age 16)",
+    },
+    {
+      type: "image",
       src: "/images/about.jpg",
       caption:
         "Taken at Seattle’s iconic Space Needle during a family road trip September 10, 2022 (Age 20)",
@@ -27,12 +33,6 @@ function Slideshow() {
       src: "/images/test.jpeg",
       caption:
         "Taken at Japantown, San Francisco, showing my girlfriend around June 17, 2023 (Age 21)",
-    },
-    {
-      type: "image",
-      src: "/images/fishing.png",
-      caption:
-        "Taken in San Francisco Bay after catching my first striped bass October 7, 2017 (Age 16)",
     },
   ];
   const [index, setIndex] = useState(0);
