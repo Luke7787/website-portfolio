@@ -75,3 +75,31 @@ body {
 .skill-marquee-right {
   animation: skillScrollRight 90s linear infinite;
 }
+
+/* Skill card: gradient border (light top/bottom, dark sides, smooth blend) */
+.skill-card-border {
+  padding: 1px;
+  border-radius: 1.5rem;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.06) 4%,
+    rgba(255, 255, 255, 0.02) 18%,
+    rgba(255, 255, 255, 0.02) 82%,
+    rgba(255, 255, 255, 0.06) 96%,
+    rgba(255, 255, 255, 0.12) 100%
+  );
+  transition: background 0.2s ease;
+}
+
+.skill-card-border:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.16) 0%,
+    rgba(255, 255, 255, 0.08) 4%,
+    rgba(255, 255, 255, 0.04) 18%,
+    rgba(255, 255, 255, 0.04) 82%,
+    rgba(255, 255, 255, 0.08) 96%,
+    rgba(255, 255, 255, 0.16) 100%
+  );
+}

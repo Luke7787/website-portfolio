@@ -717,7 +717,10 @@ export default function Page() {
 
         {/* Row 1: scroll left — cards with icon + label; two equal-width copies for seamless loop */}
         <div
-          className="w-full flex items-center py-2 overflow-hidden"
+          className="flex flex-col gap-4 py-4 w-full"
+        >
+        <div
+          className="w-full flex items-center overflow-hidden"
           style={{
             maskImage:
               "linear-gradient(to right, transparent 0%, black 25%, black 75%, transparent 100%)",
@@ -726,45 +729,49 @@ export default function Page() {
           }}
         >
           <ul className="flex list-none m-0 p-0 relative w-max skill-marquee-left">
-            <li className="flex items-center gap-8 shrink-0">
+            <li className="flex items-center gap-4 shrink-0">
               {skillsMarqueeRow1.map((skill, i) => (
                 <div key={`row1-a-${i}`} className="shrink-0">
-                  <div className="shrink-0 flex items-center gap-5 rounded-3xl border border-white/20 bg-[rgb(13,13,13)] px-6 py-5 min-h-[96px] w-[300px] transition-colors duration-200 hover:bg-[rgb(22,22,22)] hover:border-white/30">
-                    <div className="shrink-0 w-14 h-14 flex items-center justify-center rounded-2xl bg-white/10">
+                  <div className="skill-card-border shrink-0">
+                    <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
+                    <div className="shrink-0 w-9 h-9 flex items-center justify-center">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={skill.icon}
                         alt=""
-                        className="w-8 h-8 object-contain brightness-0 invert"
+                        className="w-5 h-5 object-contain brightness-0 invert"
                         loading="lazy"
                       />
                     </div>
-                    <h3 className="text-white text-2xl md:text-[28px] font-medium tracking-[-0.02em] leading-tight m-0 truncate">
+                    <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
                       {skill.name}
                     </h3>
                   </div>
                 </div>
+              </div>
               ))}
               <span className="shrink-0 w-0 block" aria-hidden />
             </li>
-            <li className="flex items-center gap-8 shrink-0" aria-hidden>
+            <li className="flex items-center gap-4 shrink-0" aria-hidden>
               {skillsMarqueeRow1.map((skill, i) => (
                 <div key={`row1-b-${i}`} className="shrink-0">
-                  <div className="shrink-0 flex items-center gap-5 rounded-3xl border border-white/20 bg-[rgb(13,13,13)] px-6 py-5 min-h-[96px] w-[300px] transition-colors duration-200 hover:bg-[rgb(22,22,22)] hover:border-white/30">
-                    <div className="shrink-0 w-14 h-14 flex items-center justify-center rounded-2xl bg-white/10">
+                  <div className="skill-card-border shrink-0">
+                    <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
+                    <div className="shrink-0 w-9 h-9 flex items-center justify-center">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={skill.icon}
                         alt=""
-                        className="w-8 h-8 object-contain brightness-0 invert"
+                        className="w-5 h-5 object-contain brightness-0 invert"
                         loading="lazy"
                       />
                     </div>
-                    <h3 className="text-white text-2xl md:text-[28px] font-medium tracking-[-0.02em] leading-tight m-0 truncate">
+                    <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
                       {skill.name}
                     </h3>
                   </div>
                 </div>
+              </div>
               ))}
               <span className="shrink-0 w-0 block" aria-hidden />
             </li>
@@ -773,7 +780,7 @@ export default function Page() {
 
         {/* Row 2: scroll right — two equal-width copies for seamless loop */}
         <div
-          className="w-full flex items-center py-2 overflow-hidden"
+          className="w-full flex items-center overflow-hidden"
           style={{
             maskImage:
               "linear-gradient(to right, transparent 0%, black 25%, black 75%, transparent 100%)",
@@ -782,49 +789,54 @@ export default function Page() {
           }}
         >
           <ul className="flex list-none m-0 p-0 relative w-max skill-marquee-right">
-            <li className="flex items-center gap-8 shrink-0">
+            <li className="flex items-center gap-4 shrink-0">
               {skillsMarqueeRow2.map((skill, i) => (
                 <div key={`row2-a-${i}`} className="shrink-0">
-                  <div className="shrink-0 flex items-center gap-5 rounded-3xl border border-white/20 bg-[rgb(13,13,13)] px-6 py-5 min-h-[96px] w-[300px] transition-colors duration-200 hover:bg-[rgb(22,22,22)] hover:border-white/30">
-                    <div className="shrink-0 w-14 h-14 flex items-center justify-center rounded-2xl bg-white/10">
+                  <div className="skill-card-border shrink-0">
+                    <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
+                    <div className="shrink-0 w-9 h-9 flex items-center justify-center">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={skill.icon}
                         alt=""
-                        className="w-8 h-8 object-contain brightness-0 invert"
+                        className="w-5 h-5 object-contain brightness-0 invert"
                         loading="lazy"
                       />
                     </div>
-                    <h3 className="text-white text-2xl md:text-[28px] font-medium tracking-[-0.02em] leading-tight m-0 truncate">
+                    <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
                       {skill.name}
                     </h3>
                   </div>
                 </div>
+              </div>
               ))}
               <span className="shrink-0 w-0 block" aria-hidden />
             </li>
-            <li className="flex items-center gap-8 shrink-0" aria-hidden>
+            <li className="flex items-center gap-4 shrink-0" aria-hidden>
               {skillsMarqueeRow2.map((skill, i) => (
                 <div key={`row2-b-${i}`} className="shrink-0">
-                  <div className="shrink-0 flex items-center gap-5 rounded-3xl border border-white/20 bg-[rgb(13,13,13)] px-6 py-5 min-h-[96px] w-[300px] transition-colors duration-200 hover:bg-[rgb(22,22,22)] hover:border-white/30">
-                    <div className="shrink-0 w-14 h-14 flex items-center justify-center rounded-2xl bg-white/10">
+                  <div className="skill-card-border shrink-0">
+                    <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
+                    <div className="shrink-0 w-9 h-9 flex items-center justify-center">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={skill.icon}
                         alt=""
-                        className="w-8 h-8 object-contain brightness-0 invert"
+                        className="w-5 h-5 object-contain brightness-0 invert"
                         loading="lazy"
                       />
                     </div>
-                    <h3 className="text-white text-2xl md:text-[28px] font-medium tracking-[-0.02em] leading-tight m-0 truncate">
+                    <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
                       {skill.name}
                     </h3>
                   </div>
                 </div>
+              </div>
               ))}
               <span className="shrink-0 w-0 block" aria-hidden />
             </li>
           </ul>
+        </div>
         </div>
       </section>
 
