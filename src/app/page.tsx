@@ -684,7 +684,7 @@ export default function Page() {
               </div>
             </ScrollRevealBlock>
 
-            {/* Card 4: Server-and-Client */}
+            {/* Card 4: Server and Client */}
             <ScrollRevealBlock delay={1.06} className="group opacity-100 transition-all duration-500 ease-out md:col-span-2 lg:col-span-1">
               <a
                 href="https://github.com/Luke7787/Server-and-Client"
@@ -695,14 +695,14 @@ export default function Page() {
                 <div className="relative w-full aspect-9/8 overflow-hidden rounded-xl mb-5">
                   <Image
                     src="/images/project4.png"
-                    alt="Server-and-Client webserver"
+                    alt="Server and Client webserver"
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1128px) 50vw, 33vw"
                     className="rounded-xl object-cover object-center transition-transform duration-300 group-hover:scale-[1.02]"
                   />
                 </div>
                 <h3 className="cursor-default text-xl font-semibold text-white mb-2">
-                  Server-and-Client
+                  Server and Client
                 </h3>
                 <p className="cursor-default text-white/70 text-[15px] leading-relaxed">
                   Concurrent web server in C implementing a subset of HTTP. Handles multiple clients via forked processes for parallel request processing.
