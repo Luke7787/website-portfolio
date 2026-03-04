@@ -38,14 +38,14 @@ export default function ScrollRevealBlock({
       ref={ref}
       initial={{
         opacity: 0,
-        y: 10,
+        y: 28,
         scale: 1,
         filter: "blur(10px)",
       }}
       animate={
         hasAnimated
           ? { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }
-          : { opacity: 0, y: 10, scale: 1, filter: "blur(10px)" }
+          : { opacity: 0, y: 28, scale: 1, filter: "blur(10px)" }
       }
       transition={{
         delay,

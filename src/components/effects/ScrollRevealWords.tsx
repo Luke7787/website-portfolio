@@ -23,7 +23,7 @@ const containerVariants = {
 const wordVariants = {
   hidden: {
     opacity: 0,
-    y: 10,
+    y: 24,
     scale: 1,
     filter: "blur(10px)",
   },
