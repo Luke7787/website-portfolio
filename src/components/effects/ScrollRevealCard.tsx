@@ -38,6 +38,22 @@ const itemVariants = {
   },
 };
 
+/** Slower spring for the large image block only. */
+const imageSpring = {
+  type: "spring" as const,
+  stiffness: 14,
+  damping: 20,
+  mass: 1.4,
+};
+
+const imageVariants = {
+  hidden: itemVariants.hidden,
+  visible: {
+    ...itemVariants.visible,
+    transition: imageSpring,
+  },
+};
+
 const textBlockVariants = {
   hidden: {},
   visible: {
@@ -139,7 +155,7 @@ export default function ScrollRevealCard({
     >
       <a href={mainHref} target="_blank" rel="noopener noreferrer" className="block">
         <motion.div
-          variants={itemVariants}
+          variants={imageVariants}
           className="relative w-full aspect-9/8 overflow-hidden rounded-xl mb-5"
         >
           <Image
