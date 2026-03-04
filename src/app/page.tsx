@@ -37,6 +37,16 @@ const skillsMarqueeRow2 = [
   skillEntry("render", "Render"),
   skillEntry("linux", "Linux"),
 ];
+const skillsMarqueeRow3 = [
+  skillEntry("csharp", "C#"),
+  skillEntry("html5", "HTML"),
+  skillEntry("css3", "CSS"),
+  skillEntry("react", "React Native"),
+  skillEntry("tailwindcss", "Tailwind CSS"),
+  skillEntry("postman", "Postman"),
+  skillEntry("expo", "Expo"),
+  skillEntry("figma", "Figma"),
+];
 
 // Slideshow Component (Added Only)
 function Slideshow() {
@@ -815,6 +825,66 @@ export default function Page() {
             <li className="flex items-center gap-4 shrink-0" aria-hidden>
               {skillsMarqueeRow2.map((skill, i) => (
                 <div key={`row2-b-${i}`} className="shrink-0">
+                  <div className="skill-card-border shrink-0">
+                    <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
+                    <div className="shrink-0 w-9 h-9 flex items-center justify-center">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={skill.icon}
+                        alt=""
+                        className="w-5 h-5 object-contain brightness-0 invert"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
+                      {skill.name}
+                    </h3>
+                  </div>
+                </div>
+              </div>
+              ))}
+              <span className="shrink-0 w-0 block" aria-hidden />
+            </li>
+          </ul>
+        </div>
+
+        {/* Row 3: scroll left — C#, HTML, CSS, React Native, Tailwind, Postman, Expo, Figma */}
+        <div
+          className="w-full flex items-center overflow-hidden"
+          style={{
+            maskImage:
+              "linear-gradient(to right, transparent 0%, black 28%, black 72%, transparent 100%)",
+            WebkitMaskImage:
+              "linear-gradient(to right, transparent 0%, black 28%, black 72%, transparent 100%)",
+          }}
+        >
+          <ul className="flex list-none m-0 p-0 relative w-max skill-marquee-left">
+            <li className="flex items-center gap-4 shrink-0">
+              {skillsMarqueeRow3.map((skill, i) => (
+                <div key={`row3-a-${i}`} className="shrink-0">
+                  <div className="skill-card-border shrink-0">
+                    <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
+                    <div className="shrink-0 w-9 h-9 flex items-center justify-center">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={skill.icon}
+                        alt=""
+                        className="w-5 h-5 object-contain brightness-0 invert"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
+                      {skill.name}
+                    </h3>
+                  </div>
+                </div>
+              </div>
+              ))}
+              <span className="shrink-0 w-0 block" aria-hidden />
+            </li>
+            <li className="flex items-center gap-4 shrink-0" aria-hidden>
+              {skillsMarqueeRow3.map((skill, i) => (
+                <div key={`row3-b-${i}`} className="shrink-0">
                   <div className="skill-card-border shrink-0">
                     <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
                     <div className="shrink-0 w-9 h-9 flex items-center justify-center">
