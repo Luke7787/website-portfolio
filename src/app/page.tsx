@@ -858,7 +858,7 @@ export default function Page() {
               "linear-gradient(to right, transparent 0%, black 28%, black 72%, transparent 100%)",
           }}
         >
-          <ul className="flex list-none m-0 p-0 relative w-max skill-marquee-left">
+          <ul className="flex list-none m-0 p-0 relative w-max skill-marquee-left-alt">
             <li className="flex items-center gap-4 shrink-0">
               {skillsMarqueeRow3.map((skill, i) => (
                 <div key={`row3-a-${i}`} className="shrink-0">

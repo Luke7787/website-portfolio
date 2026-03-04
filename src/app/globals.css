@@ -49,7 +49,7 @@ body {
     collapseLeft 0.9s ease-in-out 0.9s forwards;
 }
 
-/* Skills marquee: row 1 scrolls left, row 2 scrolls right */
+/* Skills marquee: three rows, each with a different speed so they don't sync */
 @keyframes skillScrollLeft {
   from {
     transform: translateX(0);
@@ -68,12 +68,19 @@ body {
   }
 }
 
+/* Row 1: left, faster */
 .skill-marquee-left {
-  animation: skillScrollLeft 90s linear infinite;
+  animation: skillScrollLeft 72s linear infinite;
 }
 
+/* Row 3: left, medium (different from row 1 so they drift) */
+.skill-marquee-left-alt {
+  animation: skillScrollLeft 85s linear infinite;
+}
+
+/* Row 2: right, slowest — contrasts with both left rows */
 .skill-marquee-right {
-  animation: skillScrollRight 90s linear infinite;
+  animation: skillScrollRight 100s linear infinite;
 }
 
 /* Skill card: gradient border (light top/bottom, dark sides, smooth blend) */
