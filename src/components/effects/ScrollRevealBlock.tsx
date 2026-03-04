@@ -15,19 +15,22 @@ interface ScrollRevealBlockProps {
   className?: string;
   /** Stagger delay in seconds (e.g. 0.1 for first card, 0.18 for second, etc.) */
   delay?: number;
-  /** Viewport amount (0-1) to trigger. Default 0.2 */
-  amount?: number;
+  /** "some" = any part visible (triggers early), "all" = fully visible, or 0–1 for fraction. Default "some". */
+  amount?: "some" | "all" | number;
+  /** Root margin: extend viewport so elements trigger earlier (e.g. "0px 0px 200px 0px" = 200px below). */
+  margin?: string;
 }
 
 export default function ScrollRevealBlock({
   children,
   className = "",
   delay = 0.15,
-  amount = 0.2,
+  amount = "some",
+  margin = "0px 0px 200px 0px",
 }: ScrollRevealBlockProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [hasAnimated, setHasAnimated] = useState(false);
-  const isInView = useInView(ref, { amount, once: true });
+  const isInView = useInView(ref, { amount, once: true, margin });
 
   useEffect(() => {
     if (isInView && !hasAnimated) setHasAnimated(true);
