@@ -6,7 +6,7 @@ import NavBar from "@/components/layout/NavBar";
 import AnimatedName from "@/components/effects/AnimatedName";
 import TextScramble from "@/components/effects/TextScramble";
 import ScrollRevealWords from "@/components/effects/ScrollRevealWords";
-import ScrollRevealBlock from "@/components/effects/ScrollRevealBlock";
+import ScrollRevealCard from "@/components/effects/ScrollRevealCard";
 import VantaBirdsBackground from "@/components/effects/VantaBirdsBackground";
 
 // Skill logos — jsDelivr CDN. Card layout: icon + label per skill (Framer-style).
@@ -552,173 +552,56 @@ export default function Page() {
 
           {/* Card grid — 1 col mobile, 2 cols md, 3 cols lg */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
-            {/* Card 1: Showroom Booking App */}
-            <ScrollRevealBlock delay={0.25} className="group opacity-100 transition-all duration-500 ease-out">
-              <a
-                href="https://showroom-appointment-scheduler.onrender.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block"
-              >
-                <div className="relative w-full aspect-9/8 overflow-hidden rounded-xl mb-5">
-                  <Image
-                    src="/images/P1P1.png"
-                    alt="Showroom Booking App"
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1128px) 50vw, 33vw"
-                    className="rounded-xl object-cover object-center transition-transform duration-300 group-hover:scale-[1.02]"
-                  />
-                </div>
-                <h3 className="cursor-default text-xl font-semibold text-white mb-2">
-                  Showroom Booking App
-                </h3>
-                <p className="cursor-default text-white/70 text-[15px] leading-relaxed">
-                  Full-stack appointment scheduling with Next.js, TypeScript, Prisma, and PostgreSQL. Book visits and manage availability with admin control.
-                </p>
-              </a>
-              <div className="flex gap-4 mt-4">
-                <a
-                  href="https://showroom-appointment-scheduler.onrender.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#0099ff] font-medium hover:underline"
-                >
-                  Live Site
-                </a>
-                <a
-                  href="https://github.com/Luke7787/showroom-appointment-scheduler"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#0099ff] font-medium hover:underline"
-                >
-                  GitHub
-                </a>
-              </div>
-            </ScrollRevealBlock>
+            <ScrollRevealCard
+              imageSrc="/images/P1P1.png"
+              imageAlt="Showroom Booking App"
+              title="Showroom Booking App"
+              description="Full-stack appointment scheduling with Next.js, TypeScript, Prisma, and PostgreSQL. Book visits and manage availability with admin control."
+              mainHref="https://showroom-appointment-scheduler.onrender.com/"
+              links={[
+                { label: "Live Site", href: "https://showroom-appointment-scheduler.onrender.com/" },
+                { label: "GitHub", href: "https://github.com/Luke7787/showroom-appointment-scheduler" },
+              ]}
+              cardClassName="group opacity-100 transition-all duration-500 ease-out"
+            />
 
-            {/* Card 2: Inventory Management Platform */}
-            <ScrollRevealBlock delay={0.52} className="group opacity-100 transition-all duration-500 ease-out">
-              <a
-                href="https://mango-island-08612f41e.5.azurestaticapps.net"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block"
-              >
-                <div className="relative w-full aspect-9/8 overflow-hidden rounded-xl mb-5">
-                  <Image
-                    src="/images/project2.png"
-                    alt="Inventory Management Platform"
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1128px) 50vw, 33vw"
-                    className="rounded-xl object-cover object-center transition-transform duration-300 group-hover:scale-[1.02]"
-                  />
-                </div>
-                <h3 className="cursor-default text-xl font-semibold text-white mb-2">
-                  Inventory Management Platform
-                </h3>
-                <p className="cursor-default text-white/70 text-[15px] leading-relaxed">
-                  Full-stack inventory app with React, TypeScript, Node.js, and MongoDB. View, add, update, and manage inventory through a responsive interface.
-                </p>
-              </a>
-              <div className="flex gap-4 mt-4">
-                <a
-                  href="https://mango-island-08612f41e.5.azurestaticapps.net"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#0099ff] font-medium hover:underline"
-                >
-                  Live Site
-                </a>
-                <a
-                  href="https://github.com/Luke7787/ImmaculateInventors"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#0099ff] font-medium hover:underline"
-                >
-                  GitHub
-                </a>
-              </div>
-            </ScrollRevealBlock>
+            <ScrollRevealCard
+              imageSrc="/images/project2.png"
+              imageAlt="Inventory Management Platform"
+              title="Inventory Management Platform"
+              description="Full-stack inventory app with React, TypeScript, Node.js, and MongoDB. View, add, update, and manage inventory through a responsive interface."
+              mainHref="https://mango-island-08612f41e.5.azurestaticapps.net"
+              links={[
+                { label: "Live Site", href: "https://mango-island-08612f41e.5.azurestaticapps.net" },
+                { label: "GitHub", href: "https://github.com/Luke7787/ImmaculateInventors" },
+              ]}
+              cardClassName="group opacity-100 transition-all duration-500 ease-out"
+            />
 
-            {/* Card 3: Blackjack */}
-            <ScrollRevealBlock delay={0.79} className="group opacity-100 transition-all duration-500 ease-out">
-              <a
-                href="https://luke7787.github.io/Blackjack/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block"
-              >
-                <div className="relative w-full aspect-9/8 overflow-hidden rounded-xl mb-5">
-                  <Image
-                    src="/images/project3.png"
-                    alt="Blackjack game"
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1128px) 50vw, 33vw"
-                    className="rounded-xl object-cover object-[center_5%] transition-transform duration-300 group-hover:scale-[1.02]"
-                  />
-                </div>
-                <h3 className="cursor-default text-xl font-semibold text-white mb-2">
-                  Blackjack
-                </h3>
-                <p className="cursor-default text-white/70 text-[15px] leading-relaxed">
-                  Blackjack built with JavaScript, HTML5, and CSS. Split, double down, Blackjack payouts, and responsive UI for play on any device.
-                </p>
-              </a>
-              <div className="flex gap-4 mt-4">
-                <a
-                  href="https://luke7787.github.io/Blackjack/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#0099ff] font-medium hover:underline"
-                >
-                  Live Site
-                </a>
-                <a
-                  href="https://github.com/Luke7787/Blackjack"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#0099ff] font-medium hover:underline"
-                >
-                  GitHub
-                </a>
-              </div>
-            </ScrollRevealBlock>
+            <ScrollRevealCard
+              imageSrc="/images/project3.png"
+              imageAlt="Blackjack game"
+              imageObjectPosition="center 5%"
+              title="Blackjack"
+              description="Blackjack built with JavaScript, HTML5, and CSS. Split, double down, Blackjack payouts, and responsive UI for play on any device."
+              mainHref="https://luke7787.github.io/Blackjack/"
+              links={[
+                { label: "Live Site", href: "https://luke7787.github.io/Blackjack/" },
+                { label: "GitHub", href: "https://github.com/Luke7787/Blackjack" },
+              ]}
+              cardClassName="group opacity-100 transition-all duration-500 ease-out"
+            />
 
-            {/* Card 4: Server and Client */}
-            <ScrollRevealBlock delay={1.06} className="group opacity-100 transition-all duration-500 ease-out md:col-span-2 lg:col-span-1">
-              <a
-                href="https://github.com/Luke7787/Server-and-Client"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block"
-              >
-                <div className="relative w-full aspect-9/8 overflow-hidden rounded-xl mb-5">
-                  <Image
-                    src="/images/project4.png"
-                    alt="Server and Client webserver"
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1128px) 50vw, 33vw"
-                    className="rounded-xl object-cover object-center transition-transform duration-300 group-hover:scale-[1.02]"
-                  />
-                </div>
-                <h3 className="cursor-default text-xl font-semibold text-white mb-2">
-                  Server and Client
-                </h3>
-                <p className="cursor-default text-white/70 text-[15px] leading-relaxed">
-                  Concurrent web server in C implementing a subset of HTTP. Handles multiple clients via forked processes for parallel request processing.
-                </p>
-              </a>
-              <div className="flex gap-4 mt-4">
-                <a
-                  href="https://github.com/Luke7787/Server-and-Client"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#0099ff] font-medium hover:underline"
-                >
-                  GitHub
-                </a>
-              </div>
-            </ScrollRevealBlock>
+            <ScrollRevealCard
+              imageSrc="/images/project4.png"
+              imageAlt="Server and Client webserver"
+              title="Server and Client"
+              description="Concurrent web server in C implementing a subset of HTTP. Handles multiple clients via forked processes for parallel request processing."
+              mainHref="https://github.com/Luke7787/Server-and-Client"
+              links={[{ label: "GitHub", href: "https://github.com/Luke7787/Server-and-Client" }]}
+              cardClassName="group opacity-100 transition-all duration-500 ease-out"
+              colSpanClassName="md:col-span-2 lg:col-span-1"
+            />
           </div>
         </div>
       </section>
@@ -738,187 +621,185 @@ export default function Page() {
         </div>
 
         {/* Row 1: scroll left — cards with icon + label; two equal-width copies for seamless loop */}
-        <div
-          className="flex flex-col gap-6 py-4 w-full"
-        >
-        <div
-          className="w-full flex items-center overflow-hidden"
-          style={{
-            maskImage:
-              "linear-gradient(to right, transparent 0%, black 28%, black 72%, transparent 100%)",
-            WebkitMaskImage:
-              "linear-gradient(to right, transparent 0%, black 28%, black 72%, transparent 100%)",
-          }}
-        >
-          <ul className="flex list-none m-0 p-0 relative w-max skill-marquee-left">
-            <li className="flex items-center gap-4 shrink-0">
-              {skillsMarqueeRow1.map((skill, i) => (
-                <div key={`row1-a-${i}`} className="shrink-0">
-                  <div className="skill-card-border shrink-0">
-                    <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
-                    <div className="shrink-0 w-9 h-9 flex items-center justify-center">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={skill.icon}
-                        alt=""
-                        className="w-5 h-5 object-contain brightness-0 invert"
-                        loading="lazy"
-                      />
+        <div className="flex flex-col gap-6 py-4 w-full">
+          <div
+            className="w-full flex items-center overflow-hidden"
+            style={{
+              maskImage:
+                "linear-gradient(to right, transparent 0%, black 28%, black 72%, transparent 100%)",
+              WebkitMaskImage:
+                "linear-gradient(to right, transparent 0%, black 28%, black 72%, transparent 100%)",
+            }}
+          >
+            <ul className="flex list-none m-0 p-0 relative w-max skill-marquee-left">
+              <li className="flex items-center gap-4 shrink-0">
+                {skillsMarqueeRow1.map((skill, i) => (
+                  <div key={`row1-a-${i}`} className="shrink-0">
+                    <div className="skill-card-border shrink-0">
+                      <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
+                        <div className="shrink-0 w-9 h-9 flex items-center justify-center">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={skill.icon}
+                            alt=""
+                            className="w-5 h-5 object-contain brightness-0 invert"
+                            loading="lazy"
+                          />
+                        </div>
+                        <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
+                          {skill.name}
+                        </h3>
+                      </div>
                     </div>
-                    <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
-                      {skill.name}
-                    </h3>
                   </div>
-                </div>
-              </div>
-              ))}
-              <span className="shrink-0 w-0 block" aria-hidden />
-            </li>
-            <li className="flex items-center gap-4 shrink-0" aria-hidden>
-              {skillsMarqueeRow1.map((skill, i) => (
-                <div key={`row1-b-${i}`} className="shrink-0">
-                  <div className="skill-card-border shrink-0">
-                    <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
-                    <div className="shrink-0 w-9 h-9 flex items-center justify-center">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={skill.icon}
-                        alt=""
-                        className="w-5 h-5 object-contain brightness-0 invert"
-                        loading="lazy"
-                      />
+                ))}
+                <span className="shrink-0 w-0 block" aria-hidden />
+              </li>
+              <li className="flex items-center gap-4 shrink-0" aria-hidden>
+                {skillsMarqueeRow1.map((skill, i) => (
+                  <div key={`row1-b-${i}`} className="shrink-0">
+                    <div className="skill-card-border shrink-0">
+                      <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
+                        <div className="shrink-0 w-9 h-9 flex items-center justify-center">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={skill.icon}
+                            alt=""
+                            className="w-5 h-5 object-contain brightness-0 invert"
+                            loading="lazy"
+                          />
+                        </div>
+                        <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
+                          {skill.name}
+                        </h3>
+                      </div>
                     </div>
-                    <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
-                      {skill.name}
-                    </h3>
                   </div>
-                </div>
-              </div>
-              ))}
-              <span className="shrink-0 w-0 block" aria-hidden />
-            </li>
-          </ul>
-        </div>
+                ))}
+                <span className="shrink-0 w-0 block" aria-hidden />
+              </li>
+            </ul>
+          </div>
 
-        {/* Row 2: scroll right — two equal-width copies for seamless loop */}
-        <div
-          className="w-full flex items-center overflow-hidden"
-          style={{
-            maskImage:
-              "linear-gradient(to right, transparent 0%, black 28%, black 72%, transparent 100%)",
-            WebkitMaskImage:
-              "linear-gradient(to right, transparent 0%, black 28%, black 72%, transparent 100%)",
-          }}
-        >
-          <ul className="flex list-none m-0 p-0 relative w-max skill-marquee-right">
-            <li className="flex items-center gap-4 shrink-0">
-              {skillsMarqueeRow2.map((skill, i) => (
-                <div key={`row2-a-${i}`} className="shrink-0">
-                  <div className="skill-card-border shrink-0">
-                    <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
-                    <div className="shrink-0 w-9 h-9 flex items-center justify-center">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={skill.icon}
-                        alt=""
-                        className="w-5 h-5 object-contain brightness-0 invert"
-                        loading="lazy"
-                      />
+          {/* Row 2: scroll right — two equal-width copies for seamless loop */}
+          <div
+            className="w-full flex items-center overflow-hidden"
+            style={{
+              maskImage:
+                "linear-gradient(to right, transparent 0%, black 28%, black 72%, transparent 100%)",
+              WebkitMaskImage:
+                "linear-gradient(to right, transparent 0%, black 28%, black 72%, transparent 100%)",
+            }}
+          >
+            <ul className="flex list-none m-0 p-0 relative w-max skill-marquee-right">
+              <li className="flex items-center gap-4 shrink-0">
+                {skillsMarqueeRow2.map((skill, i) => (
+                  <div key={`row2-a-${i}`} className="shrink-0">
+                    <div className="skill-card-border shrink-0">
+                      <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
+                        <div className="shrink-0 w-9 h-9 flex items-center justify-center">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={skill.icon}
+                            alt=""
+                            className="w-5 h-5 object-contain brightness-0 invert"
+                            loading="lazy"
+                          />
+                        </div>
+                        <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
+                          {skill.name}
+                        </h3>
+                      </div>
                     </div>
-                    <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
-                      {skill.name}
-                    </h3>
                   </div>
-                </div>
-              </div>
-              ))}
-              <span className="shrink-0 w-0 block" aria-hidden />
-            </li>
-            <li className="flex items-center gap-4 shrink-0" aria-hidden>
-              {skillsMarqueeRow2.map((skill, i) => (
-                <div key={`row2-b-${i}`} className="shrink-0">
-                  <div className="skill-card-border shrink-0">
-                    <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
-                    <div className="shrink-0 w-9 h-9 flex items-center justify-center">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={skill.icon}
-                        alt=""
-                        className="w-5 h-5 object-contain brightness-0 invert"
-                        loading="lazy"
-                      />
+                ))}
+                <span className="shrink-0 w-0 block" aria-hidden />
+              </li>
+              <li className="flex items-center gap-4 shrink-0" aria-hidden>
+                {skillsMarqueeRow2.map((skill, i) => (
+                  <div key={`row2-b-${i}`} className="shrink-0">
+                    <div className="skill-card-border shrink-0">
+                      <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
+                        <div className="shrink-0 w-9 h-9 flex items-center justify-center">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={skill.icon}
+                            alt=""
+                            className="w-5 h-5 object-contain brightness-0 invert"
+                            loading="lazy"
+                          />
+                        </div>
+                        <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
+                          {skill.name}
+                        </h3>
+                      </div>
                     </div>
-                    <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
-                      {skill.name}
-                    </h3>
                   </div>
-                </div>
-              </div>
-              ))}
-              <span className="shrink-0 w-0 block" aria-hidden />
-            </li>
-          </ul>
-        </div>
+                ))}
+                <span className="shrink-0 w-0 block" aria-hidden />
+              </li>
+            </ul>
+          </div>
 
-        {/* Row 3: scroll left — C#, HTML, CSS, React Native, Tailwind, Postman, Expo, Figma */}
-        <div
-          className="w-full flex items-center overflow-hidden"
-          style={{
-            maskImage:
-              "linear-gradient(to right, transparent 0%, black 28%, black 72%, transparent 100%)",
-            WebkitMaskImage:
-              "linear-gradient(to right, transparent 0%, black 28%, black 72%, transparent 100%)",
-          }}
-        >
-          <ul className="flex list-none m-0 p-0 relative w-max skill-marquee-left-alt">
-            <li className="flex items-center gap-4 shrink-0">
-              {skillsMarqueeRow3.map((skill, i) => (
-                <div key={`row3-a-${i}`} className="shrink-0">
-                  <div className="skill-card-border shrink-0">
-                    <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
-                    <div className="shrink-0 w-9 h-9 flex items-center justify-center">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={skill.icon}
-                        alt=""
-                        className="w-5 h-5 object-contain brightness-0 invert"
-                        loading="lazy"
-                      />
+          {/* Row 3: scroll left — C#, HTML, CSS, React Native, Tailwind, Postman, Expo, Figma */}
+          <div
+            className="w-full flex items-center overflow-hidden"
+            style={{
+              maskImage:
+                "linear-gradient(to right, transparent 0%, black 28%, black 72%, transparent 100%)",
+              WebkitMaskImage:
+                "linear-gradient(to right, transparent 0%, black 28%, black 72%, transparent 100%)",
+            }}
+          >
+            <ul className="flex list-none m-0 p-0 relative w-max skill-marquee-left-alt">
+              <li className="flex items-center gap-4 shrink-0">
+                {skillsMarqueeRow3.map((skill, i) => (
+                  <div key={`row3-a-${i}`} className="shrink-0">
+                    <div className="skill-card-border shrink-0">
+                      <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
+                        <div className="shrink-0 w-9 h-9 flex items-center justify-center">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={skill.icon}
+                            alt=""
+                            className="w-5 h-5 object-contain brightness-0 invert"
+                            loading="lazy"
+                          />
+                        </div>
+                        <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
+                          {skill.name}
+                        </h3>
+                      </div>
                     </div>
-                    <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
-                      {skill.name}
-                    </h3>
                   </div>
-                </div>
-              </div>
-              ))}
-              <span className="shrink-0 w-0 block" aria-hidden />
-            </li>
-            <li className="flex items-center gap-4 shrink-0" aria-hidden>
-              {skillsMarqueeRow3.map((skill, i) => (
-                <div key={`row3-b-${i}`} className="shrink-0">
-                  <div className="skill-card-border shrink-0">
-                    <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
-                    <div className="shrink-0 w-9 h-9 flex items-center justify-center">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={skill.icon}
-                        alt=""
-                        className="w-5 h-5 object-contain brightness-0 invert"
-                        loading="lazy"
-                      />
+                ))}
+                <span className="shrink-0 w-0 block" aria-hidden />
+              </li>
+              <li className="flex items-center gap-4 shrink-0" aria-hidden>
+                {skillsMarqueeRow3.map((skill, i) => (
+                  <div key={`row3-b-${i}`} className="shrink-0">
+                    <div className="skill-card-border shrink-0">
+                      <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
+                        <div className="shrink-0 w-9 h-9 flex items-center justify-center">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={skill.icon}
+                            alt=""
+                            className="w-5 h-5 object-contain brightness-0 invert"
+                            loading="lazy"
+                          />
+                        </div>
+                        <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
+                          {skill.name}
+                        </h3>
+                      </div>
                     </div>
-                    <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
-                      {skill.name}
-                    </h3>
                   </div>
-                </div>
-              </div>
-              ))}
-              <span className="shrink-0 w-0 block" aria-hidden />
-            </li>
-          </ul>
-        </div>
+                ))}
+                <span className="shrink-0 w-0 block" aria-hidden />
+              </li>
+            </ul>
+          </div>
         </div>
       </section>
 

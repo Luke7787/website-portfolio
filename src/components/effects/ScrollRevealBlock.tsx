@@ -10,6 +10,14 @@ const spring = {
   mass: 1.6,
 };
 
+/** Same as ScrollRevealWords word animation */
+const wordsSpring = {
+  type: "spring" as const,
+  stiffness: 65,
+  damping: 24,
+  mass: 0.9,
+};
+
 interface ScrollRevealBlockProps {
   children: React.ReactNode;
   className?: string;
@@ -19,6 +27,8 @@ interface ScrollRevealBlockProps {
   amount?: "some" | "all" | number;
   /** Root margin: extend viewport so elements trigger earlier (e.g. "0px 0px 200px 0px" = 200px below). */
   margin?: string;
+  /** Use same animation as "PORTFOLIO Featured Projects" (ScrollRevealWords): y 24, wordsSpring */
+  animationStyle?: "default" | "words";
 }
 
 export default function ScrollRevealBlock({
@@ -27,10 +37,15 @@ export default function ScrollRevealBlock({
   delay = 0.15,
   amount = "some",
   margin = "0px 0px 200px 0px",
+  animationStyle = "default",
 }: ScrollRevealBlockProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [hasAnimated, setHasAnimated] = useState(false);
   const isInView = useInView(ref, { amount, once: true, margin });
+
+  const isWords = animationStyle === "words";
+  const initialY = isWords ? 24 : 28;
+  const transitionSpring = isWords ? wordsSpring : spring;
 
   useEffect(() => {
     if (isInView && !hasAnimated) setHasAnimated(true);
@@ -41,18 +56,18 @@ export default function ScrollRevealBlock({
       ref={ref}
       initial={{
         opacity: 0,
-        y: 28,
+        y: initialY,
         scale: 1,
         filter: "blur(10px)",
       }}
       animate={
         hasAnimated
           ? { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }
-          : { opacity: 0, y: 28, scale: 1, filter: "blur(10px)" }
+          : { opacity: 0, y: initialY, scale: 1, filter: "blur(10px)" }
       }
       transition={{
         delay,
-        ...spring,
+        ...transitionSpring,
       }}
       className={className}
     >
