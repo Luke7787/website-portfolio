@@ -36,14 +36,24 @@ const wordVariants = {
   },
 };
 
-interface LineConfig {
+interface TextLineConfig {
   as: "p" | "h1" | "h2" | "h3" | "span" | "a";
   text: string;
   className?: string;
   href?: string;
   target?: string;
   rel?: string;
+  /** Additional props for link elements (e.g. onMouseEnter, onClick) */
+  linkProps?: React.AnchorHTMLAttributes<HTMLAnchorElement>;
 }
+
+interface CustomLineConfig {
+  as: "custom";
+  content: React.ReactNode;
+  className?: string;
+}
+
+type LineConfig = TextLineConfig | CustomLineConfig;
 
 interface ScrollRevealWordsProps {
   lines: LineConfig[];
@@ -68,11 +78,27 @@ export default function ScrollRevealWords({
       variants={containerVariants}
     >
       {lines.map((line, i) => {
+        if (line.as === "custom") {
+          return (
+            <motion.div
+              key={i}
+              variants={wordVariants}
+              className={line.className}
+            >
+              {line.content}
+            </motion.div>
+          );
+        }
         const words = line.text.split(/\s+/);
         const Tag = line.as;
         const linkProps =
           Tag === "a" && line.href
-            ? { href: line.href, target: line.target, rel: line.rel }
+            ? {
+                href: line.href,
+                target: line.target,
+                rel: line.rel,
+                ...line.linkProps,
+              }
             : {};
         if (Tag === "a") {
           return (

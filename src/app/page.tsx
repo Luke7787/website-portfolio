@@ -839,60 +839,45 @@ export default function Page() {
                 className:
                   "cursor-default text-[1.5rem] font-bold tracking-[0.03em] text-[rgb(140,140,140)]",
               },
+              {
+                as: "a",
+                text: "lukewzhuang@gmail.com",
+                href: "mailto:lukewzhuang@gmail.com",
+                className:
+                  "block mt-6 text-white text-[1.55rem] font-bold transition-colors duration-300 hover:text-[#1E90FF]",
+                linkProps: {
+                  onMouseEnter: () => setContactBirdsVisible(true),
+                  onMouseLeave: () => setContactBirdsVisible(false),
+                  onClick: () => setContactBirdsVisible(true),
+                  onTouchStart: () => setContactBirdsVisible(true),
+                },
+              },
+              {
+                as: "custom",
+                content: (
+                  <div className="mt-8 flex justify-center gap-6">
+                    {[
+                      { href: "https://github.com/Luke7787", icon: "fab fa-github" },
+                      { href: "https://www.linkedin.com/in/zhuangluke/", icon: "fab fa-linkedin" },
+                      { href: "https://www.facebook.com/luke.zhuang/", icon: "fab fa-facebook" },
+                    ].map((item) => (
+                      <a
+                        key={item.href}
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/15 transition-all duration-300 hover:scale-110"
+                      >
+                        <i
+                          className={`${item.icon} text-[28px] text-[#1B76D2] transition-colors duration-300 group-hover:text-white`}
+                        />
+                      </a>
+                    ))}
+                  </div>
+                ),
+              },
             ]}
           />
-
-          {/* Contact Info — each element reveals in sequence */}
-          <div className="mt-6 space-y-4">
-            <ScrollRevealBlock animationStyle="words" delay={0.25}>
-              <a
-                href="mailto:lukewzhuang@gmail.com"
-                className="
-                  block
-                  text-white
-                  text-[1.55rem]
-                  font-bold
-                  transition-colors
-                  duration-300
-                  hover:text-[#1E90FF]
-                "
-                onMouseEnter={() => setContactBirdsVisible(true)}
-                onMouseLeave={() => setContactBirdsVisible(false)}
-                onClick={() => setContactBirdsVisible(true)}
-                onTouchStart={() => setContactBirdsVisible(true)}
-              >
-                lukewzhuang@gmail.com
-              </a>
-            </ScrollRevealBlock>
-
-            <ScrollRevealBlock animationStyle="words" delay={0.4}>
-              <div className="mt-8 flex justify-center gap-6">
-                {[
-                  { href: "https://github.com/Luke7787", icon: "fab fa-github" },
-                  {
-                    href: "https://www.linkedin.com/in/zhuangluke/",
-                    icon: "fab fa-linkedin",
-                  },
-                  {
-                    href: "https://www.facebook.com/luke.zhuang/",
-                    icon: "fab fa-facebook",
-                  },
-                ].map((item) => (
-                  <a
-                    key={item.href}
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/15 transition-all duration-300 hover:scale-110"
-                  >
-                    <i
-                      className={`${item.icon} text-[28px] text-[#1B76D2] transition-colors duration-300 group-hover:text-white`}
-                    />
-                  </a>
-                ))}
-              </div>
-            </ScrollRevealBlock>
-          </div>
         </div>
       </section>
 
