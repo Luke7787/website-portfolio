@@ -5,6 +5,8 @@ import Image from "next/image";
 import NavBar from "@/components/layout/NavBar";
 import AnimatedName from "@/components/effects/AnimatedName";
 import TextScramble from "@/components/effects/TextScramble";
+import ScrollRevealWords from "@/components/effects/ScrollRevealWords";
+import ScrollRevealBlock from "@/components/effects/ScrollRevealBlock";
 import VantaBirdsBackground from "@/components/effects/VantaBirdsBackground";
 
 // Skill logos — jsDelivr CDN. Card layout: icon + label per skill (Framer-style).
@@ -529,19 +531,29 @@ export default function Page() {
         className="scroll-mt-2 md:scroll-mt-16 min-h-screen pt-16 flex items-center justify-center"
       >
         <div className="w-full max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <p className="mb-2 cursor-default text-[20px] tracking-[0.8px] text-[rgb(140,140,140)]">
-              PORTFOLIO
-            </p>
-            <h2 className="cursor-default text-3xl md:text-4xl font-bold tracking-[0.12em] text-white/90">
-              Featured Projects
-            </h2>
-          </div>
+          <ScrollRevealWords
+            className="text-center mb-16"
+            threshold={0.45}
+            lines={[
+              {
+                as: "p",
+                text: "PORTFOLIO",
+                className:
+                  "mb-2 cursor-default text-[20px] tracking-[0.8px] text-[rgb(140,140,140)]",
+              },
+              {
+                as: "h2",
+                text: "Featured Projects",
+                className:
+                  "cursor-default text-3xl md:text-4xl font-bold tracking-[0.12em] text-white/90",
+              },
+            ]}
+          />
 
           {/* Card grid — 1 col mobile, 2 cols md, 3 cols lg */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
             {/* Card 1: Showroom Booking App */}
-            <div className="group opacity-100 transition-all duration-500 ease-out">
+            <ScrollRevealBlock delay={0.25} className="group opacity-100 transition-all duration-500 ease-out">
               <a
                 href="https://showroom-appointment-scheduler.onrender.com/"
                 target="_blank"
@@ -582,10 +594,10 @@ export default function Page() {
                   GitHub
                 </a>
               </div>
-            </div>
+            </ScrollRevealBlock>
 
             {/* Card 2: Inventory Management Platform */}
-            <div className="group opacity-100 transition-all duration-500 ease-out">
+            <ScrollRevealBlock delay={0.52} className="group opacity-100 transition-all duration-500 ease-out">
               <a
                 href="https://mango-island-08612f41e.5.azurestaticapps.net"
                 target="_blank"
@@ -626,10 +638,10 @@ export default function Page() {
                   GitHub
                 </a>
               </div>
-            </div>
+            </ScrollRevealBlock>
 
             {/* Card 3: Blackjack */}
-            <div className="group opacity-100 transition-all duration-500 ease-out">
+            <ScrollRevealBlock delay={0.79} className="group opacity-100 transition-all duration-500 ease-out">
               <a
                 href="https://luke7787.github.io/Blackjack/"
                 target="_blank"
@@ -670,10 +682,10 @@ export default function Page() {
                   GitHub
                 </a>
               </div>
-            </div>
+            </ScrollRevealBlock>
 
             {/* Card 4: Server-and-Client */}
-            <div className="group opacity-100 transition-all duration-500 ease-out md:col-span-2 lg:col-span-1">
+            <ScrollRevealBlock delay={1.06} className="group opacity-100 transition-all duration-500 ease-out md:col-span-2 lg:col-span-1">
               <a
                 href="https://github.com/Luke7787/Server-and-Client"
                 target="_blank"
@@ -706,7 +718,7 @@ export default function Page() {
                   GitHub
                 </a>
               </div>
-            </div>
+            </ScrollRevealBlock>
           </div>
         </div>
       </section>
