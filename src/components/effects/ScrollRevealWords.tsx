@@ -37,9 +37,12 @@ const wordVariants = {
 };
 
 interface LineConfig {
-  as: "p" | "h1" | "h2" | "h3" | "span";
+  as: "p" | "h1" | "h2" | "h3" | "span" | "a";
   text: string;
   className?: string;
+  href?: string;
+  target?: string;
+  rel?: string;
 }
 
 interface ScrollRevealWordsProps {
@@ -67,8 +70,25 @@ export default function ScrollRevealWords({
       {lines.map((line, i) => {
         const words = line.text.split(/\s+/);
         const Tag = line.as;
+        const linkProps =
+          Tag === "a" && line.href
+            ? { href: line.href, target: line.target, rel: line.rel }
+            : {};
+        if (Tag === "a") {
+          return (
+            <motion.span
+              key={i}
+              variants={wordVariants}
+              style={{ display: "inline-block" }}
+            >
+              <Tag className={line.className} {...linkProps}>
+                {line.text}
+              </Tag>
+            </motion.span>
+          );
+        }
         return (
-          <Tag key={i} className={line.className}>
+          <Tag key={i} className={line.className} {...linkProps}>
             {words.map((word, j) => (
               <motion.span
                 key={j}

@@ -914,38 +914,21 @@ export default function Page() {
             lines={[
               {
                 as: "span",
-                text: `© ${new Date().getFullYear()} All rights reserved | This template is made by`,
+                text: `© ${new Date().getFullYear()} All rights reserved | This template is made by `,
                 className:
                   "cursor-default text-[0.9rem] sm:text-[1rem] font-medium text-white/70 font-['Open_Sans',sans-serif]",
               },
+              {
+                as: "a",
+                text: "Luke Zhuang",
+                href: "https://github.com/Luke7787/website-portfolio",
+                target: "_blank",
+                rel: "noopener noreferrer",
+                className:
+                  "inline-block cursor-pointer px-2 py-1 ml-1 text-white text-[0.9rem] sm:text-[1rem] font-extrabold bg-[#1b76d2] rounded transition-transform duration-300 hover:scale-105",
+              },
             ]}
           />
-          {"\u00A0"}
-          <ScrollRevealBlock animationStyle="words" delay={0.25} className="inline-block">
-            <a
-              href="https://github.com/Luke7787/website-portfolio"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="
-                inline-block
-                cursor-pointer
-                px-2
-                py-1
-                ml-1
-                text-white
-                text-[0.9rem]
-                sm:text-[1rem]
-                font-extrabold
-                bg-[#1b76d2]
-                rounded
-                transition-transform
-                duration-300
-                hover:scale-105
-              "
-            >
-              Luke Zhuang
-            </a>
-          </ScrollRevealBlock>
         </div>
       </footer>
     </main>
