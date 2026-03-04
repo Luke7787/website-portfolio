@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import NavBar from "@/components/layout/NavBar";
 import AnimatedName from "@/components/effects/AnimatedName";
 import TextScramble from "@/components/effects/TextScramble";
@@ -855,25 +856,57 @@ export default function Page() {
               {
                 as: "custom",
                 content: (
-                  <div className="mt-8 flex justify-center gap-6">
+                  <motion.div
+                    className="mt-8 flex justify-center gap-6"
+                    variants={{
+                      hidden: {},
+                      visible: {
+                        transition: { staggerChildren: 0.1, delayChildren: 0 },
+                      },
+                    }}
+                  >
                     {[
                       { href: "https://github.com/Luke7787", icon: "fab fa-github" },
                       { href: "https://www.linkedin.com/in/zhuangluke/", icon: "fab fa-linkedin" },
                       { href: "https://www.facebook.com/luke.zhuang/", icon: "fab fa-facebook" },
                     ].map((item) => (
-                      <a
+                      <motion.span
                         key={item.href}
-                        href={item.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/15 transition-all duration-300 hover:scale-110"
+                        variants={{
+                          hidden: {
+                            opacity: 0,
+                            y: 24,
+                            scale: 1,
+                            filter: "blur(10px)",
+                          },
+                          visible: {
+                            opacity: 1,
+                            y: 0,
+                            scale: 1,
+                            filter: "blur(0px)",
+                            transition: {
+                              type: "spring",
+                              stiffness: 65,
+                              damping: 24,
+                              mass: 0.9,
+                            },
+                          },
+                        }}
+                        style={{ display: "inline-block" }}
                       >
-                        <i
-                          className={`${item.icon} text-[28px] text-[#1B76D2] transition-colors duration-300 group-hover:text-white`}
-                        />
-                      </a>
+                        <a
+                          href={item.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/15 transition-all duration-300 hover:scale-110"
+                        >
+                          <i
+                            className={`${item.icon} text-[28px] text-[#1B76D2] transition-colors duration-300 group-hover:text-white`}
+                          />
+                        </a>
+                      </motion.span>
                     ))}
-                  </div>
+                  </motion.div>
                 ),
               },
             ]}
