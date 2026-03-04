@@ -714,7 +714,7 @@ export default function Page() {
       {/* SKILLS — Framer-style cards (icon + text), two rows scrolling with fade */}
       <section
         id="skills"
-        className="-scroll-mt-20 md:scroll-mt-0 pt-16 pb-8 flex flex-col items-center justify-center bg-[#141414] text-white rounded-[90px] overflow-hidden"
+        className="-scroll-mt-20 md:scroll-mt-0 pt-28 pb-24 flex flex-col items-center justify-center bg-[#141414] text-white rounded-[90px] overflow-hidden"
       >
         <div className="w-full text-center mb-12">
           <p className="mb-2 cursor-default text-[20px] tracking-[0.8px] text-[rgb(140,140,140)]">
@@ -727,7 +727,7 @@ export default function Page() {
 
         {/* Row 1: scroll left — cards with icon + label; two equal-width copies for seamless loop */}
         <div
-          className="flex flex-col gap-4 py-4 w-full"
+          className="flex flex-col gap-6 py-4 w-full"
         >
         <div
           className="w-full flex items-center overflow-hidden"
