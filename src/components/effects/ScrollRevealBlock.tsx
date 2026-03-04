@@ -41,7 +41,11 @@ export default function ScrollRevealBlock({
 }: ScrollRevealBlockProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [hasAnimated, setHasAnimated] = useState(false);
-  const isInView = useInView(ref, { amount, once: true, margin });
+  const isInView = useInView(ref, {
+    amount,
+    once: true,
+    margin: margin as Parameters<typeof useInView>[1] extends { margin?: infer M } ? M : never,
+  });
 
   const isWords = animationStyle === "words";
   const initialY = isWords ? 24 : 28;
