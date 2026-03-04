@@ -76,7 +76,7 @@ export default function ScrollRevealWords({
                 style={{ display: "inline-block" }}
               >
                 {word}
-                {j < words.length - 1 ? " " : ""}
+                {j < words.length - 1 ? "\u00A0" : ""}
               </motion.span>
             ))}
           </Tag>

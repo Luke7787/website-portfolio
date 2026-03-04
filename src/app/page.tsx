@@ -6,6 +6,7 @@ import NavBar from "@/components/layout/NavBar";
 import AnimatedName from "@/components/effects/AnimatedName";
 import TextScramble from "@/components/effects/TextScramble";
 import ScrollRevealWords from "@/components/effects/ScrollRevealWords";
+import ScrollRevealBlock from "@/components/effects/ScrollRevealBlock";
 import ScrollRevealCard from "@/components/effects/ScrollRevealCard";
 import VantaBirdsBackground from "@/components/effects/VantaBirdsBackground";
 
@@ -611,17 +612,30 @@ export default function Page() {
         id="skills"
         className="-scroll-mt-20 md:scroll-mt-0 pt-28 pb-24 flex flex-col items-center justify-center bg-[#141414] text-white rounded-[90px] overflow-hidden"
       >
-        <div className="w-full text-center mb-12">
-          <p className="mb-2 cursor-default text-[20px] tracking-[0.8px] text-[rgb(140,140,140)]">
-            EXPERTISE
-          </p>
-          <h2 className="cursor-default text-3xl md:text-4xl font-bold tracking-[0.12em] text-white/90">
-            Technical Skills
-          </h2>
+        <div className="w-full mb-12">
+          <ScrollRevealWords
+            className="text-center"
+            threshold={0.45}
+            lines={[
+              {
+                as: "p",
+                text: "EXPERTISE",
+                className:
+                  "mb-2 cursor-default text-[20px] tracking-[0.8px] text-[rgb(140,140,140)]",
+              },
+              {
+                as: "h2",
+                text: "Technical Skills",
+                className:
+                  "cursor-default text-3xl md:text-4xl font-bold tracking-[0.12em] text-white/90",
+              },
+            ]}
+          />
         </div>
 
         {/* Row 1: scroll left — cards with icon + label; two equal-width copies for seamless loop */}
         <div className="flex flex-col gap-6 py-4 w-full">
+          <ScrollRevealBlock animationStyle="words" delay={0.2}>
           <div
             className="w-full flex items-center overflow-hidden"
             style={{
@@ -680,8 +694,10 @@ export default function Page() {
               </li>
             </ul>
           </div>
+          </ScrollRevealBlock>
 
           {/* Row 2: scroll right — two equal-width copies for seamless loop */}
+          <ScrollRevealBlock animationStyle="words" delay={0.45}>
           <div
             className="w-full flex items-center overflow-hidden"
             style={{
@@ -740,8 +756,10 @@ export default function Page() {
               </li>
             </ul>
           </div>
+          </ScrollRevealBlock>
 
           {/* Row 3: scroll left — C#, HTML, CSS, React Native, Tailwind, Postman, Expo, Figma */}
+          <ScrollRevealBlock animationStyle="words" delay={0.7}>
           <div
             className="w-full flex items-center overflow-hidden"
             style={{
@@ -800,6 +818,7 @@ export default function Page() {
               </li>
             </ul>
           </div>
+          </ScrollRevealBlock>
         </div>
       </section>
 
@@ -810,66 +829,76 @@ export default function Page() {
       >
         <VantaBirdsBackground visible={contactBirdsVisible} />
         <div className="relative z-10 text-center">
-          {/* Headline */}
-          <p className="cursor-default text-[1.5rem] font-bold tracking-[0.03em] text-[rgb(140,140,140)]">
-            {"Let's Connect"}
-          </p>
+          <ScrollRevealWords
+            className="text-center"
+            threshold={0.45}
+            lines={[
+              {
+                as: "p",
+                text: "Let's Connect",
+                className:
+                  "cursor-default text-[1.5rem] font-bold tracking-[0.03em] text-[rgb(140,140,140)]",
+              },
+            ]}
+          />
 
-          {/* Contact Info */}
+          {/* Contact Info — each element reveals in sequence */}
           <div className="mt-6 space-y-4">
-            {/* Email */}
-            <a
-              href="mailto:lukewzhuang@gmail.com"
-              className="
-                block
-                text-white
-                text-[1.55rem]
-                font-bold
-                transition-colors
-                duration-300
-                hover:text-[#1E90FF]
-              "
-              onMouseEnter={() => setContactBirdsVisible(true)}
-              onMouseLeave={() => setContactBirdsVisible(false)}
-              onClick={() => setContactBirdsVisible(true)}
-              onTouchStart={() => setContactBirdsVisible(true)}
-            >
-              lukewzhuang@gmail.com
-            </a>
+            <ScrollRevealBlock animationStyle="words" delay={0.25}>
+              <a
+                href="mailto:lukewzhuang@gmail.com"
+                className="
+                  block
+                  text-white
+                  text-[1.55rem]
+                  font-bold
+                  transition-colors
+                  duration-300
+                  hover:text-[#1E90FF]
+                "
+                onMouseEnter={() => setContactBirdsVisible(true)}
+                onMouseLeave={() => setContactBirdsVisible(false)}
+                onClick={() => setContactBirdsVisible(true)}
+                onTouchStart={() => setContactBirdsVisible(true)}
+              >
+                lukewzhuang@gmail.com
+              </a>
+            </ScrollRevealBlock>
 
-            {/* Social Icons */}
-            <div className="mt-8 flex justify-center gap-6">
-              {[
-                { href: "https://github.com/Luke7787", icon: "fab fa-github" },
-                {
-                  href: "https://www.linkedin.com/in/zhuangluke/",
-                  icon: "fab fa-linkedin",
-                },
-                {
-                  href: "https://www.facebook.com/luke.zhuang/",
-                  icon: "fab fa-facebook",
-                },
-              ].map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/15 transition-all duration-300 hover:scale-110"
-                >
-                  <i
-                    className={`${item.icon} text-[28px] text-[#1B76D2] transition-colors duration-300 group-hover:text-white`}
-                  />
-                </a>
-              ))}
-            </div>
+            <ScrollRevealBlock animationStyle="words" delay={0.4}>
+              <div className="mt-8 flex justify-center gap-6">
+                {[
+                  { href: "https://github.com/Luke7787", icon: "fab fa-github" },
+                  {
+                    href: "https://www.linkedin.com/in/zhuangluke/",
+                    icon: "fab fa-linkedin",
+                  },
+                  {
+                    href: "https://www.facebook.com/luke.zhuang/",
+                    icon: "fab fa-facebook",
+                  },
+                ].map((item) => (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/15 transition-all duration-300 hover:scale-110"
+                  >
+                    <i
+                      className={`${item.icon} text-[28px] text-[#1B76D2] transition-colors duration-300 group-hover:text-white`}
+                    />
+                  </a>
+                ))}
+              </div>
+            </ScrollRevealBlock>
           </div>
         </div>
       </section>
 
       {/* FOOTER */}
       <footer className="py-6 text-center">
-        <p
+        <div
           className="
             cursor-default
             text-[0.9rem]
@@ -879,32 +908,45 @@ export default function Page() {
             font-['Open_Sans',sans-serif]
           "
         >
-          © {new Date().getFullYear()} All rights reserved | This template is
-          made by{" "}
-          <a
-            href="https://github.com/Luke7787/website-portfolio"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="
-              inline-block
-              cursor-pointer
-              px-2
-              py-1
-              ml-1
-              text-white
-              text-[0.9rem]
-              sm:text-[1rem]
-              font-extrabold
-              bg-[#1b76d2]
-              rounded
-              transition-transform
-              duration-300
-              hover:scale-105
-            "
-          >
-            Luke Zhuang
-          </a>
-        </p>
+          <ScrollRevealWords
+            className="inline"
+            threshold={0.2}
+            lines={[
+              {
+                as: "span",
+                text: `© ${new Date().getFullYear()} All rights reserved | This template is made by`,
+                className:
+                  "cursor-default text-[0.9rem] sm:text-[1rem] font-medium text-white/70 font-['Open_Sans',sans-serif]",
+              },
+            ]}
+          />
+          {"\u00A0"}
+          <ScrollRevealBlock animationStyle="words" delay={0.25} className="inline-block">
+            <a
+              href="https://github.com/Luke7787/website-portfolio"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="
+                inline-block
+                cursor-pointer
+                px-2
+                py-1
+                ml-1
+                text-white
+                text-[0.9rem]
+                sm:text-[1rem]
+                font-extrabold
+                bg-[#1b76d2]
+                rounded
+                transition-transform
+                duration-300
+                hover:scale-105
+              "
+            >
+              Luke Zhuang
+            </a>
+          </ScrollRevealBlock>
+        </div>
       </footer>
     </main>
   );
