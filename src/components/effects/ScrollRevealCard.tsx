@@ -48,6 +48,22 @@ const textBlockVariants = {
   },
 };
 
+/** Same as itemVariants but with a delay so links appear after description word reveal. */
+function linksVariants(descriptionWordCount: number) {
+  const descriptionRevealDuration = descriptionWordCount * 0.06;
+  const delay = 0.42 + descriptionRevealDuration + 0.35;
+  return {
+    hidden: itemVariants.hidden,
+    visible: {
+      ...itemVariants.visible,
+      transition: {
+        ...defaultSpring,
+        delay,
+      },
+    },
+  };
+}
+
 export interface ProjectLink {
   label: string;
   href: string;
@@ -111,6 +127,7 @@ export default function ScrollRevealCard({
 }: ScrollRevealCardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const descriptionWordCount = description.split(/\s+/).length;
 
   return (
     <motion.div
@@ -151,7 +168,7 @@ export default function ScrollRevealCard({
           </motion.div>
         </div>
       </a>
-      <motion.div variants={itemVariants} className="flex gap-4 mt-4">
+      <motion.div variants={linksVariants(descriptionWordCount)} className="flex gap-4 mt-4">
         {links.map((link) => (
           <a
             key={link.href}
