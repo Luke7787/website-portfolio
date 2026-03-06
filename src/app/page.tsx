@@ -315,161 +315,62 @@ export default function Page() {
                   className:
                     "block mt-4 text-[1.125rem] font-medium text-[#1E90FF] hover:underline transition-colors duration-200 -translate-y-25 md:translate-x-19 md:-translate-y-10 cursor-pointer",
                 },
+                {
+                  as: "custom",
+                  className:
+                    "mt-6 flex justify-center md:justify-start gap-4 md:translate-x-19 md:-translate-y-7 -translate-y-28",
+                  content: (
+                    <>
+                      <a
+                        href="https://github.com/Luke7787"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/15 transition-all duration-300 hover:scale-110"
+                      >
+                        <i className="fab fa-github text-[30px] text-[#1B76D2] transition-colors duration-300 group-hover:text-white" />
+                      </a>
+                      <a
+                        href="https://www.linkedin.com/in/zhuangluke/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/15 transition-all duration-300 hover:scale-110"
+                      >
+                        <i className="fab fa-linkedin text-[30px] text-[#1B76D2] transition-colors duration-300 group-hover:text-white" />
+                      </a>
+                      <a
+                        href="https://www.facebook.com/luke.zhuang/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/15 transition-all duration-300 hover:scale-110"
+                      >
+                        <i className="fab fa-facebook text-[30px] text-[#1B76D2] transition-colors duration-300 group-hover:text-white" />
+                      </a>
+                    </>
+                  ),
+                },
+                {
+                  as: "custom",
+                  className:
+                    "mt-4 max-w-md space-y-2 text-[1rem] font-medium leading-[1.6] tracking-[0.03em] md:translate-x-19 md:-translate-y-2.25 -translate-y-22",
+                  content: (
+                    <>
+                      <p>
+                        <span className="cursor-default text-[#8c8c8c]">Email:</span>{" "}
+                        <span className="border-b border-transparent text-[#1E90FF] hover:border-[#1E90FF] transition-colors duration-200 cursor-pointer">
+                          lukewzhuang@gmail.com
+                        </span>
+                      </p>
+                      <p>
+                        <span className="cursor-default text-[#8c8c8c]">Phone:</span>{" "}
+                        <span className="border-b border-transparent text-[#1E90FF] hover:border-[#1E90FF] transition-colors duration-200 cursor-pointer">
+                          (415) 837-8686
+                        </span>
+                      </p>
+                    </>
+                  ),
+                },
               ]}
             />
-            {/* Social Icons */}
-            <div
-              className="
-                mt-6
-                flex
-                justify-center
-                md:justify-start
-                gap-4
-                md:translate-x-19
-                md:-translate-y-7
-                -translate-y-28
-              "
-            >
-              {/* GitHub */}
-              <a
-                href="https://github.com/Luke7787"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="
-                  group
-                  inline-flex
-                  h-12
-                  w-12
-                  items-center
-                  justify-center
-                  rounded-full
-                  bg-white/15
-                  transition-all
-                  duration-300
-                  hover:scale-110
-                "
-              >
-                <i
-                  className="
-                    fab fa-github
-                    text-[30px]
-                    text-[#1B76D2]
-                    transition-colors
-                    duration-300
-                    group-hover:text-white
-                  "
-                />
-              </a>
-
-              {/* LinkedIn */}
-              <a
-                href="https://www.linkedin.com/in/zhuangluke/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="
-                  group
-                  inline-flex
-                  h-12
-                  w-12
-                  items-center
-                  justify-center
-                  rounded-full
-                  bg-white/15
-                  transition-all
-                  duration-300
-                  hover:scale-110
-                "
-              >
-                <i
-                  className="
-                    fab fa-linkedin
-                    text-[30px]
-                    text-[#1B76D2]
-                    transition-colors
-                    duration-300
-                    group-hover:text-white
-                  "
-                />
-              </a>
-
-              {/* Facebook */}
-              <a
-                href="https://www.facebook.com/luke.zhuang/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="
-                  group
-                  inline-flex
-                  h-12
-                  w-12
-                  items-center
-                  justify-center
-                  rounded-full
-                  bg-white/15
-                  transition-all
-                  duration-300
-                  hover:scale-110
-                "
-              >
-                <i
-                  className="
-                    fab fa-facebook
-                    text-[30px]
-                    text-[#1B76D2]
-                    transition-colors
-                    duration-300
-                    group-hover:text-white
-                  "
-                />
-              </a>
-            </div>
-
-            <div
-              className="
-                mt-4
-                max-w-md
-                space-y-2
-                text-[1rem]
-                font-medium
-                leading-[1.6]
-                tracking-[0.03em]
-                md:translate-x-19
-                md:-translate-y-2.25
-                -translate-y-22
-              "
-            >
-              <p>
-                <span className="cursor-default text-[#8c8c8c]">Email:</span>{" "}
-                <span
-                  className="
-                  border-b border-transparent
-                  text-[#1E90FF]
-                  hover:border-[#1E90FF]
-                  transition-colors
-                  duration-200
-                  cursor-pointer
-                "
-                >
-                  lukewzhuang@gmail.com
-                </span>
-              </p>
-
-              <p>
-                <span className="cursor-default text-[#8c8c8c]">Phone:</span>{" "}
-                <span
-                  className="
-                    border-b border-transparent
-                    text-[#1E90FF]
-                    hover:border-[#1E90FF]
-                    transition-colors
-                    duration-200
-                    cursor-pointer
-                  "
-                >
-                  (415) 837-8686
-                </span>
-              </p>
-            </div>
           </div>
         </div>
       </section>
