@@ -328,7 +328,7 @@ export default function Page() {
                         hidden: {},
                         visible: {
                           transition: {
-                            staggerChildren: 0.06,
+                            staggerChildren: 0.1,
                             delayChildren: 0,
                           },
                         },
@@ -370,7 +370,7 @@ export default function Page() {
                               },
                             },
                           }}
-                          style={{ display: "inline-flex" }}
+                          style={{ display: "inline-block" }}
                         >
                           <a
                             href={item.href}
