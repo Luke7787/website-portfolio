@@ -10,15 +10,18 @@ const defaultSpring = {
   mass: 0.9,
 };
 
-const containerVariants = {
+const containerVariants = (
+  delayChildren: number,
+  staggerChildren: number
+) => ({
   hidden: {},
   visible: {
     transition: {
-      delayChildren: 0.18,
-      staggerChildren: 0.12,
+      delayChildren,
+      staggerChildren,
     },
   },
-};
+});
 
 const wordVariants = {
   hidden: {
@@ -59,12 +62,18 @@ interface ScrollRevealWordsProps {
   lines: LineConfig[];
   className?: string;
   threshold?: number;
+  /** Delay before first child animates (seconds). Default 0.18 */
+  delayChildren?: number;
+  /** Delay between each child (seconds). Default 0.12 */
+  staggerChildren?: number;
 }
 
 export default function ScrollRevealWords({
   lines,
   className = "",
   threshold = 0.45,
+  delayChildren = 0.18,
+  staggerChildren = 0.12,
 }: ScrollRevealWordsProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: threshold });
@@ -75,7 +84,7 @@ export default function ScrollRevealWords({
       className={className}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
-      variants={containerVariants}
+      variants={containerVariants(delayChildren, staggerChildren)}
     >
       {lines.map((line, i) => {
         if (line.as === "custom") {

@@ -286,6 +286,8 @@ export default function Page() {
             <ScrollRevealWords
               className=""
               threshold={0.45}
+              delayChildren={0.05}
+              staggerChildren={0.06}
               lines={[
                 {
                   as: "p",
@@ -320,32 +322,69 @@ export default function Page() {
                   className:
                     "mt-6 flex justify-center md:justify-start gap-4 md:translate-x-19 md:-translate-y-7 -translate-y-28",
                   content: (
-                    <>
-                      <a
-                        href="https://github.com/Luke7787"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/15 transition-all duration-300 hover:scale-110"
-                      >
-                        <i className="fab fa-github text-[30px] text-[#1B76D2] transition-colors duration-300 group-hover:text-white" />
-                      </a>
-                      <a
-                        href="https://www.linkedin.com/in/zhuangluke/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/15 transition-all duration-300 hover:scale-110"
-                      >
-                        <i className="fab fa-linkedin text-[30px] text-[#1B76D2] transition-colors duration-300 group-hover:text-white" />
-                      </a>
-                      <a
-                        href="https://www.facebook.com/luke.zhuang/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/15 transition-all duration-300 hover:scale-110"
-                      >
-                        <i className="fab fa-facebook text-[30px] text-[#1B76D2] transition-colors duration-300 group-hover:text-white" />
-                      </a>
-                    </>
+                    <motion.div
+                      className="flex justify-center md:justify-start gap-4"
+                      variants={{
+                        hidden: {},
+                        visible: {
+                          transition: {
+                            staggerChildren: 0.06,
+                            delayChildren: 0,
+                          },
+                        },
+                      }}
+                    >
+                      {[
+                        {
+                          href: "https://github.com/Luke7787",
+                          icon: "fab fa-github",
+                        },
+                        {
+                          href: "https://www.linkedin.com/in/zhuangluke/",
+                          icon: "fab fa-linkedin",
+                        },
+                        {
+                          href: "https://www.facebook.com/luke.zhuang/",
+                          icon: "fab fa-facebook",
+                        },
+                      ].map((item) => (
+                        <motion.span
+                          key={item.href}
+                          variants={{
+                            hidden: {
+                              opacity: 0,
+                              y: 24,
+                              scale: 1,
+                              filter: "blur(10px)",
+                            },
+                            visible: {
+                              opacity: 1,
+                              y: 0,
+                              scale: 1,
+                              filter: "blur(0px)",
+                              transition: {
+                                type: "spring",
+                                stiffness: 65,
+                                damping: 24,
+                                mass: 0.9,
+                              },
+                            },
+                          }}
+                          style={{ display: "inline-flex" }}
+                        >
+                          <a
+                            href={item.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/15 transition-all duration-300 hover:scale-110"
+                          >
+                            <i
+                              className={`${item.icon} text-[30px] text-[#1B76D2] transition-colors duration-300 group-hover:text-white`}
+                            />
+                          </a>
+                        </motion.span>
+                      ))}
+                    </motion.div>
                   ),
                 },
                 {
@@ -353,20 +392,141 @@ export default function Page() {
                   className:
                     "mt-4 max-w-md space-y-2 text-[1rem] font-medium leading-[1.6] tracking-[0.03em] md:translate-x-19 md:-translate-y-2.25 -translate-y-22",
                   content: (
-                    <>
-                      <p>
-                        <span className="cursor-default text-[#8c8c8c]">Email:</span>{" "}
-                        <span className="border-b border-transparent text-[#1E90FF] hover:border-[#1E90FF] transition-colors duration-200 cursor-pointer">
+                    <motion.div
+                      className="space-y-2"
+                      variants={{
+                        hidden: {},
+                        visible: {
+                          transition: {
+                            staggerChildren: 0.06,
+                            delayChildren: 0,
+                          },
+                        },
+                      }}
+                    >
+                      <motion.p
+                        className="m-0"
+                        variants={{
+                          hidden: {},
+                          visible: {
+                            transition: {
+                              staggerChildren: 0.05,
+                              delayChildren: 0,
+                            },
+                          },
+                        }}
+                      >
+                        <motion.span
+                          variants={{
+                            hidden: {
+                              opacity: 0,
+                              y: 24,
+                              filter: "blur(10px)",
+                            },
+                            visible: {
+                              opacity: 1,
+                              y: 0,
+                              filter: "blur(0px)",
+                              transition: {
+                                type: "spring",
+                                stiffness: 65,
+                                damping: 24,
+                                mass: 0.9,
+                              },
+                            },
+                          }}
+                          style={{ display: "inline-block" }}
+                          className="cursor-default text-[#8c8c8c]"
+                        >
+                          Email:
+                        </motion.span>{" "}
+                        <motion.span
+                          variants={{
+                            hidden: {
+                              opacity: 0,
+                              y: 24,
+                              filter: "blur(10px)",
+                            },
+                            visible: {
+                              opacity: 1,
+                              y: 0,
+                              filter: "blur(0px)",
+                              transition: {
+                                type: "spring",
+                                stiffness: 65,
+                                damping: 24,
+                                mass: 0.9,
+                              },
+                            },
+                          }}
+                          style={{ display: "inline-block" }}
+                          className="border-b border-transparent text-[#1E90FF] hover:border-[#1E90FF] transition-colors duration-200 cursor-pointer"
+                        >
                           lukewzhuang@gmail.com
-                        </span>
-                      </p>
-                      <p>
-                        <span className="cursor-default text-[#8c8c8c]">Phone:</span>{" "}
-                        <span className="border-b border-transparent text-[#1E90FF] hover:border-[#1E90FF] transition-colors duration-200 cursor-pointer">
+                        </motion.span>
+                      </motion.p>
+                      <motion.p
+                        className="m-0"
+                        variants={{
+                          hidden: {},
+                          visible: {
+                            transition: {
+                              staggerChildren: 0.05,
+                              delayChildren: 0,
+                            },
+                          },
+                        }}
+                      >
+                        <motion.span
+                          variants={{
+                            hidden: {
+                              opacity: 0,
+                              y: 24,
+                              filter: "blur(10px)",
+                            },
+                            visible: {
+                              opacity: 1,
+                              y: 0,
+                              filter: "blur(0px)",
+                              transition: {
+                                type: "spring",
+                                stiffness: 65,
+                                damping: 24,
+                                mass: 0.9,
+                              },
+                            },
+                          }}
+                          style={{ display: "inline-block" }}
+                          className="cursor-default text-[#8c8c8c]"
+                        >
+                          Phone:
+                        </motion.span>{" "}
+                        <motion.span
+                          variants={{
+                            hidden: {
+                              opacity: 0,
+                              y: 24,
+                              filter: "blur(10px)",
+                            },
+                            visible: {
+                              opacity: 1,
+                              y: 0,
+                              filter: "blur(0px)",
+                              transition: {
+                                type: "spring",
+                                stiffness: 65,
+                                damping: 24,
+                                mass: 0.9,
+                              },
+                            },
+                          }}
+                          style={{ display: "inline-block" }}
+                          className="border-b border-transparent text-[#1E90FF] hover:border-[#1E90FF] transition-colors duration-200 cursor-pointer"
+                        >
                           (415) 837-8686
-                        </span>
-                      </p>
-                    </>
+                        </motion.span>
+                      </motion.p>
+                    </motion.div>
                   ),
                 },
               ]}
