@@ -283,93 +283,40 @@ export default function Page() {
               md:-translate-x-16
             "
           >
-            <p
-              className="
-                block
-                cursor-default
-                font-['League Spartan','Arial','sans-serif']
-                text-[90px]
-                sm:text-[110px]
-                lg:text-[150px]
-                font-black
-                uppercase
-                leading-none
-                tracking-[0.6px]
-                text-[rgba(255,255,255,0.15)]
-                [text-shadow:2px_2px_4px_rgba(0,0,0,0.5)]
-                -translate-y-118.75
-                md:translate-y-0
-              "
-            >
-              ABOUT
-            </p>
-
-            <h2
-              className="
-                hidden
-                cursor-default
-                md:block
-                mt-2
-                text-[1.8rem]
-                font-medium
-                tracking-[0.05em]
-                text-white
-                md:translate-x-19
-                md:-translate-y-22
-              "
-            >
-              {"Hi! I'm Luke Zhuang"}
-            </h2>
-
-            <p
-              className="
-                mt-5
-                cursor-default
-                max-w-[320px]
-                sm:max-w-sm
-                md:max-w-md
-                text-[1rem]
-                sm:text-[1.05rem]
-                md:text-[1.125rem]
-                font-medium
-                leading-[1.6]
-                md:leading-[1.75]
-                tracking-[0.03em]
-                text-white/80
-                text-justify
-                md:translate-x-19
-                md:-translate-y-13
-                -translate-y-30
-  
-              "
-            >
-              I’m a software engineer with a passion for building websites. I’m
-              constantly seeking new challenges to expand my skills and
-              knowledge.
-            </p>
-
-            <a
-              href="/LukeResume2026.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="
-                block
-                mt-4
-                text-[1.125rem]
-                font-medium
-                text-[#1E90FF]
-                hover:underline
-                transition-colors
-                duration-200
-                -translate-y-25
-                md:translate-x-19
-                md:-translate-y-10
-                cursor-pointer
-              "
-            >
-              Check out my resume
-            </a>
-
+            <ScrollRevealWords
+              className=""
+              threshold={0.45}
+              lines={[
+                {
+                  as: "p",
+                  text: "ABOUT",
+                  className:
+                    "block cursor-default font-['League Spartan','Arial','sans-serif'] text-[90px] sm:text-[110px] lg:text-[150px] font-black uppercase leading-none tracking-[0.6px] text-[rgba(255,255,255,0.15)] [text-shadow:2px_2px_4px_rgba(0,0,0,0.5)] -translate-y-118.75 md:translate-y-0",
+                },
+                {
+                  as: "h2",
+                  text: "Hi! I'm Luke Zhuang",
+                  className:
+                    "hidden cursor-default md:block mt-2 text-[1.8rem] font-medium tracking-[0.05em] text-white md:translate-x-19 md:-translate-y-22",
+                },
+                {
+                  as: "p",
+                  text:
+                    "I'm a software engineer with a passion for building websites. I'm constantly seeking new challenges to expand my skills and knowledge.",
+                  className:
+                    "mt-5 cursor-default max-w-[320px] sm:max-w-sm md:max-w-md text-[1rem] sm:text-[1.05rem] md:text-[1.125rem] font-medium leading-[1.6] md:leading-[1.75] tracking-[0.03em] text-white/80 text-justify md:translate-x-19 md:-translate-y-13 -translate-y-30",
+                },
+                {
+                  as: "a",
+                  text: "Check out my resume",
+                  href: "/LukeResume2026.pdf",
+                  target: "_blank",
+                  rel: "noopener noreferrer",
+                  className:
+                    "block mt-4 text-[1.125rem] font-medium text-[#1E90FF] hover:underline transition-colors duration-200 -translate-y-25 md:translate-x-19 md:-translate-y-10 cursor-pointer",
+                },
+              ]}
+            />
             {/* Social Icons */}
             <div
               className="
@@ -561,8 +508,14 @@ export default function Page() {
               description="Full-stack appointment scheduling with Next.js, TypeScript, Prisma, and PostgreSQL. Book visits and manage availability with admin control."
               mainHref="https://showroom-appointment-scheduler.onrender.com/"
               links={[
-                { label: "Live Site", href: "https://showroom-appointment-scheduler.onrender.com/" },
-                { label: "GitHub", href: "https://github.com/Luke7787/showroom-appointment-scheduler" },
+                {
+                  label: "Live Site",
+                  href: "https://showroom-appointment-scheduler.onrender.com/",
+                },
+                {
+                  label: "GitHub",
+                  href: "https://github.com/Luke7787/showroom-appointment-scheduler",
+                },
               ]}
               cardClassName="group opacity-100 transition-all duration-500 ease-out"
             />
@@ -574,8 +527,14 @@ export default function Page() {
               description="Full-stack inventory app with React, TypeScript, Node.js, and MongoDB. View, add, update, and manage inventory through a responsive interface."
               mainHref="https://mango-island-08612f41e.5.azurestaticapps.net"
               links={[
-                { label: "Live Site", href: "https://mango-island-08612f41e.5.azurestaticapps.net" },
-                { label: "GitHub", href: "https://github.com/Luke7787/ImmaculateInventors" },
+                {
+                  label: "Live Site",
+                  href: "https://mango-island-08612f41e.5.azurestaticapps.net",
+                },
+                {
+                  label: "GitHub",
+                  href: "https://github.com/Luke7787/ImmaculateInventors",
+                },
               ]}
               cardClassName="group opacity-100 transition-all duration-500 ease-out"
             />
@@ -588,8 +547,14 @@ export default function Page() {
               description="Blackjack built with JavaScript, HTML5, and CSS. Split, double down, Blackjack payouts, and responsive UI for play on any device."
               mainHref="https://luke7787.github.io/Blackjack/"
               links={[
-                { label: "Live Site", href: "https://luke7787.github.io/Blackjack/" },
-                { label: "GitHub", href: "https://github.com/Luke7787/Blackjack" },
+                {
+                  label: "Live Site",
+                  href: "https://luke7787.github.io/Blackjack/",
+                },
+                {
+                  label: "GitHub",
+                  href: "https://github.com/Luke7787/Blackjack",
+                },
               ]}
               cardClassName="group opacity-100 transition-all duration-500 ease-out"
             />
@@ -600,7 +565,12 @@ export default function Page() {
               title="Server and Client"
               description="Concurrent web server in C implementing a subset of HTTP. Handles multiple clients via forked processes for parallel request processing."
               mainHref="https://github.com/Luke7787/Server-and-Client"
-              links={[{ label: "GitHub", href: "https://github.com/Luke7787/Server-and-Client" }]}
+              links={[
+                {
+                  label: "GitHub",
+                  href: "https://github.com/Luke7787/Server-and-Client",
+                },
+              ]}
               cardClassName="group opacity-100 transition-all duration-500 ease-out"
               colSpanClassName="md:col-span-2 lg:col-span-1"
             />
@@ -637,188 +607,188 @@ export default function Page() {
         {/* Row 1: scroll left — cards with icon + label; two equal-width copies for seamless loop */}
         <div className="flex flex-col gap-6 py-4 w-full">
           <ScrollRevealBlock animationStyle="words" delay={0.2}>
-          <div
-            className="w-full flex items-center overflow-hidden"
-            style={{
-              maskImage:
-                "linear-gradient(to right, transparent 0%, black 28%, black 72%, transparent 100%)",
-              WebkitMaskImage:
-                "linear-gradient(to right, transparent 0%, black 28%, black 72%, transparent 100%)",
-            }}
-          >
-            <ul className="flex list-none m-0 p-0 relative w-max skill-marquee-left">
-              <li className="flex items-center gap-4 shrink-0">
-                {skillsMarqueeRow1.map((skill, i) => (
-                  <div key={`row1-a-${i}`} className="shrink-0">
-                    <div className="skill-card-border shrink-0">
-                      <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
-                        <div className="shrink-0 w-9 h-9 flex items-center justify-center">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={skill.icon}
-                            alt=""
-                            className="w-5 h-5 object-contain brightness-0 invert"
-                            loading="lazy"
-                          />
+            <div
+              className="w-full flex items-center overflow-hidden"
+              style={{
+                maskImage:
+                  "linear-gradient(to right, transparent 0%, black 28%, black 72%, transparent 100%)",
+                WebkitMaskImage:
+                  "linear-gradient(to right, transparent 0%, black 28%, black 72%, transparent 100%)",
+              }}
+            >
+              <ul className="flex list-none m-0 p-0 relative w-max skill-marquee-left">
+                <li className="flex items-center gap-4 shrink-0">
+                  {skillsMarqueeRow1.map((skill, i) => (
+                    <div key={`row1-a-${i}`} className="shrink-0">
+                      <div className="skill-card-border shrink-0">
+                        <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
+                          <div className="shrink-0 w-9 h-9 flex items-center justify-center">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                              src={skill.icon}
+                              alt=""
+                              className="w-5 h-5 object-contain brightness-0 invert"
+                              loading="lazy"
+                            />
+                          </div>
+                          <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
+                            {skill.name}
+                          </h3>
                         </div>
-                        <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
-                          {skill.name}
-                        </h3>
                       </div>
                     </div>
-                  </div>
-                ))}
-                <span className="shrink-0 w-0 block" aria-hidden />
-              </li>
-              <li className="flex items-center gap-4 shrink-0" aria-hidden>
-                {skillsMarqueeRow1.map((skill, i) => (
-                  <div key={`row1-b-${i}`} className="shrink-0">
-                    <div className="skill-card-border shrink-0">
-                      <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
-                        <div className="shrink-0 w-9 h-9 flex items-center justify-center">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={skill.icon}
-                            alt=""
-                            className="w-5 h-5 object-contain brightness-0 invert"
-                            loading="lazy"
-                          />
+                  ))}
+                  <span className="shrink-0 w-0 block" aria-hidden />
+                </li>
+                <li className="flex items-center gap-4 shrink-0" aria-hidden>
+                  {skillsMarqueeRow1.map((skill, i) => (
+                    <div key={`row1-b-${i}`} className="shrink-0">
+                      <div className="skill-card-border shrink-0">
+                        <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
+                          <div className="shrink-0 w-9 h-9 flex items-center justify-center">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                              src={skill.icon}
+                              alt=""
+                              className="w-5 h-5 object-contain brightness-0 invert"
+                              loading="lazy"
+                            />
+                          </div>
+                          <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
+                            {skill.name}
+                          </h3>
                         </div>
-                        <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
-                          {skill.name}
-                        </h3>
                       </div>
                     </div>
-                  </div>
-                ))}
-                <span className="shrink-0 w-0 block" aria-hidden />
-              </li>
-            </ul>
-          </div>
+                  ))}
+                  <span className="shrink-0 w-0 block" aria-hidden />
+                </li>
+              </ul>
+            </div>
           </ScrollRevealBlock>
 
           {/* Row 2: scroll right — two equal-width copies for seamless loop */}
           <ScrollRevealBlock animationStyle="words" delay={0.45}>
-          <div
-            className="w-full flex items-center overflow-hidden"
-            style={{
-              maskImage:
-                "linear-gradient(to right, transparent 0%, black 28%, black 72%, transparent 100%)",
-              WebkitMaskImage:
-                "linear-gradient(to right, transparent 0%, black 28%, black 72%, transparent 100%)",
-            }}
-          >
-            <ul className="flex list-none m-0 p-0 relative w-max skill-marquee-right">
-              <li className="flex items-center gap-4 shrink-0">
-                {skillsMarqueeRow2.map((skill, i) => (
-                  <div key={`row2-a-${i}`} className="shrink-0">
-                    <div className="skill-card-border shrink-0">
-                      <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
-                        <div className="shrink-0 w-9 h-9 flex items-center justify-center">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={skill.icon}
-                            alt=""
-                            className="w-5 h-5 object-contain brightness-0 invert"
-                            loading="lazy"
-                          />
+            <div
+              className="w-full flex items-center overflow-hidden"
+              style={{
+                maskImage:
+                  "linear-gradient(to right, transparent 0%, black 28%, black 72%, transparent 100%)",
+                WebkitMaskImage:
+                  "linear-gradient(to right, transparent 0%, black 28%, black 72%, transparent 100%)",
+              }}
+            >
+              <ul className="flex list-none m-0 p-0 relative w-max skill-marquee-right">
+                <li className="flex items-center gap-4 shrink-0">
+                  {skillsMarqueeRow2.map((skill, i) => (
+                    <div key={`row2-a-${i}`} className="shrink-0">
+                      <div className="skill-card-border shrink-0">
+                        <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
+                          <div className="shrink-0 w-9 h-9 flex items-center justify-center">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                              src={skill.icon}
+                              alt=""
+                              className="w-5 h-5 object-contain brightness-0 invert"
+                              loading="lazy"
+                            />
+                          </div>
+                          <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
+                            {skill.name}
+                          </h3>
                         </div>
-                        <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
-                          {skill.name}
-                        </h3>
                       </div>
                     </div>
-                  </div>
-                ))}
-                <span className="shrink-0 w-0 block" aria-hidden />
-              </li>
-              <li className="flex items-center gap-4 shrink-0" aria-hidden>
-                {skillsMarqueeRow2.map((skill, i) => (
-                  <div key={`row2-b-${i}`} className="shrink-0">
-                    <div className="skill-card-border shrink-0">
-                      <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
-                        <div className="shrink-0 w-9 h-9 flex items-center justify-center">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={skill.icon}
-                            alt=""
-                            className="w-5 h-5 object-contain brightness-0 invert"
-                            loading="lazy"
-                          />
+                  ))}
+                  <span className="shrink-0 w-0 block" aria-hidden />
+                </li>
+                <li className="flex items-center gap-4 shrink-0" aria-hidden>
+                  {skillsMarqueeRow2.map((skill, i) => (
+                    <div key={`row2-b-${i}`} className="shrink-0">
+                      <div className="skill-card-border shrink-0">
+                        <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
+                          <div className="shrink-0 w-9 h-9 flex items-center justify-center">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                              src={skill.icon}
+                              alt=""
+                              className="w-5 h-5 object-contain brightness-0 invert"
+                              loading="lazy"
+                            />
+                          </div>
+                          <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
+                            {skill.name}
+                          </h3>
                         </div>
-                        <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
-                          {skill.name}
-                        </h3>
                       </div>
                     </div>
-                  </div>
-                ))}
-                <span className="shrink-0 w-0 block" aria-hidden />
-              </li>
-            </ul>
-          </div>
+                  ))}
+                  <span className="shrink-0 w-0 block" aria-hidden />
+                </li>
+              </ul>
+            </div>
           </ScrollRevealBlock>
 
           {/* Row 3: scroll left — C#, HTML, CSS, React Native, Tailwind, Postman, Expo, Figma */}
           <ScrollRevealBlock animationStyle="words" delay={0.7}>
-          <div
-            className="w-full flex items-center overflow-hidden"
-            style={{
-              maskImage:
-                "linear-gradient(to right, transparent 0%, black 28%, black 72%, transparent 100%)",
-              WebkitMaskImage:
-                "linear-gradient(to right, transparent 0%, black 28%, black 72%, transparent 100%)",
-            }}
-          >
-            <ul className="flex list-none m-0 p-0 relative w-max skill-marquee-left-alt">
-              <li className="flex items-center gap-4 shrink-0">
-                {skillsMarqueeRow3.map((skill, i) => (
-                  <div key={`row3-a-${i}`} className="shrink-0">
-                    <div className="skill-card-border shrink-0">
-                      <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
-                        <div className="shrink-0 w-9 h-9 flex items-center justify-center">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={skill.icon}
-                            alt=""
-                            className="w-5 h-5 object-contain brightness-0 invert"
-                            loading="lazy"
-                          />
+            <div
+              className="w-full flex items-center overflow-hidden"
+              style={{
+                maskImage:
+                  "linear-gradient(to right, transparent 0%, black 28%, black 72%, transparent 100%)",
+                WebkitMaskImage:
+                  "linear-gradient(to right, transparent 0%, black 28%, black 72%, transparent 100%)",
+              }}
+            >
+              <ul className="flex list-none m-0 p-0 relative w-max skill-marquee-left-alt">
+                <li className="flex items-center gap-4 shrink-0">
+                  {skillsMarqueeRow3.map((skill, i) => (
+                    <div key={`row3-a-${i}`} className="shrink-0">
+                      <div className="skill-card-border shrink-0">
+                        <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
+                          <div className="shrink-0 w-9 h-9 flex items-center justify-center">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                              src={skill.icon}
+                              alt=""
+                              className="w-5 h-5 object-contain brightness-0 invert"
+                              loading="lazy"
+                            />
+                          </div>
+                          <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
+                            {skill.name}
+                          </h3>
                         </div>
-                        <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
-                          {skill.name}
-                        </h3>
                       </div>
                     </div>
-                  </div>
-                ))}
-                <span className="shrink-0 w-0 block" aria-hidden />
-              </li>
-              <li className="flex items-center gap-4 shrink-0" aria-hidden>
-                {skillsMarqueeRow3.map((skill, i) => (
-                  <div key={`row3-b-${i}`} className="shrink-0">
-                    <div className="skill-card-border shrink-0">
-                      <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
-                        <div className="shrink-0 w-9 h-9 flex items-center justify-center">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={skill.icon}
-                            alt=""
-                            className="w-5 h-5 object-contain brightness-0 invert"
-                            loading="lazy"
-                          />
+                  ))}
+                  <span className="shrink-0 w-0 block" aria-hidden />
+                </li>
+                <li className="flex items-center gap-4 shrink-0" aria-hidden>
+                  {skillsMarqueeRow3.map((skill, i) => (
+                    <div key={`row3-b-${i}`} className="shrink-0">
+                      <div className="skill-card-border shrink-0">
+                        <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
+                          <div className="shrink-0 w-9 h-9 flex items-center justify-center">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                              src={skill.icon}
+                              alt=""
+                              className="w-5 h-5 object-contain brightness-0 invert"
+                              loading="lazy"
+                            />
+                          </div>
+                          <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
+                            {skill.name}
+                          </h3>
                         </div>
-                        <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
-                          {skill.name}
-                        </h3>
                       </div>
                     </div>
-                  </div>
-                ))}
-                <span className="shrink-0 w-0 block" aria-hidden />
-              </li>
-            </ul>
-          </div>
+                  ))}
+                  <span className="shrink-0 w-0 block" aria-hidden />
+                </li>
+              </ul>
+            </div>
           </ScrollRevealBlock>
         </div>
       </section>
@@ -866,9 +836,18 @@ export default function Page() {
                     }}
                   >
                     {[
-                      { href: "https://github.com/Luke7787", icon: "fab fa-github" },
-                      { href: "https://www.linkedin.com/in/zhuangluke/", icon: "fab fa-linkedin" },
-                      { href: "https://www.facebook.com/luke.zhuang/", icon: "fab fa-facebook" },
+                      {
+                        href: "https://github.com/Luke7787",
+                        icon: "fab fa-github",
+                      },
+                      {
+                        href: "https://www.linkedin.com/in/zhuangluke/",
+                        icon: "fab fa-linkedin",
+                      },
+                      {
+                        href: "https://www.facebook.com/luke.zhuang/",
+                        icon: "fab fa-facebook",
+                      },
                     ].map((item) => (
                       <motion.span
                         key={item.href}
