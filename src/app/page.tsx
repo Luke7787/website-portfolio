@@ -407,25 +407,39 @@ export default function Page() {
                       <motion.p
                         className="m-0"
                         variants={{
-                          hidden: {},
+                          hidden: {
+                            opacity: 0,
+                            y: 24,
+                            scale: 1,
+                            filter: "blur(10px)",
+                          },
                           visible: {
+                            opacity: 1,
+                            y: 0,
+                            scale: 1,
+                            filter: "blur(0px)",
                             transition: {
-                              staggerChildren: 0.05,
-                              delayChildren: 0,
+                              type: "spring",
+                              stiffness: 65,
+                              damping: 24,
+                              mass: 0.9,
                             },
                           },
                         }}
+                        style={{ display: "block" }}
                       >
                         <motion.span
                           variants={{
                             hidden: {
                               opacity: 0,
                               y: 24,
+                              scale: 1,
                               filter: "blur(10px)",
                             },
                             visible: {
                               opacity: 1,
                               y: 0,
+                              scale: 1,
                               filter: "blur(0px)",
                               transition: {
                                 type: "spring",
@@ -445,11 +459,13 @@ export default function Page() {
                             hidden: {
                               opacity: 0,
                               y: 24,
+                              scale: 1,
                               filter: "blur(10px)",
                             },
                             visible: {
                               opacity: 1,
                               y: 0,
+                              scale: 1,
                               filter: "blur(0px)",
                               transition: {
                                 type: "spring",
@@ -468,25 +484,39 @@ export default function Page() {
                       <motion.p
                         className="m-0"
                         variants={{
-                          hidden: {},
+                          hidden: {
+                            opacity: 0,
+                            y: 24,
+                            scale: 1,
+                            filter: "blur(10px)",
+                          },
                           visible: {
+                            opacity: 1,
+                            y: 0,
+                            scale: 1,
+                            filter: "blur(0px)",
                             transition: {
-                              staggerChildren: 0.05,
-                              delayChildren: 0,
+                              type: "spring",
+                              stiffness: 65,
+                              damping: 24,
+                              mass: 0.9,
                             },
                           },
                         }}
+                        style={{ display: "block" }}
                       >
                         <motion.span
                           variants={{
                             hidden: {
                               opacity: 0,
                               y: 24,
+                              scale: 1,
                               filter: "blur(10px)",
                             },
                             visible: {
                               opacity: 1,
                               y: 0,
+                              scale: 1,
                               filter: "blur(0px)",
                               transition: {
                                 type: "spring",
@@ -506,11 +536,13 @@ export default function Page() {
                             hidden: {
                               opacity: 0,
                               y: 24,
+                              scale: 1,
                               filter: "blur(10px)",
                             },
                             visible: {
                               opacity: 1,
                               y: 0,
+                              scale: 1,
                               filter: "blur(0px)",
                               transition: {
                                 type: "spring",
