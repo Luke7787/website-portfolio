@@ -158,56 +158,64 @@ function Slideshow() {
         ]}
       />
 
-      {/* Arrows */}
-      {/* Left Arrow */}
-      <button
-        onClick={prev}
-        className="
-          absolute
-          left-4
-          top-1/2
-          -translate-y-1/2
-          flex items-center justify-center
-          w-12 h-12
-          rounded-full
-          bg-gray-100
-          text-black
-          text-3xl
-          leading-none
-          shadow-[0_8px_20px_rgba(0,0,0,0.15)]
-          hover:bg-gray-200
-          hover:scale-110
-          active:scale-95
-          transition-all duration-300
-        "
-      >
-        <span className="-translate-x-px -translate-y-0.5">‹</span>
-      </button>
+      {/* Arrows — scroll reveal */}
+      <div className="absolute inset-0">
+        <ScrollRevealBlock
+          animationStyle="words"
+          delay={0.6}
+          amount={0.3}
+          transitionOverrides={{ stiffness: 22, damping: 18 }}
+          className="absolute inset-0"
+        >
+          <button
+            onClick={prev}
+            className="
+              absolute
+              left-4
+              top-1/2
+              -translate-y-1/2
+              flex items-center justify-center
+              w-12 h-12
+              rounded-full
+              bg-gray-100
+              text-black
+              text-3xl
+              leading-none
+              shadow-[0_8px_20px_rgba(0,0,0,0.15)]
+              hover:bg-gray-200
+              hover:scale-110
+              active:scale-95
+              transition-all duration-300
+            "
+          >
+            <span className="-translate-x-px -translate-y-0.5">‹</span>
+          </button>
 
-      {/* Right Arrow */}
-      <button
-        onClick={next}
-        className="
-          absolute
-          right-4
-          top-1/2
-          -translate-y-1/2
-          flex items-center justify-center
-          w-12 h-12
-          rounded-full
-          bg-gray-100
-          text-black
-          text-3xl
-          leading-none
-          shadow-[0_8px_20px_rgba(0,0,0,0.15)]
-          hover:bg-gray-200
-          hover:scale-110
-          active:scale-95
-          transition-all duration-300
-        "
-      >
-        <span className="translate-x-px -translate-y-0.5">›</span>
-      </button>
+          <button
+            onClick={next}
+            className="
+              absolute
+              right-4
+              top-1/2
+              -translate-y-1/2
+              flex items-center justify-center
+              w-12 h-12
+              rounded-full
+              bg-gray-100
+              text-black
+              text-3xl
+              leading-none
+              shadow-[0_8px_20px_rgba(0,0,0,0.15)]
+              hover:bg-gray-200
+              hover:scale-110
+              active:scale-95
+              transition-all duration-300
+            "
+          >
+            <span className="translate-x-px -translate-y-0.5">›</span>
+          </button>
+        </ScrollRevealBlock>
+      </div>
     </div>
   );
 }
