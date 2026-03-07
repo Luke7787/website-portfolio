@@ -260,17 +260,19 @@ export default function Page() {
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-6 md:grid-cols-2">
           {/* Left: Image (Now Slideshow, styles untouched) */}
           <div className="flex justify-center md:justify-end">
-            <div
-              className="
-                w-80
-                sm:w-84
-                md:w-100
-                lg:w-116
-                md:-translate-x-12
-              "
-            >
-              <Slideshow />
-            </div>
+            <ScrollRevealBlock animationStyle="words" delay={0.1} amount={0.3}>
+              <div
+                className="
+                  w-80
+                  sm:w-84
+                  md:w-100
+                  lg:w-116
+                  md:-translate-x-12
+                "
+              >
+                <Slideshow />
+              </div>
+            </ScrollRevealBlock>
           </div>
 
           {/* Right: Text */}
