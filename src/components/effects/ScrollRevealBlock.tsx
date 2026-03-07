@@ -29,6 +29,8 @@ interface ScrollRevealBlockProps {
   margin?: string;
   /** Use same animation as "PORTFOLIO Featured Projects" (ScrollRevealWords): y 24, wordsSpring */
   animationStyle?: "default" | "words";
+  /** Override spring transition (e.g. { stiffness: 35, damping: 22 } for slower animation) */
+  transitionOverrides?: { stiffness?: number; damping?: number; mass?: number };
 }
 
 export default function ScrollRevealBlock({
@@ -38,6 +40,7 @@ export default function ScrollRevealBlock({
   amount = "some",
   margin = "0px 0px 200px 0px",
   animationStyle = "default",
+  transitionOverrides,
 }: ScrollRevealBlockProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [hasAnimated, setHasAnimated] = useState(false);
@@ -72,6 +75,7 @@ export default function ScrollRevealBlock({
       transition={{
         delay,
         ...transitionSpring,
+        ...transitionOverrides,
       }}
       className={className}
     >

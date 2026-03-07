@@ -94,60 +94,69 @@ function Slideshow() {
 
   return (
     <div className="relative">
-      {/* Aspect Ratio Container */}
-      <div className="relative w-full aspect-square">
-        {/* IMAGE */}
-        {current.type === "image" && (
-          <Image
-            src={current.src}
-            alt="Luke Zhuang"
-            fill
-            className="
-              rounded-lg
-              border-2
-              border-white
-              shadow-lg
-              object-cover
-            "
-          />
-        )}
-
-        {/* VIDEO */}
-        {current.type === "video" && (
-          <video
-            src={current.src}
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="
-              absolute
-              inset-0
-              w-full
-              h-full
-              rounded-lg
-              border-2
-              border-white
-              shadow-lg
-              object-cover
-            "
-          />
-        )}
-      </div>
-
-      {/* Caption (Added Only) */}
-      <p
-        className="
-          mt-4
-          cursor-default
-          text-sm
-          text-white/70
-          tracking-[0.03em]
-          text-center
-        "
+      {/* Aspect Ratio Container — slower scroll reveal */}
+      <ScrollRevealBlock
+        animationStyle="words"
+        delay={0.45}
+        amount={0.3}
+        transitionOverrides={{ stiffness: 22, damping: 18 }}
       >
-        {current.caption}
-      </p>
+        <div className="relative w-full aspect-square">
+          {/* IMAGE */}
+          {current.type === "image" && (
+            <Image
+              src={current.src}
+              alt="Luke Zhuang"
+              fill
+              className="
+                rounded-lg
+                border-2
+                border-white
+                shadow-lg
+                object-cover
+              "
+            />
+          )}
+
+          {/* VIDEO */}
+          {current.type === "video" && (
+            <video
+              src={current.src}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="
+                absolute
+                inset-0
+                w-full
+                h-full
+                rounded-lg
+                border-2
+                border-white
+                shadow-lg
+                object-cover
+              "
+            />
+          )}
+        </div>
+      </ScrollRevealBlock>
+
+      {/* Caption — word-by-word reveal */}
+      <ScrollRevealWords
+        className="mt-4"
+        threshold={0.3}
+        delayChildren={0.7}
+        staggerChildren={0.065}
+        lines={[
+          {
+            as: "p",
+            text: current.caption,
+            className:
+              "cursor-default text-sm text-white/70 tracking-[0.03em] text-center",
+          },
+        ]}
+      />
 
       {/* Arrows */}
       {/* Left Arrow */}
@@ -260,19 +269,17 @@ export default function Page() {
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-6 md:grid-cols-2">
           {/* Left: Image (Now Slideshow, styles untouched) */}
           <div className="flex justify-center md:justify-end">
-            <ScrollRevealBlock animationStyle="words" delay={0.1} amount={0.3}>
-              <div
-                className="
-                  w-80
-                  sm:w-84
-                  md:w-100
-                  lg:w-116
-                  md:-translate-x-12
-                "
-              >
-                <Slideshow />
-              </div>
-            </ScrollRevealBlock>
+            <div
+              className="
+                w-80
+                sm:w-84
+                md:w-100
+                lg:w-116
+                md:-translate-x-12
+              "
+            >
+              <Slideshow />
+            </div>
           </div>
 
           {/* Right: Text */}
@@ -288,8 +295,8 @@ export default function Page() {
             <ScrollRevealWords
               className=""
               threshold={0.45}
-              delayChildren={0.05}
-              staggerChildren={0.06}
+              delayChildren={1.85}
+              staggerChildren={0.1}
               lines={[
                 {
                   as: "p",
