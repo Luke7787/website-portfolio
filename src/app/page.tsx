@@ -228,6 +228,11 @@ export default function Page() {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    const timer = setTimeout(() => setBirdsVisible(true), 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <main className="relative">
       <NavBar />
@@ -256,11 +261,7 @@ export default function Page() {
                 animate-[revealText_0.65s_ease-in-out_0.65s_forwards]
                 transition-colors
                 duration-300
-                hover:text-[#1E90FF]
               "
-              onMouseEnter={() => setBirdsVisible(true)}
-              onClick={() => setBirdsVisible(true)}
-              onTouchStart={() => setBirdsVisible(true)}
               style={{ cursor: "default" }}
             >
               LUKE ZHUANG
