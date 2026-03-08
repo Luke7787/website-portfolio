@@ -94,12 +94,12 @@ function Slideshow() {
 
   return (
     <div className="relative">
-      {/* Aspect Ratio Container — slower scroll reveal */}
+      {/* Aspect Ratio Container — scroll reveal */}
       <ScrollRevealBlock
         animationStyle="words"
-        delay={0.45}
+        delay={0.2}
         amount={0.3}
-        transitionOverrides={{ stiffness: 22, damping: 18 }}
+        transitionOverrides={{ stiffness: 45, damping: 22 }}
       >
         <div className="relative w-full aspect-square">
           {/* IMAGE */}
@@ -146,8 +146,8 @@ function Slideshow() {
       <ScrollRevealWords
         className="mt-4"
         threshold={0.3}
-        delayChildren={0.7}
-        staggerChildren={0.065}
+        delayChildren={0.25}
+        staggerChildren={0.04}
         lines={[
           {
             as: "p",
@@ -303,8 +303,8 @@ export default function Page() {
             <ScrollRevealWords
               className=""
               threshold={0.45}
-              delayChildren={1.85}
-              staggerChildren={0.1}
+              delayChildren={0.14}
+              staggerChildren={0.08}
               lines={[
                 {
                   as: "p",
