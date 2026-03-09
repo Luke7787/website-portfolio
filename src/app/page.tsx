@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -41,7 +40,10 @@ import ScrollRevealCard from "@/components/effects/ScrollRevealCard";
 import VantaBirdsBackground from "@/components/effects/VantaBirdsBackground";
 
 // Skills: best icon per tech from react-icons only (Si = Simple Icons, Fa = Font Awesome, Tb = Tabler).
-type IconComponent = (props: { className?: string; "aria-hidden"?: boolean }) => React.ReactNode;
+type IconComponent = (props: {
+  className?: string;
+  "aria-hidden"?: boolean;
+}) => React.ReactNode;
 type SkillEntry = { name: string; Icon: IconComponent };
 
 const skillsMarqueeRow1: SkillEntry[] = [
@@ -352,8 +354,7 @@ export default function Page() {
                 },
                 {
                   as: "p",
-                  text:
-                    "I'm a software engineer with a passion for building websites. I'm constantly seeking new challenges to expand my skills and knowledge.",
+                  text: "I'm a software engineer with a passion for building websites. I'm constantly seeking new challenges to expand my skills and knowledge.",
                   className:
                     "mt-5 cursor-default max-w-[320px] sm:max-w-sm md:max-w-md text-[1rem] sm:text-[1.05rem] md:text-[1.125rem] font-medium leading-[1.6] md:leading-[1.75] tracking-[0.03em] text-white/80 text-justify md:translate-x-19 md:-translate-y-13 -translate-y-30",
                 },
