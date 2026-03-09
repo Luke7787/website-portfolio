@@ -644,9 +644,10 @@ export default function Page() {
             ]}
           />
 
-          {/* Card grid — 1 col mobile, 2 cols md, 3 cols lg */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
-            <ScrollRevealCard
+          {/* Single flowing row, wraps after 3 — smooth transition from Blackjack to Server and Client */}
+          <div className="flex flex-wrap gap-8 lg:gap-10">
+            <div className="w-full md:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-5rem)/3)]">
+              <ScrollRevealCard
               imageSrc="/images/P1P1.png"
               imageAlt="Showroom Booking App"
               title="Showroom Booking App"
@@ -665,7 +666,9 @@ export default function Page() {
               cardClassName="group opacity-100 transition-all duration-500 ease-out"
               startDelay={0}
             />
+            </div>
 
+            <div className="w-full md:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-5rem)/3)]">
             <ScrollRevealCard
               imageSrc="/images/project2.png"
               imageAlt="Inventory Management Platform"
@@ -685,7 +688,9 @@ export default function Page() {
               cardClassName="group opacity-100 transition-all duration-500 ease-out"
               startDelay={0.5}
             />
+            </div>
 
+            <div className="w-full md:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-5rem)/3)]">
             <ScrollRevealCard
               imageSrc="/images/project3.png"
               imageAlt="Blackjack game"
@@ -706,7 +711,9 @@ export default function Page() {
               cardClassName="group opacity-100 transition-all duration-500 ease-out"
               startDelay={1}
             />
+            </div>
 
+            <div className="w-full md:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-5rem)/3)]">
             <ScrollRevealCard
               imageSrc="/images/project4.png"
               imageAlt="Server and Client webserver"
@@ -720,9 +727,9 @@ export default function Page() {
                 },
               ]}
               cardClassName="group opacity-100 transition-all duration-500 ease-out"
-              colSpanClassName="md:col-span-2 lg:col-span-1"
-              startDelay={1.25}
+              startDelay={1.1}
             />
+            </div>
           </div>
         </div>
       </section>
