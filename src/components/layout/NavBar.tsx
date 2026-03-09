@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import AnimatedName from "@/components/effects/AnimatedName";
 
 const NAV_ITEMS = [
@@ -11,6 +12,8 @@ const NAV_ITEMS = [
   { label: "Skills", href: "#skills" },
   { label: "Contact", href: "#contact" },
 ];
+
+const SECTION_IDS = NAV_ITEMS.map((item) => item.href.replace("#", ""));
 
 function scrollToSection(href: string) {
   const id = href.replace("#", "");
@@ -26,7 +29,57 @@ function scrollToSection(href: string) {
 
 export default function NavBar() {
   const [open, setOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>(SECTION_IDS[0]);
   const navRef = useRef<HTMLElement | null>(null);
+  const ratioRef = useRef<Record<string, number>>({});
+  const rafRef = useRef<number | null>(null);
+
+  // Scroll spy: section with largest presence in the "active zone" wins (smooth, no flicker)
+  useEffect(() => {
+    SECTION_IDS.forEach((id) => {
+      ratioRef.current[id] = 0;
+    });
+
+    const elements = SECTION_IDS.map((id) => document.getElementById(id)).filter(
+      (el): el is HTMLElement => el != null
+    );
+    if (elements.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          ratioRef.current[entry.target.id] = entry.intersectionRatio;
+        });
+        let maxRatio = 0;
+        let bestId = SECTION_IDS[0];
+        SECTION_IDS.forEach((id) => {
+          const r = ratioRef.current[id] ?? 0;
+          if (r > maxRatio) {
+            maxRatio = r;
+            bestId = id;
+          }
+        });
+
+        if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+        const chosen = maxRatio > 0 ? bestId : null;
+        rafRef.current = requestAnimationFrame(() => {
+          rafRef.current = null;
+          setActiveSection((prev) => (chosen ?? prev));
+        });
+      },
+      {
+        root: null,
+        rootMargin: "-35% 0px -50% 0px",
+        threshold: [0, 0.01, 0.1, 0.25, 0.5, 0.75, 1],
+      }
+    );
+
+    elements.forEach((el) => observer.observe(el));
+    return () => {
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+      observer.disconnect();
+    };
+  }, []);
 
   // On load/refresh: strip hash so URL is always e.g. localhost:3000
   useEffect(() => {
@@ -116,80 +169,96 @@ export default function NavBar() {
           </a>
         </div>
 
-        {/* Desktop Nav Links */}
-        <ul className="hidden md:flex items-center gap-2">
-          {NAV_ITEMS.map((item) => (
-            <li key={item.href}>
-              <a
-                href="/"
-                className="
-                  uppercase
-                  rounded-md
-                  px-3 py-2
-                  text-[0.8rem]
-                  font-semibold
-                  tracking-[0.12em]
-                  text-white/90
-                  transition-colors
-                  hover:bg-[#1E90FF]
-                "
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection(item.href);
-                }}
-              >
-                {item.label}
-              </a>
-            </li>
-          ))}
+        {/* Desktop Nav Links — sliding pill shows current section */}
+        <ul className="hidden md:flex items-center gap-2 relative">
+          {NAV_ITEMS.map((item) => {
+            const id = item.href.replace("#", "");
+            const isActive = activeSection === id;
+            return (
+              <li key={item.href} className="relative">
+                <a
+                  href="/"
+                  className={
+                    "relative z-10 block uppercase rounded-md px-3 py-2 text-[0.8rem] font-semibold tracking-[0.12em] transition-[color,opacity] duration-300 ease-out " +
+                    (isActive ? "text-white opacity-100" : "text-white/90 opacity-90 hover:opacity-100 hover:bg-[#1E90FF]")
+                  }
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection(item.href);
+                  }}
+                >
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-pill"
+                      className="absolute inset-0 rounded-md bg-[#1E90FF]"
+                      transition={{
+                        type: "spring",
+                        stiffness: 240,
+                        damping: 26,
+                        mass: 0.8,
+                      }}
+                      style={{ zIndex: -1 }}
+                      aria-hidden
+                    />
+                  )}
+                  <span className="relative z-10">{item.label}</span>
+                </a>
+              </li>
+            );
+          })}
         </ul>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu Button — show current section when closed */}
         <button
           type="button"
-          className="md:hidden rounded-md px-3 py-2 text-sm font-semibold tracking-wider text-white/90 hover:bg-white/10"
+          className="md:hidden rounded-md px-3 py-2 text-sm font-semibold tracking-wider text-white/90 hover:bg-white/10 flex items-center gap-2"
           aria-expanded={open}
           aria-controls="mobile-nav"
           onClick={() => setOpen((v) => !v)}
         >
           {open ? "Close" : "Menu"}
+          <span className="text-white/60 font-normal text-xs hidden sm:inline">
+            {open ? "" : " · " + (NAV_ITEMS.find((n) => n.href.replace("#", "") === activeSection)?.label ?? activeSection)}
+          </span>
         </button>
       </div>
 
-      {/* Mobile Dropdown */}
+      {/* Mobile Dropdown — highlight current section */}
       <div
         id="mobile-nav"
-        className={`md:hidden border-t border-white/10 bg-[#141414]/95 backdrop-blur ${
-          open ? "block" : "hidden"
-        }`}
+        className={
+          "md:hidden border-t border-white/10 bg-[#141414]/95 backdrop-blur " +
+          (open ? "block" : "hidden")
+        }
       >
-        <ul className="mx-auto max-w-6xl px-4 py-3">
-          {NAV_ITEMS.map((item) => (
-            <li key={item.href}>
-              <a
-                href="/"
-                className="
-                  block
-                  uppercase
-                  rounded-md
-                  px-3 py-3
-                  text-[0.85rem]
-                  font-semibold
-                  tracking-[0.12em]
-                  text-white/90
-                  transition-colors
-                  hover:bg-[#1E90FF]
-                "
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection(item.href);
-                  setOpen(false);
-                }}
-              >
-                {item.label}
-              </a>
-            </li>
-          ))}
+        <div className="px-4 pt-3 pb-1 text-[0.7rem] uppercase tracking-widest text-white/50 transition-opacity duration-300">
+          Viewing: {NAV_ITEMS.find((n) => n.href.replace("#", "") === activeSection)?.label ?? activeSection}
+        </div>
+        <ul className="mx-auto max-w-6xl px-4 py-2">
+          {NAV_ITEMS.map((item) => {
+            const id = item.href.replace("#", "");
+            const isActive = activeSection === id;
+            return (
+              <li key={item.href}>
+                <a
+                  href="/"
+                  className={
+                    "block uppercase rounded-md px-3 py-3 text-[0.85rem] font-semibold tracking-[0.12em] transition-[background-color,color,border-color] duration-300 ease-out " +
+                    (isActive
+                      ? "bg-[#1E90FF]/20 text-[#1E90FF] border-l-2 border-[#1E90FF]"
+                      : "text-white/90 hover:bg-[#1E90FF] border-l-2 border-transparent")
+                  }
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection(item.href);
+                    setOpen(false);
+                  }}
+                >
+                  {item.label}
+                </a>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </nav>
