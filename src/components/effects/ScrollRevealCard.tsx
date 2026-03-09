@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 
@@ -98,6 +98,8 @@ interface ScrollRevealCardProps {
   cardClassName?: string;
   /** Only card 4 uses col-span on md/lg */
   colSpanClassName?: string;
+  /** Delay in seconds before this card's animation starts (for staggering cards: image → text, then next card). */
+  startDelay?: number;
 }
 
 function AnimatedWords({
@@ -140,17 +142,32 @@ export default function ScrollRevealCard({
   className = "",
   cardClassName = "group opacity-100 transition-all duration-500 ease-out",
   colSpanClassName = "",
+  /** Delay in seconds before this card's animation starts (e.g. for staggering multiple cards). */
+  startDelay = 0,
 }: ScrollRevealCardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const [hasDelayed, setHasDelayed] = useState(false);
+
+  useEffect(() => {
+    if (!isInView) return;
+    if (startDelay <= 0) {
+      setHasDelayed(true);
+      return;
+    }
+    const t = setTimeout(() => setHasDelayed(true), startDelay * 1000);
+    return () => clearTimeout(t);
+  }, [isInView, startDelay]);
+
   const descriptionWordCount = description.split(/\s+/).length;
+  const shouldAnimate = isInView && hasDelayed;
 
   return (
     <motion.div
       ref={ref}
       className={`${cardClassName} ${colSpanClassName}`}
       initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
+      animate={shouldAnimate ? "visible" : "hidden"}
       variants={cardContainerVariants}
     >
       <a href={mainHref} target="_blank" rel="noopener noreferrer" className="block">
