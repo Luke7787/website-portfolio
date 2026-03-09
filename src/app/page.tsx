@@ -3,6 +3,35 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import {
+  SiTypescript,
+  SiJavascript,
+  SiPython,
+  SiOpenjdk,
+  SiC,
+  SiCplusplus,
+  SiReact,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiExpress,
+  SiPrisma,
+  SiAxios,
+  SiPostgresql,
+  SiMongodb,
+  SiDocker,
+  SiGithub,
+  SiRender,
+  SiLinux,
+  SiSharp,
+  SiHtml5,
+  SiCss,
+  SiTailwindcss,
+  SiPostman,
+  SiExpo,
+  SiFigma,
+} from "react-icons/si";
+import { FaAws } from "react-icons/fa";
+import { TbBrandAzure } from "react-icons/tb";
 import NavBar from "@/components/layout/NavBar";
 import AnimatedName from "@/components/effects/AnimatedName";
 import TextScramble from "@/components/effects/TextScramble";
@@ -11,46 +40,48 @@ import ScrollRevealBlock from "@/components/effects/ScrollRevealBlock";
 import ScrollRevealCard from "@/components/effects/ScrollRevealCard";
 import VantaBirdsBackground from "@/components/effects/VantaBirdsBackground";
 
-// Skill logos — jsDelivr CDN. Card layout: icon + label per skill (Framer-style).
-const ICON_CDN = "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons";
-const skillEntry = (slug: string, name: string) => ({
-  name,
-  icon: `${ICON_CDN}/${slug}.svg`,
-});
-const skillsMarqueeRow1 = [
-  skillEntry("typescript", "TypeScript"),
-  skillEntry("javascript", "JavaScript"),
-  skillEntry("python", "Python"),
-  skillEntry("java", "Java"),
-  skillEntry("c", "C"),
-  skillEntry("cplusplus", "C++"),
-  skillEntry("react", "React.js"),
-  skillEntry("nextdotjs", "Next.js"),
-  skillEntry("nodedotjs", "Node.js"),
-  skillEntry("express", "Express.js"),
+// Skills: best icon per tech from react-icons only (Si = Simple Icons, Fa = Font Awesome, Tb = Tabler).
+type IconComponent = (props: { className?: string; "aria-hidden"?: boolean }) => React.ReactNode;
+type SkillEntry = { name: string; Icon: IconComponent };
+
+const skillsMarqueeRow1: SkillEntry[] = [
+  { name: "TypeScript", Icon: SiTypescript },
+  { name: "JavaScript", Icon: SiJavascript },
+  { name: "Python", Icon: SiPython },
+  { name: "Java", Icon: SiOpenjdk },
+  { name: "C", Icon: SiC },
+  { name: "C++", Icon: SiCplusplus },
+  { name: "React.js", Icon: SiReact },
+  { name: "Next.js", Icon: SiNextdotjs },
+  { name: "Node.js", Icon: SiNodedotjs },
+  { name: "Express.js", Icon: SiExpress },
 ];
-const skillsMarqueeRow2 = [
-  skillEntry("prisma", "Prisma ORM"),
-  skillEntry("axios", "Axios"),
-  skillEntry("postgresql", "PostgreSQL"),
-  skillEntry("mongodb", "MongoDB"),
-  skillEntry("amazonaws", "AWS"),
-  skillEntry("microsoftazure", "Azure"),
-  skillEntry("docker", "Docker"),
-  skillEntry("github", "GitHub"),
-  skillEntry("render", "Render"),
-  skillEntry("linux", "Linux"),
+const skillsMarqueeRow2: SkillEntry[] = [
+  { name: "Prisma ORM", Icon: SiPrisma },
+  { name: "Axios", Icon: SiAxios },
+  { name: "PostgreSQL", Icon: SiPostgresql },
+  { name: "MongoDB", Icon: SiMongodb },
+  { name: "AWS", Icon: FaAws },
+  { name: "Azure", Icon: TbBrandAzure },
+  { name: "Docker", Icon: SiDocker },
+  { name: "GitHub", Icon: SiGithub },
+  { name: "Render", Icon: SiRender },
+  { name: "Linux", Icon: SiLinux },
 ];
-const skillsMarqueeRow3 = [
-  skillEntry("csharp", "C#"),
-  skillEntry("html5", "HTML"),
-  skillEntry("css3", "CSS"),
-  skillEntry("react", "React Native"),
-  skillEntry("tailwindcss", "Tailwind CSS"),
-  skillEntry("postman", "Postman"),
-  skillEntry("expo", "Expo"),
-  skillEntry("figma", "Figma"),
+const skillsMarqueeRow3: SkillEntry[] = [
+  { name: "C#", Icon: SiSharp },
+  { name: "HTML", Icon: SiHtml5 },
+  { name: "CSS", Icon: SiCss },
+  { name: "React Native", Icon: SiReact },
+  { name: "Tailwind CSS", Icon: SiTailwindcss },
+  { name: "Postman", Icon: SiPostman },
+  { name: "Expo", Icon: SiExpo },
+  { name: "Figma", Icon: SiFigma },
 ];
+
+function SkillIcon({ skill }: { skill: SkillEntry }) {
+  return <skill.Icon className="w-5 h-5 shrink-0 text-white" aria-hidden />;
+}
 
 // Slideshow Component (Added Only)
 function Slideshow() {
@@ -734,13 +765,7 @@ export default function Page() {
                       <div className="skill-card-border shrink-0">
                         <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
                           <div className="shrink-0 w-9 h-9 flex items-center justify-center">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                              src={skill.icon}
-                              alt=""
-                              className="w-5 h-5 object-contain brightness-0 invert"
-                              loading="lazy"
-                            />
+                            <SkillIcon skill={skill} />
                           </div>
                           <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
                             {skill.name}
@@ -757,13 +782,7 @@ export default function Page() {
                       <div className="skill-card-border shrink-0">
                         <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
                           <div className="shrink-0 w-9 h-9 flex items-center justify-center">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                              src={skill.icon}
-                              alt=""
-                              className="w-5 h-5 object-contain brightness-0 invert"
-                              loading="lazy"
-                            />
+                            <SkillIcon skill={skill} />
                           </div>
                           <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
                             {skill.name}
@@ -796,13 +815,7 @@ export default function Page() {
                       <div className="skill-card-border shrink-0">
                         <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
                           <div className="shrink-0 w-9 h-9 flex items-center justify-center">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                              src={skill.icon}
-                              alt=""
-                              className="w-5 h-5 object-contain brightness-0 invert"
-                              loading="lazy"
-                            />
+                            <SkillIcon skill={skill} />
                           </div>
                           <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
                             {skill.name}
@@ -819,13 +832,7 @@ export default function Page() {
                       <div className="skill-card-border shrink-0">
                         <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
                           <div className="shrink-0 w-9 h-9 flex items-center justify-center">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                              src={skill.icon}
-                              alt=""
-                              className="w-5 h-5 object-contain brightness-0 invert"
-                              loading="lazy"
-                            />
+                            <SkillIcon skill={skill} />
                           </div>
                           <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
                             {skill.name}
@@ -858,13 +865,7 @@ export default function Page() {
                       <div className="skill-card-border shrink-0">
                         <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
                           <div className="shrink-0 w-9 h-9 flex items-center justify-center">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                              src={skill.icon}
-                              alt=""
-                              className="w-5 h-5 object-contain brightness-0 invert"
-                              loading="lazy"
-                            />
+                            <SkillIcon skill={skill} />
                           </div>
                           <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
                             {skill.name}
@@ -881,13 +882,7 @@ export default function Page() {
                       <div className="skill-card-border shrink-0">
                         <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
                           <div className="shrink-0 w-9 h-9 flex items-center justify-center">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                              src={skill.icon}
-                              alt=""
-                              className="w-5 h-5 object-contain brightness-0 invert"
-                              loading="lazy"
-                            />
+                            <SkillIcon skill={skill} />
                           </div>
                           <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
                             {skill.name}
