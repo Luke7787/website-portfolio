@@ -681,7 +681,7 @@ export default function Page() {
                 },
               ]}
               cardClassName="group opacity-100 transition-all duration-500 ease-out"
-              startDelay={2.2}
+              startDelay={0.5}
             />
 
             <ScrollRevealCard
@@ -702,7 +702,7 @@ export default function Page() {
                 },
               ]}
               cardClassName="group opacity-100 transition-all duration-500 ease-out"
-              startDelay={4.4}
+              startDelay={1}
             />
 
             <ScrollRevealCard
@@ -719,7 +719,7 @@ export default function Page() {
               ]}
               cardClassName="group opacity-100 transition-all duration-500 ease-out"
               colSpanClassName="md:col-span-2 lg:col-span-1"
-              startDelay={6.6}
+              startDelay={1.5}
             />
           </div>
         </div>

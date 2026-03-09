@@ -16,8 +16,8 @@ const cardContainerVariants = {
   hidden: {},
   visible: {
     transition: {
-      delayChildren: 0.18,
-      staggerChildren: 0.12,
+      delayChildren: 0.02,
+      staggerChildren: 0.04,
     },
   },
 };
@@ -38,12 +38,12 @@ const itemVariants = {
   },
 };
 
-/** Slower spring for the large image block only. */
+/** Snappier spring for image (contact-section pace). */
 const imageSpring = {
   type: "spring" as const,
-  stiffness: 14,
-  damping: 20,
-  mass: 1.4,
+  stiffness: 80,
+  damping: 26,
+  mass: 0.7,
 };
 
 const imageVariants = {
@@ -58,7 +58,7 @@ const textBlockVariants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.06,
+      staggerChildren: 0.02,
       delayChildren: 0,
     },
   },
@@ -66,8 +66,8 @@ const textBlockVariants = {
 
 /** Same as itemVariants but with a delay so links appear after description word reveal. */
 function linksVariants(descriptionWordCount: number) {
-  const descriptionRevealDuration = descriptionWordCount * 0.06;
-  const delay = 0.42 + descriptionRevealDuration + 0.35;
+  const descriptionRevealDuration = descriptionWordCount * 0.02;
+  const delay = 0.08 + descriptionRevealDuration + 0.06;
   return {
     hidden: itemVariants.hidden,
     visible: {
