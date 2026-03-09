@@ -626,6 +626,8 @@ export default function Page() {
           <ScrollRevealWords
             className="text-center mb-16"
             threshold={0.45}
+            delayChildren={0.02}
+            staggerChildren={0.04}
             lines={[
               {
                 as: "p",
@@ -719,7 +721,7 @@ export default function Page() {
               ]}
               cardClassName="group opacity-100 transition-all duration-500 ease-out"
               colSpanClassName="md:col-span-2 lg:col-span-1"
-              startDelay={1.5}
+              startDelay={1.25}
             />
           </div>
         </div>
