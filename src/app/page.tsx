@@ -337,8 +337,8 @@ export default function Page() {
             <ScrollRevealWords
               className=""
               threshold={0.45}
-              delayChildren={0.14}
-              staggerChildren={0.08}
+              delayChildren={0.02}
+              staggerChildren={0.02}
               lines={[
                 {
                   as: "p",
@@ -378,7 +378,7 @@ export default function Page() {
                         hidden: {},
                         visible: {
                           transition: {
-                            staggerChildren: 0.1,
+                            staggerChildren: 0.02,
                             delayChildren: 0,
                           },
                         },
@@ -448,7 +448,7 @@ export default function Page() {
                         hidden: {},
                         visible: {
                           transition: {
-                            staggerChildren: 0.06,
+                            staggerChildren: 0.02,
                             delayChildren: 0,
                           },
                         },
