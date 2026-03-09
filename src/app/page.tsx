@@ -130,9 +130,9 @@ function Slideshow() {
       {/* Aspect Ratio Container — scroll reveal */}
       <ScrollRevealBlock
         animationStyle="words"
-        delay={0.2}
+        delay={0.02}
         amount={0.3}
-        transitionOverrides={{ stiffness: 45, damping: 22 }}
+        transitionOverrides={{ stiffness: 65, damping: 24 }}
       >
         <div className="relative w-full aspect-square">
           {/* IMAGE */}
@@ -179,8 +179,8 @@ function Slideshow() {
       <ScrollRevealWords
         className="mt-4"
         threshold={0.3}
-        delayChildren={0.25}
-        staggerChildren={0.04}
+        delayChildren={0}
+        staggerChildren={0.01}
         lines={[
           {
             as: "p",
@@ -195,9 +195,9 @@ function Slideshow() {
       <div className="absolute inset-0">
         <ScrollRevealBlock
           animationStyle="words"
-          delay={0.6}
+          delay={0.04}
           amount={0.3}
-          transitionOverrides={{ stiffness: 22, damping: 18 }}
+          transitionOverrides={{ stiffness: 65, damping: 24 }}
           className="absolute inset-0"
         >
           <button
