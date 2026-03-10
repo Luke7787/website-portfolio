@@ -86,7 +86,7 @@ export interface ProjectLink {
   href: string;
 }
 
-/** Reveals links with the same smooth tween after a delay (so they appear after title + description). */
+/** Reveals links with the same smooth tween after a delay (so they appear after title + description). Each link reveals separately for better flow. */
 function LinksRevealAfterDelay({
   delayMs,
   cardRef,
@@ -105,27 +105,48 @@ function LinksRevealAfterDelay({
     return () => clearTimeout(t);
   }, [isInView, delayMs]);
 
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.18,
+        delayChildren: 0,
+      },
+    },
+  };
+
+  const linkVariants = {
+    hidden: { opacity: 0, y: 12, filter: "blur(6px)" },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: {
+        type: "tween",
+        duration: 0.9,
+        ease: [0.33, 0.1, 0.2, 1],
+      },
+    },
+  };
+
   return (
     <motion.div
       className="flex gap-4 mt-4 flex-wrap"
-      initial={{ opacity: 0, y: 12, filter: "blur(6px)" }}
-      animate={show ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 12, filter: "blur(6px)" }}
-      transition={{
-        type: "tween",
-        duration: 1,
-        ease: [0.33, 0.1, 0.2, 1],
-      }}
+      variants={containerVariants}
+      initial="hidden"
+      animate={show ? "visible" : "hidden"}
     >
       {links.map((link) => (
-        <a
-          key={link.href}
-          href={link.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-[#0099ff] font-medium hover:underline"
-        >
-          {link.label}
-        </a>
+        <motion.span key={link.href} variants={linkVariants} style={{ display: "inline-block" }}>
+          <a
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#0099ff] font-medium hover:underline"
+          >
+            {link.label}
+          </a>
+        </motion.span>
       ))}
     </motion.div>
   );
