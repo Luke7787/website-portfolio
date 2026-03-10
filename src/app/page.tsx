@@ -1,7 +1,7 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import {
   SiTypescript,
   SiJavascript,
@@ -256,6 +256,9 @@ function Slideshow() {
 export default function Page() {
   const [birdsVisible, setBirdsVisible] = useState(false);
   const [contactBirdsVisible, setContactBirdsVisible] = useState(false);
+  const [showLowerAbout, setShowLowerAbout] = useState(false);
+  const aboutTextRef = useRef<HTMLDivElement>(null);
+  const aboutInView = useInView(aboutTextRef, { once: true, amount: 0.45 });
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -265,6 +268,16 @@ export default function Page() {
     const timer = setTimeout(() => setBirdsVisible(true), 2000);
     return () => clearTimeout(timer);
   }, []);
+
+  // About section: show resume + contact after first block (full paragraph) finishes
+  useEffect(() => {
+    if (!aboutInView) return;
+    const paragraphWordCount = "I'm a software engineer with a passion for building websites. I'm constantly seeking new challenges to expand my skills and knowledge.".split(/\s+/).length;
+    // Start second block slightly before last word fully finishes so resume doesn't feel late
+    const delayMs = (0.08 + 2 * 0.058 + (paragraphWordCount - 1) * 0.058 + 0.5) * 1000;
+    const t = setTimeout(() => setShowLowerAbout(true), Math.round(delayMs));
+    return () => clearTimeout(t);
+  }, [aboutInView]);
 
   return (
     <main className="relative">
@@ -326,6 +339,7 @@ export default function Page() {
 
           {/* Right: Text */}
           <div
+            ref={aboutTextRef}
             className="
               text-center
               md:text-left
@@ -337,12 +351,12 @@ export default function Page() {
             <ScrollRevealWords
               className=""
               threshold={0.45}
-              delayChildren={0.22}
-              staggerChildren={0.092}
+              delayChildren={0.08}
+              staggerChildren={0.058}
               transitionOverrides={{
                 type: "tween",
-                duration: 1.15,
-                ease: [0.33, 0.1, 0.2, 1],
+                duration: 1.05,
+                ease: [0.22, 0.08, 0.28, 1],
               }}
               lines={[
                 {
@@ -363,15 +377,29 @@ export default function Page() {
                   className:
                     "mt-5 cursor-default max-w-[320px] sm:max-w-sm md:max-w-md text-[1rem] sm:text-[1.05rem] md:text-[1.125rem] font-medium leading-[1.6] md:leading-[1.75] tracking-[0.03em] text-white/80 text-justify md:translate-x-19 md:-translate-y-13 -translate-y-30",
                 },
-                {
-                  as: "a",
-                  text: "Check out my resume",
-                  href: "/LukeResume2026.pdf",
-                  target: "_blank",
-                  rel: "noopener noreferrer",
-                  className:
-                    "block mt-4 text-[1.125rem] font-medium text-[#1E90FF] hover:underline transition-colors duration-200 -translate-y-25 md:translate-x-19 md:-translate-y-10 cursor-pointer",
-                },
+              ]}
+            />
+            {showLowerAbout && (
+              <ScrollRevealWords
+                className=""
+                threshold={0.1}
+                delayChildren={0.22}
+                staggerChildren={0.092}
+                transitionOverrides={{
+                  type: "tween",
+                  duration: 1.15,
+                  ease: [0.33, 0.1, 0.2, 1],
+                }}
+                lines={[
+                  {
+                    as: "a",
+                    text: "Check out my resume",
+                    href: "/LukeResume2026.pdf",
+                    target: "_blank",
+                    rel: "noopener noreferrer",
+                    className:
+                      "block mt-4 text-[1.125rem] font-medium text-[#1E90FF] hover:underline transition-colors duration-200 -translate-y-25 md:translate-x-19 md:-translate-y-10 cursor-pointer",
+                  },
                 {
                   as: "custom",
                   className:
@@ -618,6 +646,7 @@ export default function Page() {
                 },
               ]}
             />
+            )}
           </div>
         </div>
       </section>
@@ -631,12 +660,12 @@ export default function Page() {
           <ScrollRevealWords
             className="text-center mb-16"
             threshold={0.45}
-            delayChildren={0.18}
-            staggerChildren={0.09}
+            delayChildren={0.08}
+            staggerChildren={0.058}
             transitionOverrides={{
               type: "tween",
-              duration: 1.1,
-              ease: [0.33, 0.1, 0.2, 1],
+              duration: 1.05,
+              ease: [0.22, 0.08, 0.28, 1],
             }}
             lines={[
               {
@@ -654,16 +683,17 @@ export default function Page() {
             ]}
           />
 
-          {/* Single flowing row, wraps after 3 — smooth transition from Blackjack to Server and Client */}
-          <ScrollRevealBlock
-            animationStyle="words"
-            delay={0.35}
-            amount={0.2}
-            transitionOverrides={{ stiffness: 28, damping: 22, mass: 1.2 }}
-            className="flex flex-wrap gap-8 lg:gap-10"
-          >
-            <div className="w-full md:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-5rem)/3)]">
-              <ScrollRevealCard
+          {/* First three projects reveal together; project 4 reveals when scrolled into view */}
+          <div className="flex flex-wrap gap-8 lg:gap-10">
+            <ScrollRevealBlock
+              animationStyle="words"
+              delay={0.35}
+              amount={0.2}
+              transitionOverrides={{ stiffness: 24, damping: 24, mass: 1.2 }}
+              className="flex flex-wrap gap-8 lg:gap-10 w-full"
+            >
+              <div className="w-full md:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-5rem)/3)]">
+                <ScrollRevealCard
               imageSrc="/images/P1P1.png"
               imageAlt="Showroom Booking App"
               title="Showroom Booking App"
@@ -682,9 +712,9 @@ export default function Page() {
               cardClassName="group opacity-100 transition-all duration-500 ease-out"
               disableReveal
             />
-            </div>
+              </div>
 
-            <div className="w-full md:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-5rem)/3)]">
+              <div className="w-full md:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-5rem)/3)]">
             <ScrollRevealCard
               imageSrc="/images/project2.png"
               imageAlt="Inventory Management Platform"
@@ -704,9 +734,9 @@ export default function Page() {
               cardClassName="group opacity-100 transition-all duration-500 ease-out"
               disableReveal
             />
-            </div>
+              </div>
 
-            <div className="w-full md:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-5rem)/3)]">
+              <div className="w-full md:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-5rem)/3)]">
             <ScrollRevealCard
               imageSrc="/images/project3.png"
               imageAlt="Blackjack game"
@@ -727,10 +757,17 @@ export default function Page() {
               cardClassName="group opacity-100 transition-all duration-500 ease-out"
               disableReveal
             />
-            </div>
+              </div>
+            </ScrollRevealBlock>
 
-            <div className="w-full md:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-5rem)/3)]">
-            <ScrollRevealCard
+            <ScrollRevealBlock
+              animationStyle="words"
+              delay={0.35}
+              amount={0.2}
+              transitionOverrides={{ stiffness: 24, damping: 24, mass: 1.2 }}
+              className="w-full md:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-5rem)/3)]"
+            >
+              <ScrollRevealCard
               imageSrc="/images/project4.png"
               imageAlt="Server and Client webserver"
               title="Server and Client"
@@ -745,8 +782,8 @@ export default function Page() {
               cardClassName="group opacity-100 transition-all duration-500 ease-out"
               disableReveal
             />
-            </div>
-          </ScrollRevealBlock>
+            </ScrollRevealBlock>
+          </div>
         </div>
       </section>
 

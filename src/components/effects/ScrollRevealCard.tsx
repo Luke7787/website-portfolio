@@ -109,7 +109,7 @@ function LinksRevealAfterDelay({
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: 0.18,
+        staggerChildren: 0.12,
         delayChildren: 0,
       },
     },
@@ -124,7 +124,7 @@ function LinksRevealAfterDelay({
       transition: {
         type: "tween",
         duration: 0.9,
-        ease: [0.33, 0.1, 0.2, 1],
+        ease: [0.22, 0.08, 0.28, 1],
       },
     },
   };
@@ -235,14 +235,27 @@ export default function ScrollRevealCard({
   if (disableReveal) {
     const titleWordCount = title.split(/\s+/).length;
     const descriptionWordCount = description.split(/\s+/).length;
-    // Links reveal after title + description: delayChildren + (title + desc words) * staggerChildren + duration for last word
-    const linksRevealDelayMs =
-      (0.1 + (titleWordCount + descriptionWordCount) * 0.088 + 1.1) * 1000;
+    // Links reveal after title + description: delayChildren + (title + desc words) * staggerChildren + tail
+    let linksRevealDelayMs =
+      (0.08 + (titleWordCount + descriptionWordCount) * 0.058 + 0.5) * 1000;
+    // Single-link cards (e.g. project 4 "GitHub" only) would feel too early; add extra delay
+    if (links.length === 1) {
+      linksRevealDelayMs += 550;
+    }
 
     return (
       <div ref={ref} className={`${cardClassName} ${colSpanClassName}`}>
         <a href={mainHref} target="_blank" rel="noopener noreferrer" className="block">
-          <div className="relative w-full aspect-9/8 overflow-hidden rounded-xl mb-5">
+          <motion.div
+            className="relative w-full aspect-9/8 overflow-hidden rounded-xl mb-5"
+            initial={{ opacity: 0, filter: "blur(10px)" }}
+            animate={isInView ? { opacity: 1, filter: "blur(0px)" } : { opacity: 0, filter: "blur(10px)" }}
+            transition={{
+              type: "tween",
+              duration: 1.5,
+              ease: [0.22, 0.08, 0.28, 1],
+            }}
+          >
             <Image
               src={imageSrc}
               alt={imageAlt}
@@ -251,16 +264,16 @@ export default function ScrollRevealCard({
               className={`rounded-xl object-cover transition-transform duration-300 ${cardClassName.includes("group") ? "group-hover:scale-[1.02]" : ""} ${imageObjectPosition ? "" : "object-center"}`}
               style={imageObjectPosition ? { objectPosition: imageObjectPosition } : undefined}
             />
-          </div>
+          </motion.div>
           <div className={className}>
             <ScrollRevealWords
               threshold={0.2}
-              delayChildren={0.1}
-              staggerChildren={0.088}
+              delayChildren={0.08}
+              staggerChildren={0.058}
               transitionOverrides={{
                 type: "tween",
-                duration: 1.1,
-                ease: [0.33, 0.1, 0.2, 1],
+                duration: 1.05,
+                ease: [0.22, 0.08, 0.28, 1],
               }}
               lines={[
                 {
