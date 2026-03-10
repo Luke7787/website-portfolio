@@ -86,6 +86,51 @@ export interface ProjectLink {
   href: string;
 }
 
+/** Reveals links with the same smooth tween after a delay (so they appear after title + description). */
+function LinksRevealAfterDelay({
+  delayMs,
+  cardRef,
+  links,
+}: {
+  delayMs: number;
+  cardRef: React.RefObject<HTMLDivElement | null>;
+  links: ProjectLink[];
+}) {
+  const [show, setShow] = useState(false);
+  const isInView = useInView(cardRef, { once: true, amount: 0.2 });
+
+  useEffect(() => {
+    if (!isInView) return;
+    const t = setTimeout(() => setShow(true), delayMs);
+    return () => clearTimeout(t);
+  }, [isInView, delayMs]);
+
+  return (
+    <motion.div
+      className="flex gap-4 mt-4 flex-wrap"
+      initial={{ opacity: 0, y: 12, filter: "blur(6px)" }}
+      animate={show ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 12, filter: "blur(6px)" }}
+      transition={{
+        type: "tween",
+        duration: 1,
+        ease: [0.33, 0.1, 0.2, 1],
+      }}
+    >
+      {links.map((link) => (
+        <a
+          key={link.href}
+          href={link.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[#0099ff] font-medium hover:underline"
+        >
+          {link.label}
+        </a>
+      ))}
+    </motion.div>
+  );
+}
+
 interface ScrollRevealCardProps {
   imageSrc: string;
   imageAlt: string;
@@ -167,6 +212,12 @@ export default function ScrollRevealCard({
   const shouldAnimate = !disableReveal && isInView && hasDelayed;
 
   if (disableReveal) {
+    const titleWordCount = title.split(/\s+/).length;
+    const descriptionWordCount = description.split(/\s+/).length;
+    // Links reveal after title + description: delayChildren + (title + desc words) * staggerChildren + duration for last word
+    const linksRevealDelayMs =
+      (0.1 + (titleWordCount + descriptionWordCount) * 0.088 + 1.1) * 1000;
+
     return (
       <div ref={ref} className={`${cardClassName} ${colSpanClassName}`}>
         <a href={mainHref} target="_blank" rel="noopener noreferrer" className="block">
@@ -205,19 +256,11 @@ export default function ScrollRevealCard({
             />
           </div>
         </a>
-        <div className="flex gap-4 mt-4">
-          {links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#0099ff] font-medium hover:underline"
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
+        <LinksRevealAfterDelay
+          delayMs={linksRevealDelayMs}
+          cardRef={ref}
+          links={links}
+        />
       </div>
     );
   }
