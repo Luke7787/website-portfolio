@@ -122,9 +122,9 @@ function LinksRevealAfterDelay({
       y: 0,
       filter: "blur(0px)",
       transition: {
-        type: "tween",
+        type: "tween" as const,
         duration: 0.9,
-        ease: [0.22, 0.08, 0.28, 1],
+        ease: [0.22, 0.08, 0.28, 1] as const,
       },
     },
   };
