@@ -100,6 +100,8 @@ interface ScrollRevealCardProps {
   colSpanClassName?: string;
   /** Delay in seconds before this card's animation starts (for staggering cards: image → text, then next card). */
   startDelay?: number;
+  /** When true, card does not animate on its own; use with a parent ScrollRevealBlock to reveal the whole row at once. */
+  disableReveal?: boolean;
 }
 
 function AnimatedWords({
@@ -144,23 +146,60 @@ export default function ScrollRevealCard({
   colSpanClassName = "",
   /** Delay in seconds before this card's animation starts (e.g. for staggering multiple cards). */
   startDelay = 0,
+  disableReveal = false,
 }: ScrollRevealCardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
   const [hasDelayed, setHasDelayed] = useState(false);
 
   useEffect(() => {
-    if (!isInView) return;
+    if (!isInView || disableReveal) return;
     if (startDelay <= 0) {
       setHasDelayed(true);
       return;
     }
     const t = setTimeout(() => setHasDelayed(true), startDelay * 1000);
     return () => clearTimeout(t);
-  }, [isInView, startDelay]);
+  }, [isInView, startDelay, disableReveal]);
 
   const descriptionWordCount = description.split(/\s+/).length;
-  const shouldAnimate = isInView && hasDelayed;
+  const shouldAnimate = !disableReveal && isInView && hasDelayed;
+
+  if (disableReveal) {
+    return (
+      <div ref={ref} className={`${cardClassName} ${colSpanClassName}`}>
+        <a href={mainHref} target="_blank" rel="noopener noreferrer" className="block">
+          <div className="relative w-full aspect-9/8 overflow-hidden rounded-xl mb-5">
+            <Image
+              src={imageSrc}
+              alt={imageAlt}
+              fill
+              sizes={imageSizes}
+              className={`rounded-xl object-cover transition-transform duration-300 ${cardClassName.includes("group") ? "group-hover:scale-[1.02]" : ""} ${imageObjectPosition ? "" : "object-center"}`}
+              style={imageObjectPosition ? { objectPosition: imageObjectPosition } : undefined}
+            />
+          </div>
+          <div className={className}>
+            <h3 className="cursor-default text-xl font-semibold text-white mb-2">{title}</h3>
+            <p className="cursor-default text-white/70 text-[15px] leading-relaxed">{description}</p>
+          </div>
+        </a>
+        <div className="flex gap-4 mt-4">
+          {links.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#0099ff] font-medium hover:underline"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <motion.div

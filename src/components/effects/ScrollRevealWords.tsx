@@ -10,6 +10,11 @@ const defaultSpring = {
   mass: 0.9,
 };
 
+/** Override word animation (e.g. { type: "tween", duration: 0.7, ease: "easeOut" } for smoother/slower). */
+type TransitionOverrides =
+  | { type: "spring"; stiffness?: number; damping?: number; mass?: number }
+  | { type: "tween"; duration?: number; ease?: string | number[] };
+
 const containerVariants = (
   delayChildren: number,
   staggerChildren: number
@@ -23,7 +28,7 @@ const containerVariants = (
   },
 });
 
-const wordVariants = {
+const wordVariants = (transitionOverrides?: TransitionOverrides) => ({
   hidden: {
     opacity: 0,
     y: 24,
@@ -35,9 +40,9 @@ const wordVariants = {
     y: 0,
     scale: 1,
     filter: "blur(0px)",
-    transition: defaultSpring,
+    transition: transitionOverrides ?? defaultSpring,
   },
-};
+});
 
 interface TextLineConfig {
   as: "p" | "h1" | "h2" | "h3" | "span" | "a";
@@ -66,6 +71,8 @@ interface ScrollRevealWordsProps {
   delayChildren?: number;
   /** Delay between each child (seconds). Default 0.12 */
   staggerChildren?: number;
+  /** Override word transition for smoother/slower animation (e.g. tween with easeOut). */
+  transitionOverrides?: TransitionOverrides;
 }
 
 export default function ScrollRevealWords({
@@ -74,9 +81,11 @@ export default function ScrollRevealWords({
   threshold = 0.45,
   delayChildren = 0.18,
   staggerChildren = 0.12,
+  transitionOverrides,
 }: ScrollRevealWordsProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: threshold });
+  const variants = wordVariants(transitionOverrides);
 
   return (
     <motion.div
@@ -91,7 +100,7 @@ export default function ScrollRevealWords({
           return (
             <motion.div
               key={i}
-              variants={wordVariants}
+              variants={variants}
               className={line.className}
             >
               {line.content}
@@ -113,7 +122,7 @@ export default function ScrollRevealWords({
           return (
             <motion.span
               key={i}
-              variants={wordVariants}
+              variants={variants}
               style={{ display: "inline-block" }}
             >
               <Tag className={line.className} {...linkProps}>
@@ -127,7 +136,7 @@ export default function ScrollRevealWords({
             {words.map((word, j) => (
               <motion.span
                 key={j}
-                variants={wordVariants}
+                variants={variants}
                 style={{ display: "inline-block" }}
               >
                 {word}

@@ -337,8 +337,13 @@ export default function Page() {
             <ScrollRevealWords
               className=""
               threshold={0.45}
-              delayChildren={0.02}
-              staggerChildren={0.02}
+              delayChildren={0.08}
+              staggerChildren={0.045}
+              transitionOverrides={{
+                type: "tween",
+                duration: 0.72,
+                ease: [0.25, 0.1, 0.25, 1],
+              }}
               lines={[
                 {
                   as: "p",
@@ -626,8 +631,13 @@ export default function Page() {
           <ScrollRevealWords
             className="text-center mb-16"
             threshold={0.45}
-            delayChildren={0.02}
-            staggerChildren={0.04}
+            delayChildren={0.08}
+            staggerChildren={0.055}
+            transitionOverrides={{
+              type: "tween",
+              duration: 0.72,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
             lines={[
               {
                 as: "p",
@@ -645,7 +655,13 @@ export default function Page() {
           />
 
           {/* Single flowing row, wraps after 3 — smooth transition from Blackjack to Server and Client */}
-          <div className="flex flex-wrap gap-8 lg:gap-10">
+          <ScrollRevealBlock
+            animationStyle="words"
+            delay={0.15}
+            amount={0.2}
+            transitionOverrides={{ stiffness: 45, damping: 26 }}
+            className="flex flex-wrap gap-8 lg:gap-10"
+          >
             <div className="w-full md:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-5rem)/3)]">
               <ScrollRevealCard
               imageSrc="/images/P1P1.png"
@@ -664,7 +680,7 @@ export default function Page() {
                 },
               ]}
               cardClassName="group opacity-100 transition-all duration-500 ease-out"
-              startDelay={0}
+              disableReveal
             />
             </div>
 
@@ -686,7 +702,7 @@ export default function Page() {
                 },
               ]}
               cardClassName="group opacity-100 transition-all duration-500 ease-out"
-              startDelay={0.5}
+              disableReveal
             />
             </div>
 
@@ -709,7 +725,7 @@ export default function Page() {
                 },
               ]}
               cardClassName="group opacity-100 transition-all duration-500 ease-out"
-              startDelay={1}
+              disableReveal
             />
             </div>
 
@@ -727,10 +743,10 @@ export default function Page() {
                 },
               ]}
               cardClassName="group opacity-100 transition-all duration-500 ease-out"
-              startDelay={1.1}
+              disableReveal
             />
             </div>
-          </div>
+          </ScrollRevealBlock>
         </div>
       </section>
 
