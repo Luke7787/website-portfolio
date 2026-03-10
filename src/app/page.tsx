@@ -337,12 +337,12 @@ export default function Page() {
             <ScrollRevealWords
               className=""
               threshold={0.45}
-              delayChildren={0.08}
-              staggerChildren={0.045}
+              delayChildren={0.22}
+              staggerChildren={0.092}
               transitionOverrides={{
                 type: "tween",
-                duration: 0.72,
-                ease: [0.25, 0.1, 0.25, 1],
+                duration: 1.15,
+                ease: [0.33, 0.1, 0.2, 1],
               }}
               lines={[
                 {
@@ -383,7 +383,7 @@ export default function Page() {
                         hidden: {},
                         visible: {
                           transition: {
-                            staggerChildren: 0.02,
+                            staggerChildren: 0.1,
                             delayChildren: 0,
                           },
                         },
@@ -453,7 +453,7 @@ export default function Page() {
                         hidden: {},
                         visible: {
                           transition: {
-                            staggerChildren: 0.02,
+                            staggerChildren: 0.08,
                             delayChildren: 0,
                           },
                         },
