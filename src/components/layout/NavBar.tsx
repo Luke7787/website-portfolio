@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import AnimatedName from "@/components/effects/AnimatedName";
 
@@ -135,7 +136,7 @@ export default function NavBar() {
             priority
           />
 
-          <a
+          <Link
             href="/"
             className="min-w-0 pl-1 sm:pl-2 cursor-pointer block"
             onClick={(e) => {
@@ -166,7 +167,7 @@ export default function NavBar() {
                 LUKE ZHUANG
               </span>
             </AnimatedName>
-          </a>
+          </Link>
         </div>
 
         {/* Desktop Nav Links — sliding pill shows current section */}
@@ -176,7 +177,7 @@ export default function NavBar() {
             const isActive = activeSection === id;
             return (
               <li key={item.href} className="relative">
-                <a
+                <Link
                   href="/"
                   className={
                     "relative z-10 block uppercase rounded-md px-3 py-2 text-[0.8rem] font-semibold tracking-[0.12em] transition-[color,opacity] duration-300 ease-out " +
@@ -202,7 +203,7 @@ export default function NavBar() {
                     />
                   )}
                   <span className="relative z-10">{item.label}</span>
-                </a>
+                </Link>
               </li>
             );
           })}
@@ -240,7 +241,7 @@ export default function NavBar() {
             const isActive = activeSection === id;
             return (
               <li key={item.href}>
-                <a
+                <Link
                   href="/"
                   className={
                     "block uppercase rounded-md px-3 py-3 text-[0.85rem] font-semibold tracking-[0.12em] transition-[background-color,color,border-color] duration-300 ease-out " +
@@ -255,7 +256,7 @@ export default function NavBar() {
                   }}
                 >
                   {item.label}
-                </a>
+                </Link>
               </li>
             );
           })}

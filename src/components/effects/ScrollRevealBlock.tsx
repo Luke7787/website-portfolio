@@ -55,7 +55,10 @@ export default function ScrollRevealBlock({
   const transitionSpring = isWords ? wordsSpring : spring;
 
   useEffect(() => {
-    if (isInView && !hasAnimated) setHasAnimated(true);
+    if (isInView && !hasAnimated) {
+      const id = setTimeout(() => setHasAnimated(true), 0);
+      return () => clearTimeout(id);
+    }
   }, [isInView, hasAnimated]);
 
   return (

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, type Variants, type Transition } from "framer-motion";
 
 const defaultSpring = {
   type: "spring" as const,
@@ -13,7 +13,7 @@ const defaultSpring = {
 /** Override word animation (e.g. { type: "tween", duration: 0.7, ease: "easeOut" } for smoother/slower). */
 type TransitionOverrides =
   | { type: "spring"; stiffness?: number; damping?: number; mass?: number }
-  | { type: "tween"; duration?: number; ease?: string | number[] };
+  | { type: "tween"; duration?: number; ease?: string | readonly [number, number, number, number] };
 
 const containerVariants = (
   delayChildren: number,
@@ -28,21 +28,32 @@ const containerVariants = (
   },
 });
 
-const wordVariants = (transitionOverrides?: TransitionOverrides) => ({
-  hidden: {
-    opacity: 0,
-    y: 24,
-    scale: 1,
-    filter: "blur(10px)",
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    filter: "blur(0px)",
-    transition: transitionOverrides ?? defaultSpring,
-  },
-});
+const wordVariants = (transitionOverrides?: TransitionOverrides): Variants => {
+  const transition: Transition =
+    transitionOverrides?.type === "tween"
+      ? {
+          type: "tween",
+          duration: transitionOverrides.duration ?? 0.7,
+          ease: (transitionOverrides.ease ?? [0.22, 0.08, 0.28, 1]) as Transition["ease"],
+        }
+      : (transitionOverrides ?? defaultSpring) as Transition;
+
+  return {
+    hidden: {
+      opacity: 0,
+      y: 24,
+      scale: 1,
+      filter: "blur(10px)",
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      filter: "blur(0px)",
+      transition,
+    },
+  };
+};
 
 interface TextLineConfig {
   as: "p" | "h1" | "h2" | "h3" | "span" | "a";

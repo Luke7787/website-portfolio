@@ -222,8 +222,8 @@ export default function ScrollRevealCard({
   useEffect(() => {
     if (!isInView || disableReveal) return;
     if (startDelay <= 0) {
-      setHasDelayed(true);
-      return;
+      const id = setTimeout(() => setHasDelayed(true), 0);
+      return () => clearTimeout(id);
     }
     const t = setTimeout(() => setHasDelayed(true), startDelay * 1000);
     return () => clearTimeout(t);
