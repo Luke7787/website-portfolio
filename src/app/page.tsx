@@ -631,12 +631,12 @@ export default function Page() {
           <ScrollRevealWords
             className="text-center mb-16"
             threshold={0.45}
-            delayChildren={0.08}
-            staggerChildren={0.055}
+            delayChildren={0.18}
+            staggerChildren={0.09}
             transitionOverrides={{
               type: "tween",
-              duration: 0.72,
-              ease: [0.25, 0.1, 0.25, 1],
+              duration: 1.1,
+              ease: [0.33, 0.1, 0.2, 1],
             }}
             lines={[
               {
@@ -657,9 +657,9 @@ export default function Page() {
           {/* Single flowing row, wraps after 3 — smooth transition from Blackjack to Server and Client */}
           <ScrollRevealBlock
             animationStyle="words"
-            delay={0.15}
+            delay={0.35}
             amount={0.2}
-            transitionOverrides={{ stiffness: 45, damping: 26 }}
+            transitionOverrides={{ stiffness: 28, damping: 22, mass: 1.2 }}
             className="flex flex-wrap gap-8 lg:gap-10"
           >
             <div className="w-full md:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-5rem)/3)]">

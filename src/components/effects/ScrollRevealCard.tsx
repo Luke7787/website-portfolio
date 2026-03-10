@@ -3,6 +3,7 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
+import ScrollRevealWords from "@/components/effects/ScrollRevealWords";
 
 /** Match ScrollRevealWords exactly: same spring and variants */
 const defaultSpring = {
@@ -180,8 +181,28 @@ export default function ScrollRevealCard({
             />
           </div>
           <div className={className}>
-            <h3 className="cursor-default text-xl font-semibold text-white mb-2">{title}</h3>
-            <p className="cursor-default text-white/70 text-[15px] leading-relaxed">{description}</p>
+            <ScrollRevealWords
+              threshold={0.2}
+              delayChildren={0.1}
+              staggerChildren={0.088}
+              transitionOverrides={{
+                type: "tween",
+                duration: 1.1,
+                ease: [0.33, 0.1, 0.2, 1],
+              }}
+              lines={[
+                {
+                  as: "h3",
+                  text: title,
+                  className: "cursor-default text-xl font-semibold text-white mb-2",
+                },
+                {
+                  as: "p",
+                  text: description,
+                  className: "cursor-default text-white/70 text-[15px] leading-relaxed",
+                },
+              ]}
+            />
           </div>
         </a>
         <div className="flex gap-4 mt-4">
