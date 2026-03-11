@@ -273,8 +273,8 @@ export default function Page() {
   useEffect(() => {
     if (!aboutInView) return;
     const paragraphWordCount = "I'm a software engineer with a passion for building websites. I'm constantly seeking new challenges to expand my skills and knowledge.".split(/\s+/).length;
-    // Start second block slightly before last word fully finishes so resume doesn't feel late
-    const delayMs = (0.08 + 2 * 0.058 + (paragraphWordCount - 1) * 0.058 + 0.5) * 1000;
+    // Start second block as soon as last word finishes (minimal buffer)
+    const delayMs = (0.08 + 2 * 0.058 + (paragraphWordCount - 1) * 0.058 + 0.15) * 1000;
     const t = setTimeout(() => setShowLowerAbout(true), Math.round(delayMs));
     return () => clearTimeout(t);
   }, [aboutInView]);
@@ -383,7 +383,7 @@ export default function Page() {
               <ScrollRevealWords
                 className=""
                 threshold={0.1}
-                delayChildren={0.22}
+                delayChildren={0}
                 staggerChildren={0.092}
                 transitionOverrides={{
                   type: "tween",
