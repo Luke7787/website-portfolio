@@ -20,7 +20,8 @@ function scrollToSection(href: string) {
   const id = href.replace("#", "");
   const el = document.getElementById(id);
   if (el) {
-    el.scrollIntoView({ behavior: "instant" });
+    const block = id === "skills" ? "center" : "start";
+    el.scrollIntoView({ behavior: "smooth", block });
   }
   // Keep URL as base path (no hash)
   if (typeof window !== "undefined") {
