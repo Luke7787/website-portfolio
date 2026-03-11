@@ -654,7 +654,7 @@ export default function Page() {
       {/* PROJECTS — Framer-style card grid */}
       <section
         id="projects"
-        className="scroll-mt-2 md:scroll-mt-16 min-h-screen pt-16 flex items-center justify-center"
+        className="scroll-mt-2 md:scroll-mt-16 min-h-screen pt-16 pb-24 md:pb-32 flex items-center justify-center"
       >
         <div className="w-full max-w-6xl mx-auto px-6">
           <ScrollRevealWords
