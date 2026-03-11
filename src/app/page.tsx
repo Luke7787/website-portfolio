@@ -815,7 +815,11 @@ export default function Page() {
 
         {/* Row 1: scroll left — cards with icon + label; two equal-width copies for seamless loop */}
         <div className="flex flex-col gap-6 py-4 w-full">
-          <ScrollRevealBlock animationStyle="words" delay={0.2}>
+          <ScrollRevealBlock
+            animationStyle="words"
+            delay={0.2}
+            transitionOverrides={{ stiffness: 32, damping: 25, mass: 1.1 }}
+          >
             <div
               className="w-full flex items-center overflow-hidden"
               style={{
@@ -865,7 +869,11 @@ export default function Page() {
           </ScrollRevealBlock>
 
           {/* Row 2: scroll right — two equal-width copies for seamless loop */}
-          <ScrollRevealBlock animationStyle="words" delay={0.45}>
+          <ScrollRevealBlock
+            animationStyle="words"
+            delay={0.45}
+            transitionOverrides={{ stiffness: 32, damping: 25, mass: 1.1 }}
+          >
             <div
               className="w-full flex items-center overflow-hidden"
               style={{
@@ -915,7 +923,11 @@ export default function Page() {
           </ScrollRevealBlock>
 
           {/* Row 3: scroll left — C#, HTML, CSS, React Native, Tailwind, Postman, Expo, Figma */}
-          <ScrollRevealBlock animationStyle="words" delay={0.7}>
+          <ScrollRevealBlock
+            animationStyle="words"
+            delay={0.7}
+            transitionOverrides={{ stiffness: 32, damping: 25, mass: 1.1 }}
+          >
             <div
               className="w-full flex items-center overflow-hidden"
               style={{
