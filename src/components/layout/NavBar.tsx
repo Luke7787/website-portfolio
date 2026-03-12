@@ -195,9 +195,9 @@ export default function NavBar() {
                       className="absolute inset-0 rounded-md bg-[#1E90FF]"
                       transition={{
                         type: "spring",
-                        stiffness: 240,
-                        damping: 26,
-                        mass: 0.8,
+                        stiffness: 100,
+                        damping: 22,
+                        mass: 1.2,
                       }}
                       style={{ zIndex: -1 }}
                       aria-hidden
