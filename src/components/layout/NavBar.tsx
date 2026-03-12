@@ -16,14 +16,20 @@ const NAV_ITEMS = [
 
 const SECTION_IDS = NAV_ITEMS.map((item) => item.href.replace("#", ""));
 
-const SCROLL_DURATION_MS = 1500;
+const SCROLL_DURATION_MS = 1600; // same smooth feel in both directions, like going up
 // Ease-out-expo: responsive start, very smooth deceleration at end (common in animation libs)
 const EASE_OUT_EXPO = (t: number) =>
   t >= 1 ? 1 : 1 - Math.pow(2, -10 * t);
 
 let scrollRafId: number | null = null;
+let isProgrammaticScroll = false;
 
-function scrollToSection(href: string) {
+type ScrollCallbacks = {
+  onStart?: () => void;
+  onComplete?: (sectionId: string) => void;
+};
+
+function scrollToSection(href: string, callbacks?: ScrollCallbacks) {
   if (typeof window === "undefined") {
     window.history.replaceState(null, "", window.location.pathname);
     return;
@@ -40,6 +46,9 @@ function scrollToSection(href: string) {
     window.history.replaceState(null, "", window.location.pathname);
     return;
   }
+
+  isProgrammaticScroll = true;
+  requestAnimationFrame(() => callbacks?.onStart?.());
 
   const block = id === "skills" ? "center" : "start";
   const rect = el.getBoundingClientRect();
@@ -67,6 +76,10 @@ function scrollToSection(href: string) {
       scrollRafId = requestAnimationFrame(tick);
     } else {
       scrollRafId = null;
+      requestAnimationFrame(() => {
+        isProgrammaticScroll = false;
+        callbacks?.onComplete?.(id);
+      });
     }
   }
   scrollRafId = requestAnimationFrame(tick);
@@ -77,11 +90,26 @@ function scrollToSection(href: string) {
 export default function NavBar() {
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string>(SECTION_IDS[0]);
+  const [isScrolling, setIsScrolling] = useState(false);
+  const isScrollingRef = useRef(false);
   const navRef = useRef<HTMLElement | null>(null);
   const ratioRef = useRef<Record<string, number>>({});
   const rafRef = useRef<number | null>(null);
 
+  const scrollCallbacks: ScrollCallbacks = {
+    onStart: () => {
+      isScrollingRef.current = true;
+      setIsScrolling(true);
+    },
+    onComplete: (sectionId) => {
+      setActiveSection(sectionId);
+      isScrollingRef.current = false;
+      setIsScrolling(false);
+    },
+  };
+
   // Scroll spy: section with largest presence in the "active zone" wins (smooth, no flicker)
+  // Skip updates during programmatic scroll so the scroll doesn't stutter at each section
   useEffect(() => {
     SECTION_IDS.forEach((id) => {
       ratioRef.current[id] = 0;
@@ -94,6 +122,7 @@ export default function NavBar() {
 
     const observer = new IntersectionObserver(
       (entries) => {
+        if (isScrollingRef.current || isProgrammaticScroll) return;
         entries.forEach((entry) => {
           ratioRef.current[entry.target.id] = entry.intersectionRatio;
         });
@@ -187,7 +216,8 @@ export default function NavBar() {
             className="min-w-0 pl-1 sm:pl-2 cursor-pointer block"
             onClick={(e) => {
               e.preventDefault();
-              scrollToSection("#home");
+              setActiveSection("home");
+              scrollToSection("#home", scrollCallbacks);
             }}
           >
             <AnimatedName>
@@ -216,8 +246,13 @@ export default function NavBar() {
           </Link>
         </div>
 
-        {/* Desktop Nav Links — sliding pill shows current section */}
-        <ul className="hidden md:flex items-center gap-2 relative">
+        {/* Desktop Nav Links — sliding pill shows current section; hover suppressed while scrolling */}
+        <ul
+          className={
+            "hidden md:flex items-center gap-2 relative group " +
+            (isScrolling ? "scrolling" : "")
+          }
+        >
           {NAV_ITEMS.map((item) => {
             const id = item.href.replace("#", "");
             const isActive = activeSection === id;
@@ -226,14 +261,16 @@ export default function NavBar() {
                 <Link
                   href="/"
                   className={
-                    "relative z-10 block uppercase rounded-md px-3 py-2 text-[0.8rem] font-semibold tracking-[0.12em] transition-[color,opacity] duration-300 ease-out " +
+                    "relative z-10 block uppercase rounded-md px-3 py-2 text-[0.8rem] font-semibold tracking-[0.12em] transition-[color,opacity,background-color] duration-300 ease-out " +
                     (isActive
                       ? "text-white opacity-100"
-                      : "text-white/90 opacity-90 hover:opacity-100 hover:bg-[#1E90FF]")
+                      : "text-white/90 opacity-90 hover:opacity-100 hover:bg-[#1E90FF]") +
+                    " group-[.scrolling]:hover:bg-transparent group-[.scrolling]:hover:opacity-90"
                   }
                   onClick={(e) => {
                     e.preventDefault();
-                    scrollToSection(item.href);
+                    setActiveSection(id);
+                    scrollToSection(item.href, scrollCallbacks);
                   }}
                 >
                   {isActive && (
@@ -306,7 +343,8 @@ export default function NavBar() {
                   }
                   onClick={(e) => {
                     e.preventDefault();
-                    scrollToSection(item.href);
+                    setActiveSection(id);
+                    scrollToSection(item.href, scrollCallbacks);
                     setOpen(false);
                   }}
                 >
