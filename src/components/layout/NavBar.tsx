@@ -16,17 +16,47 @@ const NAV_ITEMS = [
 
 const SECTION_IDS = NAV_ITEMS.map((item) => item.href.replace("#", ""));
 
+const SCROLL_DURATION_MS = 1400;
+const EASE_IN_OUT_CUBIC = (t: number) =>
+  t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
 function scrollToSection(href: string) {
   const id = href.replace("#", "");
   const el = document.getElementById(id);
-  if (el) {
-    const block = id === "skills" ? "center" : "start";
-    el.scrollIntoView({ behavior: "smooth", block });
+  if (!el || typeof window === "undefined") {
+    if (typeof window !== "undefined") {
+      window.history.replaceState(null, "", window.location.pathname);
+    }
+    return;
   }
-  // Keep URL as base path (no hash)
-  if (typeof window !== "undefined") {
-    window.history.replaceState(null, "", window.location.pathname);
+
+  const block = id === "skills" ? "center" : "start";
+  const rect = el.getBoundingClientRect();
+  const navHeight = 64; // h-16
+  const windowH = window.innerHeight;
+  let targetY: number;
+  if (block === "center") {
+    targetY =
+      window.scrollY + rect.top - windowH / 2 + rect.height / 2 - navHeight / 2;
+  } else {
+    targetY = window.scrollY + rect.top - navHeight;
   }
+  targetY = Math.max(0, targetY);
+
+  const startY = window.scrollY;
+  const distance = targetY - startY;
+  const startTime = performance.now();
+
+  function tick(now: number) {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / SCROLL_DURATION_MS, 1);
+    const eased = EASE_IN_OUT_CUBIC(progress);
+    window.scrollTo(0, startY + distance * eased);
+    if (progress < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  window.history.replaceState(null, "", window.location.pathname);
 }
 
 export default function NavBar() {
