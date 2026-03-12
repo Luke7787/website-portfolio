@@ -16,17 +16,28 @@ const NAV_ITEMS = [
 
 const SECTION_IDS = NAV_ITEMS.map((item) => item.href.replace("#", ""));
 
-const SCROLL_DURATION_MS = 1400;
-const EASE_IN_OUT_CUBIC = (t: number) =>
-  t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+const SCROLL_DURATION_MS = 1500;
+// Ease-out-expo: responsive start, very smooth deceleration at end (common in animation libs)
+const EASE_OUT_EXPO = (t: number) =>
+  t >= 1 ? 1 : 1 - Math.pow(2, -10 * t);
+
+let scrollRafId: number | null = null;
 
 function scrollToSection(href: string) {
+  if (typeof window === "undefined") {
+    window.history.replaceState(null, "", window.location.pathname);
+    return;
+  }
+
+  if (scrollRafId !== null) {
+    cancelAnimationFrame(scrollRafId);
+    scrollRafId = null;
+  }
+
   const id = href.replace("#", "");
   const el = document.getElementById(id);
-  if (!el || typeof window === "undefined") {
-    if (typeof window !== "undefined") {
-      window.history.replaceState(null, "", window.location.pathname);
-    }
+  if (!el) {
+    window.history.replaceState(null, "", window.location.pathname);
     return;
   }
 
@@ -50,11 +61,15 @@ function scrollToSection(href: string) {
   function tick(now: number) {
     const elapsed = now - startTime;
     const progress = Math.min(elapsed / SCROLL_DURATION_MS, 1);
-    const eased = EASE_IN_OUT_CUBIC(progress);
+    const eased = EASE_OUT_EXPO(progress);
     window.scrollTo(0, startY + distance * eased);
-    if (progress < 1) requestAnimationFrame(tick);
+    if (progress < 1) {
+      scrollRafId = requestAnimationFrame(tick);
+    } else {
+      scrollRafId = null;
+    }
   }
-  requestAnimationFrame(tick);
+  scrollRafId = requestAnimationFrame(tick);
 
   window.history.replaceState(null, "", window.location.pathname);
 }
@@ -72,9 +87,9 @@ export default function NavBar() {
       ratioRef.current[id] = 0;
     });
 
-    const elements = SECTION_IDS.map((id) => document.getElementById(id)).filter(
-      (el): el is HTMLElement => el != null
-    );
+    const elements = SECTION_IDS.map((id) =>
+      document.getElementById(id),
+    ).filter((el): el is HTMLElement => el != null);
     if (elements.length === 0) return;
 
     const observer = new IntersectionObserver(
@@ -96,14 +111,14 @@ export default function NavBar() {
         const chosen = maxRatio > 0 ? bestId : null;
         rafRef.current = requestAnimationFrame(() => {
           rafRef.current = null;
-          setActiveSection((prev) => (chosen ?? prev));
+          setActiveSection((prev) => chosen ?? prev);
         });
       },
       {
         root: null,
         rootMargin: "-35% 0px -50% 0px",
         threshold: [0, 0.01, 0.1, 0.25, 0.5, 0.75, 1],
-      }
+      },
     );
 
     elements.forEach((el) => observer.observe(el));
@@ -212,7 +227,9 @@ export default function NavBar() {
                   href="/"
                   className={
                     "relative z-10 block uppercase rounded-md px-3 py-2 text-[0.8rem] font-semibold tracking-[0.12em] transition-[color,opacity] duration-300 ease-out " +
-                    (isActive ? "text-white opacity-100" : "text-white/90 opacity-90 hover:opacity-100 hover:bg-[#1E90FF]")
+                    (isActive
+                      ? "text-white opacity-100"
+                      : "text-white/90 opacity-90 hover:opacity-100 hover:bg-[#1E90FF]")
                   }
                   onClick={(e) => {
                     e.preventDefault();
@@ -250,7 +267,12 @@ export default function NavBar() {
         >
           {open ? "Close" : "Menu"}
           <span className="text-white/60 font-normal text-xs hidden sm:inline">
-            {open ? "" : " · " + (NAV_ITEMS.find((n) => n.href.replace("#", "") === activeSection)?.label ?? activeSection)}
+            {open
+              ? ""
+              : " · " +
+                (NAV_ITEMS.find(
+                  (n) => n.href.replace("#", "") === activeSection,
+                )?.label ?? activeSection)}
           </span>
         </button>
       </div>
@@ -264,7 +286,9 @@ export default function NavBar() {
         }
       >
         <div className="px-4 pt-3 pb-1 text-[0.7rem] uppercase tracking-widest text-white/50 transition-opacity duration-300">
-          Viewing: {NAV_ITEMS.find((n) => n.href.replace("#", "") === activeSection)?.label ?? activeSection}
+          Viewing:{" "}
+          {NAV_ITEMS.find((n) => n.href.replace("#", "") === activeSection)
+            ?.label ?? activeSection}
         </div>
         <ul className="mx-auto max-w-6xl px-4 py-2">
           {NAV_ITEMS.map((item) => {
