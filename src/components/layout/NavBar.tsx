@@ -30,10 +30,7 @@ type ScrollCallbacks = {
 };
 
 function scrollToSection(href: string, callbacks?: ScrollCallbacks) {
-  if (typeof window === "undefined") {
-    window.history.replaceState(null, "", window.location.pathname);
-    return;
-  }
+  if (typeof window === "undefined") return;
 
   if (scrollRafId !== null) {
     cancelAnimationFrame(scrollRafId);
