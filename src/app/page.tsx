@@ -797,7 +797,10 @@ export default function Page() {
         <div className="w-full mb-12">
           <ScrollRevealWords
             className="text-center"
-            threshold={0.45}
+            threshold={0.6}
+            delayChildren={0.25}
+            staggerChildren={0.08}
+            transitionOverrides={{ type: "spring", stiffness: 42, damping: 22, mass: 1.1 }}
             lines={[
               {
                 as: "p",
