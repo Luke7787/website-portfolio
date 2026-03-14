@@ -1090,7 +1090,7 @@ export default function Page() {
       </section>
 
       {/* FOOTER */}
-      <footer className="py-6 text-center">
+      <footer id="footer" className="py-6 text-center">
         <div
           className="
             cursor-default

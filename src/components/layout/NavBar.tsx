@@ -47,16 +47,33 @@ function scrollToSection(href: string, callbacks?: ScrollCallbacks) {
   isProgrammaticScroll = true;
   requestAnimationFrame(() => callbacks?.onStart?.());
 
-  const block = id === "skills" ? "center" : "start";
-  const rect = el.getBoundingClientRect();
   const navHeight = 64; // h-16
   const windowH = window.innerHeight;
   let targetY: number;
-  if (block === "center") {
-    targetY =
-      window.scrollY + rect.top - windowH / 2 + rect.height / 2 - navHeight / 2;
+
+  if (id === "contact") {
+    // Scroll to bottom of page so contact section + full footer are both visible
+    const footer = document.getElementById("footer");
+    if (footer) {
+      const footerRect = footer.getBoundingClientRect();
+      targetY =
+        window.scrollY +
+        footerRect.top +
+        footerRect.height -
+        windowH +
+        navHeight;
+    } else {
+      targetY = window.scrollY + el.getBoundingClientRect().top - navHeight;
+    }
   } else {
-    targetY = window.scrollY + rect.top - navHeight;
+    const block = id === "skills" ? "center" : "start";
+    const rect = el.getBoundingClientRect();
+    if (block === "center") {
+      targetY =
+        window.scrollY + rect.top - windowH / 2 + rect.height / 2 - navHeight / 2;
+    } else {
+      targetY = window.scrollY + rect.top - navHeight;
+    }
   }
   targetY = Math.max(0, targetY);
 
