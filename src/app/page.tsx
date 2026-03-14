@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import {
   SiTypescript,
   SiJavascript,
@@ -113,15 +113,34 @@ function Slideshow() {
         "Taken at Japantown, San Francisco, showing my girlfriend around June 17, 2023 (Age 21)",
     },
   ];
+
+  const SLIDE_DURATION_MS = 8000; // 8 seconds per slide
   const [index, setIndex] = useState(0);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   function next() {
     setIndex((prev) => (prev + 1) % slides.length);
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = setInterval(next, SLIDE_DURATION_MS);
+    }
   }
 
   function prev() {
     setIndex((prev) => (prev - 1 + slides.length) % slides.length);
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = setInterval(next, SLIDE_DURATION_MS);
+    }
   }
+
+  // Auto-advance slideshow
+  useEffect(() => {
+    intervalRef.current = setInterval(next, SLIDE_DURATION_MS);
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, []);
 
   const current = slides[index];
 
@@ -134,53 +153,74 @@ function Slideshow() {
         amount={0.3}
         transitionOverrides={{ stiffness: 65, damping: 24 }}
       >
-        <div className="relative w-full aspect-square">
-          {/* IMAGE */}
-          {current.type === "image" && (
-            <Image
-              src={current.src}
-              alt="Luke Zhuang"
-              fill
-              className="
-                rounded-lg
-                border-2
-                border-white
-                shadow-lg
-                object-cover
-              "
-            />
-          )}
-
-          {/* VIDEO */}
-          {current.type === "video" && (
-            <video
-              src={current.src}
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="
-                absolute
-                inset-0
-                w-full
-                h-full
-                rounded-lg
-                border-2
-                border-white
-                shadow-lg
-                object-cover
-              "
-            />
-          )}
+        <div className="relative w-full aspect-square overflow-hidden">
+          <AnimatePresence mode="wait" initial={false}>
+            {current.type === "image" ? (
+              <motion.div
+                key={`${index}-${current.src}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1.2, ease: [0.22, 0.08, 0.28, 1] }}
+                className="absolute inset-0"
+              >
+                <Image
+                  src={current.src}
+                  alt="Luke Zhuang"
+                  fill
+                  className="
+                    rounded-lg
+                    border-2
+                    border-white
+                    shadow-lg
+                    object-cover
+                  "
+                />
+              </motion.div>
+            ) : (
+              <motion.div
+                key={`${index}-${current.src}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1.2, ease: [0.22, 0.08, 0.28, 1] }}
+                className="absolute inset-0"
+              >
+                <video
+                  src={current.src}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="
+                    absolute
+                    inset-0
+                    w-full
+                    h-full
+                    rounded-lg
+                    border-2
+                    border-white
+                    shadow-lg
+                    object-cover
+                  "
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </ScrollRevealBlock>
 
       {/* Caption — word-by-word reveal */}
       <ScrollRevealWords
         className="mt-4"
-        threshold={0.3}
-        delayChildren={0}
-        staggerChildren={0.01}
+        threshold={0.45}
+        delayChildren={0.08}
+        staggerChildren={0.058}
+        transitionOverrides={{
+          type: "tween",
+          duration: 1.05,
+          ease: [0.22, 0.08, 0.28, 1],
+        }}
         lines={[
           {
             as: "p",
