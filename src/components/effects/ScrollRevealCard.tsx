@@ -91,13 +91,15 @@ function LinksRevealAfterDelay({
   delayMs,
   cardRef,
   links,
+  inViewAmount = 0.2,
 }: {
   delayMs: number;
   cardRef: React.RefObject<HTMLDivElement | null>;
   links: ProjectLink[];
+  inViewAmount?: number;
 }) {
   const [show, setShow] = useState(false);
-  const isInView = useInView(cardRef, { once: true, amount: 0.2 });
+  const isInView = useInView(cardRef, { once: true, amount: inViewAmount });
 
   useEffect(() => {
     if (!isInView) return;
@@ -169,6 +171,8 @@ interface ScrollRevealCardProps {
   startDelay?: number;
   /** When true, card does not animate on its own; use with a parent ScrollRevealBlock to reveal the whole row at once. */
   disableReveal?: boolean;
+  /** Visibility threshold (0–1) for when links reveal; use to match parent ScrollRevealBlock amount when it's higher than default. */
+  linksInViewAmount?: number;
 }
 
 function AnimatedWords({
@@ -214,9 +218,11 @@ export default function ScrollRevealCard({
   /** Delay in seconds before this card's animation starts (e.g. for staggering multiple cards). */
   startDelay = 0,
   disableReveal = false,
+  linksInViewAmount,
 }: ScrollRevealCardProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const viewAmount = linksInViewAmount ?? 0.2;
+  const isInView = useInView(ref, { once: true, amount: viewAmount });
   const [hasDelayed, setHasDelayed] = useState(false);
 
   useEffect(() => {
@@ -267,7 +273,7 @@ export default function ScrollRevealCard({
           </motion.div>
           <div className={className}>
             <ScrollRevealWords
-              threshold={0.2}
+              threshold={linksInViewAmount ?? 0.2}
               delayChildren={0.08}
               staggerChildren={0.058}
               transitionOverrides={{
@@ -294,6 +300,7 @@ export default function ScrollRevealCard({
           delayMs={linksRevealDelayMs}
           cardRef={ref}
           links={links}
+          inViewAmount={linksInViewAmount}
         />
       </div>
     );
