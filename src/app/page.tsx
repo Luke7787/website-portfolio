@@ -822,8 +822,10 @@ export default function Page() {
         <div className="flex flex-col gap-6 py-4 w-full">
           <ScrollRevealBlock
             animationStyle="words"
-            delay={0.2}
-            transitionOverrides={{ stiffness: 32, damping: 25, mass: 1.1 }}
+            delay={0.25}
+            amount={0.6}
+            margin="0px 0px 0px 0px"
+            transitionOverrides={{ stiffness: 42, damping: 22, mass: 1.1 }}
           >
             <div
               className="w-full flex items-center overflow-hidden"
@@ -876,8 +878,10 @@ export default function Page() {
           {/* Row 2: scroll right — two equal-width copies for seamless loop */}
           <ScrollRevealBlock
             animationStyle="words"
-            delay={0.45}
-            transitionOverrides={{ stiffness: 32, damping: 25, mass: 1.1 }}
+            delay={0.5}
+            amount={0.6}
+            margin="0px 0px 0px 0px"
+            transitionOverrides={{ stiffness: 42, damping: 22, mass: 1.1 }}
           >
             <div
               className="w-full flex items-center overflow-hidden"
@@ -930,8 +934,10 @@ export default function Page() {
           {/* Row 3: scroll left — C#, HTML, CSS, React Native, Tailwind, Postman, Expo, Figma */}
           <ScrollRevealBlock
             animationStyle="words"
-            delay={0.7}
-            transitionOverrides={{ stiffness: 32, damping: 25, mass: 1.1 }}
+            delay={0.75}
+            amount={0.6}
+            margin="0px 0px 0px 0px"
+            transitionOverrides={{ stiffness: 42, damping: 22, mass: 1.1 }}
           >
             <div
               className="w-full flex items-center overflow-hidden"
