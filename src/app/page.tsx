@@ -140,10 +140,10 @@ function Slideshow() {
             {current.type === "image" ? (
               <motion.div
                 key={`${index}-${current.src}`}
-                initial={{ opacity: 0 }}
+                initial={{ opacity: 1 }}
                 animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 1.2, ease: [0.22, 0.08, 0.28, 1] }}
+                exit={{ opacity: 1 }}
+                transition={{ duration: 0 }}
                 className="absolute inset-0"
               >
                 <Image
@@ -162,10 +162,10 @@ function Slideshow() {
             ) : (
               <motion.div
                 key={`${index}-${current.src}`}
-                initial={{ opacity: 0 }}
+                initial={{ opacity: 1 }}
                 animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 1.2, ease: [0.22, 0.08, 0.28, 1] }}
+                exit={{ opacity: 1 }}
+                transition={{ duration: 0 }}
                 className="absolute inset-0"
               >
                 <video
