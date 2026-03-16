@@ -114,33 +114,15 @@ function Slideshow() {
     },
   ];
 
-  const SLIDE_DURATION_MS = 8000; // 8 seconds per slide
   const [index, setIndex] = useState(0);
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   function next() {
     setIndex((prev) => (prev + 1) % slides.length);
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = setInterval(next, SLIDE_DURATION_MS);
-    }
   }
 
   function prev() {
     setIndex((prev) => (prev - 1 + slides.length) % slides.length);
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = setInterval(next, SLIDE_DURATION_MS);
-    }
   }
-
-  // Auto-advance slideshow
-  useEffect(() => {
-    intervalRef.current = setInterval(next, SLIDE_DURATION_MS);
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
-  }, []);
 
   const current = slides[index];
 

@@ -139,7 +139,11 @@ function LinksRevealAfterDelay({
       animate={show ? "visible" : "hidden"}
     >
       {links.map((link) => (
-        <motion.span key={link.href} variants={linkVariants} style={{ display: "inline-block" }}>
+        <motion.span
+          key={link.href}
+          variants={linkVariants}
+          style={{ display: "inline-block" }}
+        >
           <a
             href={link.href}
             target="_blank"
@@ -251,11 +255,20 @@ export default function ScrollRevealCard({
 
     return (
       <div ref={ref} className={`${cardClassName} ${colSpanClassName}`}>
-        <a href={mainHref} target="_blank" rel="noopener noreferrer" className="block">
+        <a
+          href={mainHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block"
+        >
           <motion.div
             className="relative w-full aspect-9/8 overflow-hidden rounded-xl mb-5"
             initial={{ opacity: 0, filter: "blur(10px)" }}
-            animate={isInView ? { opacity: 1, filter: "blur(0px)" } : { opacity: 0, filter: "blur(10px)" }}
+            animate={
+              isInView
+                ? { opacity: 1, filter: "blur(0px)" }
+                : { opacity: 0, filter: "blur(10px)" }
+            }
             transition={{
               type: "tween",
               duration: 1.5,
@@ -268,7 +281,11 @@ export default function ScrollRevealCard({
               fill
               sizes={imageSizes}
               className={`rounded-xl object-cover transition-transform duration-300 ${cardClassName.includes("group") ? "group-hover:scale-[1.02]" : ""} ${imageObjectPosition ? "" : "object-center"}`}
-              style={imageObjectPosition ? { objectPosition: imageObjectPosition } : undefined}
+              style={
+                imageObjectPosition
+                  ? { objectPosition: imageObjectPosition }
+                  : undefined
+              }
             />
           </motion.div>
           <div className={className}>
@@ -285,12 +302,14 @@ export default function ScrollRevealCard({
                 {
                   as: "h3",
                   text: title,
-                  className: "cursor-default text-xl font-semibold text-white mb-2",
+                  className:
+                    "cursor-default text-xl font-semibold text-white mb-2",
                 },
                 {
                   as: "p",
                   text: description,
-                  className: "cursor-default text-white/70 text-[15px] leading-relaxed",
+                  className:
+                    "cursor-default text-white/70 text-[15px] leading-relaxed",
                 },
               ]}
             />
@@ -314,7 +333,12 @@ export default function ScrollRevealCard({
       animate={shouldAnimate ? "visible" : "hidden"}
       variants={cardContainerVariants}
     >
-      <a href={mainHref} target="_blank" rel="noopener noreferrer" className="block">
+      <a
+        href={mainHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block"
+      >
         <motion.div
           variants={imageVariants}
           className="relative w-full aspect-9/8 overflow-hidden rounded-xl mb-5"
@@ -325,7 +349,11 @@ export default function ScrollRevealCard({
             fill
             sizes={imageSizes}
             className={`rounded-xl object-cover transition-transform duration-300 ${cardClassName.includes("group") ? "group-hover:scale-[1.02]" : ""} ${imageObjectPosition ? "" : "object-center"}`}
-            style={imageObjectPosition ? { objectPosition: imageObjectPosition } : undefined}
+            style={
+              imageObjectPosition
+                ? { objectPosition: imageObjectPosition }
+                : undefined
+            }
           />
         </motion.div>
         <div className={className}>
@@ -345,7 +373,10 @@ export default function ScrollRevealCard({
           </motion.div>
         </div>
       </a>
-      <motion.div variants={linksVariants(descriptionWordCount)} className="flex gap-4 mt-4">
+      <motion.div
+        variants={linksVariants(descriptionWordCount)}
+        className="flex gap-4 mt-4"
+      >
         {links.map((link) => (
           <a
             key={link.href}
