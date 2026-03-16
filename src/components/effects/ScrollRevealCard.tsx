@@ -245,12 +245,11 @@ export default function ScrollRevealCard({
   if (disableReveal) {
     const titleWordCount = title.split(/\s+/).length;
     const descriptionWordCount = description.split(/\s+/).length;
-    // Links reveal after title + description: delayChildren + (title + desc words) * staggerChildren + tail
+    // Links reveal right after title + description: delayChildren + (title + desc words) * staggerChildren + short buffer
     let linksRevealDelayMs =
-      (0.08 + (titleWordCount + descriptionWordCount) * 0.058 + 0.5) * 1000;
-    // Single-link cards (e.g. project 4 "GitHub" only) would feel too early; add extra delay
+      (0.08 + (titleWordCount + descriptionWordCount) * 0.058 + 0.15) * 1000;
     if (links.length === 1) {
-      linksRevealDelayMs += 550;
+      linksRevealDelayMs += 120;
     }
 
     return (
@@ -290,7 +289,8 @@ export default function ScrollRevealCard({
           </motion.div>
           <div className={className}>
             <ScrollRevealWords
-              threshold={linksInViewAmount ?? 0.2}
+              observeRef={ref}
+              threshold={viewAmount}
               delayChildren={0.08}
               staggerChildren={0.058}
               transitionOverrides={{
@@ -319,7 +319,7 @@ export default function ScrollRevealCard({
           delayMs={linksRevealDelayMs}
           cardRef={ref}
           links={links}
-          inViewAmount={linksInViewAmount}
+          inViewAmount={viewAmount}
         />
       </div>
     );
