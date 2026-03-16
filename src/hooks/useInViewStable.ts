@@ -14,7 +14,7 @@ export function useInViewStable(
     amount?: number | "some" | "all";
     margin?: string;
     minVisibleMs: number;
-  }
+  },
 ) {
   const { minVisibleMs, amount = 0.2, margin } = options;
   const [stable, setStable] = useState(false);
@@ -23,7 +23,11 @@ export function useInViewStable(
   const isInView = useInView(ref, {
     amount,
     once: false,
-    margin: margin as Parameters<typeof useInView>[1] extends { margin?: infer M } ? M : never,
+    margin: margin as Parameters<typeof useInView>[1] extends {
+      margin?: infer M;
+    }
+      ? M
+      : never,
   });
 
   useEffect(() => {
