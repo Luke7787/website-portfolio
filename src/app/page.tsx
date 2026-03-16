@@ -115,12 +115,15 @@ function Slideshow() {
   ];
 
   const [index, setIndex] = useState(0);
+  const [hasChangedSlide, setHasChangedSlide] = useState(false);
 
   function next() {
+    setHasChangedSlide(true);
     setIndex((prev) => (prev + 1) % slides.length);
   }
 
   function prev() {
+    setHasChangedSlide(true);
     setIndex((prev) => (prev - 1 + slides.length) % slides.length);
   }
 
@@ -192,26 +195,32 @@ function Slideshow() {
         </div>
       </ScrollRevealBlock>
 
-      {/* Caption — word-by-word reveal */}
-      <ScrollRevealWords
-        className="mt-4"
-        threshold={0.45}
-        delayChildren={0.08}
-        staggerChildren={0.058}
-        transitionOverrides={{
-          type: "tween",
-          duration: 1.05,
-          ease: [0.22, 0.08, 0.28, 1],
-        }}
-        lines={[
-          {
-            as: "p",
-            text: current.caption,
-            className:
-              "cursor-default text-sm text-white/70 tracking-[0.03em] text-center",
-          },
-        ]}
-      />
+      {/* Caption — ScrollRevealWords on first view, plain text after slide change */}
+      {hasChangedSlide ? (
+        <p className="mt-4 cursor-default text-sm text-white/70 tracking-[0.03em] text-center">
+          {current.caption}
+        </p>
+      ) : (
+        <ScrollRevealWords
+          className="mt-4"
+          threshold={0.45}
+          delayChildren={0.08}
+          staggerChildren={0.058}
+          transitionOverrides={{
+            type: "tween",
+            duration: 1.05,
+            ease: [0.22, 0.08, 0.28, 1],
+          }}
+          lines={[
+            {
+              as: "p",
+              text: current.caption,
+              className:
+                "cursor-default text-sm text-white/70 tracking-[0.03em] text-center",
+            },
+          ]}
+        />
+      )}
 
       {/* Arrows — scroll reveal */}
       <div className="absolute inset-0">

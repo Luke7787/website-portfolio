@@ -1,7 +1,12 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView, type Variants, type Transition } from "framer-motion";
+import {
+  motion,
+  useInView,
+  type Variants,
+  type Transition,
+} from "framer-motion";
 
 const defaultSpring = {
   type: "spring" as const,
@@ -13,12 +18,13 @@ const defaultSpring = {
 /** Override word animation (e.g. { type: "tween", duration: 0.7, ease: "easeOut" } for smoother/slower). */
 type TransitionOverrides =
   | { type: "spring"; stiffness?: number; damping?: number; mass?: number }
-  | { type: "tween"; duration?: number; ease?: string | readonly [number, number, number, number] };
+  | {
+      type: "tween";
+      duration?: number;
+      ease?: string | readonly [number, number, number, number];
+    };
 
-const containerVariants = (
-  delayChildren: number,
-  staggerChildren: number
-) => ({
+const containerVariants = (delayChildren: number, staggerChildren: number) => ({
   hidden: {},
   visible: {
     transition: {
@@ -34,9 +40,11 @@ const wordVariants = (transitionOverrides?: TransitionOverrides): Variants => {
       ? {
           type: "tween",
           duration: transitionOverrides.duration ?? 0.7,
-          ease: (transitionOverrides.ease ?? [0.22, 0.08, 0.28, 1]) as Transition["ease"],
+          ease: (transitionOverrides.ease ?? [
+            0.22, 0.08, 0.28, 1,
+          ]) as Transition["ease"],
         }
-      : (transitionOverrides ?? defaultSpring) as Transition;
+      : ((transitionOverrides ?? defaultSpring) as Transition);
 
   return {
     hidden: {
@@ -109,11 +117,7 @@ export default function ScrollRevealWords({
       {lines.map((line, i) => {
         if (line.as === "custom") {
           return (
-            <motion.div
-              key={i}
-              variants={variants}
-              className={line.className}
-            >
+            <motion.div key={i} variants={variants} className={line.className}>
               {line.content}
             </motion.div>
           );
