@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
+import { useInViewStable } from "@/hooks/useInViewStable";
 
 const spring = {
   type: "spring" as const,
@@ -27,6 +28,8 @@ interface ScrollRevealBlockProps {
   amount?: "some" | "all" | number;
   /** Root margin: extend viewport so elements trigger earlier (e.g. "0px 0px 200px 0px" = 200px below). */
   margin?: string;
+  /** Require element to be in view for this many ms before revealing (handles fast scroll: no trigger until settled). */
+  minVisibleMs?: number;
   /** Use same animation as "PORTFOLIO Featured Projects" (ScrollRevealWords): y 24, wordsSpring */
   animationStyle?: "default" | "words";
   /** Override spring transition (e.g. { stiffness: 35, damping: 22 } for slower animation) */
@@ -39,16 +42,25 @@ export default function ScrollRevealBlock({
   delay = 0.15,
   amount = "some",
   margin = "0px 0px 200px 0px",
+  minVisibleMs,
   animationStyle = "default",
   transitionOverrides,
 }: ScrollRevealBlockProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [hasAnimated, setHasAnimated] = useState(false);
-  const isInView = useInView(ref, {
+
+  const isInViewInstant = useInView(ref, {
     amount,
     once: true,
     margin: margin as Parameters<typeof useInView>[1] extends { margin?: infer M } ? M : never,
   });
+  const isInViewStable = useInViewStable(ref, {
+    amount,
+    margin,
+    minVisibleMs: minVisibleMs ?? 0,
+  });
+
+  const isInView = minVisibleMs !== undefined ? isInViewStable : isInViewInstant;
 
   const isWords = animationStyle === "words";
   const initialY = isWords ? 24 : 28;

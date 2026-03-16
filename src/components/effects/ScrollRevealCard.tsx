@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import ScrollRevealWords from "@/components/effects/ScrollRevealWords";
+import { useInViewStable } from "@/hooks/useInViewStable";
 
 /** Match ScrollRevealWords exactly: same spring and variants */
 const defaultSpring = {
@@ -92,14 +93,18 @@ function LinksRevealAfterDelay({
   cardRef,
   links,
   inViewAmount = 0.2,
+  trigger,
 }: {
   delayMs: number;
   cardRef: React.RefObject<HTMLDivElement | null>;
   links: ProjectLink[];
   inViewAmount?: number;
+  /** When set, use this instead of useInView (e.g. stable-in-view from parent). */
+  trigger?: boolean;
 }) {
   const [show, setShow] = useState(false);
-  const isInView = useInView(cardRef, { once: true, amount: inViewAmount });
+  const isInViewFromRef = useInView(cardRef, { once: true, amount: inViewAmount });
+  const isInView = trigger !== undefined ? trigger : isInViewFromRef;
 
   useEffect(() => {
     if (!isInView) return;
@@ -177,6 +182,8 @@ interface ScrollRevealCardProps {
   disableReveal?: boolean;
   /** Visibility threshold (0–1) for when links reveal; use to match parent ScrollRevealBlock amount when it's higher than default. */
   linksInViewAmount?: number;
+  /** Require card in view for this many ms before revealing content (handles fast scroll). Use with parent ScrollRevealBlock minVisibleMs. */
+  inViewStableMs?: number;
 }
 
 function AnimatedWords({
@@ -223,10 +230,16 @@ export default function ScrollRevealCard({
   startDelay = 0,
   disableReveal = false,
   linksInViewAmount,
+  inViewStableMs,
 }: ScrollRevealCardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const viewAmount = linksInViewAmount ?? 0.2;
-  const isInView = useInView(ref, { once: true, amount: viewAmount });
+  const isInViewInstant = useInView(ref, { once: true, amount: viewAmount });
+  const isInViewStable = useInViewStable(ref, {
+    amount: viewAmount,
+    minVisibleMs: inViewStableMs ?? 0,
+  });
+  const isInView = inViewStableMs !== undefined ? isInViewStable : isInViewInstant;
   const [hasDelayed, setHasDelayed] = useState(false);
 
   useEffect(() => {
@@ -291,6 +304,7 @@ export default function ScrollRevealCard({
             <ScrollRevealWords
               observeRef={ref}
               threshold={viewAmount}
+              forceVisible={isInView}
               delayChildren={0.08}
               staggerChildren={0.058}
               transitionOverrides={{
@@ -320,6 +334,7 @@ export default function ScrollRevealCard({
           cardRef={ref}
           links={links}
           inViewAmount={viewAmount}
+          trigger={isInView}
         />
       </div>
     );

@@ -796,6 +796,7 @@ export default function Page() {
               delay={0.35}
               amount={0.3}
               margin="0px 0px 0px 0px"
+              minVisibleMs={140}
               transitionOverrides={{ stiffness: 24, damping: 24, mass: 1.2 }}
               className="w-full md:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-5rem)/3)]"
             >
@@ -814,6 +815,7 @@ export default function Page() {
               cardClassName="group opacity-100 transition-all duration-500 ease-out"
               disableReveal
               linksInViewAmount={0.3}
+              inViewStableMs={140}
             />
             </ScrollRevealBlock>
           </div>

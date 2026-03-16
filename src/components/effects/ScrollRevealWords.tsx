@@ -88,6 +88,8 @@ interface ScrollRevealWordsProps {
   threshold?: number;
   /** When set, use this ref for in-view check instead of internal ref (keeps description and sibling elements in sync). */
   observeRef?: React.RefObject<HTMLDivElement | null>;
+  /** When set, use this for visibility instead of useInView (e.g. stable-in-view from parent). */
+  forceVisible?: boolean;
   /** Delay before first child animates (seconds). Default 0.18 */
   delayChildren?: number;
   /** Delay between each child (seconds). Default 0.12 */
@@ -101,13 +103,15 @@ export default function ScrollRevealWords({
   className = "",
   threshold = 0.45,
   observeRef,
+  forceVisible,
   delayChildren = 0.18,
   staggerChildren = 0.12,
   transitionOverrides,
 }: ScrollRevealWordsProps) {
   const internalRef = useRef<HTMLDivElement>(null);
   const ref = observeRef ?? internalRef;
-  const isInView = useInView(ref, { once: true, amount: threshold });
+  const isInViewFromRef = useInView(ref, { once: true, amount: threshold });
+  const isInView = forceVisible !== undefined ? forceVisible : isInViewFromRef;
   const variants = wordVariants(transitionOverrides);
 
   return (
