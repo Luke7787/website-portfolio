@@ -18,8 +18,7 @@ const SECTION_IDS = NAV_ITEMS.map((item) => item.href.replace("#", ""));
 
 const SCROLL_DURATION_MS = 1600; // same smooth feel in both directions, like going up
 // Ease-out-expo: responsive start, very smooth deceleration at end (common in animation libs)
-const EASE_OUT_EXPO = (t: number) =>
-  t >= 1 ? 1 : 1 - Math.pow(2, -10 * t);
+const EASE_OUT_EXPO = (t: number) => (t >= 1 ? 1 : 1 - Math.pow(2, -10 * t));
 
 let scrollRafId: number | null = null;
 let isProgrammaticScroll = false;
@@ -70,7 +69,11 @@ function scrollToSection(href: string, callbacks?: ScrollCallbacks) {
     const rect = el.getBoundingClientRect();
     if (block === "center") {
       targetY =
-        window.scrollY + rect.top - windowH / 2 + rect.height / 2 - navHeight / 2;
+        window.scrollY +
+        rect.top -
+        windowH / 2 +
+        rect.height / 2 -
+        navHeight / 2;
     } else {
       targetY = window.scrollY + rect.top - navHeight;
     }
