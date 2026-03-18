@@ -825,7 +825,7 @@ export default function Page() {
       {/* SKILLS — Framer-style cards (icon + text), two rows scrolling with fade */}
       <section
         id="skills"
-        className="-scroll-mt-20 md:scroll-mt-0 pt-28 pb-24 flex flex-col items-center justify-center bg-[#141414] text-white rounded-[90px] overflow-hidden"
+        className="-scroll-mt-20 md:scroll-mt-0 mt-20 pt-28 pb-24 flex flex-col items-center justify-center bg-[#141414] text-white rounded-[90px] overflow-hidden"
       >
         <div className="w-full mb-12">
           <ScrollRevealWords
