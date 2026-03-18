@@ -333,7 +333,7 @@ export default function NavBar() {
         </button>
       </div>
 
-      {/* Mobile Dropdown — highlight current section */}
+      {/* Mobile Dropdown — pill-style like desktop */}
       <div
         id="mobile-nav"
         className={
@@ -341,24 +341,19 @@ export default function NavBar() {
           (open ? "block" : "hidden")
         }
       >
-        <div className="px-4 pt-3 pb-1 text-[0.7rem] uppercase tracking-widest text-white/50 transition-opacity duration-300">
-          Viewing:{" "}
-          {NAV_ITEMS.find((n) => n.href.replace("#", "") === activeSection)
-            ?.label ?? activeSection}
-        </div>
-        <ul className="mx-auto max-w-6xl px-4 py-2">
+        <ul className="flex items-center justify-center gap-1 px-3 py-3">
           {NAV_ITEMS.map((item) => {
             const id = item.href.replace("#", "");
             const isActive = activeSection === id;
             return (
-              <li key={item.href}>
+              <li key={item.href} className="relative">
                 <Link
                   href="/"
                   className={
-                    "block uppercase rounded-md px-3 py-3 text-[0.85rem] font-semibold tracking-[0.12em] transition-[background-color,color,border-color] duration-300 ease-out " +
+                    "relative z-10 block uppercase rounded-md px-2.5 py-2 text-[0.7rem] font-semibold tracking-[0.08em] transition-[color,opacity,background-color] duration-300 ease-out " +
                     (isActive
-                      ? "bg-[#1E90FF]/20 text-[#1E90FF] border-l-2 border-[#1E90FF]"
-                      : "text-white/90 hover:bg-[#1E90FF] border-l-2 border-transparent")
+                      ? "text-white opacity-100"
+                      : "text-white/90 opacity-90 hover:opacity-100 hover:bg-[#1E90FF]")
                   }
                   onClick={(e) => {
                     e.preventDefault();
@@ -367,7 +362,21 @@ export default function NavBar() {
                     setOpen(false);
                   }}
                 >
-                  {item.label}
+                  {isActive && (
+                    <motion.span
+                      layoutId="mobile-nav-pill"
+                      className="absolute inset-0 rounded-md bg-[#1E90FF]"
+                      transition={{
+                        type: "spring",
+                        stiffness: 100,
+                        damping: 22,
+                        mass: 1.2,
+                      }}
+                      style={{ zIndex: -1 }}
+                      aria-hidden
+                    />
+                  )}
+                  <span className="relative z-10">{item.label}</span>
                 </Link>
               </li>
             );
