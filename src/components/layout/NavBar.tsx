@@ -75,7 +75,9 @@ function scrollToSection(href: string, callbacks?: ScrollCallbacks) {
         rect.height / 2 -
         navHeight / 2;
     } else {
-      targetY = window.scrollY + rect.top - navHeight;
+      // About: push section down so there's more space above it
+      const pushDown = id === "about" ? 85 : 0;
+      targetY = window.scrollY + rect.top - navHeight - pushDown;
     }
   }
   targetY = Math.max(0, targetY);
