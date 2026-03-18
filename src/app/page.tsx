@@ -879,15 +879,15 @@ export default function Page() {
               }}
             >
               <ul className="flex list-none m-0 p-0 relative w-max skill-marquee-left">
-                <li className="flex items-center gap-4 shrink-0">
+                <li className="flex items-center gap-3 md:gap-4 shrink-0">
                   {skillsMarqueeRow1.map((skill, i) => (
                     <div key={`row1-a-${i}`} className="shrink-0">
                       <div className="skill-card-border shrink-0">
-                        <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
-                          <div className="shrink-0 w-9 h-9 flex items-center justify-center">
+                        <div className="shrink-0 flex items-center justify-center gap-2 md:gap-3 rounded-[18px] md:rounded-[23px] bg-[#121212] px-3 md:px-4 py-1.5 md:py-2.5 min-h-[40px] md:min-h-[52px] w-[155px] md:w-[200px] transition-colors duration-200 hover:bg-[#171717]">
+                          <div className="shrink-0 w-7 h-7 md:w-9 md:h-9 flex items-center justify-center">
                             <SkillIcon skill={skill} />
                           </div>
-                          <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
+                          <h3 className="text-white text-sm md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
                             {skill.name}
                           </h3>
                         </div>
@@ -896,15 +896,15 @@ export default function Page() {
                   ))}
                   <span className="shrink-0 w-0 block" aria-hidden />
                 </li>
-                <li className="flex items-center gap-4 shrink-0" aria-hidden>
+                <li className="flex items-center gap-3 md:gap-4 shrink-0" aria-hidden>
                   {skillsMarqueeRow1.map((skill, i) => (
                     <div key={`row1-b-${i}`} className="shrink-0">
                       <div className="skill-card-border shrink-0">
-                        <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
-                          <div className="shrink-0 w-9 h-9 flex items-center justify-center">
+                        <div className="shrink-0 flex items-center justify-center gap-2 md:gap-3 rounded-[18px] md:rounded-[23px] bg-[#121212] px-3 md:px-4 py-1.5 md:py-2.5 min-h-[40px] md:min-h-[52px] w-[155px] md:w-[200px] transition-colors duration-200 hover:bg-[#171717]">
+                          <div className="shrink-0 w-7 h-7 md:w-9 md:h-9 flex items-center justify-center">
                             <SkillIcon skill={skill} />
                           </div>
-                          <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
+                          <h3 className="text-white text-sm md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
                             {skill.name}
                           </h3>
                         </div>
@@ -935,15 +935,15 @@ export default function Page() {
               }}
             >
               <ul className="flex list-none m-0 p-0 relative w-max skill-marquee-right">
-                <li className="flex items-center gap-4 shrink-0">
+                <li className="flex items-center gap-3 md:gap-4 shrink-0">
                   {skillsMarqueeRow2.map((skill, i) => (
                     <div key={`row2-a-${i}`} className="shrink-0">
                       <div className="skill-card-border shrink-0">
-                        <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
-                          <div className="shrink-0 w-9 h-9 flex items-center justify-center">
+                        <div className="shrink-0 flex items-center justify-center gap-2 md:gap-3 rounded-[18px] md:rounded-[23px] bg-[#121212] px-3 md:px-4 py-1.5 md:py-2.5 min-h-[40px] md:min-h-[52px] w-[155px] md:w-[200px] transition-colors duration-200 hover:bg-[#171717]">
+                          <div className="shrink-0 w-7 h-7 md:w-9 md:h-9 flex items-center justify-center">
                             <SkillIcon skill={skill} />
                           </div>
-                          <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
+                          <h3 className="text-white text-sm md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
                             {skill.name}
                           </h3>
                         </div>
@@ -952,15 +952,15 @@ export default function Page() {
                   ))}
                   <span className="shrink-0 w-0 block" aria-hidden />
                 </li>
-                <li className="flex items-center gap-4 shrink-0" aria-hidden>
+                <li className="flex items-center gap-3 md:gap-4 shrink-0" aria-hidden>
                   {skillsMarqueeRow2.map((skill, i) => (
                     <div key={`row2-b-${i}`} className="shrink-0">
                       <div className="skill-card-border shrink-0">
-                        <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
-                          <div className="shrink-0 w-9 h-9 flex items-center justify-center">
+                        <div className="shrink-0 flex items-center justify-center gap-2 md:gap-3 rounded-[18px] md:rounded-[23px] bg-[#121212] px-3 md:px-4 py-1.5 md:py-2.5 min-h-[40px] md:min-h-[52px] w-[155px] md:w-[200px] transition-colors duration-200 hover:bg-[#171717]">
+                          <div className="shrink-0 w-7 h-7 md:w-9 md:h-9 flex items-center justify-center">
                             <SkillIcon skill={skill} />
                           </div>
-                          <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
+                          <h3 className="text-white text-sm md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
                             {skill.name}
                           </h3>
                         </div>
@@ -991,15 +991,15 @@ export default function Page() {
               }}
             >
               <ul className="flex list-none m-0 p-0 relative w-max skill-marquee-left-alt">
-                <li className="flex items-center gap-4 shrink-0">
+                <li className="flex items-center gap-3 md:gap-4 shrink-0">
                   {skillsMarqueeRow3.map((skill, i) => (
                     <div key={`row3-a-${i}`} className="shrink-0">
                       <div className="skill-card-border shrink-0">
-                        <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
-                          <div className="shrink-0 w-9 h-9 flex items-center justify-center">
+                        <div className="shrink-0 flex items-center justify-center gap-2 md:gap-3 rounded-[18px] md:rounded-[23px] bg-[#121212] px-3 md:px-4 py-1.5 md:py-2.5 min-h-[40px] md:min-h-[52px] w-[155px] md:w-[200px] transition-colors duration-200 hover:bg-[#171717]">
+                          <div className="shrink-0 w-7 h-7 md:w-9 md:h-9 flex items-center justify-center">
                             <SkillIcon skill={skill} />
                           </div>
-                          <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
+                          <h3 className="text-white text-sm md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
                             {skill.name}
                           </h3>
                         </div>
@@ -1008,15 +1008,15 @@ export default function Page() {
                   ))}
                   <span className="shrink-0 w-0 block" aria-hidden />
                 </li>
-                <li className="flex items-center gap-4 shrink-0" aria-hidden>
+                <li className="flex items-center gap-3 md:gap-4 shrink-0" aria-hidden>
                   {skillsMarqueeRow3.map((skill, i) => (
                     <div key={`row3-b-${i}`} className="shrink-0">
                       <div className="skill-card-border shrink-0">
-                        <div className="shrink-0 flex items-center justify-center gap-3 rounded-[23px] bg-[#121212] px-4 py-2.5 min-h-[52px] w-[200px] transition-colors duration-200 hover:bg-[#171717]">
-                          <div className="shrink-0 w-9 h-9 flex items-center justify-center">
+                        <div className="shrink-0 flex items-center justify-center gap-2 md:gap-3 rounded-[18px] md:rounded-[23px] bg-[#121212] px-3 md:px-4 py-1.5 md:py-2.5 min-h-[40px] md:min-h-[52px] w-[155px] md:w-[200px] transition-colors duration-200 hover:bg-[#171717]">
+                          <div className="shrink-0 w-7 h-7 md:w-9 md:h-9 flex items-center justify-center">
                             <SkillIcon skill={skill} />
                           </div>
-                          <h3 className="text-white text-base md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
+                          <h3 className="text-white text-sm md:text-lg font-medium tracking-[-0.02em] leading-tight m-0 truncate">
                             {skill.name}
                           </h3>
                         </div>
