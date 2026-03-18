@@ -197,7 +197,7 @@ function Slideshow() {
 
       {/* Caption — ScrollRevealWords on first view, plain text after slide change */}
       {hasChangedSlide ? (
-        <p className="mt-4 cursor-default text-sm text-white/70 tracking-[0.03em] text-center">
+        <p className="mt-4 cursor-default text-[13.75px] md:text-sm text-white/70 tracking-[0.03em] text-justify md:text-center">
           {current.caption}
         </p>
       ) : (
@@ -216,7 +216,7 @@ function Slideshow() {
               as: "p",
               text: current.caption,
               className:
-                "cursor-default text-sm text-white/70 tracking-[0.03em] text-center",
+                "cursor-default text-[13.75px] md:text-sm text-white/70 tracking-[0.03em] text-justify md:text-center",
             },
           ]}
         />
@@ -433,12 +433,12 @@ export default function Page() {
                     target: "_blank",
                     rel: "noopener noreferrer",
                     className:
-                      "block mt-4 text-[1.125rem] font-medium text-[#1E90FF] hover:underline transition-colors duration-200 -translate-y-25 md:translate-x-19 md:-translate-y-10 cursor-pointer",
+                      "block mt-1 md:mt-4 text-[1.125rem] font-medium text-[#1E90FF] hover:underline transition-colors duration-200 -translate-y-25 md:translate-x-19 md:-translate-y-10 cursor-pointer",
                   },
                   {
                     as: "custom",
                     className:
-                      "mt-6 flex justify-center md:justify-start gap-4 md:translate-x-19 md:-translate-y-7 -translate-y-28",
+                      "mt-9 md:mt-6 flex justify-center md:justify-start gap-4 md:translate-x-19 md:-translate-y-7 -translate-y-28",
                     content: (
                       <motion.div
                         className="flex justify-center md:justify-start gap-4"
