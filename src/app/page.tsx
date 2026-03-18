@@ -324,7 +324,7 @@ export default function Page() {
         className="relative scroll-mt-16 min-h-screen pt-16 flex items-center justify-center overflow-hidden"
       >
         <VantaBirdsBackground visible={birdsVisible} />
-        <div className="relative z-10 text-center">
+        <div className="relative z-10 text-center -translate-y-12 md:translate-y-0">
           <TextScramble
             text="HELLO! MY NAME IS"
             className="mb-1 cursor-default text-[20px] tracking-[0.8px] text-[rgb(140,140,140)]"
