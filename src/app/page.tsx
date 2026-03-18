@@ -1136,7 +1136,7 @@ export default function Page() {
         <div
           className="
             cursor-default
-            text-[0.7rem]
+            text-[0.75rem]
             sm:text-[1rem]
             font-medium
             text-white/70
@@ -1151,7 +1151,7 @@ export default function Page() {
                 as: "span",
                 text: `© ${new Date().getFullYear()} All rights reserved | This template is made by `,
                 className:
-                  "cursor-default text-[0.7rem] sm:text-[1rem] font-medium text-white/70 font-['Open_Sans',sans-serif]",
+                  "cursor-default text-[0.75rem] sm:text-[1rem] font-medium text-white/70 font-['Open_Sans',sans-serif]",
               },
               {
                 as: "a",
@@ -1160,7 +1160,7 @@ export default function Page() {
                 target: "_blank",
                 rel: "noopener noreferrer",
                 className:
-                  "inline-block cursor-pointer px-1.5 py-0.5 sm:px-2 sm:py-1 ml-1 text-white text-[0.7rem] sm:text-[1rem] font-extrabold bg-[#1b76d2] rounded transition-transform duration-300 hover:scale-105",
+                  "inline-block cursor-pointer px-1.5 py-0.5 sm:px-2 sm:py-1 ml-1 text-white text-[0.75rem] sm:text-[1rem] font-extrabold bg-[#1b76d2] rounded transition-transform duration-300 hover:scale-105",
               },
             ]}
           />
