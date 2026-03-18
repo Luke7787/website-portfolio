@@ -1,0 +1,28 @@
+---
+description: Mobile (iPhone 12 Pro) changes must never affect the desktop/web version
+globs: "**/*.tsx,**/*.css"
+alwaysApply: true
+---
+
+# Mobile vs desktop: never break the web version
+
+- **Target**: Mobile = iPhone 12 Pro (390×844). Desktop = larger viewports (e.g. `md:` 768px+).
+- **Rule**: Any change for mobile must **not** alter layout, behavior, or styling on desktop.
+
+## How to keep desktop untouched
+
+1. **Use Tailwind breakpoints for mobile-only tweaks**
+   - Prefer **max-width** or **only-mobile** patterns so desktop keeps current styles.
+   - Example: add mobile padding with `px-4 md:px-8` — don’t remove or override `md:px-8` when adding `px-4`.
+   - For mobile-only changes, use **unprefixed** (mobile-first) for the new behavior and ensure desktop is restored with `md:` (or `sm:`/`lg:` as appropriate).
+
+2. **Avoid**
+   - Changing or removing classes that affect desktop without a `md:` (or larger) variant that preserves the existing desktop look.
+   - Using global CSS that applies to all viewports when the intent is mobile-only (use media queries or Tailwind breakpoints).
+
+3. **Safe pattern**
+   - Add new mobile styles without breakpoints (they apply to small screens).
+   - Keep or add `md:` (and up) classes so desktop stays identical.
+   - Example: `text-sm md:text-base` keeps base size on desktop; only mobile gets smaller text.
+
+When editing components or CSS, always confirm: “Does this change anything on viewports ≥768px?” If yes, scope it so desktop is unchanged.
