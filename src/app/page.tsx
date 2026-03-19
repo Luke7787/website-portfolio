@@ -85,6 +85,10 @@ function SkillIcon({ skill }: { skill: SkillEntry }) {
   return <skill.Icon className="w-5 h-5 shrink-0 text-white" aria-hidden />;
 }
 
+/** Mobile-only about: slideshow + arrows sooner; bio + lower block use same offset (desktop unchanged). */
+const MOBILE_ABOUT_SLIDESHOW_DELAY_S = 0.42;
+const MOBILE_ABOUT_DESC_DELAY_CHILDREN_S = 1.2;
+
 /** Clear “glass” pill — no backdrop-filter (blur was smearing the slide); translucent tint only */
 const SLIDESHOW_GLASS_BTN =
   "z-10 absolute top-1/2 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full " +
@@ -128,7 +132,14 @@ function SlideshowChevron({ dir }: { dir: "left" | "right" }) {
 }
 
 // Slideshow Component (Added Only)
-function Slideshow({ revealDelay = 0.02 }: { revealDelay?: number }) {
+function Slideshow({
+  revealDelay = 0.02,
+  /** Mobile: arrows use same reveal but y=0 only (no vertical shift over translated layout). */
+  isMobile = false,
+}: {
+  revealDelay?: number;
+  isMobile?: boolean;
+}) {
   const slideshowRef = useRef<HTMLDivElement>(null);
   const slideshowInView = useInView(slideshowRef, { once: true, amount: 0.3 });
   const slides = [
@@ -274,17 +285,15 @@ function Slideshow({ revealDelay = 0.02 }: { revealDelay?: number }) {
         />
       )}
 
-      {/* Arrows — fade in */}
+      {/* Arrows — ScrollRevealBlock words-style; mobile uses disableTranslateY to avoid layout jump */}
       <div className="absolute inset-0">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={slideshowInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{
-            delay: revealDelay + 0.02,
-            type: "spring",
-            stiffness: 65,
-            damping: 24,
-          }}
+        <ScrollRevealBlock
+          animationStyle="words"
+          delay={revealDelay + 0.02}
+          amount={0.3}
+          margin="0px"
+          disableTranslateY={isMobile}
+          transitionOverrides={{ stiffness: 65, damping: 24 }}
           className="absolute inset-0"
         >
           <button
@@ -304,7 +313,7 @@ function Slideshow({ revealDelay = 0.02 }: { revealDelay?: number }) {
           >
             <SlideshowChevron dir="right" />
           </button>
-        </motion.div>
+        </ScrollRevealBlock>
       </div>
     </div>
   );
@@ -350,9 +359,14 @@ export default function Page() {
       ).length;
     // Start second block as soon as last word finishes (minimal buffer)
     const staggerBeforeParagraph = isMobile ? 0 : 2 * 0.058;
-    const mobileExtraDelay = isMobile ? 2.5 : 0;
+    const mobileExtraDelay = isMobile ? MOBILE_ABOUT_DESC_DELAY_CHILDREN_S : 0;
     const delayMs =
-      (mobileExtraDelay + 0.08 + staggerBeforeParagraph + (paragraphWordCount - 1) * 0.058 + 0.15) * 1000;
+      (mobileExtraDelay +
+        0.08 +
+        staggerBeforeParagraph +
+        (paragraphWordCount - 1) * 0.058 +
+        0.15) *
+      1000;
     const t = setTimeout(() => setShowLowerAbout(true), Math.round(delayMs));
     return () => clearTimeout(t);
   }, [aboutInView, isMobile]);
@@ -411,7 +425,12 @@ export default function Page() {
                 md:-translate-x-12
               "
             >
-              <Slideshow revealDelay={isMobile ? 1.2 : 0.02} />
+              <Slideshow
+                revealDelay={
+                  isMobile ? MOBILE_ABOUT_SLIDESHOW_DELAY_S : 0.02
+                }
+                isMobile={isMobile}
+              />
             </div>
           </div>
 
@@ -450,7 +469,7 @@ export default function Page() {
               <ScrollRevealWords
                 className=""
                 threshold={0.45}
-                delayChildren={2.5}
+                delayChildren={MOBILE_ABOUT_DESC_DELAY_CHILDREN_S}
                 staggerChildren={0.058}
                 transitionOverrides={{
                   type: "tween",
@@ -502,115 +521,59 @@ export default function Page() {
               />
             </div>
             <ScrollRevealWords
-                className=""
-                forceVisible={showLowerAbout}
-                threshold={0.1}
-                delayChildren={0}
-                staggerChildren={0.092}
-                transitionOverrides={{
-                  type: "tween",
-                  duration: 1.15,
-                  ease: [0.33, 0.1, 0.2, 1],
-                }}
-                lines={[
-                  {
-                    as: "a",
-                    text: "Check out my resume",
-                    href: "/LukeResume2026.pdf",
-                    target: "_blank",
-                    rel: "noopener noreferrer",
-                    className:
-                      "block mt-1 md:mt-4 text-[1.125rem] font-medium text-[#1E90FF] hover:underline transition-colors duration-200 -translate-y-25 md:translate-x-19 md:-translate-y-10 cursor-pointer",
-                  },
-                  {
-                    as: "custom",
-                    className:
-                      "mt-9 md:mt-6 flex justify-center md:justify-start gap-4 md:translate-x-19 md:-translate-y-7 -translate-y-28",
-                    content: (
-                      <motion.div
-                        className="flex justify-center md:justify-start gap-4"
-                        variants={{
-                          hidden: {},
-                          visible: {
-                            transition: {
-                              staggerChildren: 0.1,
-                              delayChildren: 0,
-                            },
+              className=""
+              forceVisible={showLowerAbout}
+              threshold={0.1}
+              delayChildren={0}
+              staggerChildren={0.092}
+              transitionOverrides={{
+                type: "tween",
+                duration: 1.15,
+                ease: [0.33, 0.1, 0.2, 1],
+              }}
+              lines={[
+                {
+                  as: "a",
+                  text: "Check out my resume",
+                  href: "/LukeResume2026.pdf",
+                  target: "_blank",
+                  rel: "noopener noreferrer",
+                  className:
+                    "block mt-1 md:mt-4 text-[1.125rem] font-medium text-[#1E90FF] hover:underline transition-colors duration-200 -translate-y-25 md:translate-x-19 md:-translate-y-10 cursor-pointer",
+                },
+                {
+                  as: "custom",
+                  className:
+                    "mt-9 md:mt-6 flex justify-center md:justify-start gap-4 md:translate-x-19 md:-translate-y-7 -translate-y-28",
+                  content: (
+                    <motion.div
+                      className="flex justify-center md:justify-start gap-4"
+                      variants={{
+                        hidden: {},
+                        visible: {
+                          transition: {
+                            staggerChildren: 0.1,
+                            delayChildren: 0,
                           },
-                        }}
-                      >
-                        {[
-                          {
-                            href: "https://github.com/Luke7787",
-                            icon: "fab fa-github",
-                          },
-                          {
-                            href: "https://www.linkedin.com/in/zhuangluke/",
-                            icon: "fab fa-linkedin",
-                          },
-                          {
-                            href: "https://www.facebook.com/luke.zhuang/",
-                            icon: "fab fa-facebook",
-                          },
-                        ].map((item) => (
-                          <motion.span
-                            key={item.href}
-                            variants={{
-                              hidden: {
-                                opacity: 0,
-                                y: 24,
-                                scale: 1,
-                                filter: "blur(10px)",
-                              },
-                              visible: {
-                                opacity: 1,
-                                y: 0,
-                                scale: 1,
-                                filter: "blur(0px)",
-                                transition: {
-                                  type: "spring",
-                                  stiffness: 65,
-                                  damping: 24,
-                                  mass: 0.9,
-                                },
-                              },
-                            }}
-                            style={{ display: "inline-block" }}
-                          >
-                            <a
-                              href={item.href}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="group inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/15 transition-all duration-300 hover:scale-110"
-                            >
-                              <i
-                                className={`${item.icon} text-[30px] text-[#1B76D2] transition-colors duration-300 group-hover:text-white`}
-                              />
-                            </a>
-                          </motion.span>
-                        ))}
-                      </motion.div>
-                    ),
-                  },
-                  {
-                    as: "custom",
-                    className:
-                      "mt-4 max-w-md space-y-2 text-[1rem] font-medium leading-[1.6] tracking-[0.03em] md:translate-x-19 md:-translate-y-2.25 -translate-y-22",
-                    content: (
-                      <motion.div
-                        className="space-y-2"
-                        variants={{
-                          hidden: {},
-                          visible: {
-                            transition: {
-                              staggerChildren: 0.08,
-                              delayChildren: 0,
-                            },
-                          },
-                        }}
-                      >
-                        <motion.p
-                          className="m-0"
+                        },
+                      }}
+                    >
+                      {[
+                        {
+                          href: "https://github.com/Luke7787",
+                          icon: "fab fa-github",
+                        },
+                        {
+                          href: "https://www.linkedin.com/in/zhuangluke/",
+                          icon: "fab fa-linkedin",
+                        },
+                        {
+                          href: "https://www.facebook.com/luke.zhuang/",
+                          icon: "fab fa-facebook",
+                        },
+                      ].map((item) => (
+                        <motion.span
+                          key={item.href}
                           variants={{
                             hidden: {
                               opacity: 0,
@@ -631,63 +594,65 @@ export default function Page() {
                               },
                             },
                           }}
-                          style={{ display: "block" }}
+                          style={{ display: "inline-block" }}
                         >
-                          <motion.span
-                            variants={{
-                              hidden: {
-                                opacity: 0,
-                                y: 24,
-                                scale: 1,
-                                filter: "blur(10px)",
-                              },
-                              visible: {
-                                opacity: 1,
-                                y: 0,
-                                scale: 1,
-                                filter: "blur(0px)",
-                                transition: {
-                                  type: "spring",
-                                  stiffness: 65,
-                                  damping: 24,
-                                  mass: 0.9,
-                                },
-                              },
-                            }}
-                            style={{ display: "inline-block" }}
-                            className="cursor-default text-[#8c8c8c]"
+                          <a
+                            href={item.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/15 transition-all duration-300 hover:scale-110"
                           >
-                            Email:
-                          </motion.span>{" "}
-                          <motion.span
-                            variants={{
-                              hidden: {
-                                opacity: 0,
-                                y: 24,
-                                scale: 1,
-                                filter: "blur(10px)",
-                              },
-                              visible: {
-                                opacity: 1,
-                                y: 0,
-                                scale: 1,
-                                filter: "blur(0px)",
-                                transition: {
-                                  type: "spring",
-                                  stiffness: 65,
-                                  damping: 24,
-                                  mass: 0.9,
-                                },
-                              },
-                            }}
-                            style={{ display: "inline-block" }}
-                            className="border-b border-transparent text-[#1E90FF] hover:border-[#1E90FF] transition-colors duration-200 cursor-pointer"
-                          >
-                            lukewzhuang@gmail.com
-                          </motion.span>
-                        </motion.p>
-                        <motion.p
-                          className="m-0"
+                            <i
+                              className={`${item.icon} text-[30px] text-[#1B76D2] transition-colors duration-300 group-hover:text-white`}
+                            />
+                          </a>
+                        </motion.span>
+                      ))}
+                    </motion.div>
+                  ),
+                },
+                {
+                  as: "custom",
+                  className:
+                    "mt-4 max-w-md space-y-2 text-[1rem] font-medium leading-[1.6] tracking-[0.03em] md:translate-x-19 md:-translate-y-2.25 -translate-y-22",
+                  content: (
+                    <motion.div
+                      className="space-y-2"
+                      variants={{
+                        hidden: {},
+                        visible: {
+                          transition: {
+                            staggerChildren: 0.08,
+                            delayChildren: 0,
+                          },
+                        },
+                      }}
+                    >
+                      <motion.p
+                        className="m-0"
+                        variants={{
+                          hidden: {
+                            opacity: 0,
+                            y: 24,
+                            scale: 1,
+                            filter: "blur(10px)",
+                          },
+                          visible: {
+                            opacity: 1,
+                            y: 0,
+                            scale: 1,
+                            filter: "blur(0px)",
+                            transition: {
+                              type: "spring",
+                              stiffness: 65,
+                              damping: 24,
+                              mass: 0.9,
+                            },
+                          },
+                        }}
+                        style={{ display: "block" }}
+                      >
+                        <motion.span
                           variants={{
                             hidden: {
                               opacity: 0,
@@ -708,66 +673,120 @@ export default function Page() {
                               },
                             },
                           }}
-                          style={{ display: "block" }}
+                          style={{ display: "inline-block" }}
+                          className="cursor-default text-[#8c8c8c]"
                         >
-                          <motion.span
-                            variants={{
-                              hidden: {
-                                opacity: 0,
-                                y: 24,
-                                scale: 1,
-                                filter: "blur(10px)",
+                          Email:
+                        </motion.span>{" "}
+                        <motion.span
+                          variants={{
+                            hidden: {
+                              opacity: 0,
+                              y: 24,
+                              scale: 1,
+                              filter: "blur(10px)",
+                            },
+                            visible: {
+                              opacity: 1,
+                              y: 0,
+                              scale: 1,
+                              filter: "blur(0px)",
+                              transition: {
+                                type: "spring",
+                                stiffness: 65,
+                                damping: 24,
+                                mass: 0.9,
                               },
-                              visible: {
-                                opacity: 1,
-                                y: 0,
-                                scale: 1,
-                                filter: "blur(0px)",
-                                transition: {
-                                  type: "spring",
-                                  stiffness: 65,
-                                  damping: 24,
-                                  mass: 0.9,
-                                },
+                            },
+                          }}
+                          style={{ display: "inline-block" }}
+                          className="border-b border-transparent text-[#1E90FF] hover:border-[#1E90FF] transition-colors duration-200 cursor-pointer"
+                        >
+                          lukewzhuang@gmail.com
+                        </motion.span>
+                      </motion.p>
+                      <motion.p
+                        className="m-0"
+                        variants={{
+                          hidden: {
+                            opacity: 0,
+                            y: 24,
+                            scale: 1,
+                            filter: "blur(10px)",
+                          },
+                          visible: {
+                            opacity: 1,
+                            y: 0,
+                            scale: 1,
+                            filter: "blur(0px)",
+                            transition: {
+                              type: "spring",
+                              stiffness: 65,
+                              damping: 24,
+                              mass: 0.9,
+                            },
+                          },
+                        }}
+                        style={{ display: "block" }}
+                      >
+                        <motion.span
+                          variants={{
+                            hidden: {
+                              opacity: 0,
+                              y: 24,
+                              scale: 1,
+                              filter: "blur(10px)",
+                            },
+                            visible: {
+                              opacity: 1,
+                              y: 0,
+                              scale: 1,
+                              filter: "blur(0px)",
+                              transition: {
+                                type: "spring",
+                                stiffness: 65,
+                                damping: 24,
+                                mass: 0.9,
                               },
-                            }}
-                            style={{ display: "inline-block" }}
-                            className="cursor-default text-[#8c8c8c]"
-                          >
-                            Phone:
-                          </motion.span>{" "}
-                          <motion.span
-                            variants={{
-                              hidden: {
-                                opacity: 0,
-                                y: 24,
-                                scale: 1,
-                                filter: "blur(10px)",
+                            },
+                          }}
+                          style={{ display: "inline-block" }}
+                          className="cursor-default text-[#8c8c8c]"
+                        >
+                          Phone:
+                        </motion.span>{" "}
+                        <motion.span
+                          variants={{
+                            hidden: {
+                              opacity: 0,
+                              y: 24,
+                              scale: 1,
+                              filter: "blur(10px)",
+                            },
+                            visible: {
+                              opacity: 1,
+                              y: 0,
+                              scale: 1,
+                              filter: "blur(0px)",
+                              transition: {
+                                type: "spring",
+                                stiffness: 65,
+                                damping: 24,
+                                mass: 0.9,
                               },
-                              visible: {
-                                opacity: 1,
-                                y: 0,
-                                scale: 1,
-                                filter: "blur(0px)",
-                                transition: {
-                                  type: "spring",
-                                  stiffness: 65,
-                                  damping: 24,
-                                  mass: 0.9,
-                                },
-                              },
-                            }}
-                            style={{ display: "inline-block" }}
-                            className="border-b border-transparent text-[#1E90FF] hover:border-[#1E90FF] transition-colors duration-200 cursor-pointer"
-                          >
-                            (415) 837-8686
-                          </motion.span>
-                        </motion.p>
-                      </motion.div>
-                    ),
-                  },
-                ]}
-              />
+                            },
+                          }}
+                          style={{ display: "inline-block" }}
+                          className="border-b border-transparent text-[#1E90FF] hover:border-[#1E90FF] transition-colors duration-200 cursor-pointer"
+                        >
+                          (415) 837-8686
+                        </motion.span>
+                      </motion.p>
+                    </motion.div>
+                  ),
+                },
+              ]}
+            />
           </div>
         </div>
       </section>
@@ -982,7 +1001,10 @@ export default function Page() {
                   ))}
                   <span className="shrink-0 w-0 block" aria-hidden />
                 </li>
-                <li className="flex items-center gap-3 md:gap-4 shrink-0" aria-hidden>
+                <li
+                  className="flex items-center gap-3 md:gap-4 shrink-0"
+                  aria-hidden
+                >
                   {skillsMarqueeRow1.map((skill, i) => (
                     <div key={`row1-b-${i}`} className="shrink-0">
                       <div className="skill-card-border shrink-0">
@@ -1038,7 +1060,10 @@ export default function Page() {
                   ))}
                   <span className="shrink-0 w-0 block" aria-hidden />
                 </li>
-                <li className="flex items-center gap-3 md:gap-4 shrink-0" aria-hidden>
+                <li
+                  className="flex items-center gap-3 md:gap-4 shrink-0"
+                  aria-hidden
+                >
                   {skillsMarqueeRow2.map((skill, i) => (
                     <div key={`row2-b-${i}`} className="shrink-0">
                       <div className="skill-card-border shrink-0">
@@ -1094,7 +1119,10 @@ export default function Page() {
                   ))}
                   <span className="shrink-0 w-0 block" aria-hidden />
                 </li>
-                <li className="flex items-center gap-3 md:gap-4 shrink-0" aria-hidden>
+                <li
+                  className="flex items-center gap-3 md:gap-4 shrink-0"
+                  aria-hidden
+                >
                   {skillsMarqueeRow3.map((skill, i) => (
                     <div key={`row3-b-${i}`} className="shrink-0">
                       <div className="skill-card-border shrink-0">
@@ -1123,7 +1151,9 @@ export default function Page() {
         ref={contactRef}
         className="relative -scroll-mt-25 min-h-screen pt-0 flex items-center justify-center overflow-hidden"
       >
-        <VantaBirdsBackground visible={mobileContactBirds || contactBirdsVisible} />
+        <VantaBirdsBackground
+          visible={mobileContactBirds || contactBirdsVisible}
+        />
         <div className="relative z-10 text-center">
           <ScrollRevealWords
             className="text-center"

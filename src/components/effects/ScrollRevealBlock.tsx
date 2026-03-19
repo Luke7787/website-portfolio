@@ -34,6 +34,8 @@ interface ScrollRevealBlockProps {
   animationStyle?: "default" | "words";
   /** Override spring transition (e.g. { stiffness: 35, damping: 22 } for slower animation) */
   transitionOverrides?: { stiffness?: number; damping?: number; mass?: number };
+  /** If true, y stays 0 — only opacity + blur animate (avoids layout shift with translated siblings, e.g. mobile slideshow). */
+  disableTranslateY?: boolean;
 }
 
 export default function ScrollRevealBlock({
@@ -45,6 +47,7 @@ export default function ScrollRevealBlock({
   minVisibleMs,
   animationStyle = "default",
   transitionOverrides,
+  disableTranslateY = false,
 }: ScrollRevealBlockProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [hasAnimated, setHasAnimated] = useState(false);
@@ -63,7 +66,7 @@ export default function ScrollRevealBlock({
   const isInView = minVisibleMs !== undefined ? isInViewStable : isInViewInstant;
 
   const isWords = animationStyle === "words";
-  const initialY = isWords ? 24 : 28;
+  const initialY = disableTranslateY ? 0 : isWords ? 24 : 28;
   const transitionSpring = isWords ? wordsSpring : spring;
 
   useEffect(() => {
