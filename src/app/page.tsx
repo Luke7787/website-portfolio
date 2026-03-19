@@ -104,22 +104,26 @@ const SLIDESHOW_GLASS_BTN =
 
 function SlideshowChevron({ dir }: { dir: "left" | "right" }) {
   return (
-    <svg
-      className="h-6 w-6 shrink-0 opacity-95 drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2.25}
-      strokeLinecap="round"
-      strokeLinejoin="round"
+    <span
+      className="pointer-events-none flex h-full w-full items-center justify-center"
       aria-hidden
     >
-      {dir === "left" ? (
-        <path d="M15 18l-6-6 6-6" />
-      ) : (
-        <path d="M9 18l6-6-6-6" />
-      )}
-    </svg>
+      <svg
+        className={`block h-[22px] w-[22px] shrink-0 opacity-95 drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)] translate-y-px ${dir === "left" ? "-translate-x-[0.5px]" : "translate-x-[0.5px]"}`}
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={2.25}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        {dir === "left" ? (
+          <path d="M15 18l-6-6 6-6" />
+        ) : (
+          <path d="M9 18l6-6-6-6" />
+        )}
+      </svg>
+    </span>
   );
 }
 
