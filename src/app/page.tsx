@@ -287,18 +287,33 @@ function Slideshow() {
 export default function Page() {
   const [birdsVisible, setBirdsVisible] = useState(false);
   const [contactBirdsVisible, setContactBirdsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [mobileContactBirds, setMobileContactBirds] = useState(false);
   const [showLowerAbout, setShowLowerAbout] = useState(false);
   const aboutTextRef = useRef<HTMLDivElement>(null);
+  const contactRef = useRef<HTMLDivElement>(null);
+  const footerRef = useRef<HTMLElement>(null);
+  const footerInView = useInView(footerRef, { once: true, amount: 0.3 });
   const aboutInView = useInView(aboutTextRef, { once: true, amount: 0.45 });
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
   }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => setBirdsVisible(true), 2000);
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    if (!footerInView || !isMobile) return;
+    const timer = setTimeout(() => setMobileContactBirds(true), 2500);
+    return () => clearTimeout(timer);
+  }, [footerInView, isMobile]);
 
   // About section: show resume + contact after first block (full paragraph) finishes
   useEffect(() => {
@@ -1034,9 +1049,10 @@ export default function Page() {
       {/* CONTACT */}
       <section
         id="contact"
+        ref={contactRef}
         className="relative -scroll-mt-25 min-h-screen pt-0 flex items-center justify-center overflow-hidden"
       >
-        <VantaBirdsBackground visible={contactBirdsVisible} />
+        <VantaBirdsBackground visible={mobileContactBirds || contactBirdsVisible} />
         <div className="relative z-10 text-center">
           <ScrollRevealWords
             className="text-center"
@@ -1132,7 +1148,7 @@ export default function Page() {
       </section>
 
       {/* FOOTER */}
-      <footer id="footer" className="py-6 text-center">
+      <footer id="footer" ref={footerRef} className="py-6 text-center">
         <div
           className="
             cursor-default
