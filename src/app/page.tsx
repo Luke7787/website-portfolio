@@ -85,8 +85,48 @@ function SkillIcon({ skill }: { skill: SkillEntry }) {
   return <skill.Icon className="w-5 h-5 shrink-0 text-white" aria-hidden />;
 }
 
+/** Clear “glass” pill — no backdrop-filter (blur was smearing the slide); translucent tint only */
+const SLIDESHOW_GLASS_BTN =
+  "z-10 absolute top-1/2 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full " +
+  "border border-white/50 " +
+  "bg-gradient-to-b from-white/[0.38] to-white/[0.16] " +
+  "shadow-[0_4px_28px_rgba(0,0,0,0.28),inset_0_1px_0_rgba(255,255,255,0.55),inset_0_-1px_0_rgba(255,255,255,0.06)] " +
+  "text-white transition-[transform,box-shadow,background-color,border-color] duration-200 ease-out " +
+  "hover:from-white/[0.48] hover:to-white/[0.22] hover:border-white/60 " +
+  "hover:shadow-[0_8px_36px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(255,255,255,0.65),inset_0_-1px_0_rgba(255,255,255,0.08)] " +
+  "motion-safe:hover:scale-[1.06] motion-safe:active:scale-[0.94] " +
+  "motion-reduce:hover:scale-100 motion-reduce:active:scale-100 " +
+  "active:from-white/[0.28] active:to-white/[0.12] active:border-white/45 " +
+  "active:shadow-[inset_0_2px_10px_rgba(0,0,0,0.22),inset_0_1px_0_rgba(255,255,255,0.25)] " +
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 " +
+  "focus-visible:ring-offset-black/40 " +
+  "touch-manipulation select-none [-webkit-tap-highlight-color:transparent]";
+
+function SlideshowChevron({ dir }: { dir: "left" | "right" }) {
+  return (
+    <svg
+      className="h-6 w-6 shrink-0 opacity-95 drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2.25}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      {dir === "left" ? (
+        <path d="M15 18l-6-6 6-6" />
+      ) : (
+        <path d="M9 18l6-6-6-6" />
+      )}
+    </svg>
+  );
+}
+
 // Slideshow Component (Added Only)
-function Slideshow() {
+function Slideshow({ revealDelay = 0.02 }: { revealDelay?: number }) {
+  const slideshowRef = useRef<HTMLDivElement>(null);
+  const slideshowInView = useInView(slideshowRef, { once: true, amount: 0.3 });
   const slides = [
     {
       type: "image",
@@ -130,13 +170,21 @@ function Slideshow() {
   const current = slides[index];
 
   return (
-    <div className="relative">
-      {/* Aspect Ratio Container — scroll reveal */}
-      <ScrollRevealBlock
-        animationStyle="words"
-        delay={0.02}
-        amount={0.3}
-        transitionOverrides={{ stiffness: 65, damping: 24 }}
+    <div ref={slideshowRef} className="relative">
+      {/* Aspect Ratio Container — fade-in only (no y movement to prevent layout shifts) */}
+      <motion.div
+        initial={{ opacity: 0, filter: "blur(10px)" }}
+        animate={
+          slideshowInView
+            ? { opacity: 1, filter: "blur(0px)" }
+            : { opacity: 0, filter: "blur(10px)" }
+        }
+        transition={{
+          delay: revealDelay,
+          type: "spring",
+          stiffness: 65,
+          damping: 24,
+        }}
       >
         <div className="relative w-full aspect-square overflow-hidden">
           <AnimatePresence mode="wait" initial={false}>
@@ -193,7 +241,7 @@ function Slideshow() {
             )}
           </AnimatePresence>
         </div>
-      </ScrollRevealBlock>
+      </motion.div>
 
       {/* Caption — ScrollRevealWords on first view, plain text after slide change */}
       {hasChangedSlide ? (
@@ -204,7 +252,7 @@ function Slideshow() {
         <ScrollRevealWords
           className="mt-4"
           threshold={0.45}
-          delayChildren={0.08}
+          delayChildren={revealDelay + 0.08}
           staggerChildren={0.058}
           transitionOverrides={{
             type: "tween",
@@ -222,63 +270,37 @@ function Slideshow() {
         />
       )}
 
-      {/* Arrows — scroll reveal */}
+      {/* Arrows — fade in */}
       <div className="absolute inset-0">
-        <ScrollRevealBlock
-          animationStyle="words"
-          delay={0.04}
-          amount={0.3}
-          transitionOverrides={{ stiffness: 65, damping: 24 }}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={slideshowInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{
+            delay: revealDelay + 0.02,
+            type: "spring",
+            stiffness: 65,
+            damping: 24,
+          }}
           className="absolute inset-0"
         >
           <button
+            type="button"
             onClick={prev}
-            className="
-              absolute
-              left-4
-              top-1/2
-              -translate-y-1/2
-              flex items-center justify-center
-              w-12 h-12
-              rounded-full
-              bg-gray-100
-              text-black
-              text-3xl
-              leading-none
-              shadow-[0_8px_20px_rgba(0,0,0,0.15)]
-              hover:bg-gray-200
-              hover:scale-110
-              active:scale-95
-              transition-all duration-300
-            "
+            aria-label="Previous slide"
+            className={`left-4 ${SLIDESHOW_GLASS_BTN}`}
           >
-            <span className="-translate-x-px -translate-y-0.5">‹</span>
+            <SlideshowChevron dir="left" />
           </button>
 
           <button
+            type="button"
             onClick={next}
-            className="
-              absolute
-              right-4
-              top-1/2
-              -translate-y-1/2
-              flex items-center justify-center
-              w-12 h-12
-              rounded-full
-              bg-gray-100
-              text-black
-              text-3xl
-              leading-none
-              shadow-[0_8px_20px_rgba(0,0,0,0.15)]
-              hover:bg-gray-200
-              hover:scale-110
-              active:scale-95
-              transition-all duration-300
-            "
+            aria-label="Next slide"
+            className={`right-4 ${SLIDESHOW_GLASS_BTN}`}
           >
-            <span className="translate-x-px -translate-y-0.5">›</span>
+            <SlideshowChevron dir="right" />
           </button>
-        </ScrollRevealBlock>
+        </motion.div>
       </div>
     </div>
   );
@@ -323,11 +345,13 @@ export default function Page() {
         /\s+/,
       ).length;
     // Start second block as soon as last word finishes (minimal buffer)
+    const staggerBeforeParagraph = isMobile ? 0 : 2 * 0.058;
+    const mobileExtraDelay = isMobile ? 2.5 : 0;
     const delayMs =
-      (0.08 + 2 * 0.058 + (paragraphWordCount - 1) * 0.058 + 0.15) * 1000;
+      (mobileExtraDelay + 0.08 + staggerBeforeParagraph + (paragraphWordCount - 1) * 0.058 + 0.15) * 1000;
     const t = setTimeout(() => setShowLowerAbout(true), Math.round(delayMs));
     return () => clearTimeout(t);
-  }, [aboutInView]);
+  }, [aboutInView, isMobile]);
 
   return (
     <main className="relative">
@@ -383,7 +407,7 @@ export default function Page() {
                 md:-translate-x-12
               "
             >
-              <Slideshow />
+              <Slideshow revealDelay={isMobile ? 1.2 : 0.02} />
             </div>
           </div>
 
@@ -398,40 +422,84 @@ export default function Page() {
               md:-translate-x-16
             "
           >
-            <ScrollRevealWords
-              className=""
-              threshold={0.45}
-              delayChildren={0.08}
-              staggerChildren={0.058}
-              transitionOverrides={{
-                type: "tween",
-                duration: 1.05,
-                ease: [0.22, 0.08, 0.28, 1],
-              }}
-              lines={[
-                {
-                  as: "p",
-                  text: "ABOUT",
-                  className:
-                    "block cursor-default font-['League Spartan','Arial','sans-serif'] text-[90px] sm:text-[110px] lg:text-[150px] font-black uppercase leading-none tracking-[0.6px] text-[rgba(255,255,255,0.15)] [text-shadow:2px_2px_4px_rgba(0,0,0,0.5)] -translate-y-131 md:translate-y-0",
-                },
-                {
-                  as: "h2",
-                  text: "Hi! I'm Luke Zhuang",
-                  className:
-                    "hidden cursor-default md:block mt-2 text-[1.8rem] font-medium tracking-[0.05em] text-white md:translate-x-19 md:-translate-y-22",
-                },
-                {
-                  as: "p",
-                  text: "I'm a software engineer with a passion for building websites. I'm constantly seeking new challenges to expand my skills and knowledge.",
-                  className:
-                    "mt-5 cursor-default max-w-[320px] sm:max-w-sm md:max-w-md text-[1rem] sm:text-[1.05rem] md:text-[1.125rem] font-medium leading-[1.6] md:leading-[1.75] tracking-[0.03em] text-white/80 text-justify md:translate-x-19 md:-translate-y-13 -translate-y-30",
-                },
-              ]}
-            />
-            {showLowerAbout && (
+            {/* Mobile: separate animations for each element */}
+            <div className="md:hidden">
               <ScrollRevealWords
                 className=""
+                threshold={0.3}
+                delayChildren={0.08}
+                staggerChildren={0.058}
+                transitionOverrides={{
+                  type: "tween",
+                  duration: 1.05,
+                  ease: [0.22, 0.08, 0.28, 1],
+                }}
+                lines={[
+                  {
+                    as: "p",
+                    text: "ABOUT",
+                    className:
+                      "block cursor-default font-['League Spartan','Arial','sans-serif'] text-[90px] sm:text-[110px] font-black uppercase leading-none tracking-[0.6px] text-[rgba(255,255,255,0.15)] [text-shadow:2px_2px_4px_rgba(0,0,0,0.5)] -translate-y-131",
+                  },
+                ]}
+              />
+              <ScrollRevealWords
+                className=""
+                threshold={0.45}
+                delayChildren={2.5}
+                staggerChildren={0.058}
+                transitionOverrides={{
+                  type: "tween",
+                  duration: 1.05,
+                  ease: [0.22, 0.08, 0.28, 1],
+                }}
+                lines={[
+                  {
+                    as: "p",
+                    text: "I'm a software engineer with a passion for building websites. I'm constantly seeking new challenges to expand my skills and knowledge.",
+                    className:
+                      "mt-5 cursor-default max-w-[320px] sm:max-w-sm text-[1rem] sm:text-[1.05rem] font-medium leading-[1.6] tracking-[0.03em] text-white/80 text-justify -translate-y-30",
+                  },
+                ]}
+              />
+            </div>
+            {/* Desktop: single staggered animation */}
+            <div className="hidden md:block">
+              <ScrollRevealWords
+                className=""
+                threshold={0.45}
+                delayChildren={0.08}
+                staggerChildren={0.058}
+                transitionOverrides={{
+                  type: "tween",
+                  duration: 1.05,
+                  ease: [0.22, 0.08, 0.28, 1],
+                }}
+                lines={[
+                  {
+                    as: "p",
+                    text: "ABOUT",
+                    className:
+                      "block cursor-default font-['League Spartan','Arial','sans-serif'] lg:text-[150px] font-black uppercase leading-none tracking-[0.6px] text-[rgba(255,255,255,0.15)] [text-shadow:2px_2px_4px_rgba(0,0,0,0.5)]",
+                  },
+                  {
+                    as: "h2",
+                    text: "Hi! I'm Luke Zhuang",
+                    className:
+                      "cursor-default block mt-2 text-[1.8rem] font-medium tracking-[0.05em] text-white md:translate-x-19 md:-translate-y-22",
+                  },
+                  {
+                    as: "p",
+                    text: "I'm a software engineer with a passion for building websites. I'm constantly seeking new challenges to expand my skills and knowledge.",
+                    className:
+                      "mt-5 cursor-default md:max-w-md md:text-[1.125rem] font-medium md:leading-[1.75] tracking-[0.03em] text-white/80 text-justify md:translate-x-19 md:-translate-y-13",
+                  },
+                ]}
+              />
+            </div>
+            <ScrollRevealWords
+                className=""
+                forceVisible={showLowerAbout}
                 threshold={0.1}
                 delayChildren={0}
                 staggerChildren={0.092}
@@ -696,7 +764,6 @@ export default function Page() {
                   },
                 ]}
               />
-            )}
           </div>
         </div>
       </section>
