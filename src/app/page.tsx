@@ -902,10 +902,10 @@ export default function Page() {
 
             <ScrollRevealBlock
               animationStyle="words"
-              delay={0.35}
+              delay={0.75}
               amount={0.3}
               margin="0px 0px 0px 0px"
-              minVisibleMs={140}
+              minVisibleMs={260}
               transitionOverrides={{ stiffness: 24, damping: 24, mass: 1.2 }}
               className="w-full md:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-5rem)/3)]"
             >
