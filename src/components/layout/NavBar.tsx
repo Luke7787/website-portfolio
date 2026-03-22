@@ -106,13 +106,26 @@ function scrollToSection(href: string, callbacks?: ScrollCallbacks) {
   window.history.replaceState(null, "", window.location.pathname);
 }
 
+/** Share of the viewport (by area) covered by this element — comparable across sections of any height. */
+function sectionViewportCoverage(el: HTMLElement): number {
+  const w = window.innerWidth;
+  const h = window.innerHeight;
+  if (w <= 0 || h <= 0) return 0;
+  const r = el.getBoundingClientRect();
+  const top = Math.max(0, r.top);
+  const left = Math.max(0, r.left);
+  const bottom = Math.min(h, r.bottom);
+  const right = Math.min(w, r.right);
+  const area = Math.max(0, right - left) * Math.max(0, bottom - top);
+  return area / (w * h);
+}
+
 export default function NavBar() {
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string>(SECTION_IDS[0]);
   const [isScrolling, setIsScrolling] = useState(false);
   const isScrollingRef = useRef(false);
   const navRef = useRef<HTMLElement | null>(null);
-  const ratioRef = useRef<Record<string, number>>({});
   const rafRef = useRef<number | null>(null);
 
   const scrollCallbacks: ScrollCallbacks = {
@@ -127,52 +140,53 @@ export default function NavBar() {
     },
   };
 
-  // Scroll spy: section with largest presence in the "active zone" wins (smooth, no flicker)
-  // Skip updates during programmatic scroll so the scroll doesn't stutter at each section
+  // Scroll spy: section that covers the largest share of the viewport wins (feels like "what you're mostly seeing").
+  // Uses viewport-normalized area, not IntersectionObserver ratio (which divides by section height and skewed tall blocks).
+  // Ties favor a later section so boundaries slightly favor the lower block (e.g. skills vs projects).
   useEffect(() => {
-    SECTION_IDS.forEach((id) => {
-      ratioRef.current[id] = 0;
-    });
+    function computeActiveSection(): string {
+      let bestId = SECTION_IDS[0];
+      let bestCov = -1;
+      for (const id of SECTION_IDS) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const cov = sectionViewportCoverage(el);
+        if (cov >= bestCov) {
+          bestCov = cov;
+          bestId = id;
+        }
+      }
+      if (bestCov <= 0) {
+        const yRef = window.innerHeight * 0.35;
+        let current = SECTION_IDS[0];
+        for (const id of SECTION_IDS) {
+          const el = document.getElementById(id);
+          if (!el) continue;
+          if (el.getBoundingClientRect().top <= yRef) current = id;
+        }
+        return current;
+      }
+      return bestId;
+    }
 
-    const elements = SECTION_IDS.map((id) =>
-      document.getElementById(id),
-    ).filter((el): el is HTMLElement => el != null);
-    if (elements.length === 0) return;
+    function scheduleSpyUpdate() {
+      if (isScrollingRef.current || isProgrammaticScroll) return;
+      if (rafRef.current !== null) return;
+      rafRef.current = requestAnimationFrame(() => {
+        rafRef.current = null;
+        const next = computeActiveSection();
+        setActiveSection((prev) => (prev === next ? prev : next));
+      });
+    }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (isScrollingRef.current || isProgrammaticScroll) return;
-        entries.forEach((entry) => {
-          ratioRef.current[entry.target.id] = entry.intersectionRatio;
-        });
-        let maxRatio = 0;
-        let bestId = SECTION_IDS[0];
-        SECTION_IDS.forEach((id) => {
-          const r = ratioRef.current[id] ?? 0;
-          if (r > maxRatio) {
-            maxRatio = r;
-            bestId = id;
-          }
-        });
+    window.addEventListener("scroll", scheduleSpyUpdate, { passive: true });
+    window.addEventListener("resize", scheduleSpyUpdate);
+    scheduleSpyUpdate();
 
-        if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
-        const chosen = maxRatio > 0 ? bestId : null;
-        rafRef.current = requestAnimationFrame(() => {
-          rafRef.current = null;
-          setActiveSection((prev) => chosen ?? prev);
-        });
-      },
-      {
-        root: null,
-        rootMargin: "-35% 0px -50% 0px",
-        threshold: [0, 0.01, 0.1, 0.25, 0.5, 0.75, 1],
-      },
-    );
-
-    elements.forEach((el) => observer.observe(el));
     return () => {
+      window.removeEventListener("scroll", scheduleSpyUpdate);
+      window.removeEventListener("resize", scheduleSpyUpdate);
       if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
-      observer.disconnect();
     };
   }, []);
 
