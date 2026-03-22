@@ -89,47 +89,47 @@ function SkillIcon({ skill }: { skill: SkillEntry }) {
 const MOBILE_ABOUT_SLIDESHOW_DELAY_S = 0.42;
 const MOBILE_ABOUT_DESC_DELAY_CHILDREN_S = 1.2;
 
-/** Clear “glass” pill — no backdrop-filter (blur was smearing the slide); translucent tint only */
-const SLIDESHOW_GLASS_BTN =
-  "z-10 absolute top-1/2 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full " +
-  "border border-white/50 " +
-  "bg-gradient-to-b from-white/[0.38] to-white/[0.16] " +
-  "shadow-[0_4px_28px_rgba(0,0,0,0.28),inset_0_1px_0_rgba(255,255,255,0.55),inset_0_-1px_0_rgba(255,255,255,0.06)] " +
-  "text-white transition-[transform,box-shadow,background-color,border-color] duration-200 ease-out " +
-  "hover:from-white/[0.48] hover:to-white/[0.22] hover:border-white/60 " +
-  "hover:shadow-[0_8px_36px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(255,255,255,0.65),inset_0_-1px_0_rgba(255,255,255,0.08)] " +
-  "motion-safe:hover:scale-[1.06] motion-safe:active:scale-[0.94] " +
-  "motion-reduce:hover:scale-100 motion-reduce:active:scale-100 " +
-  "active:from-white/[0.28] active:to-white/[0.12] active:border-white/45 " +
-  "active:shadow-[inset_0_2px_10px_rgba(0,0,0,0.22),inset_0_1px_0_rgba(255,255,255,0.25)] " +
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 " +
-  "focus-visible:ring-offset-black/40 " +
-  "touch-manipulation select-none [-webkit-tap-highlight-color:transparent]";
-
-function SlideshowChevron({ dir }: { dir: "left" | "right" }) {
-  return (
-    <span
-      className="pointer-events-none flex h-full w-full items-center justify-center"
-      aria-hidden
-    >
-      <svg
-        className={`block h-[22px] w-[22px] shrink-0 opacity-95 drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)] translate-y-px ${dir === "left" ? "-translate-x-[0.5px]" : "translate-x-[0.5px]"}`}
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={2.25}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        {dir === "left" ? (
-          <path d="M15 18l-6-6 6-6" />
-        ) : (
-          <path d="M9 18l6-6-6-6" />
-        )}
-      </svg>
-    </span>
-  );
-}
+// /** Clear “glass” pill — no backdrop-filter (blur was smearing the slide); translucent tint only */
+// const SLIDESHOW_GLASS_BTN =
+//   "z-10 absolute top-1/2 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full " +
+//   "border border-white/50 " +
+//   "bg-gradient-to-b from-white/[0.38] to-white/[0.16] " +
+//   "shadow-[0_4px_28px_rgba(0,0,0,0.28),inset_0_1px_0_rgba(255,255,255,0.55),inset_0_-1px_0_rgba(255,255,255,0.06)] " +
+//   "text-white transition-[transform,box-shadow,background-color,border-color] duration-200 ease-out " +
+//   "hover:from-white/[0.48] hover:to-white/[0.22] hover:border-white/60 " +
+//   "hover:shadow-[0_8px_36px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(255,255,255,0.65),inset_0_-1px_0_rgba(255,255,255,0.08)] " +
+//   "motion-safe:hover:scale-[1.06] motion-safe:active:scale-[0.94] " +
+//   "motion-reduce:hover:scale-100 motion-reduce:active:scale-100 " +
+//   "active:from-white/[0.28] active:to-white/[0.12] active:border-white/45 " +
+//   "active:shadow-[inset_0_2px_10px_rgba(0,0,0,0.22),inset_0_1px_0_rgba(255,255,255,0.25)] " +
+//   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 " +
+//   "focus-visible:ring-offset-black/40 " +
+//   "touch-manipulation select-none [-webkit-tap-highlight-color:transparent]";
+//
+// function SlideshowChevron({ dir }: { dir: "left" | "right" }) {
+//   return (
+//     <span
+//       className="pointer-events-none flex h-full w-full items-center justify-center"
+//       aria-hidden
+//     >
+//       <svg
+//         className={`block h-[22px] w-[22px] shrink-0 opacity-95 drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)] translate-y-px ${dir === "left" ? "-translate-x-[0.5px]" : "translate-x-[0.5px]"}`}
+//         viewBox="0 0 24 24"
+//         fill="none"
+//         stroke="currentColor"
+//         strokeWidth={2.25}
+//         strokeLinecap="round"
+//         strokeLinejoin="round"
+//       >
+//         {dir === "left" ? (
+//           <path d="M15 18l-6-6 6-6" />
+//         ) : (
+//           <path d="M9 18l6-6-6-6" />
+//         )}
+//       </svg>
+//     </span>
+//   );
+// }
 
 // Slideshow Component (Added Only)
 function Slideshow({
@@ -154,7 +154,7 @@ function Slideshow({
       src: "/images/about.jpg",
       caption:
         "Taken at Seattle’s iconic Space Needle during a family road trip September 10, 2022 (Age 20)",
-    },
+    }, // fixed hero: Seattle / Space Needle — keep as slides[1] when re-enabling slideshow
     {
       type: "video",
       src: "/images/handstand.mp4",
@@ -169,20 +169,24 @@ function Slideshow({
     },
   ];
 
-  const [index, setIndex] = useState(0);
-  const [hasChangedSlide, setHasChangedSlide] = useState(false);
+  // Slideshow cycling (commented — About uses fixed Seattle slide only)
+  // const [index, setIndex] = useState(0);
+  // const [hasChangedSlide, setHasChangedSlide] = useState(false);
+  //
+  // function next() {
+  //   setHasChangedSlide(true);
+  //   setIndex((prev) => (prev + 1) % slides.length);
+  // }
+  //
+  // function prev() {
+  //   setHasChangedSlide(true);
+  //   setIndex((prev) => (prev - 1 + slides.length) % slides.length);
+  // }
+  //
+  // const current = slides[index];
 
-  function next() {
-    setHasChangedSlide(true);
-    setIndex((prev) => (prev + 1) % slides.length);
-  }
-
-  function prev() {
-    setHasChangedSlide(true);
-    setIndex((prev) => (prev - 1 + slides.length) % slides.length);
-  }
-
-  const current = slides[index];
+  /** Seattle iconic (Space Needle) — same as slides[1] in the array above */
+  const current = slides[1];
 
   return (
     <div ref={slideshowRef} className="relative">
@@ -205,7 +209,7 @@ function Slideshow({
           <AnimatePresence mode="wait" initial={false}>
             {current.type === "image" ? (
               <motion.div
-                key={`${index}-${current.src}`}
+                key={current.src}
                 initial={{ opacity: 1 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 1 }}
@@ -227,7 +231,7 @@ function Slideshow({
               </motion.div>
             ) : (
               <motion.div
-                key={`${index}-${current.src}`}
+                key={current.src}
                 initial={{ opacity: 1 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 1 }}
@@ -258,7 +262,8 @@ function Slideshow({
         </div>
       </motion.div>
 
-      {/* Caption — ScrollRevealWords on first view, plain text after slide change */}
+      {/*
+      Caption — ScrollRevealWords on first view, plain text after slide change
       {hasChangedSlide ? (
         <p className="mt-4 cursor-default text-[13.75px] md:text-sm text-white/70 tracking-[0.03em] text-justify md:text-center">
           {current.caption}
@@ -284,8 +289,10 @@ function Slideshow({
           ]}
         />
       )}
+      */}
 
-      {/* Arrows — ScrollRevealBlock words-style; mobile uses disableTranslateY to avoid layout jump */}
+      {/*
+      Arrows — ScrollRevealBlock words-style; mobile uses disableTranslateY to avoid layout jump
       <div className="absolute inset-0">
         <ScrollRevealBlock
           animationStyle="words"
@@ -315,6 +322,7 @@ function Slideshow({
           </button>
         </ScrollRevealBlock>
       </div>
+      */}
     </div>
   );
 }
