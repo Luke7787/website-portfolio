@@ -434,9 +434,7 @@ export default function Page() {
               "
             >
               <Slideshow
-                revealDelay={
-                  isMobile ? MOBILE_ABOUT_SLIDESHOW_DELAY_S : 0.02
-                }
+                revealDelay={isMobile ? MOBILE_ABOUT_SLIDESHOW_DELAY_S : 0.02}
                 isMobile={isMobile}
               />
             </div>
