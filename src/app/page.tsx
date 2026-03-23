@@ -470,7 +470,7 @@ export default function Page() {
                     as: "p",
                     text: "ABOUT",
                     className:
-                      "block cursor-default font-['League Spartan','Arial','sans-serif'] text-[90px] sm:text-[110px] font-black uppercase leading-none tracking-[0.6px] text-[rgba(255,255,255,0.15)] [text-shadow:2px_2px_4px_rgba(0,0,0,0.5)] -translate-y-131",
+                      "relative -top-[1mm] block cursor-default font-['League Spartan','Arial','sans-serif'] text-[90px] sm:text-[110px] font-black uppercase leading-none tracking-[0.6px] text-[rgba(255,255,255,0.15)] [text-shadow:2px_2px_4px_rgba(0,0,0,0.5)] -translate-y-115",
                   },
                 ]}
               />
