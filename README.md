@@ -2,7 +2,7 @@
 
 **Live Site:** https://lukezhuang.onrender.com
 
-Welcome to my personal portfolio website. Here, you can learn more about my background, explore featured projects I’ve built, and browse a photo gallery highlighting some of my favorite moments. My contact information and resume are available here. The website is fully responsive for both mobile and desktop devices.
+Welcome to my personal portfolio website. Here, you can learn more about my background and explore featured projects I’ve built. My contact information and resume are available here. The website is fully responsive for both mobile and desktop devices.
 
 | Section   | Description |
 |------------|------------|
