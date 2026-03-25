@@ -7,6 +7,7 @@ import {
   type Variants,
   type Transition,
 } from "framer-motion";
+import { useInViewStable } from "@/hooks/useInViewStable";
 
 const defaultSpring = {
   type: "spring" as const,
@@ -82,10 +83,20 @@ interface CustomLineConfig {
 
 type LineConfig = TextLineConfig | CustomLineConfig;
 
+type UseInViewMargin = Parameters<typeof useInView>[1] extends {
+  margin?: infer M;
+}
+  ? M
+  : never;
+
 interface ScrollRevealWordsProps {
   lines: LineConfig[];
   className?: string;
   threshold?: number;
+  /** IntersectionObserver root margin (e.g. negative bottom % delays trigger while scrolling down). */
+  margin?: string;
+  /** Require this many ms in view before revealing (only when > 0). */
+  minVisibleMs?: number;
   /** When set, use this ref for in-view check instead of internal ref (keeps description and sibling elements in sync). */
   observeRef?: React.RefObject<HTMLDivElement | null>;
   /** When set, use this for visibility instead of useInView (e.g. stable-in-view from parent). */
@@ -102,6 +113,8 @@ export default function ScrollRevealWords({
   lines,
   className = "",
   threshold = 0.45,
+  margin,
+  minVisibleMs,
   observeRef,
   forceVisible,
   delayChildren = 0.18,
@@ -110,7 +123,19 @@ export default function ScrollRevealWords({
 }: ScrollRevealWordsProps) {
   const internalRef = useRef<HTMLDivElement>(null);
   const ref = observeRef ?? internalRef;
-  const isInViewFromRef = useInView(ref, { once: true, amount: threshold });
+  const marginTyped = margin as UseInViewMargin | undefined;
+  const isInViewInstant = useInView(ref, {
+    once: true,
+    amount: threshold,
+    ...(margin ? { margin: marginTyped } : {}),
+  });
+  const isInViewStable = useInViewStable(ref, {
+    amount: threshold,
+    minVisibleMs: minVisibleMs ?? 0,
+    ...(margin ? { margin } : {}),
+  });
+  const isInViewFromRef =
+    (minVisibleMs ?? 0) > 0 ? isInViewStable : isInViewInstant;
   const isInView = forceVisible !== undefined ? forceVisible : isInViewFromRef;
   const variants = wordVariants(transitionOverrides);
 

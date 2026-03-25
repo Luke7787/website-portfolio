@@ -81,6 +81,28 @@ const skillsMarqueeRow3: SkillEntry[] = [
   { name: "Figma", Icon: SiFigma },
 ];
 
+const SKILLS_SECTION_HEADING_LINES = [
+  {
+    as: "p" as const,
+    text: "EXPERTISE",
+    className:
+      "mb-2 cursor-default text-[20px] tracking-[0.8px] text-[rgb(140,140,140)]",
+  },
+  {
+    as: "h2" as const,
+    text: "Technical Skills",
+    className:
+      "cursor-default text-3xl md:text-4xl font-bold tracking-[0.12em] text-white/90",
+  },
+];
+
+const SKILLS_HEADING_SPRING = {
+  type: "spring" as const,
+  stiffness: 42,
+  damping: 22,
+  mass: 1.1,
+};
+
 function SkillIcon({ skill }: { skill: SkillEntry }) {
   return <skill.Icon className="w-5 h-5 shrink-0 text-white" aria-hidden />;
 }
@@ -134,11 +156,8 @@ const MOBILE_ABOUT_DESC_DELAY_CHILDREN_S = 1.2;
 // Slideshow Component (Added Only)
 function Slideshow({
   revealDelay = 0.02,
-  /** Mobile: arrows use same reveal but y=0 only (no vertical shift over translated layout). */
-  isMobile = false,
 }: {
   revealDelay?: number;
-  isMobile?: boolean;
 }) {
   const slideshowRef = useRef<HTMLDivElement>(null);
   const slideshowInView = useInView(slideshowRef, { once: true, amount: 0.3 });
@@ -435,7 +454,6 @@ export default function Page() {
             >
               <Slideshow
                 revealDelay={isMobile ? MOBILE_ABOUT_SLIDESHOW_DELAY_S : 0.02}
-                isMobile={isMobile}
               />
             </div>
           </div>
@@ -942,32 +960,29 @@ export default function Page() {
         className="-scroll-mt-20 md:scroll-mt-0 mt-20 pt-28 pb-24 flex flex-col items-center justify-center bg-[#141414] text-white rounded-[90px] overflow-hidden"
       >
         <div className="w-full mb-12">
-          <ScrollRevealWords
-            className="text-center"
-            threshold={0.6}
-            delayChildren={0.25}
-            staggerChildren={0.08}
-            transitionOverrides={{
-              type: "spring",
-              stiffness: 42,
-              damping: 22,
-              mass: 1.1,
-            }}
-            lines={[
-              {
-                as: "p",
-                text: "EXPERTISE",
-                className:
-                  "mb-2 cursor-default text-[20px] tracking-[0.8px] text-[rgb(140,140,140)]",
-              },
-              {
-                as: "h2",
-                text: "Technical Skills",
-                className:
-                  "cursor-default text-3xl md:text-4xl font-bold tracking-[0.12em] text-white/90",
-              },
-            ]}
-          />
+          {/* Mobile: stricter in-view + stable ms so the heading does not finish before project 4 copy + GitHub link reveal. */}
+          <div className="md:hidden">
+            <ScrollRevealWords
+              className="text-center"
+              threshold={0.9}
+              margin="0px 0px -24% 0px"
+              minVisibleMs={420}
+              delayChildren={0.25}
+              staggerChildren={0.08}
+              transitionOverrides={SKILLS_HEADING_SPRING}
+              lines={SKILLS_SECTION_HEADING_LINES}
+            />
+          </div>
+          <div className="hidden md:block">
+            <ScrollRevealWords
+              className="text-center"
+              threshold={0.6}
+              delayChildren={0.25}
+              staggerChildren={0.08}
+              transitionOverrides={SKILLS_HEADING_SPRING}
+              lines={SKILLS_SECTION_HEADING_LINES}
+            />
+          </div>
         </div>
 
         {/* Row 1: scroll left — cards with icon + label; two equal-width copies for seamless loop */}
