@@ -5,6 +5,7 @@ import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import ScrollRevealWords from "@/components/effects/ScrollRevealWords";
 import { useInViewStable } from "@/hooks/useInViewStable";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 /** Match ScrollRevealWords exactly: same spring and variants */
 const defaultSpring = {
@@ -232,11 +233,21 @@ export default function ScrollRevealCard({
   linksInViewAmount,
   inViewStableMs,
 }: ScrollRevealCardProps) {
-  const ref = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const textInViewRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
+  /** On mobile + disableReveal, observing the full card fires when only the image top crosses the viewport; use the text block so the prior card can finish its reveal first. */
+  const inViewObserveRef =
+    disableReveal && isMobile ? textInViewRef : containerRef;
   const viewAmount = linksInViewAmount ?? 0.2;
-  const isInViewInstant = useInView(ref, { once: true, amount: viewAmount });
-  const isInViewStable = useInViewStable(ref, {
-    amount: viewAmount,
+  const inViewAmount =
+    disableReveal && isMobile ? Math.max(viewAmount, 0.45) : viewAmount;
+  const isInViewInstant = useInView(inViewObserveRef, {
+    once: true,
+    amount: inViewAmount,
+  });
+  const isInViewStable = useInViewStable(inViewObserveRef, {
+    amount: inViewAmount,
     minVisibleMs: inViewStableMs ?? 0,
   });
   const isInView = inViewStableMs !== undefined ? isInViewStable : isInViewInstant;
@@ -266,7 +277,7 @@ export default function ScrollRevealCard({
     }
 
     return (
-      <div ref={ref} className={`${cardClassName} ${colSpanClassName}`}>
+      <div ref={containerRef} className={`${cardClassName} ${colSpanClassName}`}>
         <a
           href={mainHref}
           target="_blank"
@@ -300,10 +311,13 @@ export default function ScrollRevealCard({
               }
             />
           </motion.div>
-          <div className={className}>
+          <div
+            ref={isMobile ? textInViewRef : undefined}
+            className={className}
+          >
             <ScrollRevealWords
-              observeRef={ref}
-              threshold={viewAmount}
+              observeRef={inViewObserveRef}
+              threshold={inViewAmount}
               forceVisible={isInView}
               delayChildren={0.08}
               staggerChildren={0.058}
@@ -331,9 +345,9 @@ export default function ScrollRevealCard({
         </a>
         <LinksRevealAfterDelay
           delayMs={linksRevealDelayMs}
-          cardRef={ref}
+          cardRef={containerRef}
           links={links}
-          inViewAmount={viewAmount}
+          inViewAmount={inViewAmount}
           trigger={isInView}
         />
       </div>
@@ -342,7 +356,7 @@ export default function ScrollRevealCard({
 
   return (
     <motion.div
-      ref={ref}
+      ref={containerRef}
       className={`${cardClassName} ${colSpanClassName}`}
       initial="hidden"
       animate={shouldAnimate ? "visible" : "hidden"}
