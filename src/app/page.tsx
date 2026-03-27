@@ -341,6 +341,10 @@ export default function Page() {
   const footerInView = useInView(footerRef, { once: true, amount: 0.3 });
   const aboutInView = useInView(aboutTextRef, { once: true, amount: 0.45 });
 
+  const aboutLowerMotionSpring = isMobile
+    ? ({ type: "spring" as const, stiffness: 52, damping: 22, mass: 1.12 })
+    : ({ type: "spring" as const, stiffness: 65, damping: 24, mass: 0.9 });
+
   useEffect(() => {
     window.scrollTo(0, 0);
     const check = () => setIsMobile(window.innerWidth < 768);
@@ -360,30 +364,35 @@ export default function Page() {
     return () => clearTimeout(timer);
   }, [footerInView, isMobile]);
 
-  // About section: show resume + contact after first block (full paragraph) finishes
+  // About section: resume + icons + email/phone after the bio paragraph finishes (mobile uses same pacing as ScrollRevealWords below).
   useEffect(() => {
     if (!aboutInView) return;
     const paragraphWordCount =
       "I'm a software engineer with a passion for building websites. I'm constantly seeking new challenges to expand my skills and knowledge.".split(
         /\s+/,
       ).length;
-    // Start second block as soon as last word finishes (minimal buffer)
     const staggerBeforeParagraph = isMobile ? 0 : 2 * 0.058;
     const mobileExtraDelay = isMobile ? MOBILE_ABOUT_DESC_DELAY_CHILDREN_S : 0;
     const paragraphStagger = isMobile
       ? MOBILE_ABOUT_DESC_STAGGER_CHILDREN_S
       : 0.058;
     const delayMs = isMobile
-      ? (mobileExtraDelay +
-          0.08 +
-          (paragraphWordCount - 1) * paragraphStagger +
-          MOBILE_ABOUT_DESC_WORD_DURATION_S +
-          0.1) *
-        1000
+      ? Math.max(
+          0,
+          Math.round(
+            (mobileExtraDelay +
+              0.04 +
+              (paragraphWordCount - 1) * paragraphStagger +
+              MOBILE_ABOUT_DESC_WORD_DURATION_S +
+              0.02) *
+              1000 -
+              140,
+          ),
+        )
       : (0.08 +
           staggerBeforeParagraph +
           (paragraphWordCount - 1) * paragraphStagger +
-          0.15) *
+          0.1) *
         1000;
     const t = setTimeout(() => setShowLowerAbout(true), Math.round(delayMs));
     return () => clearTimeout(t);
@@ -539,12 +548,14 @@ export default function Page() {
               className=""
               forceVisible={showLowerAbout}
               threshold={0.1}
-              delayChildren={0}
-              staggerChildren={isMobile ? 0.078 : 0.092}
+              delayChildren={isMobile ? 0.04 : 0}
+              staggerChildren={isMobile ? 0.12 : 0.092}
               transitionOverrides={{
                 type: "tween",
-                duration: isMobile ? 1.02 : 1.15,
-                ease: [0.33, 0.1, 0.2, 1],
+                duration: isMobile ? 1.05 : 1.15,
+                ease: isMobile
+                  ? ([0.22, 0.08, 0.28, 1] as const)
+                  : ([0.33, 0.1, 0.2, 1] as const),
               }}
               lines={[
                 {
@@ -567,8 +578,8 @@ export default function Page() {
                         hidden: {},
                         visible: {
                           transition: {
-                            staggerChildren: isMobile ? 0.085 : 0.1,
-                            delayChildren: 0,
+                            staggerChildren: isMobile ? 0.09 : 0.1,
+                            delayChildren: isMobile ? 0.03 : 0,
                           },
                         },
                       }}
@@ -601,12 +612,7 @@ export default function Page() {
                               y: 0,
                               scale: 1,
                               filter: "blur(0px)",
-                              transition: {
-                                type: "spring",
-                                stiffness: 65,
-                                damping: 24,
-                                mass: 0.9,
-                              },
+                              transition: aboutLowerMotionSpring,
                             },
                           }}
                           style={{ display: "inline-block" }}
@@ -637,8 +643,8 @@ export default function Page() {
                         hidden: {},
                         visible: {
                           transition: {
-                            staggerChildren: 0.08,
-                            delayChildren: 0,
+                            staggerChildren: isMobile ? 0.07 : 0.08,
+                            delayChildren: isMobile ? 0.04 : 0,
                           },
                         },
                       }}
@@ -657,12 +663,7 @@ export default function Page() {
                             y: 0,
                             scale: 1,
                             filter: "blur(0px)",
-                            transition: {
-                              type: "spring",
-                              stiffness: 65,
-                              damping: 24,
-                              mass: 0.9,
-                            },
+                            transition: aboutLowerMotionSpring,
                           },
                         }}
                         style={{ display: "block" }}
@@ -680,12 +681,7 @@ export default function Page() {
                               y: 0,
                               scale: 1,
                               filter: "blur(0px)",
-                              transition: {
-                                type: "spring",
-                                stiffness: 65,
-                                damping: 24,
-                                mass: 0.9,
-                              },
+                              transition: aboutLowerMotionSpring,
                             },
                           }}
                           style={{ display: "inline-block" }}
@@ -706,12 +702,7 @@ export default function Page() {
                               y: 0,
                               scale: 1,
                               filter: "blur(0px)",
-                              transition: {
-                                type: "spring",
-                                stiffness: 65,
-                                damping: 24,
-                                mass: 0.9,
-                              },
+                              transition: aboutLowerMotionSpring,
                             },
                           }}
                           style={{ display: "inline-block" }}
@@ -734,12 +725,7 @@ export default function Page() {
                             y: 0,
                             scale: 1,
                             filter: "blur(0px)",
-                            transition: {
-                              type: "spring",
-                              stiffness: 65,
-                              damping: 24,
-                              mass: 0.9,
-                            },
+                            transition: aboutLowerMotionSpring,
                           },
                         }}
                         style={{ display: "block" }}
@@ -757,12 +743,7 @@ export default function Page() {
                               y: 0,
                               scale: 1,
                               filter: "blur(0px)",
-                              transition: {
-                                type: "spring",
-                                stiffness: 65,
-                                damping: 24,
-                                mass: 0.9,
-                              },
+                              transition: aboutLowerMotionSpring,
                             },
                           }}
                           style={{ display: "inline-block" }}
@@ -783,12 +764,7 @@ export default function Page() {
                               y: 0,
                               scale: 1,
                               filter: "blur(0px)",
-                              transition: {
-                                type: "spring",
-                                stiffness: 65,
-                                damping: 24,
-                                mass: 0.9,
-                              },
+                              transition: aboutLowerMotionSpring,
                             },
                           }}
                           style={{ display: "inline-block" }}
@@ -1172,6 +1148,13 @@ export default function Page() {
           <ScrollRevealWords
             className="text-center"
             threshold={0.45}
+            delayChildren={isMobile ? 0 : 0.18}
+            staggerChildren={isMobile ? 0 : 0.12}
+            transitionOverrides={
+              isMobile
+                ? { type: "spring", stiffness: 82, damping: 26, mass: 0.8 }
+                : undefined
+            }
             lines={[
               {
                 as: "p",
@@ -1200,7 +1183,10 @@ export default function Page() {
                     variants={{
                       hidden: {},
                       visible: {
-                        transition: { staggerChildren: 0.1, delayChildren: 0 },
+                        transition: {
+                          staggerChildren: isMobile ? 0 : 0.1,
+                          delayChildren: 0,
+                        },
                       },
                     }}
                   >
@@ -1234,9 +1220,9 @@ export default function Page() {
                             filter: "blur(0px)",
                             transition: {
                               type: "spring",
-                              stiffness: 65,
-                              damping: 24,
-                              mass: 0.9,
+                              stiffness: isMobile ? 88 : 65,
+                              damping: isMobile ? 26 : 24,
+                              mass: isMobile ? 0.75 : 0.9,
                             },
                           },
                         }}
