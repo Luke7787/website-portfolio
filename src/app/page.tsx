@@ -364,7 +364,7 @@ export default function Page() {
     return () => clearTimeout(timer);
   }, [footerInView, isMobile]);
 
-  // About section: when to show resume → icons → email/phone (one `forceVisible`); timing tuned vs bio end, with extra lead for that whole block.
+  // About section: when to show resume → icons → email/phone (`forceVisible`). Mobile keeps pull-forward vs bio; desktop uses original stagger estimate + 0.15s tail (no ms pull-forward — that only made sense on mobile).
   useEffect(() => {
     if (!aboutInView) return;
     const paragraphWordCount =
@@ -376,7 +376,7 @@ export default function Page() {
     const paragraphStagger = isMobile
       ? MOBILE_ABOUT_DESC_STAGGER_CHILDREN_S
       : 0.058;
-    const resumeThroughPhoneLeadMs = 580; // mobile pull-forward vs bio end (resume → phone block)
+    const resumeThroughPhoneLeadMs = 580; // mobile only: pull-forward vs estimated bio end
     const delayMs = isMobile
       ? Math.max(
           0,
@@ -396,9 +396,8 @@ export default function Page() {
             (0.08 +
               staggerBeforeParagraph +
               (paragraphWordCount - 1) * paragraphStagger +
-              0.1) *
-              1000 -
-              440,
+              0.15) *
+              1000,
           ),
         );
     const t = setTimeout(() => setShowLowerAbout(true), Math.round(delayMs));
