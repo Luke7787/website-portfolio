@@ -364,7 +364,7 @@ export default function Page() {
     return () => clearTimeout(timer);
   }, [footerInView, isMobile]);
 
-  // About section: resume + icons + email/phone after the bio paragraph finishes (mobile uses same pacing as ScrollRevealWords below).
+  // About section: when to show resume → icons → email/phone (one `forceVisible`); timing tuned vs bio end, with extra lead for that whole block.
   useEffect(() => {
     if (!aboutInView) return;
     const paragraphWordCount =
@@ -376,6 +376,7 @@ export default function Page() {
     const paragraphStagger = isMobile
       ? MOBILE_ABOUT_DESC_STAGGER_CHILDREN_S
       : 0.058;
+    const resumeThroughPhoneLeadMs = 580; // mobile pull-forward vs bio end (resume → phone block)
     const delayMs = isMobile
       ? Math.max(
           0,
@@ -386,14 +387,20 @@ export default function Page() {
               MOBILE_ABOUT_DESC_WORD_DURATION_S +
               0.02) *
               1000 -
-              140,
+              resumeThroughPhoneLeadMs,
           ),
         )
-      : (0.08 +
-          staggerBeforeParagraph +
-          (paragraphWordCount - 1) * paragraphStagger +
-          0.1) *
-        1000;
+      : Math.max(
+          0,
+          Math.round(
+            (0.08 +
+              staggerBeforeParagraph +
+              (paragraphWordCount - 1) * paragraphStagger +
+              0.1) *
+              1000 -
+              440,
+          ),
+        );
     const t = setTimeout(() => setShowLowerAbout(true), Math.round(delayMs));
     return () => clearTimeout(t);
   }, [aboutInView, isMobile]);
