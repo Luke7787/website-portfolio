@@ -87,7 +87,12 @@ function SkillIcon({ skill }: { skill: SkillEntry }) {
 
 /** Mobile-only about: slideshow + arrows sooner; bio + lower block use same offset (desktop unchanged). */
 const MOBILE_ABOUT_SLIDESHOW_DELAY_S = 0.42;
-const MOBILE_ABOUT_DESC_DELAY_CHILDREN_S = 1.2;
+/** Pause after “ABOUT” before bio words start (lower = faster reveal). */
+const MOBILE_ABOUT_DESC_DELAY_CHILDREN_S = 0.68;
+/** Word stagger for mobile bio line — keep in sync with `showLowerAbout` effect below. */
+const MOBILE_ABOUT_DESC_STAGGER_CHILDREN_S = 0.05;
+/** Per-word tween duration for mobile bio — keep in sync with `ScrollRevealWords` `transitionOverrides.duration`. */
+const MOBILE_ABOUT_DESC_WORD_DURATION_S = 0.95;
 
 // /** Clear “glass” pill — no backdrop-filter (blur was smearing the slide); translucent tint only */
 // const SLIDESHOW_GLASS_BTN =
@@ -365,13 +370,21 @@ export default function Page() {
     // Start second block as soon as last word finishes (minimal buffer)
     const staggerBeforeParagraph = isMobile ? 0 : 2 * 0.058;
     const mobileExtraDelay = isMobile ? MOBILE_ABOUT_DESC_DELAY_CHILDREN_S : 0;
-    const delayMs =
-      (mobileExtraDelay +
-        0.08 +
-        staggerBeforeParagraph +
-        (paragraphWordCount - 1) * 0.058 +
-        0.15) *
-      1000;
+    const paragraphStagger = isMobile
+      ? MOBILE_ABOUT_DESC_STAGGER_CHILDREN_S
+      : 0.058;
+    const delayMs = isMobile
+      ? (mobileExtraDelay +
+          0.08 +
+          (paragraphWordCount - 1) * paragraphStagger +
+          MOBILE_ABOUT_DESC_WORD_DURATION_S +
+          0.1) *
+        1000
+      : (0.08 +
+          staggerBeforeParagraph +
+          (paragraphWordCount - 1) * paragraphStagger +
+          0.15) *
+        1000;
     const t = setTimeout(() => setShowLowerAbout(true), Math.round(delayMs));
     return () => clearTimeout(t);
   }, [aboutInView, isMobile]);
@@ -472,10 +485,10 @@ export default function Page() {
                 className=""
                 threshold={0.45}
                 delayChildren={MOBILE_ABOUT_DESC_DELAY_CHILDREN_S}
-                staggerChildren={0.058}
+                staggerChildren={MOBILE_ABOUT_DESC_STAGGER_CHILDREN_S}
                 transitionOverrides={{
                   type: "tween",
-                  duration: 1.05,
+                  duration: MOBILE_ABOUT_DESC_WORD_DURATION_S,
                   ease: [0.22, 0.08, 0.28, 1],
                 }}
                 lines={[
@@ -527,10 +540,10 @@ export default function Page() {
               forceVisible={showLowerAbout}
               threshold={0.1}
               delayChildren={0}
-              staggerChildren={0.092}
+              staggerChildren={isMobile ? 0.078 : 0.092}
               transitionOverrides={{
                 type: "tween",
-                duration: 1.15,
+                duration: isMobile ? 1.02 : 1.15,
                 ease: [0.33, 0.1, 0.2, 1],
               }}
               lines={[
@@ -554,7 +567,7 @@ export default function Page() {
                         hidden: {},
                         visible: {
                           transition: {
-                            staggerChildren: 0.1,
+                            staggerChildren: isMobile ? 0.085 : 0.1,
                             delayChildren: 0,
                           },
                         },
