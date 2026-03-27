@@ -445,7 +445,7 @@ export default function Page() {
       {/* ABOUT */}
       <section
         id="about"
-        className="scroll-mt-16 md:scroll-mt-34 min-h-screen pt-16 flex"
+        className="scroll-mt-16 md:scroll-mt-34 min-h-screen pt-16 pb-24 md:pb-0 flex"
       >
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-6 md:grid-cols-2 pt-[11vh] md:pt-[8vh]">
           {/* Left: Image (Now Slideshow, styles untouched) */}
@@ -792,7 +792,7 @@ export default function Page() {
       {/* PROJECTS — Framer-style card grid */}
       <section
         id="projects"
-        className="scroll-mt-2 md:scroll-mt-16 min-h-screen pt-16 pb-24 md:pb-32 flex items-center justify-center"
+        className="scroll-mt-2 md:scroll-mt-16 min-h-screen pt-24 md:pt-16 pb-24 md:pb-32 flex items-center justify-center"
       >
         <div className="w-full max-w-6xl mx-auto px-6">
           <ScrollRevealWords
