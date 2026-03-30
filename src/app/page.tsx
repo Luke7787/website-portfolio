@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import {
@@ -345,12 +345,38 @@ export default function Page() {
     ? ({ type: "spring" as const, stiffness: 52, damping: 22, mass: 1.12 })
     : ({ type: "spring" as const, stiffness: 65, damping: 24, mass: 0.9 });
 
+  // Desktop: keep a single scroll-to-top on mount (unchanged behavior).
+  // Mobile: Safari/Chrome often re-apply scroll restoration after useEffect; see mobile useLayoutEffect below.
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (typeof window !== "undefined" && window.innerWidth >= 768) {
+      window.scrollTo(0, 0);
+    }
     const check = () => setIsMobile(window.innerWidth < 768);
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
+  }, []);
+
+  useLayoutEffect(() => {
+    if (typeof window === "undefined" || window.innerWidth >= 768) return;
+    const prevRestoration = history.scrollRestoration;
+    history.scrollRestoration = "manual";
+    const goTop = () => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    };
+    goTop();
+    requestAnimationFrame(goTop);
+    const t0 = window.setTimeout(goTop, 0);
+    const t1 = window.setTimeout(goTop, 50);
+    const t2 = window.setTimeout(goTop, 200);
+    return () => {
+      window.clearTimeout(t0);
+      window.clearTimeout(t1);
+      window.clearTimeout(t2);
+      history.scrollRestoration = prevRestoration;
+    };
   }, []);
 
   useEffect(() => {
