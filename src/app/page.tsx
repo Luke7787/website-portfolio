@@ -791,7 +791,7 @@ export default function Page() {
       {/* PROJECTS — Framer-style card grid */}
       <section
         id="projects"
-        className="scroll-mt-2 md:scroll-mt-16 min-h-screen pt-24 md:pt-16 pb-24 md:pb-32 flex items-center justify-center"
+        className="scroll-mt-2 md:scroll-mt-16 min-h-screen pt-24 md:pt-16 pb-24 md:pb-32 flex items-start md:items-center justify-center"
       >
         <div className="w-full max-w-6xl mx-auto px-6">
           <ScrollRevealWords
@@ -825,7 +825,7 @@ export default function Page() {
             <ScrollRevealBlock
               animationStyle="words"
               delay={0.35}
-              amount={0.2}
+              amount={isMobile ? 0.075 : 0.2}
               transitionOverrides={{ stiffness: 24, damping: 24, mass: 1.2 }}
               className="flex flex-wrap gap-8 lg:gap-10 w-full"
             >
@@ -900,7 +900,7 @@ export default function Page() {
             <ScrollRevealBlock
               animationStyle="words"
               delay={0.75}
-              amount={0.2}
+              amount={isMobile ? 0.075 : 0.2}
               minVisibleMs={220}
               transitionOverrides={{ stiffness: 24, damping: 24, mass: 1.2 }}
               className="w-full md:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-5rem)/3)]"
@@ -919,7 +919,7 @@ export default function Page() {
                 ]}
                 cardClassName="group opacity-100 transition-all duration-500 ease-out"
                 disableReveal
-                linksInViewAmount={0.2}
+                linksInViewAmount={isMobile ? 0.075 : 0.2}
                 inViewStableMs={120}
               />
             </ScrollRevealBlock>
