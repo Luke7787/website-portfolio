@@ -335,10 +335,12 @@ export default function Page() {
   const [isMobile, setIsMobile] = useState(false);
   const [mobileContactBirds, setMobileContactBirds] = useState(false);
   const [showLowerAbout, setShowLowerAbout] = useState(false);
+  const aboutSectionRef = useRef<HTMLElement>(null);
   const aboutTextRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
   const footerRef = useRef<HTMLElement>(null);
   const footerInView = useInView(footerRef, { once: true, amount: 0.3 });
+  const aboutSectionInView = useInView(aboutSectionRef, { once: true, amount: 0.08 });
   const aboutInView = useInView(aboutTextRef, { once: true, amount: 0.45 });
 
   const aboutLowerMotionSpring = isMobile
@@ -470,6 +472,7 @@ export default function Page() {
       {/* ABOUT */}
       <section
         id="about"
+        ref={aboutSectionRef}
         className="scroll-mt-16 md:scroll-mt-34 min-h-screen pt-16 pb-24 md:pb-0 flex"
       >
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-6 md:grid-cols-2 pt-[11vh] md:pt-[8vh]">
@@ -505,7 +508,8 @@ export default function Page() {
             <div className="md:hidden">
               <ScrollRevealWords
                 className=""
-                threshold={0.3}
+                forceVisible={aboutSectionInView}
+                threshold={0.15}
                 delayChildren={0.08}
                 staggerChildren={0.058}
                 transitionOverrides={{
