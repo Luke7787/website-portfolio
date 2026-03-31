@@ -87,8 +87,11 @@ function SkillIcon({ skill }: { skill: SkillEntry }) {
 
 /** Mobile-only about: slideshow + arrows sooner; bio + lower block use same offset (desktop unchanged). */
 const MOBILE_ABOUT_SLIDESHOW_DELAY_S = 0.42;
-/** Pause after “ABOUT” before bio words start (lower = faster reveal). */
-const MOBILE_ABOUT_DESC_DELAY_CHILDREN_S = 0.68;
+/** Additional pause after slideshow reveal before bio words start. */
+const MOBILE_ABOUT_IMAGE_TO_BIO_DELAY_S = 0.56;
+/** Mobile bio line begins after slideshow reveal + this extra pause. */
+const MOBILE_ABOUT_DESC_DELAY_CHILDREN_S =
+  MOBILE_ABOUT_SLIDESHOW_DELAY_S + MOBILE_ABOUT_IMAGE_TO_BIO_DELAY_S;
 /** Word stagger for mobile bio line — keep in sync with `showLowerAbout` effect below. */
 const MOBILE_ABOUT_DESC_STAGGER_CHILDREN_S = 0.05;
 /** Per-word tween duration for mobile bio — keep in sync with `ScrollRevealWords` `transitionOverrides.duration`. */
@@ -398,9 +401,11 @@ export default function Page() {
     return () => clearTimeout(timer);
   }, [footerInView, isMobile]);
 
-  // About section: when to show resume → icons → email/phone (`forceVisible`). Mobile keeps pull-forward vs bio; desktop uses original stagger estimate + 0.15s tail (no ms pull-forward — that only made sense on mobile).
+  // About section: when to show resume → icons → email/phone (`forceVisible`).
+  // Mobile uses section visibility for stable sequencing regardless of slow scroll.
   useEffect(() => {
-    if (!aboutInView) return;
+    const aboutRevealReady = isMobile ? aboutSectionInView : aboutInView;
+    if (!aboutRevealReady) return;
     const paragraphWordCount =
       "I'm a software engineer with a passion for building websites. I'm constantly seeking new challenges to expand my skills and knowledge.".split(
         /\s+/,
@@ -410,7 +415,7 @@ export default function Page() {
     const paragraphStagger = isMobile
       ? MOBILE_ABOUT_DESC_STAGGER_CHILDREN_S
       : 0.058;
-    const resumeThroughPhoneLeadMs = 820; // mobile only: pull-forward vs estimated bio end (higher = resume line sooner)
+    const resumeThroughPhoneLeadMs = 920; // mobile only: pull-forward vs estimated bio end (higher = resume line sooner)
     const delayMs = isMobile
       ? Math.max(
           0,
@@ -436,7 +441,7 @@ export default function Page() {
         );
     const t = setTimeout(() => setShowLowerAbout(true), Math.round(delayMs));
     return () => clearTimeout(t);
-  }, [aboutInView, isMobile]);
+  }, [aboutInView, aboutSectionInView, isMobile]);
 
   return (
     <main className="relative">
@@ -535,6 +540,7 @@ export default function Page() {
               />
               <ScrollRevealWords
                 className=""
+                forceVisible={aboutSectionInView}
                 threshold={0.45}
                 delayChildren={MOBILE_ABOUT_DESC_DELAY_CHILDREN_S}
                 staggerChildren={MOBILE_ABOUT_DESC_STAGGER_CHILDREN_S}
