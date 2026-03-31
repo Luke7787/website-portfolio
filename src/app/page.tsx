@@ -139,8 +139,10 @@ const MOBILE_ABOUT_DESC_WORD_DURATION_S = 0.95;
 // Slideshow Component (Added Only)
 function Slideshow({
   revealDelay = 0.02,
+  isMobile = false,
 }: {
   revealDelay?: number;
+  isMobile?: boolean;
 }) {
   const slideshowRef = useRef<HTMLDivElement>(null);
   const slideshowInView = useInView(slideshowRef, { once: true, amount: 0.3 });
@@ -194,11 +196,15 @@ function Slideshow({
     <div ref={slideshowRef} className="relative">
       {/* Aspect Ratio Container — fade-in only (no y movement to prevent layout shifts) */}
       <motion.div
-        initial={{ opacity: 0, filter: "blur(10px)" }}
+        initial={{
+          opacity: 0,
+          filter: "blur(10px)",
+          y: isMobile ? 14 : 0,
+        }}
         animate={
           slideshowInView
-            ? { opacity: 1, filter: "blur(0px)" }
-            : { opacity: 0, filter: "blur(10px)" }
+            ? { opacity: 1, filter: "blur(0px)", y: 0 }
+            : { opacity: 0, filter: "blur(10px)", y: isMobile ? 14 : 0 }
         }
         transition={{
           delay: revealDelay,
@@ -489,6 +495,7 @@ export default function Page() {
             >
               <Slideshow
                 revealDelay={isMobile ? MOBILE_ABOUT_SLIDESHOW_DELAY_S : 0.02}
+                isMobile={isMobile}
               />
             </div>
           </div>
