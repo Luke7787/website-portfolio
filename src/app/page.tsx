@@ -415,7 +415,7 @@ export default function Page() {
     const paragraphStagger = isMobile
       ? MOBILE_ABOUT_DESC_STAGGER_CHILDREN_S
       : 0.058;
-    const resumeThroughPhoneLeadMs = 920; // mobile only: pull-forward vs estimated bio end (higher = resume line sooner)
+    const resumeThroughPhoneLeadMs = 1040; // mobile only: pull-forward vs estimated bio end (higher = resume line sooner)
     const delayMs = isMobile
       ? Math.max(
           0,
