@@ -344,7 +344,9 @@ export default function Page() {
   const [isMobile, setIsMobile] = useState(false);
   const [mobileContactBirds, setMobileContactBirds] = useState(false);
   const [showLowerAbout, setShowLowerAbout] = useState(false);
-  const [copiedField, setCopiedField] = useState<"email" | "phone" | null>(null);
+  const [copiedField, setCopiedField] = useState<
+    "email" | "phone" | "contactEmail" | null
+  >(null);
   const aboutSectionRef = useRef<HTMLElement>(null);
   const aboutTextRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
@@ -453,7 +455,10 @@ export default function Page() {
     };
   }, []);
 
-  const copyText = async (value: string, field: "email" | "phone") => {
+  const copyText = async (
+    value: string,
+    field: "email" | "phone" | "contactEmail",
+  ) => {
     if (typeof navigator === "undefined") return;
     try {
       await navigator.clipboard.writeText(value);
@@ -1291,17 +1296,66 @@ export default function Page() {
                   "cursor-default text-[1.5rem] font-bold tracking-[0.03em] text-[rgb(140,140,140)]",
               },
               {
-                as: "a",
-                text: "lukewzhuang@gmail.com",
-                href: "mailto:lukewzhuang@gmail.com",
-                className:
-                  "block mt-6 text-white text-[1.55rem] font-bold transition-colors duration-300 hover:text-[#1E90FF]",
-                linkProps: {
-                  onMouseEnter: () => setContactBirdsVisible(true),
-                  onMouseLeave: () => setContactBirdsVisible(false),
-                  onClick: () => setContactBirdsVisible(true),
-                  onTouchStart: () => setContactBirdsVisible(true),
-                },
+                as: "custom",
+                content: (
+                  <div className="mt-6 flex justify-center">
+                    <div className="relative inline-flex flex-col items-center">
+                    <button
+                      type="button"
+                      onMouseEnter={() => setContactBirdsVisible(true)}
+                      onMouseLeave={() => setContactBirdsVisible(false)}
+                      onTouchStart={() => setContactBirdsVisible(true)}
+                      onClick={() => {
+                        setContactBirdsVisible(true);
+                        void copyText("lukewzhuang@gmail.com", "contactEmail");
+                      }}
+                      className="bg-transparent p-0 text-white text-[1.55rem] font-bold transition-colors duration-300 hover:text-[#1E90FF] cursor-pointer"
+                      aria-label="Copy contact email address"
+                      title="Copy email"
+                    >
+                      lukewzhuang@gmail.com
+                    </button>
+                    <AnimatePresence initial={false}>
+                      {copiedField === "contactEmail" ? (
+                        <motion.span
+                          key="contact-email-copied"
+                          initial={{
+                            opacity: 0,
+                            y: 8,
+                            scale: 0.92,
+                            filter: "blur(6px)",
+                          }}
+                          animate={{
+                            opacity: 1,
+                            y: 0,
+                            scale: 1,
+                            filter: "blur(0px)",
+                          }}
+                          exit={{
+                            opacity: 0,
+                            y: -4,
+                            scale: 0.98,
+                            filter: "blur(4px)",
+                          }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 320,
+                            damping: 24,
+                            mass: 0.75,
+                          }}
+                          className="pointer-events-none absolute left-1/2 top-full z-10 mt-0.5 inline-flex -translate-x-1/2 items-center gap-1 whitespace-nowrap rounded-full border border-[#1E90FF]/35 bg-[#1E90FF]/12 px-2 py-0.5 text-[0.72rem] font-medium tracking-[0.02em] text-[#b9ddff] shadow-[0_0_14px_rgba(30,144,255,0.2)]"
+                        >
+                          <i
+                            aria-hidden
+                            className="fa-regular fa-clipboard text-[0.68rem] text-[#7ec0ff]"
+                          />
+                          Copied to Clipboard
+                        </motion.span>
+                      ) : null}
+                    </AnimatePresence>
+                    </div>
+                  </div>
+                ),
               },
               {
                 as: "custom",
