@@ -443,6 +443,23 @@ export default function Page() {
     return () => clearTimeout(t);
   }, [aboutInView, aboutSectionInView, isMobile]);
 
+  const copyText = async (value: string) => {
+    if (typeof navigator === "undefined") return;
+    try {
+      await navigator.clipboard.writeText(value);
+    } catch {
+      const textarea = document.createElement("textarea");
+      textarea.value = value;
+      textarea.setAttribute("readonly", "");
+      textarea.style.position = "absolute";
+      textarea.style.left = "-9999px";
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+    }
+  };
+
   return (
     <main className="relative">
       <NavBar />
@@ -738,7 +755,11 @@ export default function Page() {
                         >
                           Email:
                         </motion.span>{" "}
-                        <motion.span
+                        <motion.button
+                          type="button"
+                          onClick={() => copyText("lukewzhuang@gmail.com")}
+                          aria-label="Copy email address"
+                          title="Copy email"
                           variants={{
                             hidden: {
                               opacity: 0,
@@ -755,10 +776,10 @@ export default function Page() {
                             },
                           }}
                           style={{ display: "inline-block" }}
-                          className="border-b border-transparent text-[#1E90FF] hover:border-[#1E90FF] transition-colors duration-200 cursor-pointer"
+                          className="text-[#1E90FF] hover:underline transition-colors duration-200 cursor-pointer bg-transparent p-0"
                         >
                           lukewzhuang@gmail.com
-                        </motion.span>
+                        </motion.button>
                       </motion.p>
                       <motion.p
                         className="m-0"
@@ -800,7 +821,11 @@ export default function Page() {
                         >
                           Phone:
                         </motion.span>{" "}
-                        <motion.span
+                        <motion.button
+                          type="button"
+                          onClick={() => copyText("(415) 837-8686")}
+                          aria-label="Copy phone number"
+                          title="Copy phone number"
                           variants={{
                             hidden: {
                               opacity: 0,
@@ -817,10 +842,10 @@ export default function Page() {
                             },
                           }}
                           style={{ display: "inline-block" }}
-                          className="border-b border-transparent text-[#1E90FF] hover:border-[#1E90FF] transition-colors duration-200 cursor-pointer"
+                          className="text-[#1E90FF] hover:underline transition-colors duration-200 cursor-pointer bg-transparent p-0"
                         >
                           (415) 837-8686
-                        </motion.span>
+                        </motion.button>
                       </motion.p>
                     </motion.div>
                   ),
