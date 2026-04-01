@@ -344,10 +344,12 @@ export default function Page() {
   const [isMobile, setIsMobile] = useState(false);
   const [mobileContactBirds, setMobileContactBirds] = useState(false);
   const [showLowerAbout, setShowLowerAbout] = useState(false);
+  const [copiedField, setCopiedField] = useState<"email" | "phone" | null>(null);
   const aboutSectionRef = useRef<HTMLElement>(null);
   const aboutTextRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
   const footerRef = useRef<HTMLElement>(null);
+  const copyFeedbackTimeoutRef = useRef<number | null>(null);
   const footerInView = useInView(footerRef, { once: true, amount: 0.3 });
   const aboutSectionInView = useInView(aboutSectionRef, { once: true, amount: 0.08 });
   const aboutInView = useInView(aboutTextRef, { once: true, amount: 0.45 });
@@ -443,7 +445,15 @@ export default function Page() {
     return () => clearTimeout(t);
   }, [aboutInView, aboutSectionInView, isMobile]);
 
-  const copyText = async (value: string) => {
+  useEffect(() => {
+    return () => {
+      if (copyFeedbackTimeoutRef.current !== null) {
+        window.clearTimeout(copyFeedbackTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  const copyText = async (value: string, field: "email" | "phone") => {
     if (typeof navigator === "undefined") return;
     try {
       await navigator.clipboard.writeText(value);
@@ -458,6 +468,14 @@ export default function Page() {
       document.execCommand("copy");
       document.body.removeChild(textarea);
     }
+    setCopiedField(field);
+    if (copyFeedbackTimeoutRef.current !== null) {
+      window.clearTimeout(copyFeedbackTimeoutRef.current);
+    }
+    copyFeedbackTimeoutRef.current = window.setTimeout(() => {
+      setCopiedField((prev) => (prev === field ? null : prev));
+      copyFeedbackTimeoutRef.current = null;
+    }, 1400);
   };
 
   return (
@@ -757,7 +775,7 @@ export default function Page() {
                         </motion.span>{" "}
                         <motion.button
                           type="button"
-                          onClick={() => copyText("lukewzhuang@gmail.com")}
+                          onClick={() => copyText("lukewzhuang@gmail.com", "email")}
                           aria-label="Copy email address"
                           title="Copy email"
                           variants={{
@@ -780,6 +798,24 @@ export default function Page() {
                         >
                           lukewzhuang@gmail.com
                         </motion.button>
+                        <AnimatePresence initial={false}>
+                          {copiedField === "email" ? (
+                            <motion.span
+                              key="email-copied"
+                              initial={{ opacity: 0, y: 8, scale: 0.92, filter: "blur(6px)" }}
+                              animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+                              exit={{ opacity: 0, y: -4, scale: 0.98, filter: "blur(4px)" }}
+                              transition={{ type: "spring", stiffness: 320, damping: 24, mass: 0.75 }}
+                              className="ml-2 inline-flex items-center gap-1 rounded-full border border-[#1E90FF]/35 bg-[#1E90FF]/12 px-2 py-0.5 align-middle text-[0.72rem] font-medium tracking-[0.02em] text-[#b9ddff] shadow-[0_0_14px_rgba(30,144,255,0.2)]"
+                            >
+                              <i
+                                aria-hidden
+                                className="fa-regular fa-clipboard text-[0.68rem] text-[#7ec0ff]"
+                              />
+                              Copied to Clipboard
+                            </motion.span>
+                          ) : null}
+                        </AnimatePresence>
                       </motion.p>
                       <motion.p
                         className="m-0"
@@ -823,7 +859,7 @@ export default function Page() {
                         </motion.span>{" "}
                         <motion.button
                           type="button"
-                          onClick={() => copyText("(415) 837-8686")}
+                          onClick={() => copyText("(415) 837-8686", "phone")}
                           aria-label="Copy phone number"
                           title="Copy phone number"
                           variants={{
@@ -846,6 +882,24 @@ export default function Page() {
                         >
                           (415) 837-8686
                         </motion.button>
+                        <AnimatePresence initial={false}>
+                          {copiedField === "phone" ? (
+                            <motion.span
+                              key="phone-copied"
+                              initial={{ opacity: 0, y: 8, scale: 0.92, filter: "blur(6px)" }}
+                              animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+                              exit={{ opacity: 0, y: -4, scale: 0.98, filter: "blur(4px)" }}
+                              transition={{ type: "spring", stiffness: 320, damping: 24, mass: 0.75 }}
+                              className="ml-2 inline-flex items-center gap-1 rounded-full border border-[#1E90FF]/35 bg-[#1E90FF]/12 px-2 py-0.5 align-middle text-[0.72rem] font-medium tracking-[0.02em] text-[#b9ddff] shadow-[0_0_14px_rgba(30,144,255,0.2)]"
+                            >
+                              <i
+                                aria-hidden
+                                className="fa-regular fa-clipboard text-[0.68rem] text-[#7ec0ff]"
+                              />
+                              Copied to Clipboard
+                            </motion.span>
+                          ) : null}
+                        </AnimatePresence>
                       </motion.p>
                     </motion.div>
                   ),
