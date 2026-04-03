@@ -924,7 +924,8 @@ export default function Page() {
         <div className="w-full max-w-6xl mx-auto px-6">
           <ScrollRevealWords
             className="text-center mb-16"
-            threshold={0.45}
+            threshold={isMobile ? 0.8 : 0.45}
+            margin={isMobile ? "0px 0px -300px 0px" : undefined}
             delayChildren={0.08}
             staggerChildren={0.058}
             transitionOverrides={{
