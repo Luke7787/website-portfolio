@@ -355,6 +355,8 @@ export default function Page() {
   const footerInView = useInView(footerRef, { once: true, amount: 0.3 });
   const aboutSectionInView = useInView(aboutSectionRef, { once: true, amount: 0.08 });
   const aboutInView = useInView(aboutTextRef, { once: true, amount: 0.45 });
+  /** Single source for resume timing: mobile must not re-run when `aboutInView` flips later (resets timeout). */
+  const aboutRevealReady = isMobile ? aboutSectionInView : aboutInView;
 
   const aboutLowerMotionSpring = isMobile
     ? ({ type: "spring" as const, stiffness: 52, damping: 22, mass: 1.12 })
@@ -408,7 +410,6 @@ export default function Page() {
   // About section: when to show resume → icons → email/phone (`forceVisible`).
   // Mobile uses section visibility for stable sequencing regardless of slow scroll.
   useEffect(() => {
-    const aboutRevealReady = isMobile ? aboutSectionInView : aboutInView;
     if (!aboutRevealReady) return;
     const paragraphWordCount =
       "I'm a software engineer with a passion for building websites. I'm constantly seeking new challenges to expand my skills and knowledge.".split(
@@ -445,7 +446,7 @@ export default function Page() {
         );
     const t = setTimeout(() => setShowLowerAbout(true), Math.round(delayMs));
     return () => clearTimeout(t);
-  }, [aboutInView, aboutSectionInView, isMobile]);
+  }, [aboutRevealReady, isMobile]);
 
   useEffect(() => {
     return () => {
