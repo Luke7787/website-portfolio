@@ -6,6 +6,7 @@ import Image from "next/image";
 import ScrollRevealWords from "@/components/effects/ScrollRevealWords";
 import { useInViewStable } from "@/hooks/useInViewStable";
 import { useIsMobile } from "@/hooks/useIsMobile";
+import { estimateDisableRevealProjectSequenceMs } from "@/lib/projectCardSequence";
 
 /** Match ScrollRevealWords exactly: same spring and variants */
 const defaultSpring = {
@@ -185,6 +186,11 @@ interface ScrollRevealCardProps {
   linksInViewAmount?: number;
   /** Require card in view for this many ms before revealing content (handles fast scroll). Use with parent ScrollRevealBlock minVisibleMs. */
   inViewStableMs?: number;
+  /** Mobile + disableReveal: row index (0,1,…) for ordered reveals with siblings. */
+  sequentialIndex?: number;
+  sequentialOpenGate?: number;
+  onSequentialStart?: (index: number, durationMs: number) => void;
+  onSequentialRaw?: (visible: boolean) => void;
 }
 
 function AnimatedWords({
@@ -232,6 +238,10 @@ export default function ScrollRevealCard({
   disableReveal = false,
   linksInViewAmount,
   inViewStableMs,
+  sequentialIndex,
+  sequentialOpenGate,
+  onSequentialStart,
+  onSequentialRaw,
 }: ScrollRevealCardProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const textInViewRef = useRef<HTMLDivElement>(null);
@@ -242,15 +252,84 @@ export default function ScrollRevealCard({
   const viewAmount = linksInViewAmount ?? 0.2;
   const inViewAmount =
     disableReveal && isMobile ? Math.max(viewAmount, 0.45) : viewAmount;
-  const isInViewInstant = useInView(inViewObserveRef, {
-    once: true,
+  const mobileTextInView = useInView(textInViewRef, {
+    once: false,
     amount: inViewAmount,
+  });
+  const containerInstantInView = useInView(containerRef, {
+    once: true,
+    amount: viewAmount,
   });
   const isInViewStable = useInViewStable(inViewObserveRef, {
     amount: inViewAmount,
     minVisibleMs: inViewStableMs ?? 0,
   });
-  const isInView = inViewStableMs !== undefined ? isInViewStable : isInViewInstant;
+  const sequentialEnabled =
+    disableReveal &&
+    isMobile &&
+    typeof sequentialIndex === "number" &&
+    typeof sequentialOpenGate === "number" &&
+    typeof onSequentialStart === "function" &&
+    typeof onSequentialRaw === "function";
+  const [sequentialLatched, setSequentialLatched] = useState(false);
+  const [mobileNonSequentialLatched, setMobileNonSequentialLatched] =
+    useState(false);
+
+  useEffect(() => {
+    if (!sequentialEnabled) return;
+    onSequentialRaw(mobileTextInView);
+  }, [sequentialEnabled, mobileTextInView, onSequentialRaw]);
+
+  useEffect(() => {
+    if (!sequentialEnabled || sequentialIndex === undefined) return;
+    const eligible =
+      mobileTextInView &&
+      sequentialOpenGate === sequentialIndex &&
+      !sequentialLatched;
+    if (eligible) {
+      setSequentialLatched(true);
+      onSequentialStart(
+        sequentialIndex,
+        estimateDisableRevealProjectSequenceMs(
+          title,
+          description,
+          links.length,
+        ),
+      );
+    }
+  }, [
+    sequentialEnabled,
+    mobileTextInView,
+    sequentialOpenGate,
+    sequentialIndex,
+    sequentialLatched,
+    onSequentialStart,
+    title,
+    description,
+    links.length,
+  ]);
+
+  useEffect(() => {
+    if (sequentialEnabled) return;
+    if (!(disableReveal && isMobile)) return;
+    if (mobileTextInView && !mobileNonSequentialLatched) {
+      setMobileNonSequentialLatched(true);
+    }
+  }, [
+    sequentialEnabled,
+    disableReveal,
+    isMobile,
+    mobileTextInView,
+    mobileNonSequentialLatched,
+  ]);
+
+  const isInView = sequentialEnabled
+    ? sequentialLatched
+    : disableReveal && isMobile
+      ? mobileNonSequentialLatched
+      : inViewStableMs !== undefined
+        ? isInViewStable
+        : containerInstantInView;
   const [hasDelayed, setHasDelayed] = useState(false);
 
   useEffect(() => {

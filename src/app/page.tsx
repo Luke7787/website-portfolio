@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useLayoutEffect, useRef } from "react";
+import { useState, useEffect, useLayoutEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import {
@@ -38,6 +38,7 @@ import ScrollRevealWords from "@/components/effects/ScrollRevealWords";
 import ScrollRevealBlock from "@/components/effects/ScrollRevealBlock";
 import ScrollRevealCard from "@/components/effects/ScrollRevealCard";
 import VantaBirdsBackground from "@/components/effects/VantaBirdsBackground";
+import { useMobileProjectSequentialGate } from "@/hooks/useMobileProjectSequentialGate";
 
 // Skills: best icon per tech from react-icons only (Si = Simple Icons, Fa = Font Awesome, Tb = Tabler).
 type IconComponent = (props: {
@@ -357,6 +358,31 @@ export default function Page() {
   const aboutInView = useInView(aboutTextRef, { once: true, amount: 0.45 });
   /** Single source for resume timing: mobile must not re-run when `aboutInView` flips later (resets timeout). */
   const aboutRevealReady = isMobile ? aboutSectionInView : aboutInView;
+
+  const {
+    openGate: mobileProjectOpenGate,
+    onSequenceStart: mobileProjectOnSequenceStart,
+    setRawAt: mobileProjectSetRawAt,
+  } = useMobileProjectSequentialGate(isMobile);
+
+  const reportMobileProjectRaw = useCallback(
+    (index: number, visible: boolean) => {
+      mobileProjectSetRawAt?.(index, visible);
+    },
+    [mobileProjectSetRawAt],
+  );
+  const onMobileProjectSequentialRaw0 = useCallback(
+    (v: boolean) => reportMobileProjectRaw(0, v),
+    [reportMobileProjectRaw],
+  );
+  const onMobileProjectSequentialRaw1 = useCallback(
+    (v: boolean) => reportMobileProjectRaw(1, v),
+    [reportMobileProjectRaw],
+  );
+  const onMobileProjectSequentialRaw2 = useCallback(
+    (v: boolean) => reportMobileProjectRaw(2, v),
+    [reportMobileProjectRaw],
+  );
 
   const aboutLowerMotionSpring = isMobile
     ? ({ type: "spring" as const, stiffness: 52, damping: 22, mass: 1.12 })
@@ -977,6 +1003,16 @@ export default function Page() {
                   ]}
                   cardClassName="group opacity-100 transition-all duration-500 ease-out"
                   disableReveal
+                  sequentialIndex={isMobile ? 0 : undefined}
+                  sequentialOpenGate={
+                    isMobile ? mobileProjectOpenGate : undefined
+                  }
+                  onSequentialStart={
+                    isMobile ? mobileProjectOnSequenceStart : undefined
+                  }
+                  onSequentialRaw={
+                    isMobile ? onMobileProjectSequentialRaw0 : undefined
+                  }
                 />
               </div>
 
@@ -999,6 +1035,16 @@ export default function Page() {
                   ]}
                   cardClassName="group opacity-100 transition-all duration-500 ease-out"
                   disableReveal
+                  sequentialIndex={isMobile ? 1 : undefined}
+                  sequentialOpenGate={
+                    isMobile ? mobileProjectOpenGate : undefined
+                  }
+                  onSequentialStart={
+                    isMobile ? mobileProjectOnSequenceStart : undefined
+                  }
+                  onSequentialRaw={
+                    isMobile ? onMobileProjectSequentialRaw1 : undefined
+                  }
                 />
               </div>
 
@@ -1022,6 +1068,16 @@ export default function Page() {
                   ]}
                   cardClassName="group opacity-100 transition-all duration-500 ease-out"
                   disableReveal
+                  sequentialIndex={isMobile ? 2 : undefined}
+                  sequentialOpenGate={
+                    isMobile ? mobileProjectOpenGate : undefined
+                  }
+                  onSequentialStart={
+                    isMobile ? mobileProjectOnSequenceStart : undefined
+                  }
+                  onSequentialRaw={
+                    isMobile ? onMobileProjectSequentialRaw2 : undefined
+                  }
                 />
               </div>
             </ScrollRevealBlock>
