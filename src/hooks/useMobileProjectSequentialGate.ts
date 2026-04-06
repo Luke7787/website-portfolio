@@ -2,27 +2,29 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const CARD_COUNT = 3;
+/** Showroom, Inventory, Blackjack, Server & Client — all stacked on mobile. */
+const CARD_COUNT = 4;
+
+type RawTuple = [boolean, boolean, boolean, boolean];
+
+const initialRaw: RawTuple = [false, false, false, false];
 
 /**
- * Mobile-only: reveal project cards 0→1→2 in order. The next card may start only after
+ * Mobile-only: reveal project cards 0→1→2→3 in order. The next card may start only after
  * the previous card’s estimated sequence duration, or after skipped (never-started) cards
  * when the user scrolls past them.
  */
 export function useMobileProjectSequentialGate(isMobile: boolean) {
   const [openGate, setOpenGate] = useState(0);
-  const [rawVisible, setRawVisible] = useState<[boolean, boolean, boolean]>([
-    false,
-    false,
-    false,
-  ]);
+  const [rawVisible, setRawVisible] = useState<RawTuple>(initialRaw);
   const startedRef = useRef<Set<number>>(new Set());
   const timeoutRef = useRef<number | null>(null);
 
   const setRawAt = useCallback((index: number, visible: boolean) => {
+    if (index < 0 || index >= CARD_COUNT) return;
     setRawVisible((prev) => {
       if (prev[index] === visible) return prev;
-      const next: [boolean, boolean, boolean] = [...prev];
+      const next = [...prev] as RawTuple;
       next[index] = visible;
       return next;
     });
@@ -36,7 +38,10 @@ export function useMobileProjectSequentialGate(isMobile: boolean) {
     }
     timeoutRef.current = window.setTimeout(() => {
       timeoutRef.current = null;
-      setOpenGate((g) => Math.max(g, index + 1));
+      // Run after the timeout tick so the next card’s first paint isn’t one frame behind.
+      queueMicrotask(() => {
+        setOpenGate((g) => Math.max(g, index + 1));
+      });
     }, durationMs);
   }, []);
 
@@ -70,7 +75,7 @@ export function useMobileProjectSequentialGate(isMobile: boolean) {
   useEffect(() => {
     if (isMobile) return;
     setOpenGate(0);
-    setRawVisible([false, false, false]);
+    setRawVisible(initialRaw);
     startedRef.current.clear();
     if (timeoutRef.current !== null) {
       window.clearTimeout(timeoutRef.current);

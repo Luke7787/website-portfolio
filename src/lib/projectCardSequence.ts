@@ -1,6 +1,6 @@
 /**
- * Upper bound for disableReveal project cards (image tween + ScrollRevealWords + LinksRevealAfterDelay).
- * Keep in sync with ScrollRevealCard `disableReveal` branch and LinksRevealAfterDelay.
+ * When to allow the next mobile sequential project card: end of ScrollRevealWords + link tweens
+ * (matches LinksRevealAfterDelay timing). Keep in sync with that branch in ScrollRevealCard.
  */
 export function estimateDisableRevealProjectSequenceMs(
   title: string,
@@ -14,8 +14,14 @@ export function estimateDisableRevealProjectSequenceMs(
   if (linkCount === 1) {
     linksRevealDelayMs += 120;
   }
-  const linksEndMs =
-    linksRevealDelayMs + Math.max(0, linkCount - 1) * 120 + 900;
-  const imageMs = 1500;
-  return Math.ceil(Math.max(imageMs, linksEndMs) + 280);
+  const linkStaggerMs = Math.max(0, linkCount - 1) * 120;
+  // 0.9s tween + [0.22, 0.08, 0.28, 1]: motion reads complete a bit before 900ms.
+  const lastLinkTweenMs = 655;
+  const linksEndMs = linksRevealDelayMs + linkStaggerMs + lastLinkTweenMs;
+  // Small trim so the following card can start on the same beat as the link row feeling “done”.
+  const handoffTrimMs = 55;
+  return Math.max(
+    0,
+    Math.ceil(linksEndMs - handoffTrimMs),
+  );
 }

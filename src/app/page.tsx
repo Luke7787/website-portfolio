@@ -383,6 +383,10 @@ export default function Page() {
     (v: boolean) => reportMobileProjectRaw(2, v),
     [reportMobileProjectRaw],
   );
+  const onMobileProjectSequentialRaw3 = useCallback(
+    (v: boolean) => reportMobileProjectRaw(3, v),
+    [reportMobileProjectRaw],
+  );
 
   const aboutLowerMotionSpring = isMobile
     ? ({ type: "spring" as const, stiffness: 52, damping: 22, mass: 1.12 })
@@ -1104,8 +1108,18 @@ export default function Page() {
                 ]}
                 cardClassName="group opacity-100 transition-all duration-500 ease-out"
                 disableReveal
-                linksInViewAmount={isMobile ? 0.075 : 0.2}
-                inViewStableMs={120}
+                linksInViewAmount={isMobile ? undefined : 0.2}
+                inViewStableMs={isMobile ? undefined : 120}
+                sequentialIndex={isMobile ? 3 : undefined}
+                sequentialOpenGate={
+                  isMobile ? mobileProjectOpenGate : undefined
+                }
+                onSequentialStart={
+                  isMobile ? mobileProjectOnSequenceStart : undefined
+                }
+                onSequentialRaw={
+                  isMobile ? onMobileProjectSequentialRaw3 : undefined
+                }
               />
             </ScrollRevealBlock>
           </div>
