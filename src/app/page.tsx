@@ -714,7 +714,7 @@ export default function Page() {
                           icon: "fab fa-linkedin",
                         },
                         {
-                          href: "https://www.instagram.com/luke.zhuang/",
+                          href: "https://www.instagram.com/lukez7787/",
                           icon: "fab fa-instagram",
                         },
                       ].map((item) => (
@@ -1454,7 +1454,7 @@ export default function Page() {
                         icon: "fab fa-linkedin",
                       },
                       {
-                        href: "https://www.instagram.com/luke.zhuang/",
+                        href: "https://www.instagram.com/lukez7787/",
                         icon: "fab fa-instagram",
                       },
                     ].map((item) => (
