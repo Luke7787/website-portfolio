@@ -2,7 +2,7 @@
 
 **Live Site:** https://lukezhuang.onrender.com
 
-## Tech Stack
+# Tech Stack
 
 - **Framework:** Next.js 
 - **Frontend:** React  
