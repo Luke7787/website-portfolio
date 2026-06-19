@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { Fragment, useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import ScrollRevealWords from "@/components/effects/ScrollRevealWords";
@@ -207,19 +207,35 @@ function AnimatedWords({
   className?: string;
 }) {
   const words = text.split(/\s+/);
+  // Justified text needs real, breakable spaces *between* word spans so
+  // `text-align: justify` can stretch them. Other text keeps the original
+  // non-breaking space inside each span (unchanged spacing + animation).
+  const justify = className?.includes("text-justify");
   return (
     <Tag className={className}>
       <motion.span variants={textBlockVariants} style={{ display: "inline" }}>
-        {words.map((word, j) => (
-          <motion.span
-            key={j}
-            variants={itemVariants}
-            style={{ display: "inline-block" }}
-          >
-            {word}
-            {j < words.length - 1 ? "\u00A0" : ""}
-          </motion.span>
-        ))}
+        {words.map((word, j) =>
+          justify ? (
+            <Fragment key={j}>
+              <motion.span
+                variants={itemVariants}
+                style={{ display: "inline-block" }}
+              >
+                {word}
+              </motion.span>
+              {j < words.length - 1 ? " " : ""}
+            </Fragment>
+          ) : (
+            <motion.span
+              key={j}
+              variants={itemVariants}
+              style={{ display: "inline-block" }}
+            >
+              {word}
+              {j < words.length - 1 ? "\u00A0" : ""}
+            </motion.span>
+          ),
+        )}
       </motion.span>
     </Tag>
   );
@@ -353,7 +369,7 @@ export default function ScrollRevealCard({
   const imageFitClass =
     imageObjectFit === "contain" ? "object-contain" : "object-cover";
   const imagePositionClass = imageObjectPosition ? "" : "object-center";
-  const imageFrameClassName = `relative w-full ${imageAspectClassName} overflow-hidden rounded-xl mb-5${imageObjectFit === "contain" ? " bg-[#121212]" : ""}`;
+  const imageFrameClassName = `relative w-full ${imageAspectClassName} overflow-hidden rounded-xl mb-6${imageObjectFit === "contain" ? " bg-[#121212]" : ""}`;
 
   if (disableReveal) {
     const titleWordCount = title.split(/\s+/).length;
@@ -420,13 +436,13 @@ export default function ScrollRevealCard({
                   as: "h3",
                   text: title,
                   className:
-                    "cursor-default text-xl font-semibold text-white mb-2",
+                    "cursor-default text-xl font-semibold text-white mb-6",
                 },
                 {
                   as: "p",
                   text: description,
                   className:
-                    "cursor-default text-white/70 text-[15px] leading-relaxed",
+                    "cursor-default text-white/70 text-[15px] leading-relaxed text-justify",
                 },
               ]}
             />
@@ -479,14 +495,14 @@ export default function ScrollRevealCard({
             <AnimatedWords
               text={title}
               as="h3"
-              className="cursor-default text-xl font-semibold text-white mb-2"
+              className="cursor-default text-xl font-semibold text-white mb-6"
             />
           </motion.div>
           <motion.div variants={itemVariants}>
             <AnimatedWords
               text={description}
               as="p"
-              className="cursor-default text-white/70 text-[15px] leading-relaxed"
+              className="cursor-default text-white/70 text-[15px] leading-relaxed text-justify"
             />
           </motion.div>
         </div>

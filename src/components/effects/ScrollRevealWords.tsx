@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { Fragment, useRef } from "react";
 import {
   motion,
   useInView,
@@ -179,18 +179,34 @@ export default function ScrollRevealWords({
             </motion.span>
           );
         }
+        // Justified text needs real, breakable spaces *between* word spans so
+        // `text-align: justify` can stretch them. Other text keeps the original
+        // non-breaking space inside each span (unchanged spacing + animation).
+        const justify = line.className?.includes("text-justify");
         return (
           <Tag key={i} className={line.className} {...linkProps}>
-            {words.map((word, j) => (
-              <motion.span
-                key={j}
-                variants={variants}
-                style={{ display: "inline-block" }}
-              >
-                {word}
-                {j < words.length - 1 ? "\u00A0" : ""}
-              </motion.span>
-            ))}
+            {words.map((word, j) =>
+              justify ? (
+                <Fragment key={j}>
+                  <motion.span
+                    variants={variants}
+                    style={{ display: "inline-block" }}
+                  >
+                    {word}
+                  </motion.span>
+                  {j < words.length - 1 ? " " : ""}
+                </Fragment>
+              ) : (
+                <motion.span
+                  key={j}
+                  variants={variants}
+                  style={{ display: "inline-block" }}
+                >
+                  {word}
+                  {j < words.length - 1 ? "\u00A0" : ""}
+                </motion.span>
+              ),
+            )}
           </Tag>
         );
       })}
