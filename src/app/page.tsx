@@ -744,9 +744,9 @@ export default function Page() {
                             className="group inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/15 transition-all duration-300 hover:scale-110"
                           >
                             <i
-                              className={`${item.icon} text-[30px] text-[#1B76D2] transition-colors duration-300 group-hover:text-white${
+                              className={`${item.icon} text-[30px] text-[#1B76D2] transition-colors duration-300 group-hover:text-white ${
                                 item.icon.includes("instagram")
-                                  ? " [-webkit-text-stroke:0.65px_currentColor] [paint-order:stroke_fill]"
+                                  ? "[-webkit-text-stroke:0.65px_currentColor] [paint-order:stroke_fill]"
                                   : ""
                               }`}
                             />
@@ -1495,9 +1495,9 @@ export default function Page() {
                           className="group inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/15 transition-all duration-300 hover:scale-110"
                         >
                           <i
-                            className={`${item.icon} text-[28px] text-[#1B76D2] transition-colors duration-300 group-hover:text-white${
+                            className={`${item.icon} text-[28px] text-[#1B76D2] transition-colors duration-300 group-hover:text-white ${
                               item.icon.includes("instagram")
-                                ? " [-webkit-text-stroke:0.6px_currentColor] [paint-order:stroke_fill]"
+                                ? "[-webkit-text-stroke:0.6px_currentColor] [paint-order:stroke_fill]"
                                 : ""
                             }`}
                           />

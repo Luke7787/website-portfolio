@@ -369,7 +369,7 @@ export default function ScrollRevealCard({
   const imageFitClass =
     imageObjectFit === "contain" ? "object-contain" : "object-cover";
   const imagePositionClass = imageObjectPosition ? "" : "object-center";
-  const imageFrameClassName = `relative w-full ${imageAspectClassName} overflow-hidden rounded-xl mb-6${imageObjectFit === "contain" ? " bg-[#121212]" : ""}`;
+  const imageFrameClassName = `relative w-full ${imageAspectClassName} overflow-hidden rounded-xl mb-6 ${imageObjectFit === "contain" ? "bg-[#121212]" : ""}`;
 
   if (disableReveal) {
     const titleWordCount = title.split(/\s+/).length;
