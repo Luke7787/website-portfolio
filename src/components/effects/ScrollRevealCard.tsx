@@ -170,6 +170,10 @@ interface ScrollRevealCardProps {
   imageAlt: string;
   imageSizes?: string;
   imageObjectPosition?: string;
+  /** Override default `aspect-9/8` when the screenshot needs a different frame (e.g. widescreen). */
+  imageAspectClassName?: string;
+  /** `contain` shows the full image; default `cover` crops to fill. */
+  imageObjectFit?: "cover" | "contain";
   title: string;
   description: string;
   mainHref: string;
@@ -226,6 +230,8 @@ export default function ScrollRevealCard({
   imageAlt,
   imageSizes = "(max-width: 768px) 100vw, (max-width: 1128px) 50vw, 33vw",
   imageObjectPosition,
+  imageAspectClassName = "aspect-9/8",
+  imageObjectFit = "cover",
   title,
   description,
   mainHref,
@@ -344,6 +350,10 @@ export default function ScrollRevealCard({
 
   const descriptionWordCount = description.split(/\s+/).length;
   const shouldAnimate = !disableReveal && isInView && hasDelayed;
+  const imageFitClass =
+    imageObjectFit === "contain" ? "object-contain" : "object-cover";
+  const imagePositionClass = imageObjectPosition ? "" : "object-center";
+  const imageFrameClassName = `relative w-full ${imageAspectClassName} overflow-hidden rounded-xl mb-5${imageObjectFit === "contain" ? " bg-[#121212]" : ""}`;
 
   if (disableReveal) {
     const titleWordCount = title.split(/\s+/).length;
@@ -364,7 +374,7 @@ export default function ScrollRevealCard({
           className="block"
         >
           <motion.div
-            className="relative w-full aspect-9/8 overflow-hidden rounded-xl mb-5"
+            className={imageFrameClassName}
             initial={{ opacity: 0, filter: "blur(10px)" }}
             animate={
               isInView
@@ -382,7 +392,7 @@ export default function ScrollRevealCard({
               alt={imageAlt}
               fill
               sizes={imageSizes}
-              className={`rounded-xl object-cover transition-transform duration-300 ${cardClassName.includes("group") ? "group-hover:scale-[1.02]" : ""} ${imageObjectPosition ? "" : "object-center"}`}
+              className={`rounded-xl ${imageFitClass} transition-transform duration-300 ${cardClassName.includes("group") ? "group-hover:scale-[1.02]" : ""} ${imagePositionClass}`}
               style={
                 imageObjectPosition
                   ? { objectPosition: imageObjectPosition }
@@ -449,14 +459,14 @@ export default function ScrollRevealCard({
       >
         <motion.div
           variants={imageVariants}
-          className="relative w-full aspect-9/8 overflow-hidden rounded-xl mb-5"
+          className={imageFrameClassName}
         >
           <Image
             src={imageSrc}
             alt={imageAlt}
             fill
             sizes={imageSizes}
-            className={`rounded-xl object-cover transition-transform duration-300 ${cardClassName.includes("group") ? "group-hover:scale-[1.02]" : ""} ${imageObjectPosition ? "" : "object-center"}`}
+            className={`rounded-xl ${imageFitClass} transition-transform duration-300 ${cardClassName.includes("group") ? "group-hover:scale-[1.02]" : ""} ${imagePositionClass}`}
             style={
               imageObjectPosition
                 ? { objectPosition: imageObjectPosition }

@@ -994,8 +994,10 @@ export default function Page() {
             >
               <div className="w-full md:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-5rem)/3)]">
                 <ScrollRevealCard
-                  imageSrc="/images/P1P1.png"
+                  imageSrc="/images/showroom-booking.jpg"
                   imageAlt="Showroom Booking App"
+                  imageObjectFit="cover"
+                  imageObjectPosition="top center"
                   title="Showroom Booking App"
                   description="Full-stack appointment scheduling with Next.js, TypeScript, Prisma, and PostgreSQL. Book visits and manage availability with admin control."
                   mainHref="https://showroom-appointment-scheduler.onrender.com/"
