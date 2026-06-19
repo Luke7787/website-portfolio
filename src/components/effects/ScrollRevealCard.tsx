@@ -436,7 +436,7 @@ export default function ScrollRevealCard({
                   as: "h3",
                   text: title,
                   className:
-                    "cursor-default text-xl font-semibold text-white mb-6",
+                    "cursor-default text-xl font-semibold text-white mb-4",
                 },
                 {
                   as: "p",
@@ -495,7 +495,7 @@ export default function ScrollRevealCard({
             <AnimatedWords
               text={title}
               as="h3"
-              className="cursor-default text-xl font-semibold text-white mb-6"
+              className="cursor-default text-xl font-semibold text-white mb-4"
             />
           </motion.div>
           <motion.div variants={itemVariants}>
