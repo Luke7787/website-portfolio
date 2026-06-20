@@ -1032,11 +1032,11 @@ export default function Page() {
                   imageAlt="Inventory Management Platform"
                   title="Inventory Management Platform"
                   description="Full-stack inventory app with React, TypeScript, Node.js, and MongoDB. View, add, update, and manage inventory through a responsive interface."
-                  mainHref="https://mango-island-08612f41e.5.azurestaticapps.net"
+                  mainHref="https://delightful-wave-0026bfa0f.7.azurestaticapps.net"
                   links={[
                     {
                       label: "Live Site",
-                      href: "https://mango-island-08612f41e.5.azurestaticapps.net",
+                      href: "https://delightful-wave-0026bfa0f.7.azurestaticapps.net",
                     },
                     {
                       label: "GitHub",
