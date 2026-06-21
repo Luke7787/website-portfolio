@@ -1530,7 +1530,7 @@ export default function Page() {
             lines={[
               {
                 as: "span",
-                text: `© ${new Date().getFullYear()} All rights reserved | This template is made by `,
+                text: `© ${new Date().getFullYear()} All rights reserved | This website is made by `,
                 className:
                   "cursor-default text-[0.7rem] sm:text-[1rem] font-medium text-white/70 font-['Open_Sans',sans-serif]",
               },
