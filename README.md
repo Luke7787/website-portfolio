@@ -1,5 +1,3 @@
-# Luke Zhuang's [Personal Portfolio](https://lukezhuang.onrender.com)
-
 **Live Site:** https://lukezhuang.onrender.com
 
 <h3><font size="7">Tech Stack</font></h3><ul>
