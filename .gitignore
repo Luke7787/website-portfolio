@@ -20,6 +20,9 @@
 # production
 /build
 
+# cursor (local IDE config — not for public repo)
+.cursor/
+
 # misc
 .DS_Store
 *.pem
