@@ -1198,7 +1198,16 @@ export default function Page() {
                   title="Tutoring Business Website"
                   description="Responsive tutoring website built with HTML and CSS. Showcases services, pricing, policies, and contact information through a clean design."
                   mainHref="https://luke7787.github.io/tutoring/"
-                  links={[]}
+                  links={[
+                    {
+                      label: "Live Site",
+                      href: "https://luke7787.github.io/tutoring/",
+                    },
+                    {
+                      label: "GitHub",
+                      href: "https://github.com/Luke7787/tutoring",
+                    },
+                  ]}
                   cardClassName="group opacity-100 transition-all duration-500 ease-out"
                   disableReveal
                   linksInViewAmount={isMobile ? undefined : 0.2}
