@@ -1,6 +1,12 @@
 "use client";
 
-import { Fragment, useRef, useState, useEffect } from "react";
+import {
+  Fragment,
+  useRef,
+  useState,
+  useEffect,
+  type CSSProperties,
+} from "react";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import ScrollRevealWords from "@/components/effects/ScrollRevealWords";
@@ -105,7 +111,10 @@ function LinksRevealAfterDelay({
   trigger?: boolean;
 }) {
   const [show, setShow] = useState(false);
-  const isInViewFromRef = useInView(cardRef, { once: true, amount: inViewAmount });
+  const isInViewFromRef = useInView(cardRef, {
+    once: true,
+    amount: inViewAmount,
+  });
   const isInView = trigger !== undefined ? trigger : isInViewFromRef;
 
   useEffect(() => {
@@ -172,6 +181,8 @@ interface ScrollRevealCardProps {
   imageObjectPosition?: string;
   /** Override default `aspect-9/8` when the screenshot needs a different frame (e.g. widescreen). */
   imageAspectClassName?: string;
+  /** Allow setting an inline aspect ratio style for exact custom frames. */
+  imageAspectStyle?: CSSProperties;
   /** `contain` shows the full image; default `cover` crops to fill. */
   imageObjectFit?: "cover" | "contain";
   title: string;
@@ -247,6 +258,7 @@ export default function ScrollRevealCard({
   imageSizes = "(max-width: 768px) 100vw, (max-width: 1128px) 50vw, 33vw",
   imageObjectPosition,
   imageAspectClassName = "aspect-9/8",
+  imageAspectStyle,
   imageObjectFit = "cover",
   title,
   description,
@@ -382,7 +394,10 @@ export default function ScrollRevealCard({
     }
 
     return (
-      <div ref={containerRef} className={`${cardClassName} ${colSpanClassName}`}>
+      <div
+        ref={containerRef}
+        className={`${cardClassName} ${colSpanClassName}`}
+      >
         <a
           href={mainHref}
           target="_blank"
@@ -391,6 +406,7 @@ export default function ScrollRevealCard({
         >
           <motion.div
             className={imageFrameClassName}
+            style={imageAspectStyle}
             initial={{ opacity: 0, filter: "blur(10px)" }}
             animate={
               isInView
@@ -416,10 +432,7 @@ export default function ScrollRevealCard({
               }
             />
           </motion.div>
-          <div
-            ref={isMobile ? textInViewRef : undefined}
-            className={className}
-          >
+          <div ref={isMobile ? textInViewRef : undefined} className={className}>
             <ScrollRevealWords
               observeRef={inViewObserveRef}
               threshold={inViewAmount}
@@ -473,10 +486,7 @@ export default function ScrollRevealCard({
         rel="noopener noreferrer"
         className="block"
       >
-        <motion.div
-          variants={imageVariants}
-          className={imageFrameClassName}
-        >
+        <motion.div variants={imageVariants} className={imageFrameClassName}>
           <Image
             src={imageSrc}
             alt={imageAlt}

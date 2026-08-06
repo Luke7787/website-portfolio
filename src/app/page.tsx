@@ -1189,9 +1189,10 @@ export default function Page() {
                 <ScrollRevealCard
                   imageSrc="/images/project5.png"
                   imageAlt="Tutoring business website"
+                  imageObjectFit="contain"
                   title="Tutoring Business Website"
                   description="Responsive tutoring website built with HTML and CSS. Showcases services, pricing, policies, and contact information through a clean design."
-                  mainHref="#"
+                  mainHref="https://luke7787.github.io/tutoring/"
                   links={[]}
                   cardClassName="group opacity-100 transition-all duration-500 ease-out"
                   disableReveal
