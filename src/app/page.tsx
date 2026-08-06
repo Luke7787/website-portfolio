@@ -1189,7 +1189,12 @@ export default function Page() {
                 <ScrollRevealCard
                   imageSrc="/images/project5.png"
                   imageAlt="Tutoring business website"
-                  imageObjectFit="contain"
+                  imageObjectFit="cover"
+                  imageStyle={{
+                    left: "-20px",
+                    width: "calc(100% + 40px)",
+                    height: "100%",
+                  }}
                   title="Tutoring Business Website"
                   description="Responsive tutoring website built with HTML and CSS. Showcases services, pricing, policies, and contact information through a clean design."
                   mainHref="https://luke7787.github.io/tutoring/"

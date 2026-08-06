@@ -183,6 +183,8 @@ interface ScrollRevealCardProps {
   imageAspectClassName?: string;
   /** Allow setting an inline aspect ratio style for exact custom frames. */
   imageAspectStyle?: CSSProperties;
+  /** Optional inline style overrides for the image element. */
+  imageStyle?: CSSProperties;
   /** `contain` shows the full image; default `cover` crops to fill. */
   imageObjectFit?: "cover" | "contain";
   title: string;
@@ -259,6 +261,7 @@ export default function ScrollRevealCard({
   imageObjectPosition,
   imageAspectClassName = "aspect-9/8",
   imageAspectStyle,
+  imageStyle,
   imageObjectFit = "cover",
   title,
   description,
@@ -419,18 +422,23 @@ export default function ScrollRevealCard({
               ease: [0.22, 0.08, 0.28, 1],
             }}
           >
-            <Image
-              src={imageSrc}
-              alt={imageAlt}
-              fill
-              sizes={imageSizes}
-              className={`rounded-xl ${imageFitClass} transition-transform duration-300 ${cardClassName.includes("group") ? "group-hover:scale-[1.02]" : ""} ${imagePositionClass}`}
-              style={
-                imageObjectPosition
-                  ? { objectPosition: imageObjectPosition }
-                  : undefined
-              }
-            />
+            <div
+              className="absolute inset-0 overflow-hidden"
+              style={imageStyle}
+            >
+              <Image
+                src={imageSrc}
+                alt={imageAlt}
+                fill
+                sizes={imageSizes}
+                className={`rounded-xl w-full h-full ${imageFitClass} transition-transform duration-300 ${cardClassName.includes("group") ? "group-hover:scale-[1.02]" : ""} ${imagePositionClass}`}
+                style={
+                  imageObjectPosition
+                    ? { objectPosition: imageObjectPosition }
+                    : undefined
+                }
+              />
+            </div>
           </motion.div>
           <div ref={isMobile ? textInViewRef : undefined} className={className}>
             <ScrollRevealWords
@@ -487,18 +495,20 @@ export default function ScrollRevealCard({
         className="block"
       >
         <motion.div variants={imageVariants} className={imageFrameClassName}>
-          <Image
-            src={imageSrc}
-            alt={imageAlt}
-            fill
-            sizes={imageSizes}
-            className={`rounded-xl ${imageFitClass} transition-transform duration-300 ${cardClassName.includes("group") ? "group-hover:scale-[1.02]" : ""} ${imagePositionClass}`}
-            style={
-              imageObjectPosition
-                ? { objectPosition: imageObjectPosition }
-                : undefined
-            }
-          />
+          <div className="absolute inset-0 overflow-hidden" style={imageStyle}>
+            <Image
+              src={imageSrc}
+              alt={imageAlt}
+              fill
+              sizes={imageSizes}
+              className={`rounded-xl w-full h-full ${imageFitClass} transition-transform duration-300 ${cardClassName.includes("group") ? "group-hover:scale-[1.02]" : ""} ${imagePositionClass}`}
+              style={
+                imageObjectPosition
+                  ? { objectPosition: imageObjectPosition }
+                  : undefined
+              }
+            />
+          </div>
         </motion.div>
         <div className={className}>
           <motion.div variants={itemVariants}>
