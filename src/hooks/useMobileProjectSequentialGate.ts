@@ -2,15 +2,15 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
-/** Showroom, Inventory, Blackjack, Server & Client — all stacked on mobile. */
-const CARD_COUNT = 4;
+/** Showroom, Inventory, Blackjack, Server & Client, Tutoring Business Website — all stacked on mobile. */
+const CARD_COUNT = 5;
 
-type RawTuple = [boolean, boolean, boolean, boolean];
+type RawTuple = [boolean, boolean, boolean, boolean, boolean];
 
-const initialRaw: RawTuple = [false, false, false, false];
+const initialRaw: RawTuple = [false, false, false, false, false];
 
 /**
- * Mobile-only: reveal project cards 0→1→2→3 in order. The next card may start only after
+ * Mobile-only: reveal project cards 0→1→2→3→4 in order. The next card may start only after
  * the previous card’s estimated sequence duration, or after skipped (never-started) cards
  * when the user scrolls past them.
  */

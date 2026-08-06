@@ -1,5 +1,11 @@
 "use client";
-import { useState, useEffect, useLayoutEffect, useRef, useCallback } from "react";
+import {
+  useState,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useCallback,
+} from "react";
 import Image from "next/image";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import {
@@ -354,7 +360,10 @@ export default function Page() {
   const footerRef = useRef<HTMLElement>(null);
   const copyFeedbackTimeoutRef = useRef<number | null>(null);
   const footerInView = useInView(footerRef, { once: true, amount: 0.3 });
-  const aboutSectionInView = useInView(aboutSectionRef, { once: true, amount: 0.08 });
+  const aboutSectionInView = useInView(aboutSectionRef, {
+    once: true,
+    amount: 0.08,
+  });
   const aboutInView = useInView(aboutTextRef, { once: true, amount: 0.45 });
   /** Single source for resume timing: mobile must not re-run when `aboutInView` flips later (resets timeout). */
   const aboutRevealReady = isMobile ? aboutSectionInView : aboutInView;
@@ -387,10 +396,14 @@ export default function Page() {
     (v: boolean) => reportMobileProjectRaw(3, v),
     [reportMobileProjectRaw],
   );
+  const onMobileProjectSequentialRaw4 = useCallback(
+    (v: boolean) => reportMobileProjectRaw(4, v),
+    [reportMobileProjectRaw],
+  );
 
   const aboutLowerMotionSpring = isMobile
-    ? ({ type: "spring" as const, stiffness: 52, damping: 22, mass: 1.12 })
-    : ({ type: "spring" as const, stiffness: 65, damping: 24, mass: 0.9 });
+    ? { type: "spring" as const, stiffness: 52, damping: 22, mass: 1.12 }
+    : { type: "spring" as const, stiffness: 65, damping: 24, mass: 0.9 };
 
   // Desktop: keep a single scroll-to-top on mount (unchanged behavior).
   // Mobile: Safari/Chrome often re-apply scroll restoration after useEffect; see mobile useLayoutEffect below.
@@ -815,7 +828,9 @@ export default function Page() {
                         </motion.span>{" "}
                         <motion.button
                           type="button"
-                          onClick={() => copyText("lukewzhuang@gmail.com", "email")}
+                          onClick={() =>
+                            copyText("lukewzhuang@gmail.com", "email")
+                          }
                           aria-label="Copy email address"
                           title="Copy email"
                           variants={{
@@ -842,10 +857,30 @@ export default function Page() {
                           {copiedField === "email" ? (
                             <motion.span
                               key="email-copied"
-                              initial={{ opacity: 0, y: 8, scale: 0.92, filter: "blur(6px)" }}
-                              animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-                              exit={{ opacity: 0, y: -4, scale: 0.98, filter: "blur(4px)" }}
-                              transition={{ type: "spring", stiffness: 320, damping: 24, mass: 0.75 }}
+                              initial={{
+                                opacity: 0,
+                                y: 8,
+                                scale: 0.92,
+                                filter: "blur(6px)",
+                              }}
+                              animate={{
+                                opacity: 1,
+                                y: 0,
+                                scale: 1,
+                                filter: "blur(0px)",
+                              }}
+                              exit={{
+                                opacity: 0,
+                                y: -4,
+                                scale: 0.98,
+                                filter: "blur(4px)",
+                              }}
+                              transition={{
+                                type: "spring",
+                                stiffness: 320,
+                                damping: 24,
+                                mass: 0.75,
+                              }}
                               className="ml-2 inline-flex items-center gap-1 rounded-full border border-[#1E90FF]/35 bg-[#1E90FF]/12 px-2 py-0.5 align-middle text-[0.72rem] font-medium tracking-[0.02em] text-[#b9ddff] shadow-[0_0_14px_rgba(30,144,255,0.2)]"
                             >
                               <i
@@ -926,10 +961,30 @@ export default function Page() {
                           {copiedField === "phone" ? (
                             <motion.span
                               key="phone-copied"
-                              initial={{ opacity: 0, y: 8, scale: 0.92, filter: "blur(6px)" }}
-                              animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-                              exit={{ opacity: 0, y: -4, scale: 0.98, filter: "blur(4px)" }}
-                              transition={{ type: "spring", stiffness: 320, damping: 24, mass: 0.75 }}
+                              initial={{
+                                opacity: 0,
+                                y: 8,
+                                scale: 0.92,
+                                filter: "blur(6px)",
+                              }}
+                              animate={{
+                                opacity: 1,
+                                y: 0,
+                                scale: 1,
+                                filter: "blur(0px)",
+                              }}
+                              exit={{
+                                opacity: 0,
+                                y: -4,
+                                scale: 0.98,
+                                filter: "blur(4px)",
+                              }}
+                              transition={{
+                                type: "spring",
+                                stiffness: 320,
+                                damping: 24,
+                                mass: 0.75,
+                              }}
                               className="ml-2 inline-flex items-center gap-1 rounded-full border border-[#1E90FF]/35 bg-[#1E90FF]/12 px-2 py-0.5 align-middle text-[0.72rem] font-medium tracking-[0.02em] text-[#b9ddff] shadow-[0_0_14px_rgba(30,144,255,0.2)]"
                             >
                               <i
@@ -1098,35 +1153,62 @@ export default function Page() {
               amount={isMobile ? 0.075 : 0.2}
               minVisibleMs={220}
               transitionOverrides={{ stiffness: 24, damping: 24, mass: 1.2 }}
-              className="w-full md:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-5rem)/3)]"
+              className="flex flex-wrap gap-8 lg:gap-10 w-full"
             >
-              <ScrollRevealCard
-                imageSrc="/images/project4.png"
-                imageAlt="Server and Client webserver"
-                title="Server and Client"
-                description="Concurrent web server in C implementing a subset of HTTP. Handles multiple clients via forked processes for parallel request processing."
-                mainHref="https://github.com/Luke7787/Server-and-Client"
-                links={[
-                  {
-                    label: "GitHub",
-                    href: "https://github.com/Luke7787/Server-and-Client",
-                  },
-                ]}
-                cardClassName="group opacity-100 transition-all duration-500 ease-out"
-                disableReveal
-                linksInViewAmount={isMobile ? undefined : 0.2}
-                inViewStableMs={isMobile ? undefined : 120}
-                sequentialIndex={isMobile ? 3 : undefined}
-                sequentialOpenGate={
-                  isMobile ? mobileProjectOpenGate : undefined
-                }
-                onSequentialStart={
-                  isMobile ? mobileProjectOnSequenceStart : undefined
-                }
-                onSequentialRaw={
-                  isMobile ? onMobileProjectSequentialRaw3 : undefined
-                }
-              />
+              <div className="w-full md:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-5rem)/3)]">
+                <ScrollRevealCard
+                  imageSrc="/images/project4.png"
+                  imageAlt="Server and Client webserver"
+                  title="Server and Client"
+                  description="Concurrent web server in C implementing a subset of HTTP. Handles multiple clients via forked processes for parallel request processing."
+                  mainHref="https://github.com/Luke7787/Server-and-Client"
+                  links={[
+                    {
+                      label: "GitHub",
+                      href: "https://github.com/Luke7787/Server-and-Client",
+                    },
+                  ]}
+                  cardClassName="group opacity-100 transition-all duration-500 ease-out"
+                  disableReveal
+                  linksInViewAmount={isMobile ? undefined : 0.2}
+                  inViewStableMs={isMobile ? undefined : 120}
+                  sequentialIndex={isMobile ? 3 : undefined}
+                  sequentialOpenGate={
+                    isMobile ? mobileProjectOpenGate : undefined
+                  }
+                  onSequentialStart={
+                    isMobile ? mobileProjectOnSequenceStart : undefined
+                  }
+                  onSequentialRaw={
+                    isMobile ? onMobileProjectSequentialRaw3 : undefined
+                  }
+                />
+              </div>
+
+              <div className="w-full md:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-5rem)/3)]">
+                <ScrollRevealCard
+                  imageSrc="/images/project5.png"
+                  imageAlt="Tutoring business website"
+                  title="Tutoring Business Website"
+                  description="Responsive tutoring website built with HTML and CSS. Showcases services, pricing, policies, and contact information through a clean design."
+                  mainHref="#"
+                  links={[]}
+                  cardClassName="group opacity-100 transition-all duration-500 ease-out"
+                  disableReveal
+                  linksInViewAmount={isMobile ? undefined : 0.2}
+                  inViewStableMs={isMobile ? undefined : 120}
+                  sequentialIndex={isMobile ? 4 : undefined}
+                  sequentialOpenGate={
+                    isMobile ? mobileProjectOpenGate : undefined
+                  }
+                  onSequentialStart={
+                    isMobile ? mobileProjectOnSequenceStart : undefined
+                  }
+                  onSequentialRaw={
+                    isMobile ? onMobileProjectSequentialRaw4 : undefined
+                  }
+                />
+              </div>
             </ScrollRevealBlock>
           </div>
         </div>
@@ -1378,59 +1460,62 @@ export default function Page() {
                 content: (
                   <div className="mt-6 flex justify-center">
                     <div className="relative inline-flex flex-col items-center">
-                    <button
-                      type="button"
-                      onMouseEnter={() => setContactBirdsVisible(true)}
-                      onMouseLeave={() => setContactBirdsVisible(false)}
-                      onTouchStart={() => setContactBirdsVisible(true)}
-                      onClick={() => {
-                        setContactBirdsVisible(true);
-                        void copyText("lukewzhuang@gmail.com", "contactEmail");
-                      }}
-                      className="bg-transparent p-0 text-white text-[1.55rem] font-bold transition-colors duration-300 hover:text-[#1E90FF] cursor-pointer"
-                      aria-label="Copy contact email address"
-                      title="Copy email"
-                    >
-                      lukewzhuang@gmail.com
-                    </button>
-                    <AnimatePresence initial={false}>
-                      {copiedField === "contactEmail" ? (
-                        <motion.span
-                          key="contact-email-copied"
-                          initial={{
-                            opacity: 0,
-                            y: 8,
-                            scale: 0.92,
-                            filter: "blur(6px)",
-                          }}
-                          animate={{
-                            opacity: 1,
-                            y: 0,
-                            scale: 1,
-                            filter: "blur(0px)",
-                          }}
-                          exit={{
-                            opacity: 0,
-                            y: -4,
-                            scale: 0.98,
-                            filter: "blur(4px)",
-                          }}
-                          transition={{
-                            type: "spring",
-                            stiffness: 320,
-                            damping: 24,
-                            mass: 0.75,
-                          }}
-                          className="pointer-events-none absolute left-1/2 top-full z-10 mt-0.5 inline-flex -translate-x-1/2 items-center gap-1 whitespace-nowrap rounded-full border border-[#1E90FF]/35 bg-[#1E90FF]/12 px-2 py-0.5 text-[0.72rem] font-medium tracking-[0.02em] text-[#b9ddff] shadow-[0_0_14px_rgba(30,144,255,0.2)]"
-                        >
-                          <i
-                            aria-hidden
-                            className="fa-regular fa-clipboard text-[0.68rem] text-[#7ec0ff]"
-                          />
-                          Copied to Clipboard
-                        </motion.span>
-                      ) : null}
-                    </AnimatePresence>
+                      <button
+                        type="button"
+                        onMouseEnter={() => setContactBirdsVisible(true)}
+                        onMouseLeave={() => setContactBirdsVisible(false)}
+                        onTouchStart={() => setContactBirdsVisible(true)}
+                        onClick={() => {
+                          setContactBirdsVisible(true);
+                          void copyText(
+                            "lukewzhuang@gmail.com",
+                            "contactEmail",
+                          );
+                        }}
+                        className="bg-transparent p-0 text-white text-[1.55rem] font-bold transition-colors duration-300 hover:text-[#1E90FF] cursor-pointer"
+                        aria-label="Copy contact email address"
+                        title="Copy email"
+                      >
+                        lukewzhuang@gmail.com
+                      </button>
+                      <AnimatePresence initial={false}>
+                        {copiedField === "contactEmail" ? (
+                          <motion.span
+                            key="contact-email-copied"
+                            initial={{
+                              opacity: 0,
+                              y: 8,
+                              scale: 0.92,
+                              filter: "blur(6px)",
+                            }}
+                            animate={{
+                              opacity: 1,
+                              y: 0,
+                              scale: 1,
+                              filter: "blur(0px)",
+                            }}
+                            exit={{
+                              opacity: 0,
+                              y: -4,
+                              scale: 0.98,
+                              filter: "blur(4px)",
+                            }}
+                            transition={{
+                              type: "spring",
+                              stiffness: 320,
+                              damping: 24,
+                              mass: 0.75,
+                            }}
+                            className="pointer-events-none absolute left-1/2 top-full z-10 mt-0.5 inline-flex -translate-x-1/2 items-center gap-1 whitespace-nowrap rounded-full border border-[#1E90FF]/35 bg-[#1E90FF]/12 px-2 py-0.5 text-[0.72rem] font-medium tracking-[0.02em] text-[#b9ddff] shadow-[0_0_14px_rgba(30,144,255,0.2)]"
+                          >
+                            <i
+                              aria-hidden
+                              className="fa-regular fa-clipboard text-[0.68rem] text-[#7ec0ff]"
+                            />
+                            Copied to Clipboard
+                          </motion.span>
+                        ) : null}
+                      </AnimatePresence>
                     </div>
                   </div>
                 ),
