@@ -400,6 +400,10 @@ export default function Page() {
     (v: boolean) => reportMobileProjectRaw(4, v),
     [reportMobileProjectRaw],
   );
+  const onMobileProjectSequentialRaw5 = useCallback(
+    (v: boolean) => reportMobileProjectRaw(5, v),
+    [reportMobileProjectRaw],
+  );
 
   const aboutLowerMotionSpring = isMobile
     ? { type: "spring" as const, stiffness: 52, damping: 22, mass: 1.12 }
@@ -1219,6 +1223,41 @@ export default function Page() {
                   }
                   onSequentialRaw={
                     isMobile ? onMobileProjectSequentialRaw4 : undefined
+                  }
+                />
+              </div>
+
+              <div className="w-full md:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-5rem)/3)]">
+                <ScrollRevealCard
+                  imageSrc="/images/chat-app.png"
+                  imageAlt="Real-Time Chat Application"
+                  imageObjectFit="cover"
+                  imageObjectPosition="center 12%"
+                  imageStyle={{
+                    left: "-4%",
+                    width: "108%",
+                    height: "100%",
+                  }}
+                  title="Real-Time Chat Application"
+                  description="Full-stack messaging platform with Socket.io, user authentication, online status, image sharing, persistent chat history, and customizable themes."
+                  mainHref="#"
+                  links={[
+                    {
+                      label: "Demo",
+                      href: "#",
+                    },
+                  ]}
+                  cardClassName="group opacity-100 transition-all duration-500 ease-out"
+                  disableReveal
+                  sequentialIndex={isMobile ? 5 : undefined}
+                  sequentialOpenGate={
+                    isMobile ? mobileProjectOpenGate : undefined
+                  }
+                  onSequentialStart={
+                    isMobile ? mobileProjectOnSequenceStart : undefined
+                  }
+                  onSequentialRaw={
+                    isMobile ? onMobileProjectSequentialRaw5 : undefined
                   }
                 />
               </div>
