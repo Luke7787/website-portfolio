@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
-/** Showroom, Inventory, Blackjack, Server & Client, Tutoring Business Website, Real-Time Chat Application — all stacked on mobile. */
+/** Showroom, Inventory, Blackjack, Real-Time Chat Application, Tutoring Business Website, Server & Client — all stacked on mobile. */
 const CARD_COUNT = 6;
 
 type RawTuple = [boolean, boolean, boolean, boolean, boolean, boolean];

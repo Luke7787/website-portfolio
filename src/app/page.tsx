@@ -1119,29 +1119,26 @@ export default function Page() {
 
               <div className="w-full md:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-5rem)/3)]">
                 <ScrollRevealCard
-                  imageSrc="/images/project5.png"
-                  imageAlt="Tutoring business website"
-                  imageObjectFit="cover"
-                  imageStyle={{
-                    left: "-20px",
-                    width: "calc(100% + 40px)",
-                    height: "100%",
-                  }}
-                  title="Tutoring Business Website"
-                  description="Responsive tutoring website built with HTML and CSS. Showcases services, pricing, policies, and contact information through a clean design."
-                  mainHref="https://luke7787.github.io/tutoring/"
+                  imageSrc="/images/project3.png"
+                  imageAlt="Blackjack game"
+                  imageObjectPosition="center 5%"
+                  title="Blackjack"
+                  description="Blackjack built with JavaScript, HTML5, and CSS. Split, double down, Blackjack payouts, and responsive UI for play on any device."
+                  mainHref="https://luke7787.github.io/Blackjack/"
                   links={[
                     {
                       label: "Live Site",
-                      href: "https://luke7787.github.io/tutoring/",
+                      href: "https://luke7787.github.io/Blackjack/",
                     },
                     {
                       label: "GitHub",
-                      href: "https://github.com/Luke7787/tutoring",
+                      href: "https://github.com/Luke7787/Blackjack",
                     },
                   ]}
                   cardClassName="group opacity-100 transition-all duration-500 ease-out"
                   disableReveal
+                  linksInViewAmount={isMobile ? undefined : 0.2}
+                  inViewStableMs={isMobile ? undefined : 120}
                   sequentialIndex={isMobile ? 2 : undefined}
                   sequentialOpenGate={
                     isMobile ? mobileProjectOpenGate : undefined
@@ -1166,26 +1163,29 @@ export default function Page() {
             >
               <div className="w-full md:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-5rem)/3)]">
                 <ScrollRevealCard
-                  imageSrc="/images/project3.png"
-                  imageAlt="Blackjack game"
-                  imageObjectPosition="center 5%"
-                  title="Blackjack"
-                  description="Blackjack built with JavaScript, HTML5, and CSS. Split, double down, Blackjack payouts, and responsive UI for play on any device."
-                  mainHref="https://luke7787.github.io/Blackjack/"
+                  imageSrc="/images/project5.png"
+                  imageAlt="Tutoring business website"
+                  imageObjectFit="cover"
+                  imageStyle={{
+                    left: "-20px",
+                    width: "calc(100% + 40px)",
+                    height: "100%",
+                  }}
+                  title="Tutoring Business Website"
+                  description="Responsive tutoring website built with HTML and CSS. Showcases services, pricing, policies, and contact information through a clean design."
+                  mainHref="https://luke7787.github.io/tutoring/"
                   links={[
                     {
                       label: "Live Site",
-                      href: "https://luke7787.github.io/Blackjack/",
+                      href: "https://luke7787.github.io/tutoring/",
                     },
                     {
                       label: "GitHub",
-                      href: "https://github.com/Luke7787/Blackjack",
+                      href: "https://github.com/Luke7787/tutoring",
                     },
                   ]}
                   cardClassName="group opacity-100 transition-all duration-500 ease-out"
                   disableReveal
-                  linksInViewAmount={isMobile ? undefined : 0.2}
-                  inViewStableMs={isMobile ? undefined : 120}
                   sequentialIndex={isMobile ? 3 : undefined}
                   sequentialOpenGate={
                     isMobile ? mobileProjectOpenGate : undefined
@@ -1195,34 +1195,6 @@ export default function Page() {
                   }
                   onSequentialRaw={
                     isMobile ? onMobileProjectSequentialRaw3 : undefined
-                  }
-                />
-              </div>
-
-              <div className="w-full md:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-5rem)/3)]">
-                <ScrollRevealCard
-                  imageSrc="/images/project4.png"
-                  imageAlt="Server and Client webserver"
-                  title="Server and Client"
-                  description="Concurrent web server in C implementing a subset of HTTP. Handles multiple clients via forked processes for parallel request processing."
-                  mainHref="https://github.com/Luke7787/Server-and-Client"
-                  links={[
-                    {
-                      label: "GitHub",
-                      href: "https://github.com/Luke7787/Server-and-Client",
-                    },
-                  ]}
-                  cardClassName="group opacity-100 transition-all duration-500 ease-out"
-                  disableReveal
-                  sequentialIndex={isMobile ? 4 : undefined}
-                  sequentialOpenGate={
-                    isMobile ? mobileProjectOpenGate : undefined
-                  }
-                  onSequentialStart={
-                    isMobile ? mobileProjectOnSequenceStart : undefined
-                  }
-                  onSequentialRaw={
-                    isMobile ? onMobileProjectSequentialRaw4 : undefined
                   }
                 />
               </div>
@@ -1245,6 +1217,34 @@ export default function Page() {
                     {
                       label: "GitHub",
                       href: "https://github.com/Luke7787/chat-app",
+                    },
+                  ]}
+                  cardClassName="group opacity-100 transition-all duration-500 ease-out"
+                  disableReveal
+                  sequentialIndex={isMobile ? 4 : undefined}
+                  sequentialOpenGate={
+                    isMobile ? mobileProjectOpenGate : undefined
+                  }
+                  onSequentialStart={
+                    isMobile ? mobileProjectOnSequenceStart : undefined
+                  }
+                  onSequentialRaw={
+                    isMobile ? onMobileProjectSequentialRaw4 : undefined
+                  }
+                />
+              </div>
+
+              <div className="w-full md:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-5rem)/3)]">
+                <ScrollRevealCard
+                  imageSrc="/images/project4.png"
+                  imageAlt="Server and Client webserver"
+                  title="Server and Client"
+                  description="Concurrent web server in C implementing a subset of HTTP. Handles multiple clients via forked processes for parallel request processing."
+                  mainHref="https://github.com/Luke7787/Server-and-Client"
+                  links={[
+                    {
+                      label: "GitHub",
+                      href: "https://github.com/Luke7787/Server-and-Client",
                     },
                   ]}
                   cardClassName="group opacity-100 transition-all duration-500 ease-out"
