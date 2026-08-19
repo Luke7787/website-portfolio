@@ -187,6 +187,10 @@ interface ScrollRevealCardProps {
   imageStyle?: CSSProperties;
   /** `contain` shows the full image; default `cover` crops to fill. */
   imageObjectFit?: "cover" | "contain";
+  /** With `contain`, fill letterbox gaps using a blurred copy of the image. */
+  imageBackdropFill?: boolean;
+  /** Slight zoom on the sharp foreground image (e.g. 1.06 crops a bit on the sides). */
+  imageForegroundScale?: number;
   title: string;
   description: string;
   mainHref: string;
@@ -254,6 +258,70 @@ function AnimatedWords({
   );
 }
 
+function CardProjectImage({
+  imageSrc,
+  imageAlt,
+  imageSizes,
+  imageStyle,
+  imageFitClass,
+  imagePositionClass,
+  imageObjectPosition,
+  imageBackdropFill,
+  imageForegroundScale,
+  cardClassName,
+}: {
+  imageSrc: string;
+  imageAlt: string;
+  imageSizes: string;
+  imageStyle?: CSSProperties;
+  imageFitClass: string;
+  imagePositionClass: string;
+  imageObjectPosition?: string;
+  imageBackdropFill?: boolean;
+  imageForegroundScale?: number;
+  cardClassName: string;
+}) {
+  const hoverScale = cardClassName.includes("group")
+    ? "group-hover:scale-[1.02]"
+    : "";
+
+  return (
+    <div className="absolute inset-0 overflow-hidden" style={imageStyle}>
+      {imageBackdropFill ? (
+        <Image
+          src={imageSrc}
+          alt=""
+          aria-hidden
+          fill
+          sizes={imageSizes}
+          className="rounded-xl object-cover scale-110 blur-2xl opacity-70 saturate-125"
+        />
+      ) : null}
+      <div
+        className="absolute inset-0 z-10 origin-center"
+        style={
+          imageForegroundScale
+            ? { transform: `scale(${imageForegroundScale})` }
+            : undefined
+        }
+      >
+        <Image
+          src={imageSrc}
+          alt={imageAlt}
+          fill
+          sizes={imageSizes}
+          className={`rounded-xl w-full h-full ${imageFitClass} transition-transform duration-300 ${hoverScale} ${imagePositionClass}`}
+          style={
+            imageObjectPosition
+              ? { objectPosition: imageObjectPosition }
+              : undefined
+          }
+        />
+      </div>
+    </div>
+  );
+}
+
 export default function ScrollRevealCard({
   imageSrc,
   imageAlt,
@@ -263,6 +331,8 @@ export default function ScrollRevealCard({
   imageAspectStyle,
   imageStyle,
   imageObjectFit = "cover",
+  imageBackdropFill = false,
+  imageForegroundScale,
   title,
   description,
   mainHref,
@@ -384,7 +454,19 @@ export default function ScrollRevealCard({
   const imageFitClass =
     imageObjectFit === "contain" ? "object-contain" : "object-cover";
   const imagePositionClass = imageObjectPosition ? "" : "object-center";
-  const imageFrameClassName = `relative w-full ${imageAspectClassName} overflow-hidden rounded-xl mb-6 ${imageObjectFit === "contain" ? "bg-[#121212]" : ""}`;
+  const imageFrameClassName = `relative w-full ${imageAspectClassName} overflow-hidden rounded-xl mb-6 ${imageObjectFit === "contain" && !imageBackdropFill ? "bg-[#121212]" : ""}`;
+  const cardImageProps = {
+    imageSrc,
+    imageAlt,
+    imageSizes,
+    imageStyle,
+    imageFitClass,
+    imagePositionClass,
+    imageObjectPosition,
+    imageBackdropFill,
+    imageForegroundScale,
+    cardClassName,
+  };
 
   if (disableReveal) {
     const titleWordCount = title.split(/\s+/).length;
@@ -422,23 +504,7 @@ export default function ScrollRevealCard({
               ease: [0.22, 0.08, 0.28, 1],
             }}
           >
-            <div
-              className="absolute inset-0 overflow-hidden"
-              style={imageStyle}
-            >
-              <Image
-                src={imageSrc}
-                alt={imageAlt}
-                fill
-                sizes={imageSizes}
-                className={`rounded-xl w-full h-full ${imageFitClass} transition-transform duration-300 ${cardClassName.includes("group") ? "group-hover:scale-[1.02]" : ""} ${imagePositionClass}`}
-                style={
-                  imageObjectPosition
-                    ? { objectPosition: imageObjectPosition }
-                    : undefined
-                }
-              />
-            </div>
+            <CardProjectImage {...cardImageProps} />
           </motion.div>
           <div ref={isMobile ? textInViewRef : undefined} className={className}>
             <ScrollRevealWords
@@ -495,20 +561,7 @@ export default function ScrollRevealCard({
         className="block"
       >
         <motion.div variants={imageVariants} className={imageFrameClassName}>
-          <div className="absolute inset-0 overflow-hidden" style={imageStyle}>
-            <Image
-              src={imageSrc}
-              alt={imageAlt}
-              fill
-              sizes={imageSizes}
-              className={`rounded-xl w-full h-full ${imageFitClass} transition-transform duration-300 ${cardClassName.includes("group") ? "group-hover:scale-[1.02]" : ""} ${imagePositionClass}`}
-              style={
-                imageObjectPosition
-                  ? { objectPosition: imageObjectPosition }
-                  : undefined
-              }
-            />
-          </div>
+          <CardProjectImage {...cardImageProps} />
         </motion.div>
         <div className={className}>
           <motion.div variants={itemVariants}>

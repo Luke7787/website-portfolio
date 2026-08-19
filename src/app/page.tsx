@@ -1231,13 +1231,9 @@ export default function Page() {
                 <ScrollRevealCard
                   imageSrc="/images/chat-app.png"
                   imageAlt="Real-Time Chat Application"
-                  imageObjectFit="cover"
-                  imageObjectPosition="center 12%"
-                  imageStyle={{
-                    left: "-4%",
-                    width: "108%",
-                    height: "100%",
-                  }}
+                  imageObjectFit="contain"
+                  imageBackdropFill
+                  imageForegroundScale={1.1}
                   title="Real-Time Chat Application"
                   description="Full-stack messaging platform with Socket.io, user authentication, online status, image sharing, persistent chat history, and customizable themes."
                   mainHref="#"
