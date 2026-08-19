@@ -1236,11 +1236,11 @@ export default function Page() {
                   imageForegroundScale={1.1}
                   title="Real-Time Chat Application"
                   description="Full-stack messaging platform with Socket.io, user authentication, online status, image sharing, persistent chat history, and customizable themes."
-                  mainHref="#"
+                  mainHref="https://chat-app-7v3r.onrender.com/login"
                   links={[
                     {
                       label: "Demo",
-                      href: "#",
+                      href: "https://chat-app-7v3r.onrender.com/login",
                     },
                   ]}
                   cardClassName="group opacity-100 transition-all duration-500 ease-out"
