@@ -1239,8 +1239,12 @@ export default function Page() {
                   mainHref="https://chat-app-7v3r.onrender.com/login"
                   links={[
                     {
-                      label: "Demo",
+                      label: "Live Site",
                       href: "https://chat-app-7v3r.onrender.com/login",
+                    },
+                    {
+                      label: "GitHub",
+                      href: "https://github.com/Luke7787/chat-app",
                     },
                   ]}
                   cardClassName="group opacity-100 transition-all duration-500 ease-out"
