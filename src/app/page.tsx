@@ -1166,11 +1166,7 @@ export default function Page() {
                   imageSrc="/images/project5.png"
                   imageAlt="Tutoring business website"
                   imageObjectFit="cover"
-                  imageStyle={{
-                    left: "-20px",
-                    width: "calc(100% + 40px)",
-                    height: "100%",
-                  }}
+                  imageObjectPosition="top center"
                   title="Tutoring Business Website"
                   description="Responsive tutoring website built with HTML and CSS. Showcases services, pricing, policies, and contact information through a clean design."
                   mainHref="https://luke7787.github.io/tutoring/"
