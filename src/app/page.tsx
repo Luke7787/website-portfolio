@@ -1087,7 +1087,7 @@ export default function Page() {
 
               <div className="w-full md:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-5rem)/3)]">
                 <ScrollRevealCard
-                  imageSrc="/images/project2.png"
+                  imageSrc="/images/newproject2.png"
                   imageAlt="Inventory Management Platform"
                   title="Inventory Management Platform"
                   description="Full-stack inventory app with React, TypeScript, Node.js, and MongoDB. View, add, update, and manage inventory through a responsive interface."
