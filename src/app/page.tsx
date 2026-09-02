@@ -698,7 +698,7 @@ export default function Page() {
                 {
                   as: "a",
                   text: "Check out my resume",
-                  href: "/LukeResume2026.pdf",
+                  href: "/Luke_Zhuang_Resume_2026.pdf",
                   target: "_blank",
                   rel: "noopener noreferrer",
                   className:
