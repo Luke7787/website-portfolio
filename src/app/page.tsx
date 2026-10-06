@@ -1197,11 +1197,9 @@ export default function Page() {
 
               <div className="w-full md:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-5rem)/3)]">
                 <ScrollRevealCard
-                  imageSrc="/images/chat-app.png"
+                  imageSrc="/images/chat-app-v2.png"
                   imageAlt="Real-Time Chat Application"
-                  imageObjectFit="contain"
-                  imageBackdropFill
-                  imageForegroundScale={1.1}
+                  imageObjectPosition="top center"
                   title="Real-Time Chat Application"
                   description="Full-stack messaging platform with Socket.io, user authentication, online status, image sharing, persistent chat history, and customizable themes."
                   mainHref="https://chat-app-7v3r.onrender.com/login"
