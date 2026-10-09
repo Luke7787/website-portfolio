@@ -404,6 +404,10 @@ export default function Page() {
     (v: boolean) => reportMobileProjectRaw(5, v),
     [reportMobileProjectRaw],
   );
+  const onMobileProjectSequentialRaw6 = useCallback(
+    (v: boolean) => reportMobileProjectRaw(6, v),
+    [reportMobileProjectRaw],
+  );
 
   const aboutLowerMotionSpring = isMobile
     ? { type: "spring" as const, stiffness: 52, damping: 22, mass: 1.12 }
@@ -1252,6 +1256,40 @@ export default function Page() {
                   }
                   onSequentialRaw={
                     isMobile ? onMobileProjectSequentialRaw5 : undefined
+                  }
+                />
+              </div>
+
+              <div className="w-full md:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-5rem)/3)]">
+                <ScrollRevealCard
+                  imageSrc="/images/project-7-v3.jpg"
+                  imageAlt="Wedding Website"
+                  imageObjectFit="cover"
+                  imageObjectPosition="top center"
+                  title="Wedding Website"
+                  description="Full-stack wedding website with JavaScript, Node.js, Express, and MongoDB. RSVP with saved responses and email notifications."
+                  mainHref="https://luke-and-gizelle-wedding.onrender.com/"
+                  links={[
+                    {
+                      label: "Live Site",
+                      href: "https://luke-and-gizelle-wedding.onrender.com/",
+                    },
+                    {
+                      label: "GitHub",
+                      href: "https://github.com/Luke7787/wedding-website",
+                    },
+                  ]}
+                  cardClassName="group opacity-100 transition-all duration-500 ease-out"
+                  disableReveal
+                  sequentialIndex={isMobile ? 6 : undefined}
+                  sequentialOpenGate={
+                    isMobile ? mobileProjectOpenGate : undefined
+                  }
+                  onSequentialStart={
+                    isMobile ? mobileProjectOnSequenceStart : undefined
+                  }
+                  onSequentialRaw={
+                    isMobile ? onMobileProjectSequentialRaw6 : undefined
                   }
                 />
               </div>
