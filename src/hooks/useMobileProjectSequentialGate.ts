@@ -33,8 +33,10 @@ const initialRaw: RawTuple = [
 export function useMobileProjectSequentialGate(isMobile: boolean) {
   const [openGate, setOpenGate] = useState(0);
   const [rawVisible, setRawVisible] = useState<RawTuple>(initialRaw);
+  const openGateRef = useRef(0);
   const startedRef = useRef<Set<number>>(new Set());
   const timeoutRef = useRef<number | null>(null);
+  openGateRef.current = openGate;
 
   const setRawAt = useCallback((index: number, visible: boolean) => {
     if (index < 0 || index >= CARD_COUNT) return;
@@ -48,6 +50,8 @@ export function useMobileProjectSequentialGate(isMobile: boolean) {
 
   const onSequenceStart = useCallback((index: number, durationMs: number) => {
     startedRef.current.add(index);
+    // A card catching up after the gate moved on must not cancel the active handoff.
+    if (index < openGateRef.current) return;
     if (timeoutRef.current !== null) {
       window.clearTimeout(timeoutRef.current);
       timeoutRef.current = null;

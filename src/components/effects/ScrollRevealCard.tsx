@@ -351,18 +351,25 @@ export default function ScrollRevealCard({
   onSequentialRaw,
 }: ScrollRevealCardProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const imageInViewRef = useRef<HTMLDivElement>(null);
   const textInViewRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
-  /** On mobile + disableReveal, observing the full card fires when only the image top crosses the viewport; use the text block so the prior card can finish its reveal first. */
   const inViewObserveRef =
-    disableReveal && isMobile ? textInViewRef : containerRef;
+    disableReveal && isMobile ? imageInViewRef : containerRef;
   const viewAmount = linksInViewAmount ?? 0.2;
   const inViewAmount =
     disableReveal && isMobile ? Math.max(viewAmount, 0.45) : viewAmount;
+  /** Half the photo counts. The description threshold alone left a fully on-screen photo blank. */
+  const imageInViewAmount = 0.5;
+  const mobileImageInView = useInView(imageInViewRef, {
+    once: false,
+    amount: imageInViewAmount,
+  });
   const mobileTextInView = useInView(textInViewRef, {
     once: false,
     amount: inViewAmount,
   });
+  const mobileCardInView = mobileImageInView || mobileTextInView;
   const containerInstantInView = useInView(containerRef, {
     once: true,
     amount: viewAmount,
@@ -384,29 +391,33 @@ export default function ScrollRevealCard({
 
   useEffect(() => {
     if (!sequentialEnabled) return;
-    onSequentialRaw(mobileTextInView);
-  }, [sequentialEnabled, mobileTextInView, onSequentialRaw]);
+    onSequentialRaw(mobileCardInView);
+  }, [sequentialEnabled, mobileCardInView, onSequentialRaw]);
 
   useEffect(() => {
     if (!sequentialEnabled || sequentialIndex === undefined) return;
+    // `>=` so a card the gate skipped (fast scroll) still reveals when it comes back into view.
+    // Only the card whose turn it is advances the gate; catch-up must not cancel that timer.
     const eligible =
-      mobileTextInView &&
-      sequentialOpenGate === sequentialIndex &&
+      mobileCardInView &&
+      sequentialOpenGate >= sequentialIndex &&
       !sequentialLatched;
     if (eligible) {
       setSequentialLatched(true);
-      onSequentialStart(
-        sequentialIndex,
-        estimateDisableRevealProjectSequenceMs(
-          title,
-          description,
-          links.length,
-        ),
-      );
+      if (sequentialOpenGate === sequentialIndex) {
+        onSequentialStart(
+          sequentialIndex,
+          estimateDisableRevealProjectSequenceMs(
+            title,
+            description,
+            links.length,
+          ),
+        );
+      }
     }
   }, [
     sequentialEnabled,
-    mobileTextInView,
+    mobileCardInView,
     sequentialOpenGate,
     sequentialIndex,
     sequentialLatched,
@@ -419,14 +430,14 @@ export default function ScrollRevealCard({
   useEffect(() => {
     if (sequentialEnabled) return;
     if (!(disableReveal && isMobile)) return;
-    if (mobileTextInView && !mobileNonSequentialLatched) {
+    if (mobileCardInView && !mobileNonSequentialLatched) {
       setMobileNonSequentialLatched(true);
     }
   }, [
     sequentialEnabled,
     disableReveal,
     isMobile,
-    mobileTextInView,
+    mobileCardInView,
     mobileNonSequentialLatched,
   ]);
 
@@ -490,6 +501,7 @@ export default function ScrollRevealCard({
           className="block"
         >
           <motion.div
+            ref={imageInViewRef}
             className={imageFrameClassName}
             style={imageAspectStyle}
             initial={{ opacity: 0, filter: "blur(10px)" }}
