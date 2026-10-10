@@ -26,15 +26,43 @@ let isProgrammaticScroll = false;
 type ScrollCallbacks = {
   onStart?: () => void;
   onComplete?: (sectionId: string) => void;
+  onInterrupt?: () => void;
 };
 
-function scrollToSection(href: string, callbacks?: ScrollCallbacks) {
-  if (typeof window === "undefined") return;
+let detachScrollInterrupt: (() => void) | null = null;
+/** Timestamp of the last real wheel event, used to ignore trackpad coasting. */
+let lastWheelAt = 0;
 
+const SCROLL_KEYS = new Set([
+  "ArrowUp",
+  "ArrowDown",
+  "PageUp",
+  "PageDown",
+  "Home",
+  "End",
+  " ",
+]);
+
+function wheelDeltaY(e: WheelEvent): number {
+  if (e.deltaMode === 1) return e.deltaY * 16;
+  if (e.deltaMode === 2) return e.deltaY * window.innerHeight;
+  return e.deltaY;
+}
+
+function stopProgrammaticScroll() {
   if (scrollRafId !== null) {
     cancelAnimationFrame(scrollRafId);
     scrollRafId = null;
   }
+  detachScrollInterrupt?.();
+  detachScrollInterrupt = null;
+  isProgrammaticScroll = false;
+}
+
+function scrollToSection(href: string, callbacks?: ScrollCallbacks) {
+  if (typeof window === "undefined") return;
+
+  stopProgrammaticScroll();
 
   const id = href.replace("#", "");
   const el = document.getElementById(id);
@@ -42,9 +70,6 @@ function scrollToSection(href: string, callbacks?: ScrollCallbacks) {
     window.history.replaceState(null, "", window.location.pathname);
     return;
   }
-
-  isProgrammaticScroll = true;
-  requestAnimationFrame(() => callbacks?.onStart?.());
 
   const navHeight = 64; // h-16
   const windowH = window.innerHeight;
@@ -86,20 +111,99 @@ function scrollToSection(href: string, callbacks?: ScrollCallbacks) {
   const distance = targetY - startY;
   const startTime = performance.now();
 
+  if (Math.abs(distance) < 1) {
+    window.scrollTo({ top: targetY, left: 0, behavior: "auto" });
+    callbacks?.onStart?.();
+    callbacks?.onComplete?.(id);
+    window.history.replaceState(null, "", window.location.pathname);
+    return;
+  }
+
+  isProgrammaticScroll = true;
+  callbacks?.onStart?.();
+
+  let settled = false;
+  let lastY = startY;
+  // A flick already in progress when the link is clicked should not cancel the jump.
+  const inheritedInertia = startTime - lastWheelAt < 140;
+
+  function finishArrived() {
+    if (settled) return;
+    settled = true;
+    stopProgrammaticScroll();
+    window.scrollTo({ top: targetY, left: 0, behavior: "auto" });
+    callbacks?.onComplete?.(id);
+  }
+
+  function finishInterrupted(deltaY = 0) {
+    if (settled) return;
+    settled = true;
+    stopProgrammaticScroll();
+    callbacks?.onInterrupt?.();
+    if (deltaY !== 0) {
+      window.scrollBy({ top: deltaY, left: 0, behavior: "auto" });
+    }
+  }
+
+  function onWheel(e: WheelEvent) {
+    if (settled || !isProgrammaticScroll) return;
+    const now = performance.now();
+    const gap = now - lastWheelAt;
+    // Same coasting gesture that started before the click — let the jump finish.
+    if (inheritedInertia && gap < 140) {
+      e.preventDefault();
+      return;
+    }
+    const dy = wheelDeltaY(e);
+    if (e.cancelable) e.preventDefault();
+    finishInterrupted(e.defaultPrevented ? dy : 0);
+  }
+
+  function onTouchMove() {
+    if (settled || !isProgrammaticScroll) return;
+    finishInterrupted();
+  }
+
+  function onKeyDown(e: KeyboardEvent) {
+    if (settled || !isProgrammaticScroll) return;
+    if (!SCROLL_KEYS.has(e.key)) return;
+    finishInterrupted();
+  }
+
+  window.addEventListener("wheel", onWheel, { passive: false, capture: true });
+  window.addEventListener("touchmove", onTouchMove, {
+    passive: true,
+    capture: true,
+  });
+  window.addEventListener("keydown", onKeyDown, { capture: true });
+  detachScrollInterrupt = () => {
+    window.removeEventListener("wheel", onWheel, true);
+    window.removeEventListener("touchmove", onTouchMove, true);
+    window.removeEventListener("keydown", onKeyDown, true);
+  };
+
   function tick(now: number) {
+    if (settled) return;
+    const actual = window.scrollY;
     const elapsed = now - startTime;
+    // Scrollbar drag takes over. Ignore tiny drift from layout or subpixels.
+    if (elapsed > 80 && Math.abs(actual - lastY) > 40) {
+      finishInterrupted();
+      return;
+    }
+
     const progress = Math.min(elapsed / SCROLL_DURATION_MS, 1);
     const eased = EASE_OUT_EXPO(progress);
-    window.scrollTo(0, startY + distance * eased);
-    if (progress < 1) {
-      scrollRafId = requestAnimationFrame(tick);
-    } else {
-      scrollRafId = null;
-      requestAnimationFrame(() => {
-        isProgrammaticScroll = false;
-        callbacks?.onComplete?.(id);
-      });
+    const y = startY + distance * eased;
+
+    if (progress >= 1 || Math.abs(targetY - y) < 0.5) {
+      finishArrived();
+      return;
     }
+
+    window.scrollTo({ top: y, left: 0, behavior: "auto" });
+    lastY = window.scrollY;
+    scrollRafId = requestAnimationFrame(tick);
   }
   scrollRafId = requestAnimationFrame(tick);
 
@@ -135,6 +239,10 @@ export default function NavBar() {
     },
     onComplete: (sectionId) => {
       setActiveSection(sectionId);
+      isScrollingRef.current = false;
+      setIsScrolling(false);
+    },
+    onInterrupt: () => {
       isScrollingRef.current = false;
       setIsScrolling(false);
     },
@@ -195,6 +303,16 @@ export default function NavBar() {
     if (typeof window !== "undefined" && window.location.hash) {
       window.history.replaceState(null, "", window.location.pathname);
     }
+  }, []);
+
+  // Track wheel timing outside the nav animation so a coasting trackpad
+  // doesn't get mistaken for a new scroll gesture.
+  useEffect(() => {
+    const recordWheel = () => {
+      lastWheelAt = performance.now();
+    };
+    window.addEventListener("wheel", recordWheel, { passive: true });
+    return () => window.removeEventListener("wheel", recordWheel);
   }, []);
 
   useEffect(() => {

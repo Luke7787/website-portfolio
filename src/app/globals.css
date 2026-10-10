@@ -8,6 +8,10 @@ body {
   margin: 0;
 }
 
+html {
+  scroll-behavior: auto;
+}
+
 body {
   min-height: 100vh;
   text-rendering: optimizeLegibility;
