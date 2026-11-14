@@ -463,7 +463,7 @@ export default function Page() {
   useEffect(() => {
     if (!aboutRevealReady) return;
     const paragraphWordCount =
-      "Full Stack Engineer passionate about building web and mobile applications. I'm constantly seeking new challenges to expand my skills and knowledge.".split(
+      "Full Stack Engineer passionate about building web and mobile applications. Always eager to take on new challenges and grow my skills.".split(
         /\s+/,
       ).length;
     const staggerBeforeParagraph = isMobile ? 0 : 2 * 0.058;
@@ -644,7 +644,7 @@ export default function Page() {
                 lines={[
                   {
                     as: "p",
-                    text: "Full Stack Engineer passionate about building web and mobile applications. I'm constantly seeking new challenges to expand my skills and knowledge.",
+                    text: "Full Stack Engineer passionate about building web and mobile applications. Always eager to take on new challenges and grow my skills.",
                     className:
                       "mt-5 cursor-default max-w-[320px] sm:max-w-sm text-[1rem] sm:text-[1.05rem] font-medium leading-[1.6] tracking-[0.03em] text-white/80 text-justify -translate-y-30",
                   },
@@ -678,7 +678,7 @@ export default function Page() {
                   },
                   {
                     as: "p",
-                    text: "Full Stack Engineer passionate about building web and mobile applications. I'm constantly seeking new challenges to expand my skills and knowledge.",
+                    text: "Full Stack Engineer passionate about building web and mobile applications. Always eager to take on new challenges and grow my skills.",
                     className:
                       "mt-5 cursor-default md:max-w-md md:text-[1.125rem] font-medium md:leading-[1.75] tracking-[0.03em] text-white/80 text-justify md:translate-x-19 md:-translate-y-13",
                   },
