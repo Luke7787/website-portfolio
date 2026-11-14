@@ -780,7 +780,7 @@ export default function Page() {
                 {
                   as: "custom",
                   className:
-                    "mt-4 max-w-md space-y-2 text-[1rem] font-medium leading-[1.6] tracking-[0.03em] md:translate-x-19 md:-translate-y-2.25 -translate-y-22",
+                    "mt-4 w-fit max-w-full mx-auto space-y-2 text-left text-[1rem] font-medium leading-[1.6] tracking-[0.03em] md:mx-0 md:w-auto md:text-inherit md:translate-x-19 md:-translate-y-2.25 -translate-y-22",
                   content: (
                     <motion.div
                       className="space-y-2"
